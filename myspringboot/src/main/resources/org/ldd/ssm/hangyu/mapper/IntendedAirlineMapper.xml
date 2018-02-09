@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.IntendedAirlineMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.IntendedAirline" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="demand_id" property="demandId" jdbcType="BIGINT" />
+    <result column="dpt" property="dpt" jdbcType="VARCHAR" />
+    <result column="pst" property="pst" jdbcType="VARCHAR" />
+    <result column="arrv" property="arrv" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, demand_id, dpt, pst, arrv
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from intendedAirline
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from intendedAirline
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.IntendedAirline" >
+    insert into intendedAirline (id, demand_id, dpt, 
+      pst, arrv)
+    values (#{id,jdbcType=BIGINT}, #{demandId,jdbcType=BIGINT}, #{dpt,jdbcType=VARCHAR}, 
+      #{pst,jdbcType=VARCHAR}, #{arrv,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.IntendedAirline" >
+    insert into intendedAirline
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="demandId != null" >
+        demand_id,
+      </if>
+      <if test="dpt != null" >
+        dpt,
+      </if>
+      <if test="pst != null" >
+        pst,
+      </if>
+      <if test="arrv != null" >
+        arrv,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="demandId != null" >
+        #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="dpt != null" >
+        #{dpt,jdbcType=VARCHAR},
+      </if>
+      <if test="pst != null" >
+        #{pst,jdbcType=VARCHAR},
+      </if>
+      <if test="arrv != null" >
+        #{arrv,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.IntendedAirline" >
+    update intendedAirline
+    <set >
+      <if test="demandId != null" >
+        demand_id = #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="dpt != null" >
+        dpt = #{dpt,jdbcType=VARCHAR},
+      </if>
+      <if test="pst != null" >
+        pst = #{pst,jdbcType=VARCHAR},
+      </if>
+      <if test="arrv != null" >
+        arrv = #{arrv,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.IntendedAirline" >
+    update intendedAirline
+    set demand_id = #{demandId,jdbcType=BIGINT},
+      dpt = #{dpt,jdbcType=VARCHAR},
+      pst = #{pst,jdbcType=VARCHAR},
+      arrv = #{arrv,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <delete id="deleteByDemandId" parameterType="Long">
+  	delete from intendedAirline
+  	<where>
+  		<if test="demandId != null and demandId >0">
+  			demand_id = #{demandId,jdbcType=BIGINT}
+  		</if>
+  	</where>
+  </delete>
+  <resultMap id="ListResultMap" type="org.ldd.ssm.hangyu.domain.IntendedAirline" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="demand_id" property="demandId" jdbcType="BIGINT" />
+    <result column="dpt" property="dpt" jdbcType="VARCHAR" />
+    <result column="dpt_name" property="dptName" jdbcType="VARCHAR" />
+    <result column="pst" property="pst" jdbcType="VARCHAR" />
+    <result column="pst_name" property="pstName" jdbcType="VARCHAR" />
+    <result column="arrv" property="arrv" jdbcType="VARCHAR" />
+    <result column="arrv_name" property="arrvName" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByDemandId" resultMap="ListResultMap">
+  	select 
+  	id, demand_id, dpt,
+  	(select b.airln_Cd from airportinfonewthree b where a.dpt = b.iATA) dpt_name,
+  	pst,
+  	(select b.airln_Cd from airportinfonewthree b where a.pst = b.iATA) pst_name,
+  	arrv,
+  	(select b.airln_Cd from airportinfonewthree b where a.arrv = b.iATA) arrv_name
+  	from intendedAirline a
+  	<where>
+  		<if test="demandId != null and demandId >0">
+  			demand_id = #{demandId,jdbcType=BIGINT}
+  		</if>
+  	</where>
+  </select>
+  <select id="selectCountByDemandId" resultType="Integer">
+  	select count(*) from intendedAirline
+  	<where>
+  		<if test="demandId != null and demandId >0">
+  			demand_id = #{demandId,jdbcType=BIGINT}
+  		</if>
+  	</where>
+  </select>
+</mapper>

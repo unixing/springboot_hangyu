@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.WeatherInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.WeatherInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+    <result column="monthMax" property="monthmax" jdbcType="VARCHAR" />
+    <result column="monthMin" property="monthmin" jdbcType="VARCHAR" />
+    <result column="avgSD" property="avgsd" jdbcType="VARCHAR" />
+    <result column="avgQY" property="avgqy" jdbcType="VARCHAR" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, month, monthMax, monthMin, avgSD, avgQY, IATA
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from WeatherInfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from WeatherInfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.WeatherInfo" >
+    insert into WeatherInfo (id, month, monthMax, 
+      monthMin, avgSD, avgQY, 
+      IATA)
+    values (#{id,jdbcType=BIGINT}, #{month,jdbcType=VARCHAR}, #{monthmax,jdbcType=VARCHAR}, 
+      #{monthmin,jdbcType=VARCHAR}, #{avgsd,jdbcType=VARCHAR}, #{avgqy,jdbcType=VARCHAR}, 
+      #{iata,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.WeatherInfo" >
+    insert into WeatherInfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="monthmax != null" >
+        monthMax,
+      </if>
+      <if test="monthmin != null" >
+        monthMin,
+      </if>
+      <if test="avgsd != null" >
+        avgSD,
+      </if>
+      <if test="avgqy != null" >
+        avgQY,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="monthmax != null" >
+        #{monthmax,jdbcType=VARCHAR},
+      </if>
+      <if test="monthmin != null" >
+        #{monthmin,jdbcType=VARCHAR},
+      </if>
+      <if test="avgsd != null" >
+        #{avgsd,jdbcType=VARCHAR},
+      </if>
+      <if test="avgqy != null" >
+        #{avgqy,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.WeatherInfo" >
+    update WeatherInfo
+    <set >
+      <if test="month != null" >
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="monthmax != null" >
+        monthMax = #{monthmax,jdbcType=VARCHAR},
+      </if>
+      <if test="monthmin != null" >
+        monthMin = #{monthmin,jdbcType=VARCHAR},
+      </if>
+      <if test="avgsd != null" >
+        avgSD = #{avgsd,jdbcType=VARCHAR},
+      </if>
+      <if test="avgqy != null" >
+        avgQY = #{avgqy,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.WeatherInfo" >
+    update WeatherInfo
+    set month = #{month,jdbcType=VARCHAR},
+      monthMax = #{monthmax,jdbcType=VARCHAR},
+      monthMin = #{monthmin,jdbcType=VARCHAR},
+      avgSD = #{avgsd,jdbcType=VARCHAR},
+      avgQY = #{avgqy,jdbcType=VARCHAR},
+      IATA = #{iata,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectWeatherInfosByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from WeatherInfo
+  	<where>
+  		<if test="iata!=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>

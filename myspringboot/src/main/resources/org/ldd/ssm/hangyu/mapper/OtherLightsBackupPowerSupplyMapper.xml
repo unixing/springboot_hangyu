@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.OtherLightsBackupPowerSupplyMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.OtherLightsBackupPowerSupply" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+    <result column="airportCharacteristicsWorki" property="airportcharacteristicsworki" jdbcType="VARCHAR" />
+    <result column="landingDirection" property="landingdirection" jdbcType="VARCHAR" />
+    <result column="glideRoadside" property="glideroadside" jdbcType="VARCHAR" />
+    <result column="backupPowerOrConversionTime" property="backuppowerorconversiontime" jdbcType="VARCHAR" />
+    <result column="stoppingDischarginLamp" property="stoppingdischarginlamp" jdbcType="VARCHAR" />
+    <result column="theRunwayBlinker" property="therunwayblinker" jdbcType="VARCHAR" />
+    <result column="couldOmnidirectionalGuidingLight" property="couldomnidirectionalguidinglight" jdbcType="VARCHAR" />
+    <result column="otherNote" property="otherNote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, IATA, airportCharacteristicsWorki, landingDirection, glideRoadside, backupPowerOrConversionTime, 
+    stoppingDischarginLamp, theRunwayBlinker, couldOmnidirectionalGuidingLight, otherNote
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from OtherLightsBackupPowerSupply
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from OtherLightsBackupPowerSupply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.OtherLightsBackupPowerSupply" >
+    insert into OtherLightsBackupPowerSupply (id, IATA, airportCharacteristicsWorki, 
+      landingDirection, glideRoadside, backupPowerOrConversionTime, 
+      stoppingDischarginLamp, theRunwayBlinker, 
+      couldOmnidirectionalGuidingLight, otherNote)
+    values (#{id,jdbcType=BIGINT}, #{iata,jdbcType=VARCHAR}, #{airportcharacteristicsworki,jdbcType=VARCHAR}, 
+      #{landingdirection,jdbcType=VARCHAR}, #{glideroadside,jdbcType=VARCHAR}, #{backuppowerorconversiontime,jdbcType=VARCHAR}, 
+      #{stoppingdischarginlamp,jdbcType=VARCHAR}, #{therunwayblinker,jdbcType=VARCHAR}, 
+      #{couldomnidirectionalguidinglight,jdbcType=VARCHAR}, #{otherNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.OtherLightsBackupPowerSupply" >
+    insert into OtherLightsBackupPowerSupply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+      <if test="airportcharacteristicsworki != null" >
+        airportCharacteristicsWorki,
+      </if>
+      <if test="landingdirection != null" >
+        landingDirection,
+      </if>
+      <if test="glideroadside != null" >
+        glideRoadside,
+      </if>
+      <if test="backuppowerorconversiontime != null" >
+        backupPowerOrConversionTime,
+      </if>
+      <if test="stoppingdischarginlamp != null" >
+        stoppingDischarginLamp,
+      </if>
+      <if test="therunwayblinker != null" >
+        theRunwayBlinker,
+      </if>
+      <if test="couldomnidirectionalguidinglight != null" >
+        couldOmnidirectionalGuidingLight,
+      </if>
+      <if test="otherNote != null" >
+        otherNote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="airportcharacteristicsworki != null" >
+        #{airportcharacteristicsworki,jdbcType=VARCHAR},
+      </if>
+      <if test="landingdirection != null" >
+        #{landingdirection,jdbcType=VARCHAR},
+      </if>
+      <if test="glideroadside != null" >
+        #{glideroadside,jdbcType=VARCHAR},
+      </if>
+      <if test="backuppowerorconversiontime != null" >
+        #{backuppowerorconversiontime,jdbcType=VARCHAR},
+      </if>
+      <if test="stoppingdischarginlamp != null" >
+        #{stoppingdischarginlamp,jdbcType=VARCHAR},
+      </if>
+      <if test="therunwayblinker != null" >
+        #{therunwayblinker,jdbcType=VARCHAR},
+      </if>
+      <if test="couldomnidirectionalguidinglight != null" >
+        #{couldomnidirectionalguidinglight,jdbcType=VARCHAR},
+      </if>
+      <if test="otherNote != null" >
+        #{otherNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.OtherLightsBackupPowerSupply" >
+    update OtherLightsBackupPowerSupply
+    <set >
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="airportcharacteristicsworki != null" >
+        airportCharacteristicsWorki = #{airportcharacteristicsworki,jdbcType=VARCHAR},
+      </if>
+      <if test="landingdirection != null" >
+        landingDirection = #{landingdirection,jdbcType=VARCHAR},
+      </if>
+      <if test="glideroadside != null" >
+        glideRoadside = #{glideroadside,jdbcType=VARCHAR},
+      </if>
+      <if test="backuppowerorconversiontime != null" >
+        backupPowerOrConversionTime = #{backuppowerorconversiontime,jdbcType=VARCHAR},
+      </if>
+      <if test="stoppingdischarginlamp != null" >
+        stoppingDischarginLamp = #{stoppingdischarginlamp,jdbcType=VARCHAR},
+      </if>
+      <if test="therunwayblinker != null" >
+        theRunwayBlinker = #{therunwayblinker,jdbcType=VARCHAR},
+      </if>
+      <if test="couldomnidirectionalguidinglight != null" >
+        couldOmnidirectionalGuidingLight = #{couldomnidirectionalguidinglight,jdbcType=VARCHAR},
+      </if>
+      <if test="otherNote != null" >
+        otherNote = #{otherNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.OtherLightsBackupPowerSupply" >
+    update OtherLightsBackupPowerSupply
+    set IATA = #{iata,jdbcType=VARCHAR},
+      airportCharacteristicsWorki = #{airportcharacteristicsworki,jdbcType=VARCHAR},
+      landingDirection = #{landingdirection,jdbcType=VARCHAR},
+      glideRoadside = #{glideroadside,jdbcType=VARCHAR},
+      backupPowerOrConversionTime = #{backuppowerorconversiontime,jdbcType=VARCHAR},
+      stoppingDischarginLamp = #{stoppingdischarginlamp,jdbcType=VARCHAR},
+      theRunwayBlinker = #{therunwayblinker,jdbcType=VARCHAR},
+      couldOmnidirectionalGuidingLight = #{couldomnidirectionalguidinglight,jdbcType=VARCHAR},
+      otherNote = #{otherNote,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectOtherLightsBackupPowerSupplyByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from OtherLightsBackupPowerSupply
+  	<where>
+  		<if test="iata!=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>

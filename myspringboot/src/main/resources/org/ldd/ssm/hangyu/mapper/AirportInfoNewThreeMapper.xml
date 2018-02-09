@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.hangyu.mapper.AirportInfoNewThreeMapper">
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.AirportInfoNewThree">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="airln_Cd" jdbcType="VARCHAR" property="airlnCd" />
+    <result column="airln_Cd_Name" jdbcType="VARCHAR" property="airlnCdName" />
+    <result column="airlin_Elh_Name" jdbcType="VARCHAR" property="airlinElhName" />
+    <result column="airlin_Spe_Spl" jdbcType="VARCHAR" property="airlinSpeSpl" />
+    <result column="iATA" jdbcType="VARCHAR" property="iata" />
+    <result column="ICAO" jdbcType="VARCHAR" property="icao" />
+    <result column="inter" jdbcType="VARCHAR" property="inter" />
+    <result column="airfieldLvl" jdbcType="VARCHAR" property="airfieldlvl" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city_coordinate_j" jdbcType="VARCHAR" property="cityCoordinateJ" />
+    <result column="city_coordinate_w" jdbcType="VARCHAR" property="cityCoordinateW" />
+    <result column="coordinateUpdateTime" jdbcType="VARCHAR" property="coordinateupdatetime" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="air_state" jdbcType="VARCHAR" property="airState" />
+    <result column="airpotType" jdbcType="VARCHAR" property="airpottype" />
+    <result column="warZone" jdbcType="VARCHAR" property="warzone" />
+    <result column="air_ele" jdbcType="VARCHAR" property="airEle" />
+    <result column="airpotCls" jdbcType="VARCHAR" property="airpotcls" />
+    <result column="coordinateAirport" jdbcType="VARCHAR" property="coordinateairport" />
+    <result column="coordinateTimeList" jdbcType="VARCHAR" property="coordinatetimelist" />
+    <result column="specialAirport" jdbcType="VARCHAR" property="specialairport" />
+    <result column="specialAirportWhy" jdbcType="VARCHAR" property="specialairportwhy" />
+    <result column="port" jdbcType="VARCHAR" property="port" />
+    <result column="releasePunctuality" jdbcType="VARCHAR" property="releasepunctuality" />
+    <result column="fireLvl" jdbcType="VARCHAR" property="firelvl" />
+    <result column="lightingConditions" jdbcType="VARCHAR" property="lightingconditions" />
+    <result column="allowTheTakeoffAndLanding" jdbcType="VARCHAR" property="allowthetakeoffandlanding" />
+    <result column="modelCanHandle" jdbcType="VARCHAR" property="modelcanhandle" />
+    <result column="runwayArticleNumber" jdbcType="VARCHAR" property="runwayarticlenumber" />
+    <result column="airportShuttleMetro" jdbcType="VARCHAR" property="airportshuttlemetro" />
+    <result column="airportBus" jdbcType="VARCHAR" property="airportbus" />
+    <result column="distanceFromDowntown" jdbcType="VARCHAR" property="distancefromdowntown" />
+    <result column="inTheFlight" jdbcType="VARCHAR" property="intheflight" />
+    <result column="international" jdbcType="VARCHAR" property="international" />
+    <result column="internationalTime" jdbcType="VARCHAR" property="internationaltime" />
+    <result column="domestic" jdbcType="VARCHAR" property="domestic" />
+    <result column="inThePort" jdbcType="VARCHAR" property="intheport" />
+    <result column="inTheFlightTime" jdbcType="VARCHAR" property="intheflighttime" />
+    <result column="membershipGroup" jdbcType="VARCHAR" property="membershipgroup" />
+    <result column="planePositionNumber" jdbcType="VARCHAR" property="planepositionnumber" />
+    <result column="departureTime" jdbcType="VARCHAR" property="departuretime" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operatorInput" jdbcType="VARCHAR" property="operatorinput" />
+    <result column="isRewardPolicy" jdbcType="VARCHAR" property="isrewardpolicy" />
+    <result column="isRewardPolicyText" jdbcType="VARCHAR" property="isrewardpolicytext" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, airln_Cd, airln_Cd_Name, airlin_Elh_Name, airlin_Spe_Spl, iATA, ICAO, inter, 
+    airfieldLvl, city, province, city_coordinate_j, city_coordinate_w, coordinateUpdateTime, 
+    area, air_state, airpotType, warZone, air_ele, airpotCls, coordinateAirport, coordinateTimeList, 
+    specialAirport, specialAirportWhy, port, releasePunctuality, fireLvl, lightingConditions, 
+    allowTheTakeoffAndLanding, modelCanHandle, runwayArticleNumber, airportShuttleMetro, 
+    airportBus, distanceFromDowntown, inTheFlight, international, internationalTime, 
+    domestic, inThePort, inTheFlightTime, membershipGroup, planePositionNumber, departureTime, 
+    operator, operatorInput, isRewardPolicy, isRewardPolicyText
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from airportinfonewthree
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from airportinfonewthree
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.AirportInfoNewThree">
+    insert into airportinfonewthree (id, airln_Cd, airln_Cd_Name, 
+      airlin_Elh_Name, airlin_Spe_Spl, iATA, 
+      ICAO, inter, airfieldLvl, 
+      city, province, city_coordinate_j, 
+      city_coordinate_w, coordinateUpdateTime, 
+      area, air_state, airpotType, 
+      warZone, air_ele, airpotCls, 
+      coordinateAirport, coordinateTimeList, 
+      specialAirport, specialAirportWhy, port, 
+      releasePunctuality, fireLvl, lightingConditions, 
+      allowTheTakeoffAndLanding, modelCanHandle, 
+      runwayArticleNumber, airportShuttleMetro, 
+      airportBus, distanceFromDowntown, inTheFlight, 
+      international, internationalTime, domestic, 
+      inThePort, inTheFlightTime, membershipGroup, 
+      planePositionNumber, departureTime, operator, 
+      operatorInput, isRewardPolicy, isRewardPolicyText
+      )
+    values (#{id,jdbcType=BIGINT}, #{airlnCd,jdbcType=VARCHAR}, #{airlnCdName,jdbcType=VARCHAR}, 
+      #{airlinElhName,jdbcType=VARCHAR}, #{airlinSpeSpl,jdbcType=VARCHAR}, #{iata,jdbcType=VARCHAR}, 
+      #{icao,jdbcType=VARCHAR}, #{inter,jdbcType=VARCHAR}, #{airfieldlvl,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{cityCoordinateJ,jdbcType=VARCHAR}, 
+      #{cityCoordinateW,jdbcType=VARCHAR}, #{coordinateupdatetime,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{airState,jdbcType=VARCHAR}, #{airpottype,jdbcType=VARCHAR}, 
+      #{warzone,jdbcType=VARCHAR}, #{airEle,jdbcType=VARCHAR}, #{airpotcls,jdbcType=VARCHAR}, 
+      #{coordinateairport,jdbcType=VARCHAR}, #{coordinatetimelist,jdbcType=VARCHAR}, 
+      #{specialairport,jdbcType=VARCHAR}, #{specialairportwhy,jdbcType=VARCHAR}, #{port,jdbcType=VARCHAR}, 
+      #{releasepunctuality,jdbcType=VARCHAR}, #{firelvl,jdbcType=VARCHAR}, #{lightingconditions,jdbcType=VARCHAR}, 
+      #{allowthetakeoffandlanding,jdbcType=VARCHAR}, #{modelcanhandle,jdbcType=VARCHAR}, 
+      #{runwayarticlenumber,jdbcType=VARCHAR}, #{airportshuttlemetro,jdbcType=VARCHAR}, 
+      #{airportbus,jdbcType=VARCHAR}, #{distancefromdowntown,jdbcType=VARCHAR}, #{intheflight,jdbcType=VARCHAR}, 
+      #{international,jdbcType=VARCHAR}, #{internationaltime,jdbcType=VARCHAR}, #{domestic,jdbcType=VARCHAR}, 
+      #{intheport,jdbcType=VARCHAR}, #{intheflighttime,jdbcType=VARCHAR}, #{membershipgroup,jdbcType=VARCHAR}, 
+      #{planepositionnumber,jdbcType=VARCHAR}, #{departuretime,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
+      #{operatorinput,jdbcType=VARCHAR}, #{isrewardpolicy,jdbcType=VARCHAR}, #{isrewardpolicytext,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.AirportInfoNewThree">
+    insert into airportinfonewthree
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="airlnCd != null">
+        airln_Cd,
+      </if>
+      <if test="airlnCdName != null">
+        airln_Cd_Name,
+      </if>
+      <if test="airlinElhName != null">
+        airlin_Elh_Name,
+      </if>
+      <if test="airlinSpeSpl != null">
+        airlin_Spe_Spl,
+      </if>
+      <if test="iata != null">
+        iATA,
+      </if>
+      <if test="icao != null">
+        ICAO,
+      </if>
+      <if test="inter != null">
+        inter,
+      </if>
+      <if test="airfieldlvl != null">
+        airfieldLvl,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="cityCoordinateJ != null">
+        city_coordinate_j,
+      </if>
+      <if test="cityCoordinateW != null">
+        city_coordinate_w,
+      </if>
+      <if test="coordinateupdatetime != null">
+        coordinateUpdateTime,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="airState != null">
+        air_state,
+      </if>
+      <if test="airpottype != null">
+        airpotType,
+      </if>
+      <if test="warzone != null">
+        warZone,
+      </if>
+      <if test="airEle != null">
+        air_ele,
+      </if>
+      <if test="airpotcls != null">
+        airpotCls,
+      </if>
+      <if test="coordinateairport != null">
+        coordinateAirport,
+      </if>
+      <if test="coordinatetimelist != null">
+        coordinateTimeList,
+      </if>
+      <if test="specialairport != null">
+        specialAirport,
+      </if>
+      <if test="specialairportwhy != null">
+        specialAirportWhy,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="releasepunctuality != null">
+        releasePunctuality,
+      </if>
+      <if test="firelvl != null">
+        fireLvl,
+      </if>
+      <if test="lightingconditions != null">
+        lightingConditions,
+      </if>
+      <if test="allowthetakeoffandlanding != null">
+        allowTheTakeoffAndLanding,
+      </if>
+      <if test="modelcanhandle != null">
+        modelCanHandle,
+      </if>
+      <if test="runwayarticlenumber != null">
+        runwayArticleNumber,
+      </if>
+      <if test="airportshuttlemetro != null">
+        airportShuttleMetro,
+      </if>
+      <if test="airportbus != null">
+        airportBus,
+      </if>
+      <if test="distancefromdowntown != null">
+        distanceFromDowntown,
+      </if>
+      <if test="intheflight != null">
+        inTheFlight,
+      </if>
+      <if test="international != null">
+        international,
+      </if>
+      <if test="internationaltime != null">
+        internationalTime,
+      </if>
+      <if test="domestic != null">
+        domestic,
+      </if>
+      <if test="intheport != null">
+        inThePort,
+      </if>
+      <if test="intheflighttime != null">
+        inTheFlightTime,
+      </if>
+      <if test="membershipgroup != null">
+        membershipGroup,
+      </if>
+      <if test="planepositionnumber != null">
+        planePositionNumber,
+      </if>
+      <if test="departuretime != null">
+        departureTime,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="operatorinput != null">
+        operatorInput,
+      </if>
+      <if test="isrewardpolicy != null">
+        isRewardPolicy,
+      </if>
+      <if test="isrewardpolicytext != null">
+        isRewardPolicyText,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="airlnCd != null">
+        #{airlnCd,jdbcType=VARCHAR},
+      </if>
+      <if test="airlnCdName != null">
+        #{airlnCdName,jdbcType=VARCHAR},
+      </if>
+      <if test="airlinElhName != null">
+        #{airlinElhName,jdbcType=VARCHAR},
+      </if>
+      <if test="airlinSpeSpl != null">
+        #{airlinSpeSpl,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null">
+        #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="icao != null">
+        #{icao,jdbcType=VARCHAR},
+      </if>
+      <if test="inter != null">
+        #{inter,jdbcType=VARCHAR},
+      </if>
+      <if test="airfieldlvl != null">
+        #{airfieldlvl,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCoordinateJ != null">
+        #{cityCoordinateJ,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCoordinateW != null">
+        #{cityCoordinateW,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinateupdatetime != null">
+        #{coordinateupdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="airState != null">
+        #{airState,jdbcType=VARCHAR},
+      </if>
+      <if test="airpottype != null">
+        #{airpottype,jdbcType=VARCHAR},
+      </if>
+      <if test="warzone != null">
+        #{warzone,jdbcType=VARCHAR},
+      </if>
+      <if test="airEle != null">
+        #{airEle,jdbcType=VARCHAR},
+      </if>
+      <if test="airpotcls != null">
+        #{airpotcls,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinateairport != null">
+        #{coordinateairport,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinatetimelist != null">
+        #{coordinatetimelist,jdbcType=VARCHAR},
+      </if>
+      <if test="specialairport != null">
+        #{specialairport,jdbcType=VARCHAR},
+      </if>
+      <if test="specialairportwhy != null">
+        #{specialairportwhy,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="releasepunctuality != null">
+        #{releasepunctuality,jdbcType=VARCHAR},
+      </if>
+      <if test="firelvl != null">
+        #{firelvl,jdbcType=VARCHAR},
+      </if>
+      <if test="lightingconditions != null">
+        #{lightingconditions,jdbcType=VARCHAR},
+      </if>
+      <if test="allowthetakeoffandlanding != null">
+        #{allowthetakeoffandlanding,jdbcType=VARCHAR},
+      </if>
+      <if test="modelcanhandle != null">
+        #{modelcanhandle,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayarticlenumber != null">
+        #{runwayarticlenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="airportshuttlemetro != null">
+        #{airportshuttlemetro,jdbcType=VARCHAR},
+      </if>
+      <if test="airportbus != null">
+        #{airportbus,jdbcType=VARCHAR},
+      </if>
+      <if test="distancefromdowntown != null">
+        #{distancefromdowntown,jdbcType=VARCHAR},
+      </if>
+      <if test="intheflight != null">
+        #{intheflight,jdbcType=VARCHAR},
+      </if>
+      <if test="international != null">
+        #{international,jdbcType=VARCHAR},
+      </if>
+      <if test="internationaltime != null">
+        #{internationaltime,jdbcType=VARCHAR},
+      </if>
+      <if test="domestic != null">
+        #{domestic,jdbcType=VARCHAR},
+      </if>
+      <if test="intheport != null">
+        #{intheport,jdbcType=VARCHAR},
+      </if>
+      <if test="intheflighttime != null">
+        #{intheflighttime,jdbcType=VARCHAR},
+      </if>
+      <if test="membershipgroup != null">
+        #{membershipgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="planepositionnumber != null">
+        #{planepositionnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="departuretime != null">
+        #{departuretime,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorinput != null">
+        #{operatorinput,jdbcType=VARCHAR},
+      </if>
+      <if test="isrewardpolicy != null">
+        #{isrewardpolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="isrewardpolicytext != null">
+        #{isrewardpolicytext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.AirportInfoNewThree">
+    update airportinfonewthree
+    <set>
+      <if test="airlnCd != null">
+        airln_Cd = #{airlnCd,jdbcType=VARCHAR},
+      </if>
+      <if test="airlnCdName != null">
+        airln_Cd_Name = #{airlnCdName,jdbcType=VARCHAR},
+      </if>
+      <if test="airlinElhName != null">
+        airlin_Elh_Name = #{airlinElhName,jdbcType=VARCHAR},
+      </if>
+      <if test="airlinSpeSpl != null">
+        airlin_Spe_Spl = #{airlinSpeSpl,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null">
+        iATA = #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="icao != null">
+        ICAO = #{icao,jdbcType=VARCHAR},
+      </if>
+      <if test="inter != null">
+        inter = #{inter,jdbcType=VARCHAR},
+      </if>
+      <if test="airfieldlvl != null">
+        airfieldLvl = #{airfieldlvl,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCoordinateJ != null">
+        city_coordinate_j = #{cityCoordinateJ,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCoordinateW != null">
+        city_coordinate_w = #{cityCoordinateW,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinateupdatetime != null">
+        coordinateUpdateTime = #{coordinateupdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="airState != null">
+        air_state = #{airState,jdbcType=VARCHAR},
+      </if>
+      <if test="airpottype != null">
+        airpotType = #{airpottype,jdbcType=VARCHAR},
+      </if>
+      <if test="warzone != null">
+        warZone = #{warzone,jdbcType=VARCHAR},
+      </if>
+      <if test="airEle != null">
+        air_ele = #{airEle,jdbcType=VARCHAR},
+      </if>
+      <if test="airpotcls != null">
+        airpotCls = #{airpotcls,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinateairport != null">
+        coordinateAirport = #{coordinateairport,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinatetimelist != null">
+        coordinateTimeList = #{coordinatetimelist,jdbcType=VARCHAR},
+      </if>
+      <if test="specialairport != null">
+        specialAirport = #{specialairport,jdbcType=VARCHAR},
+      </if>
+      <if test="specialairportwhy != null">
+        specialAirportWhy = #{specialairportwhy,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        port = #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="releasepunctuality != null">
+        releasePunctuality = #{releasepunctuality,jdbcType=VARCHAR},
+      </if>
+      <if test="firelvl != null">
+        fireLvl = #{firelvl,jdbcType=VARCHAR},
+      </if>
+      <if test="lightingconditions != null">
+        lightingConditions = #{lightingconditions,jdbcType=VARCHAR},
+      </if>
+      <if test="allowthetakeoffandlanding != null">
+        allowTheTakeoffAndLanding = #{allowthetakeoffandlanding,jdbcType=VARCHAR},
+      </if>
+      <if test="modelcanhandle != null">
+        modelCanHandle = #{modelcanhandle,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayarticlenumber != null">
+        runwayArticleNumber = #{runwayarticlenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="airportshuttlemetro != null">
+        airportShuttleMetro = #{airportshuttlemetro,jdbcType=VARCHAR},
+      </if>
+      <if test="airportbus != null">
+        airportBus = #{airportbus,jdbcType=VARCHAR},
+      </if>
+      <if test="distancefromdowntown != null">
+        distanceFromDowntown = #{distancefromdowntown,jdbcType=VARCHAR},
+      </if>
+      <if test="intheflight != null">
+        inTheFlight = #{intheflight,jdbcType=VARCHAR},
+      </if>
+      <if test="international != null">
+        international = #{international,jdbcType=VARCHAR},
+      </if>
+      <if test="internationaltime != null">
+        internationalTime = #{internationaltime,jdbcType=VARCHAR},
+      </if>
+      <if test="domestic != null">
+        domestic = #{domestic,jdbcType=VARCHAR},
+      </if>
+      <if test="intheport != null">
+        inThePort = #{intheport,jdbcType=VARCHAR},
+      </if>
+      <if test="intheflighttime != null">
+        inTheFlightTime = #{intheflighttime,jdbcType=VARCHAR},
+      </if>
+      <if test="membershipgroup != null">
+        membershipGroup = #{membershipgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="planepositionnumber != null">
+        planePositionNumber = #{planepositionnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="departuretime != null">
+        departureTime = #{departuretime,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorinput != null">
+        operatorInput = #{operatorinput,jdbcType=VARCHAR},
+      </if>
+      <if test="isrewardpolicy != null">
+        isRewardPolicy = #{isrewardpolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="isrewardpolicytext != null">
+        isRewardPolicyText = #{isrewardpolicytext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.AirportInfoNewThree">
+    update airportinfonewthree
+    set airln_Cd = #{airlnCd,jdbcType=VARCHAR},
+      airln_Cd_Name = #{airlnCdName,jdbcType=VARCHAR},
+      airlin_Elh_Name = #{airlinElhName,jdbcType=VARCHAR},
+      airlin_Spe_Spl = #{airlinSpeSpl,jdbcType=VARCHAR},
+      iATA = #{iata,jdbcType=VARCHAR},
+      ICAO = #{icao,jdbcType=VARCHAR},
+      inter = #{inter,jdbcType=VARCHAR},
+      airfieldLvl = #{airfieldlvl,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city_coordinate_j = #{cityCoordinateJ,jdbcType=VARCHAR},
+      city_coordinate_w = #{cityCoordinateW,jdbcType=VARCHAR},
+      coordinateUpdateTime = #{coordinateupdatetime,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      air_state = #{airState,jdbcType=VARCHAR},
+      airpotType = #{airpottype,jdbcType=VARCHAR},
+      warZone = #{warzone,jdbcType=VARCHAR},
+      air_ele = #{airEle,jdbcType=VARCHAR},
+      airpotCls = #{airpotcls,jdbcType=VARCHAR},
+      coordinateAirport = #{coordinateairport,jdbcType=VARCHAR},
+      coordinateTimeList = #{coordinatetimelist,jdbcType=VARCHAR},
+      specialAirport = #{specialairport,jdbcType=VARCHAR},
+      specialAirportWhy = #{specialairportwhy,jdbcType=VARCHAR},
+      port = #{port,jdbcType=VARCHAR},
+      releasePunctuality = #{releasepunctuality,jdbcType=VARCHAR},
+      fireLvl = #{firelvl,jdbcType=VARCHAR},
+      lightingConditions = #{lightingconditions,jdbcType=VARCHAR},
+      allowTheTakeoffAndLanding = #{allowthetakeoffandlanding,jdbcType=VARCHAR},
+      modelCanHandle = #{modelcanhandle,jdbcType=VARCHAR},
+      runwayArticleNumber = #{runwayarticlenumber,jdbcType=VARCHAR},
+      airportShuttleMetro = #{airportshuttlemetro,jdbcType=VARCHAR},
+      airportBus = #{airportbus,jdbcType=VARCHAR},
+      distanceFromDowntown = #{distancefromdowntown,jdbcType=VARCHAR},
+      inTheFlight = #{intheflight,jdbcType=VARCHAR},
+      international = #{international,jdbcType=VARCHAR},
+      internationalTime = #{internationaltime,jdbcType=VARCHAR},
+      domestic = #{domestic,jdbcType=VARCHAR},
+      inThePort = #{intheport,jdbcType=VARCHAR},
+      inTheFlightTime = #{intheflighttime,jdbcType=VARCHAR},
+      membershipGroup = #{membershipgroup,jdbcType=VARCHAR},
+      planePositionNumber = #{planepositionnumber,jdbcType=VARCHAR},
+      departureTime = #{departuretime,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      operatorInput = #{operatorinput,jdbcType=VARCHAR},
+      isRewardPolicy = #{isrewardpolicy,jdbcType=VARCHAR},
+      isRewardPolicyText = #{isrewardpolicytext,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByIcao" resultMap="BaseResultMap">
+  	select
+  	id, airln_Cd, airln_Cd_Name, airlin_Elh_Name, airlin_Spe_Spl, iATA, ICAO, 
+  	(case when inter = '1' then '是' when inter = '0' then '否' end) inter, 
+    airfieldLvl, city, province, city_coordinate_j, city_coordinate_w, coordinateUpdateTime, 
+    area, air_state, airpotType, warZone, air_ele, 
+    (case WHEN airpotCls ='普通机场' OR airpotCls = '' OR ISNULL(airpotCls) THEN '非高原'
+     when airpotCls = '高原机场' then '高原' 
+     when airpotCls = '高高原机场' then '高高原' end) airpotCls, 
+    coordinateAirport, coordinateTimeList, 
+    specialAirport, specialAirportWhy, port, releasePunctuality, fireLvl, lightingConditions, 
+    allowTheTakeoffAndLanding, modelCanHandle, runwayArticleNumber, airportShuttleMetro, 
+    airportBus, distanceFromDowntown, inTheFlight, international, internationalTime, 
+    domestic, inThePort, inTheFlightTime, membershipGroup, planePositionNumber, departureTime, 
+    operator, operatorInput, isRewardPolicy, isRewardPolicyText
+  	from airportinfonewthree
+  	<where>
+  		iATA = #{_parameter}
+  	</where>
+  </select>
+  
+  <select id="selectById" resultMap="BaseResultMap">
+  	select
+  	id, airln_Cd, airln_Cd_Name, airlin_Elh_Name, airlin_Spe_Spl, iATA, ICAO, 
+  	(case when inter = '1' then '是' when inter = '0' then '否' end) inter, 
+    airfieldLvl, city, province, city_coordinate_j, city_coordinate_w, coordinateUpdateTime, 
+    area, air_state, airpotType, warZone, air_ele, 
+    (case WHEN airpotCls ='普通机场' OR airpotCls = '' OR ISNULL(airpotCls) THEN '非高原'
+     when airpotCls = '高原机场' then '高原' 
+     when airpotCls = '高高原机场' then '高高原' end) airpotCls, 
+    coordinateAirport, coordinateTimeList, 
+    specialAirport, specialAirportWhy, port, releasePunctuality, fireLvl, lightingConditions, 
+    allowTheTakeoffAndLanding, modelCanHandle, runwayArticleNumber, airportShuttleMetro, 
+    airportBus, distanceFromDowntown, inTheFlight, international, internationalTime, 
+    domestic, inThePort, inTheFlightTime, membershipGroup, planePositionNumber, departureTime, 
+    operator, operatorInput, isRewardPolicy, isRewardPolicyText
+  	from airportinfonewthree
+  	<where>
+  		id = #{_parameter}
+  	</where>
+  </select>
+  
+  <select id="selectAirportNameByIcao" resultType="java.lang.String">
+  	select
+  	airln_Cd
+  	from airportinfonewthree
+  	<where>
+  		iATA = #{_parameter}
+  	</where>
+  </select>
+  
+  <resultMap id="RouteNetworkMap" type="org.ldd.ssm.hangyu.domain.RouteNetwork" >
+    <result column="dpt_name" property="dptName" jdbcType="VARCHAR" />
+    <result column="dpt_iata" property="dptIata" jdbcType="VARCHAR" />
+    <result column="dpt_longitude" property="dptLongitude" jdbcType="VARCHAR" />
+    <result column="dpt_latitude" property="dptLatitude" jdbcType="VARCHAR" />
+    <result column="arrv_name" property="arrvName" jdbcType="VARCHAR" />
+    <result column="arrv_iata" property="arrvIata" jdbcType="VARCHAR" />
+    <result column="arrv_longitude" property="arrvLongitude" jdbcType="VARCHAR" />
+    <result column="arrv_latitude" property="arrvLatitude" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="selectAirportRouteNetwork" resultMap="RouteNetworkMap">
+  	SELECT 
+  		(SELECT c.airln_Cd FROM airportinfonewthree c WHERE c.iATA = #{iata,jdbcType=VARCHAR}) dpt_name, 
+  		(SELECT c.iATA FROM airportinfonewthree c WHERE c.iATA = #{iata,jdbcType=VARCHAR}) dpt_iata, 
+  		(SELECT c.city_coordinate_j FROM airportinfonewthree c WHERE c.iATA = #{iata,jdbcType=VARCHAR}) dpt_longitude,
+  		(SELECT c.city_coordinate_w FROM airportinfonewthree c WHERE c.iATA = #{iata,jdbcType=VARCHAR}) dpt_latitude,
+  		a.airln_Cd arrv_name ,a.iATA arrv_iata,a.city_coordinate_j arrv_longitude,a.city_coordinate_w arrv_latitude 
+  		FROM airportinfonewthree a 
+  		<where>
+  			EXISTS(
+  				SELECT arrv_itia FROM 
+  				(
+  					select arrv_AirPt_Cd_itia arrv_itia from eachflightinfo WHERE dpt_AirPt_Cd_itia = #{iata,jdbcType=VARCHAR} 
+  					union 
+  					select dpt_AirPt_Cd_itia arrv_itia from eachflightinfo WHERE arrv_Airpt_Cd_itia = #{iata,jdbcType=VARCHAR}
+  				) 
+  				b WHERE a.iATA = b.arrv_itia
+  			)
+  		</where>
+  </select>
+  
+  <select id="selectAllData" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from airportinfonewthree
+    </select>
+  
+  <select id="selectAirlineAirportList" resultMap="RouteNetworkMap">
+  	select 
+  	DISTINCT dpt_AirPt_Cd_itia dpt_iata,arrv_AirPt_Cd_itia arrv_iata 
+  	from eachflightinfo 
+  	<where>
+  		<if test="iata !=null and iata != ''">
+  			 flt_nbr LIKE concat(#{iata,jdbcType=VARCHAR},'%')
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="selectAirlineAirport" resultMap="RouteNetworkMap">
+  	SELECT 
+  	a.airln_Cd dpt_name,a.iATA dpt_iata,a.city_coordinate_j dpt_longitude,a.city_coordinate_w dpt_latitude,
+  	b.airln_Cd arrv_name,b.iATA arrv_iata,b.city_coordinate_j arrv_longitude,b.city_coordinate_w arrv_latitude 
+  	FROM
+	(SELECT airln_Cd,iATA,city_coordinate_j,city_coordinate_w FROM airportinfonewthree WHERE iATA = #{dptIata,jdbcType=VARCHAR}) a ,
+	(SELECT airln_Cd,iATA,city_coordinate_j,city_coordinate_w FROM airportinfonewthree WHERE iATA = #{arrvIata,jdbcType=VARCHAR}) b
+  </select>
+  
+  <select id="selectAirportsForDemand" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from airportinfonewthree
+  	<where>
+  		<if test="ids != null and ids != ''">
+  			id in (${ids})
+  		</if>
+  	</where>
+  </select>
+</mapper>

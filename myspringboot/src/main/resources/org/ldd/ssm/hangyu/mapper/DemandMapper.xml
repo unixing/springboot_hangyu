@@ -1,0 +1,1966 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.DemandMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.Demand">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+		<result column="intentionMoneyState" property="intentionMoneyState"
+			jdbcType="VARCHAR" />
+		<result column="demandState" property="demandstate" jdbcType="VARCHAR" />
+		<result column="demandType" property="demandtype" jdbcType="VARCHAR" />
+		<result column="releaseTime" property="releasetime" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="dpt" property="dpt" jdbcType="VARCHAR" />
+		<result column="dpt_acceptNearAirport" property="dptAcceptnearairport"
+			jdbcType="VARCHAR" />
+		<result column="dpt_timeResources" property="dptTimeresources"
+			jdbcType="VARCHAR" />
+		<result column="dpt_time" property="dptTime" jdbcType="VARCHAR" />
+		<result column="pst" property="pst" jdbcType="VARCHAR" />
+		<result column="pst_acceptNearAirport" property="pstAcceptnearairport"
+			jdbcType="VARCHAR" />
+		<result column="pst_timeResources" property="pstTimeresources"
+			jdbcType="VARCHAR" />
+		<result column="pst_time" property="pstTime" jdbcType="VARCHAR" />
+		<result column="arrv" property="arrv" jdbcType="VARCHAR" />
+		<result column="arrv_acceptNearAirport" property="arrvAcceptnearairport"
+			jdbcType="VARCHAR" />
+		<result column="arrv_timeResources" property="arrvTimeresources"
+			jdbcType="VARCHAR" />
+		<result column="arrv_time" property="arrvTime" jdbcType="VARCHAR" />
+		<result column="airCrftTyp" property="aircrfttyp" jdbcType="VARCHAR" />
+		<result column="days" property="days" jdbcType="VARCHAR" />
+		<result column="blockBidPrice" property="blockbidprice"
+			jdbcType="INTEGER" />
+		<result column="loadFactorsExpect" property="loadfactorsexpect"
+			jdbcType="INTEGER" />
+		<result column="avgGuestExpect" property="avgguestexpect"
+			jdbcType="INTEGER" />
+		<result column="subsidyPolicy" property="subsidypolicy"
+			jdbcType="VARCHAR" />
+		<result column="sailingTime" property="sailingtime" jdbcType="VARCHAR" />
+		<result column="seating" property="seating" jdbcType="VARCHAR" />
+		<result column="capacityCompany" property="capacitycompany"
+			jdbcType="BIGINT" />
+		<result column="scheduling" property="scheduling" jdbcType="VARCHAR" />
+		<result column="schedulinePort" property="schedulinePort"
+			jdbcType="VARCHAR" />
+		<result column="hoursCost" property="hourscost" jdbcType="VARCHAR" />
+		<result column="intendedAirline" property="intendedairline"
+			jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="publicWay" property="publicway" jdbcType="VARCHAR" />
+		<result column="directionalGoal" property="directionalgoal"
+			jdbcType="VARCHAR" />
+		<result column="demandProgress" property="demandprogress"
+			jdbcType="VARCHAR" />
+		<result column="finishDate" property="finishDate"
+			jdbcType="VARCHAR" />
+		<result column="contact" property="contact" jdbcType="VARCHAR" />
+		<result column="iHome" property="iHome" jdbcType="VARCHAR" />
+		<result column="fltNbr" property="fltNbr" jdbcType="VARCHAR" />
+		<result column="periodValidity" property="periodValidity"
+			jdbcType="VARCHAR" />
+		<result column="dpt_state" property="dptState" jdbcType="VARCHAR" />
+		<result column="dpt_ct" property="dptCt" jdbcType="VARCHAR" />
+		<result column="pst_state" property="pstState" jdbcType="VARCHAR" />
+		<result column="pst_ct" property="pstCt" jdbcType="VARCHAR" />
+		<result column="arrv_state" property="arrvState" jdbcType="VARCHAR" />
+		<result column="arrv_ct" property="arrvCt" jdbcType="VARCHAR" />
+		<result column="demand_id" property="demandId" jdbcType="BIGINT" />
+		<result column="rek" property="rek" jdbcType="VARCHAR" />
+		<result column="close_reason" property="closeReason" jdbcType="VARCHAR"/>
+		<association column="capacityCompany" property="capacityCompany"
+			select="org.ldd.ssm.hangyu.mapper.AirCompenyInfoThreeMapper.selectByPrimaryKey" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, employee_id,intentionMoneyState, demandState, demandType,
+		releaseTime, title, dpt, dpt_acceptNearAirport,
+		dpt_timeResources, dpt_time, pst, pst_acceptNearAirport, pst_timeResources, pst_time,
+		arrv, arrv_acceptNearAirport, arrv_timeResources, arrv_time,
+		airCrftTyp, days, blockBidPrice,
+		loadFactorsExpect, avgGuestExpect, subsidyPolicy, sailingTime,
+		seating, capacityCompany, scheduling, hoursCost, intendedAirline, remark,
+		publicWay,
+		directionalGoal, demandProgress,finishDate,contact,iHome,fltNbr,periodValidity,dpt_state,dpt_ct,
+		pst_state,pst_ct,arrv_state,arrv_ct,schedulinePort,demand_id,rek,close_reason
+	</sql>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from demand
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.Demand">
+		insert into demand (id, employee_id,intentionMoneyState, demandState,
+		demandType, releaseTime, title,
+		dpt, dpt_acceptNearAirport, dpt_timeResources,
+		dpt_time, pst, pst_acceptNearAirport,
+		pst_timeResources, pst_time, arrv,
+		arrv_acceptNearAirport, arrv_timeResources,
+		arrv_time, airCrftTyp, days,
+		blockBidPrice, loadFactorsExpect, avgGuestExpect,
+		subsidyPolicy, sailingTime,
+		seating, capacityCompany, scheduling,
+		hoursCost, intendedAirline, remark,
+		publicWay, directionalGoal, demandProgress,finishDate,
+		contact,iHome,fltNbr,periodValidity,dpt_state,dpt_ct,
+		pst_state,pst_ct,arrv_state,arrv_ct,schedulinePort,demand_id,rek,close_reason
+		)
+		values (#{id,jdbcType=BIGINT},
+		#{employeeId,jdbcType=BIGINT},#{intentionMoneyState,jdbcType=VARCHAR},
+		#{demandstate,jdbcType=VARCHAR},
+		#{demandtype,jdbcType=VARCHAR}, #{releasetime,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+		#{dpt,jdbcType=VARCHAR}, #{dptAcceptnearairport,jdbcType=VARCHAR},
+		#{dptTimeresources,jdbcType=VARCHAR},
+		#{dptTime,jdbcType=VARCHAR}, #{pst,jdbcType=VARCHAR}, #{pstAcceptnearairport,jdbcType=VARCHAR},
+		#{pstTimeresources,jdbcType=VARCHAR}, #{pstTime,jdbcType=VARCHAR},
+		#{arrv,jdbcType=VARCHAR},
+		#{arrvAcceptnearairport,jdbcType=VARCHAR}, #{arrvTimeresources,jdbcType=VARCHAR},
+		#{arrvTime,jdbcType=VARCHAR}, #{aircrfttyp,jdbcType=VARCHAR}, #{days,jdbcType=VARCHAR},
+		#{blockbidprice,jdbcType=INTEGER},
+		#{loadfactorsexpect,jdbcType=INTEGER},
+		#{avgguestexpect,jdbcType=INTEGER},
+		#{subsidypolicy,jdbcType=VARCHAR}, #{sailingtime,jdbcType=VARCHAR},
+		#{seating,jdbcType=VARCHAR}, #{capacitycompany,jdbcType=BIGINT}, #{scheduling,jdbcType=VARCHAR},
+		#{hourscost,jdbcType=VARCHAR}, #{intendedairline,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{publicway,jdbcType=VARCHAR}, #{directionalgoal,jdbcType=VARCHAR},
+		#{demandprogress,jdbcType=VARCHAR},
+		#{finishDate,jdbcType=VARCHAR},
+		#{contact,jdbcType=VARCHAR},#{iHome,jdbcType=VARCHAR},
+		#{fltNbr,jdbcType=VARCHAR},#{periodValidity,jdbcType=VARCHAR},#{dptState,jdbcType=VARCHAR},#{dptCt,jdbcType=VARCHAR},
+		#{pstState,jdbcType=VARCHAR},#{pstCt,jdbcType=VARCHAR},#{arrvState,jdbcType=VARCHAR},#{arrvCt,jdbcType=VARCHAR},
+		#{schedulinePort,jdbcType=VARCHAR},
+		#{demandId,jdbcType=BIGINT},#{rek,jdbcType=VARCHAR},#{closeReason,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.Demand"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into demand
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="employeeId != null">
+				employee_id,
+			</if>
+			<if test="intentionMoneyState != null">
+				intentionMoneyState,
+			</if>
+			<if test="demandstate != null">
+				demandState,
+			</if>
+			<if test="demandtype != null">
+				demandType,
+			</if>
+			<if test="releasetime != null">
+				releaseTime,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="dptState != null">
+				dpt_state,
+			</if>
+			<if test="dpt != null">
+				dpt,
+			</if>
+			<if test="dptCt != null">
+				dpt_ct,
+			</if>
+			<if test="dptAcceptnearairport != null">
+				dpt_acceptNearAirport,
+			</if>
+			<if test="dptTimeresources != null">
+				dpt_timeResources,
+			</if>
+			<if test="dptTime != null">
+				dpt_time,
+			</if>
+			<if test="pstState != null">
+				pst_state,
+			</if>
+			<if test="pst != null">
+				pst,
+			</if>
+			<if test="pstCt != null">
+				pst_ct,
+			</if>
+			<if test="pstAcceptnearairport != null">
+				pst_acceptNearAirport,
+			</if>
+			<if test="pstTimeresources != null">
+				pst_timeResources,
+			</if>
+			<if test="pstTime != null">
+				pst_time,
+			</if>
+			<if test="arrvState != null">
+				arrv_state,
+			</if>
+			<if test="arrv != null">
+				arrv,
+			</if>
+			<if test="arrvCt != null">
+				arrv_ct,
+			</if>
+			<if test="arrvAcceptnearairport != null">
+				arrv_acceptNearAirport,
+			</if>
+			<if test="arrvTimeresources != null">
+				arrv_timeResources,
+			</if>
+			<if test="arrvTime != null">
+				arrv_time,
+			</if>
+			<if test="aircrfttyp != null">
+				airCrftTyp,
+			</if>
+			<if test="days != null">
+				days,
+			</if>
+			<if test="blockbidprice != null">
+				blockBidPrice,
+			</if>
+			<if test="loadfactorsexpect != null">
+				loadFactorsExpect,
+			</if>
+			<if test="avgguestexpect != null">
+				avgGuestExpect,
+			</if>
+			<if test="subsidypolicy != null">
+				subsidyPolicy,
+			</if>
+			<if test="sailingtime != null">
+				sailingTime,
+			</if>
+			<if test="seating != null">
+				seating,
+			</if>
+			<if test="capacitycompany != null">
+				capacityCompany,
+			</if>
+			<if test="scheduling != null">
+				scheduling,
+			</if>
+			<if test="hourscost != null">
+				hoursCost,
+			</if>
+			<if test="intendedairline != null">
+				intendedAirline,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="publicway != null">
+				publicWay,
+			</if>
+			<if test="directionalgoal != null">
+				directionalGoal,
+			</if>
+			<if test="demandprogress != null">
+				demandProgress,
+			</if>
+			<if test="finishDate != null">
+				finishDate,
+			</if>
+			<if test="contact != null">
+				contact,
+			</if>
+			<if test="iHome != null">
+				iHome,
+			</if>
+			<if test="fltNbr != null">
+				fltNbr,
+			</if>
+			<if test="periodValidity != null">
+				periodValidity,
+			</if>
+			<if test="schedulinePort != null">
+				schedulinePort,
+			</if>
+			<if test="demandId != null">
+				demand_id,
+			</if>
+			<if test="rek != null">
+				rek,
+			</if>
+			<if test="closeReason != null">
+				close_reason,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="employeeId != null">
+				#{employeeId,jdbcType=BIGINT},
+			</if>
+			<if test="intentionMoneyState != null">
+				#{intentionMoneyState,jdbcType=VARCHAR},
+			</if>
+			<if test="demandstate != null">
+				#{demandstate,jdbcType=VARCHAR},
+			</if>
+			<if test="demandtype != null">
+				#{demandtype,jdbcType=VARCHAR},
+			</if>
+			<if test="releasetime != null">
+				#{releasetime,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="dptState != null">
+				#{dptState,jdbcType=VARCHAR},
+			</if>
+			<if test="dpt != null">
+				#{dpt,jdbcType=VARCHAR},
+			</if>
+			<if test="dptCt != null">
+				#{dptCt,jdbcType=VARCHAR},
+			</if>
+			<if test="dptAcceptnearairport != null">
+				#{dptAcceptnearairport,jdbcType=VARCHAR},
+			</if>
+			<if test="dptTimeresources != null">
+				#{dptTimeresources,jdbcType=VARCHAR},
+			</if>
+			<if test="dptTime != null">
+				#{dptTime,jdbcType=VARCHAR},
+			</if>
+			<if test="pstState != null">
+				#{pstState,jdbcType=VARCHAR},
+			</if>
+			<if test="pst != null">
+				#{pst,jdbcType=VARCHAR},
+			</if>
+			<if test="pstCt != null">
+				#{pstCt,jdbcType=VARCHAR},
+			</if>
+			<if test="pstAcceptnearairport != null">
+				#{pstAcceptnearairport,jdbcType=VARCHAR},
+			</if>
+			<if test="pstTimeresources != null">
+				#{pstTimeresources,jdbcType=VARCHAR},
+			</if>
+			<if test="pstTime != null">
+				#{pstTime,jdbcType=VARCHAR},
+			</if>
+			<if test="arrvState != null">
+				#{arrvState,jdbcType=VARCHAR},
+			</if>
+			<if test="arrv != null">
+				#{arrv,jdbcType=VARCHAR},
+			</if>
+			<if test="arrvCt != null">
+				#{arrvCt,jdbcType=VARCHAR},
+			</if>
+			<if test="arrvAcceptnearairport != null">
+				#{arrvAcceptnearairport,jdbcType=VARCHAR},
+			</if>
+			<if test="arrvTimeresources != null">
+				#{arrvTimeresources,jdbcType=VARCHAR},
+			</if>
+			<if test="arrvTime != null">
+				#{arrvTime,jdbcType=VARCHAR},
+			</if>
+			<if test="aircrfttyp != null">
+				#{aircrfttyp,jdbcType=VARCHAR},
+			</if>
+			<if test="days != null">
+				#{days,jdbcType=VARCHAR},
+			</if>
+			<if test="blockbidprice != null">
+				#{blockbidprice,jdbcType=INTEGER},
+			</if>
+			<if test="loadfactorsexpect != null">
+				#{loadfactorsexpect,jdbcType=INTEGER},
+			</if>
+			<if test="avgguestexpect != null">
+				#{avgguestexpect,jdbcType=INTEGER},
+			</if>
+			<if test="subsidypolicy != null">
+				#{subsidypolicy,jdbcType=VARCHAR},
+			</if>
+			<if test="sailingtime != null">
+				#{sailingtime,jdbcType=VARCHAR},
+			</if>
+			<if test="seating != null">
+				#{seating,jdbcType=VARCHAR},
+			</if>
+			<if test="capacitycompany != null">
+				#{capacitycompany,jdbcType=BIGINT},
+			</if>
+			<if test="scheduling != null">
+				#{scheduling,jdbcType=VARCHAR},
+			</if>
+			<if test="hourscost != null">
+				#{hourscost,jdbcType=VARCHAR},
+			</if>
+			<if test="intendedairline != null">
+				#{intendedairline,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="publicway != null">
+				#{publicway,jdbcType=VARCHAR},
+			</if>
+			<if test="directionalgoal != null">
+				#{directionalgoal,jdbcType=VARCHAR},
+			</if>
+			<if test="demandprogress != null">
+				#{demandprogress,jdbcType=VARCHAR},
+			</if>
+			<if test="finishDate != null">
+				#{finishDate,jdbcType=VARCHAR},
+			</if>
+			<if test="contact != null">
+				#{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="iHome != null">
+				#{iHome,jdbcType=VARCHAR},
+			</if>
+			<if test="fltNbr != null">
+				#{fltNbr,jdbcType=VARCHAR},
+			</if>
+			<if test="periodValidity != null">
+				#{periodValidity,jdbcType=VARCHAR},
+			</if>
+			<if test="schedulinePort != null">
+				#{schedulinePort,jdbcType=VARCHAR},
+			</if>
+			<if test="demandId != null">
+				#{demandId,jdbcType=BIGINT},
+			</if>
+			<if test="rek != null">
+				#{rek,jdbcType=VARCHAR},
+			</if>
+			<if test="closeReason != null">
+				#{close_reason,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.Demand">
+		update demand
+		<set>
+			<if test="employeeId != null">
+				employee_id = #{employeeId,jdbcType=BIGINT},
+			</if>
+			<if test="intentionMoneyState != null">
+				intentionMoneyState = #{intentionMoneyState,jdbcType=VARCHAR},
+			</if>
+			<if test="demandstate != null">
+				demandState = #{demandstate,jdbcType=VARCHAR},
+			</if>
+			<if test="demandtype != null">
+				demandType = #{demandtype,jdbcType=VARCHAR},
+			</if>
+			<if test="releasetime != null">
+				releaseTime = #{releasetime,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="dptState != null">
+				dpt_state = #{dptState,jdbcType=VARCHAR},
+			</if>
+			<if test="dpt != null">
+				dpt = #{dpt,jdbcType=VARCHAR},
+			</if>
+			<if test="dptCt != null">
+				dpt_ct = #{dptCt,jdbcType=VARCHAR},
+			</if>
+			<if test="dptAcceptnearairport != null">
+				dpt_acceptNearAirport = #{dptAcceptnearairport,jdbcType=VARCHAR},
+			</if>
+			<if test="dptTimeresources != null">
+				dpt_timeResources = #{dptTimeresources,jdbcType=VARCHAR},
+			</if>
+			<if test="dptTime != null">
+				dpt_time = #{dptTime,jdbcType=VARCHAR},
+			</if>
+			<if test="pstState != null">
+				pst_state = #{pstState,jdbcType=VARCHAR},
+			</if>
+			<if test="pst != null">
+				pst = #{pst,jdbcType=VARCHAR},
+			</if>
+			<if test="pstCt != null">
+				pst_ct = #{pstCt,jdbcType=VARCHAR},
+			</if>
+			<if test="pstAcceptnearairport != null">
+				pst_acceptNearAirport = #{pstAcceptnearairport,jdbcType=VARCHAR},
+			</if>
+			<if test="pstTimeresources != null">
+				pst_timeResources = #{pstTimeresources,jdbcType=VARCHAR},
+			</if>
+			<if test="pstTime != null">
+				pst_time = #{pstTime,jdbcType=VARCHAR},
+			</if>
+			<if test="arrvState != null">
+				arrv_state = #{arrvState,jdbcType=VARCHAR},
+			</if>
+			<if test="arrv != null">
+				arrv = #{arrv,jdbcType=VARCHAR},
+			</if>
+			<if test="arrvCt != null">
+				arrv_ct = #{arrvCt,jdbcType=VARCHAR},
+			</if>
+			<if test="arrvAcceptnearairport != null">
+				arrv_acceptNearAirport = #{arrvAcceptnearairport,jdbcType=VARCHAR},
+			</if>
+			<if test="arrvTimeresources != null">
+				arrv_timeResources = #{arrvTimeresources,jdbcType=VARCHAR},
+			</if>
+			<if test="arrvTime != null">
+				arrv_time = #{arrvTime,jdbcType=VARCHAR},
+			</if>
+			<if test="aircrfttyp != null">
+				airCrftTyp = #{aircrfttyp,jdbcType=VARCHAR},
+			</if>
+			<if test="days != null">
+				days = #{days,jdbcType=VARCHAR},
+			</if>
+			<if test="blockbidprice != null">
+				blockBidPrice = #{blockbidprice,jdbcType=INTEGER},
+			</if>
+			<if test="loadfactorsexpect != null">
+				loadFactorsExpect = #{loadfactorsexpect,jdbcType=INTEGER},
+			</if>
+			<if test="avgguestexpect != null">
+				avgGuestExpect = #{avgguestexpect,jdbcType=INTEGER},
+			</if>
+			<if test="subsidypolicy != null">
+				subsidyPolicy = #{subsidypolicy,jdbcType=VARCHAR},
+			</if>
+			<if test="sailingtime != null">
+				sailingTime = #{sailingtime,jdbcType=VARCHAR},
+			</if>
+			<if test="seating != null">
+				seating = #{seating,jdbcType=VARCHAR},
+			</if>
+			<if test="capacitycompany != null">
+				capacityCompany = #{capacitycompany,jdbcType=BIGINT},
+			</if>
+			<if test="scheduling != null">
+				scheduling = #{scheduling,jdbcType=VARCHAR},
+			</if>
+			<if test="hourscost != null">
+				hoursCost = #{hourscost,jdbcType=VARCHAR},
+			</if>
+			<if test="intendedairline != null">
+				intendedAirline = #{intendedairline,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="publicway != null">
+				publicWay = #{publicway,jdbcType=VARCHAR},
+			</if>
+			<if test="directionalgoal != null">
+				directionalGoal = #{directionalgoal,jdbcType=VARCHAR},
+			</if>
+			<if test="demandprogress != null">
+				demandProgress = #{demandprogress,jdbcType=VARCHAR},
+			</if>
+			<if test="finishDate != null">
+				finishDate = #{finishDate,jdbcType=VARCHAR},
+			</if>
+			<if test="contact != null">
+				contact = #{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="iHome != null">
+				iHome = #{iHome,jdbcType=VARCHAR},
+			</if>
+			<if test="fltNbr != null">
+				fltNbr = #{fltNbr,jdbcType=VARCHAR},
+			</if>
+			<if test="periodValidity != null">
+				periodValidity = #{periodValidity,jdbcType=VARCHAR},
+			</if>
+			<if test="schedulinePort != null">
+				schedulinePort = #{schedulinePort,jdbcType=VARCHAR},
+			</if>
+			<if test="demandId !=null">
+				demand_id =#{demandId,jdbcType=BIGINT},
+			</if>
+			<if test="rek != null">
+				rek = #{rek,jdbcType=VARCHAR},
+			</if>
+			<if test="closeReason != null">
+				close_reason = #{closeReason,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.Demand">
+		update demand
+		set employee_id = #{employeeId,jdbcType=BIGINT},
+		intentionMoneyState = #{intentionMoneyState,jdbcType=VARCHAR},
+		demandState = #{demandstate,jdbcType=VARCHAR},
+		demandType = #{demandtype,jdbcType=VARCHAR},
+		releaseTime = #{releasetime,jdbcType=VARCHAR},
+		title = #{title,jdbcType=VARCHAR},
+		dpt_state = #{dptState,jdbcType=VARCHAR},
+		dpt = #{dpt,jdbcType=VARCHAR},
+		dpt_ct = #{dptCt,jdbcType=VARCHAR},
+		dpt_acceptNearAirport = #{dptAcceptnearairport,jdbcType=VARCHAR},
+		dpt_timeResources = #{dptTimeresources,jdbcType=VARCHAR},
+		dpt_time = #{dptTime,jdbcType=VARCHAR},
+		pst_state = #{pstState,jdbcType=VARCHAR},
+		pst = #{pst,jdbcType=VARCHAR},
+		pst_ct = #{pstCt,jdbcType=VARCHAR},
+		pst_acceptNearAirport = #{pstAcceptnearairport,jdbcType=VARCHAR},
+		pst_timeResources = #{pstTimeresources,jdbcType=VARCHAR},
+		pst_time = #{pstTime,jdbcType=VARCHAR},
+		arrv_state = #{arrvState,jdbcType=VARCHAR},
+		arrv = #{arrv,jdbcType=VARCHAR},
+		arrv_ct = #{arrvCt,jdbcType=VARCHAR},
+		arrv_acceptNearAirport = #{arrvAcceptnearairport,jdbcType=VARCHAR},
+		arrv_timeResources = #{arrvTimeresources,jdbcType=VARCHAR},
+		arrv_time = #{arrvTime,jdbcType=VARCHAR},
+		airCrftTyp = #{aircrfttyp,jdbcType=VARCHAR},
+		days = #{days,jdbcType=VARCHAR},
+		blockBidPrice = #{blockbidprice,jdbcType=INTEGER},
+		loadFactorsExpect = #{loadfactorsexpect,jdbcType=INTEGER},
+		avgGuestExpect = #{avgguestexpect,jdbcType=INTEGER},
+		subsidyPolicy = #{subsidypolicy,jdbcType=VARCHAR},
+		sailingTime = #{sailingtime,jdbcType=VARCHAR},
+		seating = #{seating,jdbcType=VARCHAR},
+		capacityCompany = #{capacitycompany,jdbcType=BIGINT},
+		scheduling = #{scheduling,jdbcType=VARCHAR},
+		hoursCost = #{hourscost,jdbcType=VARCHAR},
+		intendedAirline = #{intendedairline,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		publicWay = #{publicway,jdbcType=VARCHAR},
+		directionalGoal = #{directionalgoal,jdbcType=VARCHAR},
+		demandProgress = #{demandprogress,jdbcType=VARCHAR},
+		finishDate = #{finishDate,jdbcType=VARCHAR},
+		contact = #{contact,jdbcType=VARCHAR},
+		iHome = #{iHome,jdbcType=VARCHAR},
+		fltNbr = #{fltNbr,jdbcType=VARCHAR},
+		periodValidity = #{periodValidity,jdbcType=VARCHAR},
+		schedulinePort = #{schedulinePort,jdbcType=VARCHAR},
+		demand_id = #{demandId,jdbcType=BIGINT},
+		rek = #{rek,jdbcType=VARCHAR},
+		close_reason = #{closeReason,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+
+	<resultMap id="PageResultMap" type="org.ldd.ssm.hangyu.domain.Demand">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+		<result column="intentionMoneyState" property="intentionMoneyState"
+			jdbcType="VARCHAR" />
+		<result column="demandState" property="demandstate" jdbcType="VARCHAR" />
+		<result column="demandType" property="demandtype" jdbcType="VARCHAR" />
+		<result column="releaseTime" property="releasetime" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="dpt" property="dpt" jdbcType="VARCHAR" />
+		<result column="dpt_acceptNearAirport" property="dptAcceptnearairport"
+			jdbcType="VARCHAR" />
+		<result column="dpt_timeResources" property="dptTimeresources"
+			jdbcType="VARCHAR" />
+		<result column="dpt_time" property="dptTime" jdbcType="VARCHAR" />
+		<result column="pst" property="pst" jdbcType="VARCHAR" />
+		<result column="pst_acceptNearAirport" property="pstAcceptnearairport"
+			jdbcType="VARCHAR" />
+		<result column="pst_timeResources" property="pstTimeresources"
+			jdbcType="VARCHAR" />
+		<result column="pst_time" property="pstTime" jdbcType="VARCHAR" />
+		<result column="arrv" property="arrv" jdbcType="VARCHAR" />
+		<result column="arrv_acceptNearAirport" property="arrvAcceptnearairport"
+			jdbcType="VARCHAR" />
+		<result column="arrv_timeResources" property="arrvTimeresources"
+			jdbcType="VARCHAR" />
+		<result column="arrv_time" property="arrvTime" jdbcType="VARCHAR" />
+		<result column="airCrftTyp" property="aircrfttyp" jdbcType="VARCHAR" />
+		<result column="days" property="days" jdbcType="VARCHAR" />
+		<result column="blockBidPrice" property="blockbidprice"
+			jdbcType="INTEGER" />
+		<result column="loadFactorsExpect" property="loadfactorsexpect"
+			jdbcType="INTEGER" />
+		<result column="avgGuestExpect" property="avgguestexpect"
+			jdbcType="INTEGER" />
+		<result column="subsidyPolicy" property="subsidypolicy"
+			jdbcType="VARCHAR" />
+		<result column="sailingTime" property="sailingtime" jdbcType="VARCHAR" />
+		<result column="seating" property="seating" jdbcType="VARCHAR" />
+		<result column="capacityCompany" property="capacitycompany"
+			jdbcType="BIGINT" />
+		<result column="scheduling" property="scheduling" jdbcType="VARCHAR" />
+		<result column="schedulinePort" property="schedulinePort"
+			jdbcType="VARCHAR" />
+		<result column="hoursCost" property="hourscost" jdbcType="VARCHAR" />
+		<result column="intendedAirline" property="intendedairline"
+			jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="publicWay" property="publicway" jdbcType="VARCHAR" />
+		<result column="directionalGoal" property="directionalgoal"
+			jdbcType="VARCHAR" />
+		<result column="demandProgress" property="demandprogress"
+			jdbcType="VARCHAR" />
+			<result column="finishDate" property="finishDate"
+			jdbcType="VARCHAR" />
+		<result column="contact" property="contact" jdbcType="VARCHAR" />
+		<result column="iHome" property="iHome" jdbcType="VARCHAR" />
+		<result column="fltNbr" property="fltNbr" jdbcType="VARCHAR" />
+		<result column="periodValidity" property="periodValidity"
+			jdbcType="VARCHAR" />
+		<result column="dpt_state" property="dptState" jdbcType="VARCHAR" />
+		<result column="dpt_ct" property="dptCt" jdbcType="VARCHAR" />
+		<result column="pst_state" property="pstState" jdbcType="VARCHAR" />
+		<result column="pst_ct" property="pstCt" jdbcType="VARCHAR" />
+		<result column="arrv_state" property="arrvState" jdbcType="VARCHAR" />
+		<result column="arrv_ct" property="arrvCt" jdbcType="VARCHAR" />
+		<result column="dpt_flt_lvl" property="dptFltLvl" jdbcType="VARCHAR" />
+		<result column="pst_flt_lvl" property="pstFltLvl" jdbcType="VARCHAR" />
+		<result column="arrv_flt_lvl" property="arrvFltLvl" jdbcType="VARCHAR" />
+		<result column="dpt_nm" property="dptNm" jdbcType="VARCHAR" />
+		<result column="pst_nm" property="pstNm" jdbcType="VARCHAR" />
+		<result column="arrv_nm" property="arrvNm" jdbcType="VARCHAR" />
+		<result column="CpyNm" property="CpyNm" jdbcType="VARCHAR" />
+		<result column="renew" property="renew" jdbcType="INTEGER" />
+		<result column="collect_type" property="collectType" jdbcType="INTEGER" />
+		<result column="demand_id" property="demandId" jdbcType="BIGINT" />
+		<result column="collect_id" property="collectId" jdbcType="INTEGER" />
+		<result column="rek" property="rek" jdbcType="VARCHAR" />
+		<result column="close_reason" property="closeReason" jdbcType="VARCHAR"/>
+		<association column="capacityCompany" property="capacityCompany"
+			select="org.ldd.ssm.hangyu.mapper.AirCompenyInfoThreeMapper.selectByPrimaryKey" />
+	</resultMap>
+
+
+	<select id="selectByPrimaryKey" resultMap="PageResultMap"
+		parameterType="java.lang.Long">
+		select
+		id, employee_id,intentionMoneyState, demandState,
+		demandType, releaseTime,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.dpt_state = '0' AND
+		a.dpt = d.iATA) dpt_flt_lvl,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.pst_state = '0' AND
+		a.pst = d.iATA) pst_flt_lvl,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.arrv_state = '0' AND
+		a.arrv = d.iATA) arrv_flt_lvl,
+		title,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.dpt_state = '0' AND
+		a.dpt = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.dpt_state='2' AND a.dpt = c.city_icao) dpt_nm,
+		dpt,dpt_acceptNearAirport, dpt_timeResources, dpt_time,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.pst_state = '0' AND
+		a.pst = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.pst_state='2' AND a.pst = c.city_icao) pst_nm,
+		pst,pst_acceptNearAirport, pst_timeResources, pst_time,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.arrv_state = '0' AND
+		a.arrv = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.arrv_state='2' AND a.arrv = c.city_icao) arrv_nm,
+		arrv,arrv_acceptNearAirport, arrv_timeResources,
+		arrv_time, airCrftTyp, days,
+		blockBidPrice, loadFactorsExpect, avgGuestExpect,
+		subsidyPolicy, sailingTime,
+		seating, capacityCompany, scheduling,
+		hoursCost, intendedAirline, remark,
+		publicWay, directionalGoal,
+		(select b.company_name from employee b where b.id = a.employee_id) CpyNm,
+		demandProgress,finishDate,contact,iHome,fltNbr,periodValidity,dpt_state,dpt_ct,
+		pst_state,pst_ct,arrv_state,arrv_ct,schedulinePort,demand_id,rek,close_reason
+		from demand a
+		where a.id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<select id="getDemandsForCurrentEmployee" resultMap="PageResultMap">
+		select id, employee_id,intentionMoneyState, demandState,
+		demandType, releaseTime,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.dpt_state = '0' AND
+		a.dpt = d.iATA) dpt_flt_lvl,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.pst_state = '0' AND
+		a.pst = d.iATA) pst_flt_lvl,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.arrv_state = '0' AND
+		a.arrv = d.iATA) arrv_flt_lvl,
+		title,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.dpt_state = '0' AND
+		a.dpt = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.dpt_state='2' AND a.dpt = c.city_icao) dpt_nm,
+		dpt,dpt_acceptNearAirport, dpt_timeResources, dpt_time,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.pst_state = '0' AND
+		a.pst = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.pst_state='2' AND a.pst = c.city_icao) pst_nm,
+		pst,pst_acceptNearAirport, pst_timeResources, pst_time,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.arrv_state = '0' AND
+		a.arrv = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.arrv_state='2' AND a.arrv = c.city_icao) arrv_nm,
+		arrv,arrv_acceptNearAirport, arrv_timeResources,
+		arrv_time, airCrftTyp, days,
+		blockBidPrice, loadFactorsExpect, avgGuestExpect,
+		subsidyPolicy, sailingTime,
+		seating, capacityCompany, scheduling,
+		hoursCost, intendedAirline, remark,
+		publicWay, directionalGoal,
+		demandProgress,finishDate,contact,iHome,fltNbr,periodValidity,dpt_state,dpt_ct,
+		pst_state,pst_ct,arrv_state,arrv_ct,schedulinePort,rek,demand_id,close_reason,
+		(select count(*) from employeeDemand d
+		<where>
+			d.demand_id = a.id
+			<if test="employeeId !=null and employeeId >0">
+				and d.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		) renew,
+		(select count(*) from collect e
+		<where>
+			e.demand_id = a.id
+			<if test="employeeId !=null and employeeId >0">
+				and e.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		) collect_type,
+		(select id from collect e
+		<where>
+			e.demand_id = a.id
+			<if test="employeeId !=null and employeeId >0">
+				and e.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		) collect_id
+		FROM demand a
+		<where>
+			a.demandProgress in ('0','1','2') and demandState = '6'
+			<if test="employeeId !=null and employeeId >0">
+				and a.employee_id != #{employeeId,jdbcType=BIGINT}
+			</if>
+			<if test="demandType == '0'.toString() or demandType == '1'.toString() or demandType == '2'.toString()">
+				and demandType = #{demandType,jdbcType=VARCHAR}
+				<if test="demandType=='0'.toString()">
+					 and
+						(
+						ISNULL(directionalGoal) or directionalGoal ='' 
+						or 
+						(SELECT c.id FROM employee b,aircompenyinfothree c
+						 WHERE b.airlineRetrievalCondition = c.iata AND b.id = #{employeeId,jdbcType=BIGINT})
+						  in (directionalGoal)
+						)
+				</if>
+				<if test="demandType=='1'.toString()">
+					 and
+						(
+						ISNULL(directionalGoal) or directionalGoal ='' 
+						or 
+						(SELECT c.id FROM employee b,airportinfonewthree c 
+						WHERE b.airlineRetrievalCondition = c.iATA AND b.id = #{employeeId,jdbcType=BIGINT}) in (directionalGoal)
+						)
+				</if>
+			</if>
+			<if test="demandType == '3'.toString()">
+				and (demandType = '0' or demandType = '1')
+			</if>
+		</where>
+		order by releaseTime Desc
+		limit #{startIndex,jdbcType=INTEGER},#{pageNo,jdbcType=INTEGER}
+	</select>
+
+	<select id="getDemandsForCurrentEmployeeCount" resultType="Integer">
+		select count(*) from demand a
+		<where>
+			a.demandProgress in ('0','1','2') and demandState = '6'
+			<if test="employeeId !=null and employeeId >0">
+				and a.employee_id != #{employeeId,jdbcType=BIGINT}
+			</if>
+			<if
+				test="demandType == '0'.toString() or demandType == '1'.toString() or demandType == '2'.toString()">
+				and demandType = #{demandType,jdbcType=VARCHAR}
+				<if test="demandType=='0'.toString()">
+					 and
+						(
+						ISNULL(directionalGoal) or directionalGoal ='' 
+						or 
+						(SELECT c.id FROM employee b,aircompenyinfothree c
+						 WHERE b.airlineRetrievalCondition = c.iata AND b.id = #{employeeId,jdbcType=BIGINT})
+						  in (directionalGoal)
+						)
+				</if>
+				<if test="demandType=='1'.toString()">
+					 and
+						(
+						ISNULL(directionalGoal) or directionalGoal ='' 
+						or 
+						(SELECT c.id FROM employee b,airportinfonewthree c 
+						WHERE b.airlineRetrievalCondition = c.iATA AND b.id = #{employeeId,jdbcType=BIGINT}) in (directionalGoal)
+						)
+				</if>
+			</if>
+			<if test="demandType == '3'.toString()">
+				and (demandType = '0' or demandType = '1')
+			</if>
+		</where>
+	</select>
+
+	<select id="getOthersDemandListIndex" resultMap="PageResultMap">
+		select id, employee_id,intentionMoneyState, demandState,
+		demandType, releaseTime,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.dpt_state = '0' AND
+		a.dpt = d.iATA) dpt_flt_lvl,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.pst_state = '0' AND
+		a.pst = d.iATA) pst_flt_lvl,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.arrv_state = '0' AND
+		a.arrv = d.iATA) arrv_flt_lvl,
+		title,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.dpt_state = '0' AND
+		a.dpt = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.dpt_state='2' AND a.dpt = c.city_icao) dpt_nm,
+		dpt,dpt_acceptNearAirport, dpt_timeResources, dpt_time,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.pst_state = '0' AND
+		a.pst = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.pst_state='2' AND a.pst = c.city_icao) pst_nm,
+		pst,pst_acceptNearAirport, pst_timeResources, pst_time,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.arrv_state = '0' AND
+		a.arrv = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.arrv_state='2' AND a.arrv = c.city_icao) arrv_nm,
+		arrv,arrv_acceptNearAirport, arrv_timeResources,
+		arrv_time, airCrftTyp, days,
+		blockBidPrice, loadFactorsExpect, avgGuestExpect,
+		subsidyPolicy, sailingTime,
+		seating, capacityCompany, scheduling,
+		hoursCost, intendedAirline, remark,
+		publicWay, directionalGoal,
+		demandProgress,finishDate,contact,iHome,fltNbr,periodValidity,dpt_state,dpt_ct,
+		pst_state,pst_ct,arrv_state,arrv_ct,schedulinePort,rek,demand_id,close_reason,
+		(select count(*) from employeeDemand d
+		<where>
+			d.demand_id = a.id
+			<if test="employeeId !=null and employeeId >0">
+				and d.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		) renew,
+		(select count(*) from collect e
+		<where>
+			e.demand_id = a.id
+			<if test="employeeId !=null and employeeId >0">
+				and e.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		) collect_type,
+		(select id from collect e
+		<where>
+			e.demand_id = a.id
+			<if test="employeeId !=null and employeeId >0">
+				and e.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		) collect_id
+		FROM demand a
+		<where>
+			a.demandProgress in ('0','1','2') and demandState = '6'
+			<if test="employeeId !=null and employeeId >0">
+				and a.employee_id != #{employeeId,jdbcType=BIGINT}
+			</if>
+			<if test="itia !=null and itia !=''">
+				and (
+					a.dpt = #{itia,jdbcType=VARCHAR}
+					or a.pst = #{itia,jdbcType=VARCHAR}
+					or a.arrv = #{itia,jdbcType=VARCHAR}
+					or (a.demandType = '1' and
+							(
+							select count(*) from intendedAirline b
+							 where b.demand_id = a.id and 
+							 	(
+								 	b.dpt = #{itia,jdbcType=VARCHAR}
+									or b.pst = #{itia,jdbcType=VARCHAR}
+									or b.arrv = #{itia,jdbcType=VARCHAR}
+								)
+							)>0
+						)
+					)
+			</if>
+			<if test="demandType == '0'.toString() or demandType == '1'.toString() or demandType == '2'.toString()">
+				and demandType = #{demandType,jdbcType=VARCHAR}
+				<if test="demandType=='0'.toString()">
+					 and
+						(
+						ISNULL(directionalGoal) or directionalGoal ='' 
+						or 
+						(SELECT c.id FROM employee b,aircompenyinfothree c
+						 WHERE b.airlineRetrievalCondition = c.iata AND b.id = #{employeeId,jdbcType=BIGINT})
+						  in (directionalGoal)
+						)
+				</if>
+				<if test="demandType=='1'.toString()">
+					 and
+						(
+						ISNULL(directionalGoal) or directionalGoal ='' 
+						or 
+						(SELECT c.id FROM employee b,airportinfonewthree c 
+						WHERE b.airlineRetrievalCondition = c.iATA AND b.id = #{employeeId,jdbcType=BIGINT}) in (directionalGoal)
+						)
+				</if>
+			</if>
+			<if test="demandType == '3'.toString()">
+				and (demandType = '0' or demandType = '1')
+			</if>
+		</where>
+		order by releaseTime Desc
+		limit #{startIndex,jdbcType=INTEGER},#{pageNo,jdbcType=INTEGER}
+	</select>
+
+	<select id="getOthersDemandListIndexCount" resultType="Integer">
+		select count(*) from demand a
+		<where>
+			a.demandProgress in ('0','1','2') and demandState = '6'
+			<if test="employeeId !=null and employeeId >0">
+				and a.employee_id != #{employeeId,jdbcType=BIGINT}
+			</if>
+			<if test="itia !=null and itia !=''">
+				and (
+					a.dpt = #{itia,jdbcType=VARCHAR}
+					or a.pst = #{itia,jdbcType=VARCHAR}
+					or a.arrv = #{itia,jdbcType=VARCHAR} 
+					or (a.demandType = '1' and
+							(
+							select count(*) from intendedAirline b
+							 where b.demand_id = a.id and 
+							 	(
+								 	b.dpt = #{itia,jdbcType=VARCHAR}
+									or b.pst = #{itia,jdbcType=VARCHAR}
+									or b.arrv = #{itia,jdbcType=VARCHAR}
+								)
+							)>0
+						)
+					)
+			</if>
+			<if
+				test="demandType == '0'.toString() or demandType == '1'.toString() or demandType == '2'.toString()">
+				and demandType = #{demandType,jdbcType=VARCHAR}
+				<if test="demandType=='0'.toString()">
+					 and
+						(
+						ISNULL(directionalGoal) or directionalGoal ='' 
+						or 
+						(SELECT c.id FROM employee b,aircompenyinfothree c
+						 WHERE b.airlineRetrievalCondition = c.iata AND b.id = #{employeeId,jdbcType=BIGINT})
+						  in (directionalGoal)
+						)
+				</if>
+				<if test="demandType=='1'.toString()">
+					 and
+						(
+						ISNULL(directionalGoal) or directionalGoal ='' 
+						or 
+						(SELECT c.id FROM employee b,airportinfonewthree c 
+						WHERE b.airlineRetrievalCondition = c.iATA AND b.id = #{employeeId,jdbcType=BIGINT}) in (directionalGoal)
+						)
+				</if>
+			</if>
+			<if test="demandType == '3'.toString()">
+				and (demandType = '0' or demandType = '1')
+			</if>
+		</where>
+	</select>
+	
+	<select id="getDemandsForCurrentCheckedCity" resultMap="PageResultMap">
+		select id, employee_id, intentionMoneyState, demandState,
+		demandType, releaseTime, title,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.dpt_state = '0' AND
+		a.dpt = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.dpt_state='2' AND a.dpt = c.city_icao) dpt_nm,
+		dpt,dpt_acceptNearAirport, dpt_timeResources,dpt_time,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.pst_state = '0' AND
+		a.pst = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.pst_state='2' AND a.pst = c.city_icao) pst_nm,
+		pst,pst_acceptNearAirport, pst_timeResources, pst_time,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.arrv_state = '0' AND
+		a.arrv = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.arrv_state='2' AND a.arrv = c.city_icao) arrv_nm,
+		arrv,arrv_acceptNearAirport, arrv_timeResources,
+		arrv_time, airCrftTyp, days,
+		blockBidPrice, loadFactorsExpect, avgGuestExpect,
+		subsidyPolicy, sailingTime,
+		seating, capacityCompany, scheduling,
+		hoursCost, intendedAirline, remark,
+		publicWay, directionalGoal,
+		demandProgress,finishDate,contact,iHome,fltNbr,periodValidity,dpt_state,dpt_ct,
+		pst_state,pst_ct,arrv_state,arrv_ct,schedulinePort,rek,demand_id,close_reason,
+		(select count(*) from employeeDemand e
+		<where>
+			e.demand_id = a.id
+			<if test="employeeId !=null and employeeId >0">
+				and e.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		) renew,
+		(select count(*) from collect e
+		<where>
+			e.demand_id = a.id
+			<if test="employeeId !=null and employeeId >0">
+				and e.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		) collect_type,
+		(select id from collect e
+		<where>
+			e.demand_id = a.id
+			<if test="employeeId !=null and employeeId >0">
+				and e.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		) collect_id,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.dpt_state = '0' AND
+		a.dpt = d.iATA) dpt_flt_lvl,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.pst_state = '0' AND
+		a.pst = d.iATA) pst_flt_lvl,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.arrv_state = '0' AND
+		a.arrv = d.iATA) arrv_flt_lvl
+		FROM demand a
+		<where>
+			(a.demandType = '0' or a.demandType = '1') and a.demandProgress in
+			('0','1','2')
+			and demandState = '6'
+			<if test="itia != null and itia != ''">
+				<if test="itiaType != null and itiaType == '0'.toString()">
+					and (
+					(
+					a.dpt = #{itia,jdbcType=VARCHAR} and a.dpt_state =
+					#{itiaType,jdbcType=VARCHAR})
+					or (a.pst = #{itia,jdbcType=VARCHAR} and a.pst_state =
+					#{itiaType,jdbcType=VARCHAR})
+					or (a.arrv = #{itia,jdbcType=VARCHAR} and a.arrv_state =
+					#{itiaType,jdbcType=VARCHAR})
+					)
+				</if>
+				<if test="itiaType != null and itiaType =='2'.toString()">
+					and (
+					a.dpt_ct = #{itia,jdbcType=VARCHAR}
+					or a.pst_ct = #{itia,jdbcType=VARCHAR}
+					or a.arrv_ct = #{itia,jdbcType=VARCHAR}
+					)
+				</if>
+			</if>
+			<if test="type == 1">
+				and a.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+			<if
+				test="demandType == '0'.toString() or demandType == '1'.toString() or demandType == '2'.toString()">
+				and a.demandType = #{demandType,jdbcType=VARCHAR}
+			</if>
+			<if test="demandType == '3'.toString()">
+				and (a.demandType = '0' or a.demandType = '1')
+			</if>
+		</where>
+		order by a.releaseTime Desc
+		limit #{startIndex,jdbcType=INTEGER},#{pageNo,jdbcType=INTEGER}
+	</select>
+
+	<select id="getDemandsForCurrentCheckedCityCount" resultType="Integer">
+		select count(*) from demand a
+		<where>
+			(a.demandType = '0' or a.demandType = '1') and a.demandProgress in
+			('0','1','2')
+			and demandState = '6'
+			<if test="itia != null and itia != ''">
+				<if test="itiaType != null and itiaType == '0'.toString()">
+					and (
+					(
+					a.dpt = #{itia,jdbcType=VARCHAR} and a.dpt_state =
+					#{itiaType,jdbcType=VARCHAR})
+					or (a.pst = #{itia,jdbcType=VARCHAR} and a.pst_state =
+					#{itiaType,jdbcType=VARCHAR})
+					or (a.arrv = #{itia,jdbcType=VARCHAR} and a.arrv_state =
+					#{itiaType,jdbcType=VARCHAR})
+					)
+				</if>
+				<if test="itiaType != null and itiaType =='2'.toString()">
+					and (
+					a.dpt_ct = #{itia,jdbcType=VARCHAR}
+					or a.pst_ct = #{itia,jdbcType=VARCHAR}
+					or a.arrv_ct = #{itia,jdbcType=VARCHAR}
+					)
+				</if>
+			</if>
+			<if test="type == 1">
+				and a.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+			<if
+				test="demandType == '0'.toString() or demandType == '1'.toString() or demandType == '2'.toString()">
+				and a.demandType = #{demandType,jdbcType=VARCHAR}
+			</if>
+			<if test="demandType == '3'.toString()">
+				and (a.demandType = '0' or a.demandType = '1')
+			</if>
+		</where>
+	</select>
+
+	<select id="selectTrusteeshipDemandList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from demand
+		<where>
+			demandType = '2'
+		</where>
+		order by releaseTime Desc
+		limit #{startIndex,jdbcType=INTEGER},#{pageNo,jdbcType=INTEGER}
+	</select>
+	<select id="selectCountTrusteeshipDemand" resultType="java.lang.Integer">
+		select
+		count(*)
+		from demand
+		<where>
+			demandType = '2'
+		</where>
+	</select>
+
+	<!-- wxm begin 首页 -->
+	<select id="getAllDemands" parameterType="org.ldd.ssm.hangyu.domain.Employee"
+		resultType="org.ldd.ssm.hangyu.query.DemandDto">
+		select p.dpt,t.city_coordinate_j cityCoordinateJ,t.city_coordinate_w
+		cityCoordinateW, sum(num) num,GROUP_CONCAT(DISTINCT(p.demandType))
+		demandType,GROUP_CONCAT(DISTINCT(p.obj)) obj, GROUP_CONCAT(p.newInfo)
+		newInfo from
+			(	<!-- 查到自己发布的需求 begin -->
+				(SELECT d.dpt dpt,0 as num ,NUll as demandType,GROUP_CONCAT(DISTINCT(d.obj))
+				obj,d.newInfo FROM
+					(   
+						SELECT a.dpt dpt,GROUP_CONCAT(DISTINCT(a.demandType))demandType,'0' as obj,
+						IF(FIND_IN_SET('0',GROUP_CONCAT(DISTINCT(d.newInfo))),0,1) as newInfo
+						FROM demand a
+						LEFT JOIN response d on a.id=d.demand_id
+						WHERE (a.dpt is not null and a.dpt!='' ) and a.employee_id=#{id} and
+						a.demandProgress in (0,1,2)
+						and (a.demandType=0 or a.demandType=1) and a.demandState in ('4','6') GROUP BY a.dpt
+					union ALL
+						SELECT b.pst dpt,GROUP_CONCAT(DISTINCT(b.demandType)) demandType,'0' as obj,
+						IF(FIND_IN_SET('0',GROUP_CONCAT(DISTINCT(d.newInfo))),0,1) as newInfo
+						FROM demand b
+						LEFT JOIN response d on b.id=d.demand_id
+						WHERE (b.pst is not null and b.pst!='' ) and b.employee_id=#{id} and
+						b.demandProgress in (0,1,2)
+						and (b.demandType=0 or b.demandType=1) and b.demandState in ('4','6') GROUP BY	b.pst
+					UNION ALL
+						SELECT c.arrv dpt,GROUP_CONCAT(DISTINCT(c.demandType)) demandType,'0' as obj,
+						IF(FIND_IN_SET('0',GROUP_CONCAT(DISTINCT(d.newInfo))),0,1) as newInfo FROM demand c
+						LEFT JOIN response d on c.id=d.demand_id
+						WHERE (c.arrv is not null and c.arrv!='' ) and c.employee_id=#{id} and
+						c.demandProgress in (0,1,2)
+						and (c.demandType=0 or c.demandType=1) and c.demandState in ('4','6') GROUP BY  c.arrv
+					)d GROUP BY d.dpt
+				)
+				<!-- 查到自己发布的需求 end -->
+			union all
+				<!-- 查询我能看见的别人发的需求  并且统计未读条数 begin -->
+				(SELECT e.dpt dpt,sum(e.num) num ,GROUP_CONCAT(DISTINCT(e.demandType))
+				demandType,GROUP_CONCAT(DISTINCT(e.obj)) obj, NULL as newInfo FROM
+					(SELECT a.dpt dpt,count(a.dpt)
+					num,GROUP_CONCAT(DISTINCT(a.demandType))demandType,'1' as obj
+					FROM demand a LEFT JOIN employee aa on a.employee_id=aa.id
+					WHERE (a.dpt is not null and a.dpt!='' ) and employee_id!=#{id} and
+					a.demandState='6' and a.demandProgress in (0,1,2)
+					and (case when #{role}='0' then (demandType='0' and (a.directionalGoal is null or a.directionalGoal='' or #{directId} in (a.directionalGoal)) ) 
+					when #{role}='1' then (demandType='1' and (a.directionalGoal is null or a.directionalGoal='' or #{directId} in (a.directionalGoal))) else 1=1 end)
+					and (demandType=0 or demandType=1) and a.id not in (select demand_id from
+					employeeDemand where employee_id=#{id}) GROUP BY a.dpt
+				union ALL
+					SELECT b.pst dpt,count(b.pst) num,GROUP_CONCAT(DISTINCT(b.demandType))
+					demandType , '1' as obj
+					FROM demand b LEFT JOIN employee bb on b.employee_id=bb.id
+					WHERE (b.pst is not null and b.pst!='' ) and b.demandState='6' and
+					employee_id!=#{id} and b.demandProgress in (0,1,2)
+					and (case when #{role}='0' then (demandType='0' and (b.directionalGoal is null or b.directionalGoal='' or #{directId} in (b.directionalGoal)))
+ 					when #{role}='1' then (demandType='1' and (b.directionalGoal is null or b.directionalGoal='' or #{directId} in (b.directionalGoal) )) else 1=1 end)
+					and (demandType=0 or demandType=1) and b.id not in (select demand_id from
+					employeeDemand where employee_id=#{id}) GROUP BY b.pst
+				UNION ALL
+					SELECT c.arrv dpt,count(c.arrv) num,GROUP_CONCAT(DISTINCT(c.demandType))
+					demandType, '1' as obj FROM demand c
+					LEFT JOIN employee cc on c.employee_id=cc.id WHERE (c.arrv is not null and
+					c.arrv!='' ) and c.demandState='6' and c.demandProgress in (0,1,2)
+					and employee_id!=#{id} and (case when #{role}='0' then (demandType='0' and ( c.directionalGoal is null or c.directionalGoal='' or #{directId} in (c.directionalGoal)))
+					when #{role}='1' then (demandType='1' and (c.directionalGoal is null or c.directionalGoal='' or #{directId} in (c.directionalGoal))) else 1=1 end)
+					and (demandType=0 or demandType=1) and c.id not in (select demand_id from
+					employeeDemand where employee_id=#{id}) GROUP BY c.arrv
+				) e GROUP BY e.dpt
+				)
+				<!-- 查询我能看见的别人发的需求  并且统计未读条数 end -->
+			union all
+				<!-- 查询我已读的别人发的需求 begin -->
+				(SELECT e.dpt dpt,0 as num ,GROUP_CONCAT(DISTINCT(e.demandType))
+				demandType,GROUP_CONCAT(DISTINCT(e.obj)) obj, NULL as newInfo FROM
+				( 
+					SELECT a.dpt dpt,GROUP_CONCAT(DISTINCT(a.demandType))demandType,'1'
+					as obj FROM demand a
+					LEFT JOIN employee aa on a.employee_id=aa.id WHERE (a.dpt is not null and
+					a.dpt!='' ) and a.demandState ='6'  and a.demandProgress in (0,1,2)
+					and
+					employee_id!=#{id} and (case when #{role}='0' then (demandType='0' and (a.directionalGoal is null or a.directionalGoal='' or #{directId} in (a.directionalGoal)) )when
+					#{role}='1' then (demandType='1' and (a.directionalGoal is null or a.directionalGoal='' or #{directId} in (a.directionalGoal))) else 1=1 end)
+					and (demandType=0 or demandType=1) and a.id in (select demand_id from
+					employeeDemand where employee_id=#{id}) GROUP BY a.dpt
+				union ALL
+					SELECT b.pst dpt,GROUP_CONCAT(DISTINCT(b.demandType)) demandType , '1' as
+					obj FROM demand b
+					LEFT JOIN employee bb on b.employee_id=bb.id WHERE (b.pst is not null and
+					b.pst!='' ) and b.demandState='6' and b.demandProgress in (0,1,2)
+					and employee_id!=#{id} and (case when #{role}='0' then (demandType='0' and (b.directionalGoal is null or b.directionalGoal='' or #{directId} in (b.directionalGoal) ))
+					when #{role}='1' then (demandType='1' and (b.directionalGoal is null or b.directionalGoal='' or #{directId} in (b.directionalGoal) ))  else 1=1 end)
+					and (demandType=0 or demandType=1) and b.id in (select demand_id from
+					employeeDemand where employee_id=#{id}) GROUP BY b.pst
+				UNION ALL
+					SELECT c.arrv dpt,GROUP_CONCAT(DISTINCT(c.demandType)) demandType, '1' as
+					obj FROM demand c
+					LEFT JOIN employee cc on c.employee_id=cc.id WHERE (c.arrv is not null and
+					c.arrv!='' ) and c.demandState='6' and c.demandProgress in (0,1,2)
+					and employee_id!=#{id} and (case when #{role}='0' then (demandType='0' and ( c.directionalGoal is null or c.directionalGoal='' or #{directId} in (c.directionalGoal)))
+					when #{role}='1' then (demandType='1' and (c.directionalGoal is null or c.directionalGoal='' or #{directId} in (c.directionalGoal))) else 1=1 end)
+					and (demandType=0 or demandType=1) and c.id in (select demand_id from
+					employeeDemand where employee_id=#{id}) GROUP BY c.arrv
+				) e GROUP BY e.dpt
+			)
+			<!-- 查询我已读的别人发的需求  end -->
+		) p LEFT JOIN airportinfonewthree t on p.dpt=t.iATA GROUP BY p.dpt;
+	</select>
+	
+	<select id="getAllDemandsCount"  parameterType="org.ldd.ssm.hangyu.domain.Employee"
+		resultType="org.ldd.ssm.hangyu.query.DemandDto">
+select p.dpt,t.city_coordinate_j cityCoordinateJ,t.city_coordinate_w
+		cityCoordinateW, sum(num) num,sum(myNum) myNum,
+		1 as demandType,1 as obj, 1 as	newInfo
+		from
+			(	<!-- 查到自己发布的需求 begin -->
+				(SELECT d.dpt dpt,sum(d.num) myNum ,0 as  num
+				 FROM
+					(   
+						SELECT a.dpt dpt,count(a.dpt)	num
+						FROM demand a
+						WHERE (a.dpt is not null and a.dpt!='' ) and a.employee_id=#{id} and
+						a.demandProgress in (0,1,2)
+						and (a.demandType=0 or a.demandType=1) and a.demandState in ('4','6') GROUP BY a.dpt
+					union ALL
+						SELECT b.pst dpt,count(b.pst) num
+						FROM demand b
+						WHERE (b.pst is not null and b.pst!='' ) and b.employee_id=#{id} and
+						b.demandProgress in (0,1,2)
+						and (b.demandType=0 or b.demandType=1) and b.demandState in ('4','6') GROUP BY	b.pst
+					UNION ALL
+						SELECT c.arrv dpt,count(c.arrv)	num
+						FROM demand c
+						WHERE (c.arrv is not null and c.arrv!='' ) and c.employee_id=#{id} and
+						c.demandProgress in (0,1,2)
+						and (c.demandType=0 or c.demandType=1) and c.demandState in ('4','6') GROUP BY  c.arrv
+						<!-- 可能有的意向航线的点 bigen -->
+					UNION ALL
+						select b.dpt dpt,count(b.dpt)	num from demand a
+						inner JOIN intendedAirline b on a.id=b.demand_id
+						WHERE (b.dpt is not null and b.dpt!='' and b.dpt!=a.dpt) and a.employee_id=#{id} and
+						a.demandProgress in (0,1,2)
+						and (a.demandType=0 or a.demandType=1) and a.demandState in ('4','6') GROUP BY b.dpt
+					UNION ALL
+						select b.pst dpt,count(b.pst)	num from demand a
+						inner JOIN intendedAirline b on a.id=b.demand_id
+						WHERE (b.pst is not null and b.pst!='' and b.pst!=a.dpt) and a.employee_id=#{id} and
+						a.demandProgress in (0,1,2)
+						and (a.demandType=0 or a.demandType=1) and a.demandState in ('4','6') GROUP BY b.pst
+					UNION ALL
+						select b.arrv dpt,count(b.arrv)	num from demand a
+						inner JOIN intendedAirline b on a.id=b.demand_id
+						WHERE (b.arrv is not null and b.arrv!='' and b.arrv!=a.dpt) and a.employee_id=#{id} and
+						a.demandProgress in (0,1,2)
+						and (a.demandType=0 or a.demandType=1) and a.demandState in ('4','6') GROUP BY b.arrv
+						<!-- 可能有的意向航线的点 end -->
+					)d GROUP BY d.dpt
+				)
+				<!-- 查到自己发布的需求 end -->
+			union all
+				<!-- 查询我能看见的别人发的需求  并且统计条数 begin -->
+				(SELECT e.dpt dpt , 0 as myNum,sum(e.num) num FROM
+					(SELECT a.dpt dpt,count(a.dpt) 	num
+					FROM demand a LEFT JOIN employee aa on a.employee_id=aa.id
+					WHERE (a.dpt is not null and a.dpt!='' ) and employee_id!=#{id} and
+					a.demandState='6' and a.demandProgress in (0,1,2)
+					and (case when #{role}='0' then (demandType='0' and (a.directionalGoal is null or a.directionalGoal='' or #{directId} in (a.directionalGoal)) ) 
+					when #{role}='1' then (demandType='1' and (a.directionalGoal is null or a.directionalGoal='' or #{directId} in (a.directionalGoal))) else 1=1 end)
+					and (demandType=0 or demandType=1)  GROUP BY a.dpt
+				union ALL
+					SELECT b.pst dpt,count(b.pst) num
+					FROM demand b LEFT JOIN employee bb on b.employee_id=bb.id
+					WHERE (b.pst is not null and b.pst!='' ) and b.demandState='6' and
+					employee_id!=#{id} and b.demandProgress in (0,1,2)
+					and (case when #{role}='0' then (demandType='0' and (b.directionalGoal is null or b.directionalGoal='' or #{directId} in (b.directionalGoal)))
+ 					when #{role}='1' then (demandType='1' and (b.directionalGoal is null or b.directionalGoal='' or #{directId} in (b.directionalGoal) )) else 1=1 end)
+					and (demandType=0 or demandType=1) GROUP BY b.pst
+				UNION ALL
+					SELECT c.arrv dpt,count(c.arrv) num
+					 FROM demand c
+					LEFT JOIN employee cc on c.employee_id=cc.id WHERE (c.arrv is not null and
+					c.arrv!='' ) and c.demandState='6' and c.demandProgress in (0,1,2)
+					and employee_id!=#{id} and (case when #{role}='0' then (demandType='0' and ( c.directionalGoal is null or c.directionalGoal='' or #{directId} in (c.directionalGoal)))
+					when #{role}='1' then (demandType='1' and (c.directionalGoal is null or c.directionalGoal='' or #{directId} in (c.directionalGoal))) else 1=1 end)
+					and (demandType=0 or demandType=1)  GROUP BY c.arrv
+				UNION ALL
+				<!-- 可能有的意向航线的点 bigen -->
+					SELECT b.dpt dpt,count(b.dpt) 	num
+					FROM demand a 
+					LEFT JOIN employee aa on a.employee_id=aa.id
+					inner JOIN intendedAirline b on a.id=b.demand_id
+					WHERE (b.dpt is not null and b.dpt!=''  and b.dpt!=a.dpt) and employee_id!=#{id} and
+					a.demandState='6' and a.demandProgress in (0,1,2)
+					and (case when #{role}='0' then (demandType='0' and (a.directionalGoal is null or a.directionalGoal='' or #{directId} in (a.directionalGoal)) ) 
+					when #{role}='1' then (demandType='1' and (a.directionalGoal is null or a.directionalGoal='' or #{directId} in (a.directionalGoal))) else 1=1 end)
+					and (demandType=0 or demandType=1)  GROUP BY b.dpt
+				UNION ALL
+					SELECT b.pst dpt,count(b.pst) 	num
+					FROM demand a 
+					LEFT JOIN employee aa on a.employee_id=aa.id
+					inner JOIN intendedAirline b on a.id=b.demand_id
+					WHERE (b.pst is not null and b.pst!=''  and b.pst!=a.dpt) and employee_id!=#{id} and
+					a.demandState='6' and a.demandProgress in (0,1,2)
+					and (case when #{role}='0' then (demandType='0' and (a.directionalGoal is null or a.directionalGoal='' or #{directId} in (a.directionalGoal)) ) 
+					when #{role}='1' then (demandType='1' and (a.directionalGoal is null or a.directionalGoal='' or #{directId} in (a.directionalGoal))) else 1=1 end)
+					and (demandType=0 or demandType=1)  GROUP BY b.pst
+				UNION ALL
+					SELECT b.arrv dpt,count(b.arrv) 	num
+					FROM demand a 
+					LEFT JOIN employee aa on a.employee_id=aa.id
+					inner JOIN intendedAirline b on a.id=b.demand_id
+					WHERE (b.arrv is not null and b.arrv!=''  and b.arrv!=a.dpt) and employee_id!=#{id} and
+					a.demandState='6' and a.demandProgress in (0,1,2)
+					and (case when #{role}='0' then (demandType='0' and (a.directionalGoal is null or a.directionalGoal='' or #{directId} in (a.directionalGoal)) ) 
+					when #{role}='1' then (demandType='1' and (a.directionalGoal is null or a.directionalGoal='' or #{directId} in (a.directionalGoal))) else 1=1 end)
+					and (demandType=0 or demandType=1)  GROUP BY b.arrv
+					<!-- 可能有的意向航线的点 end -->
+				) e GROUP BY e.dpt
+				)
+				<!-- 查询我能看见的别人发的需求  并且统计条数 end -->
+			
+		) p LEFT JOIN airportinfonewthree t on p.dpt=t.iATA GROUP BY p.dpt;
+	</select>	
+	<select id="getAirportId" parameterType="org.ldd.ssm.hangyu.domain.Employee" resultType="java.lang.Long">
+		select id from airportinfonewthree where iata=#{airlineretrievalcondition}
+	</select>
+	
+	<select id="getAircompenyId" parameterType="org.ldd.ssm.hangyu.domain.Employee" resultType="java.lang.Long">
+		select id from aircompenyinfothree where iata=#{airlineretrievalcondition}
+	</select>
+	<!-- wxm end 首页 -->
+
+
+	<!-- 委托、托管列表,分太美角色和普通角色,太美登录不传employeeId -->
+	<resultMap type="org.ldd.ssm.hangyu.query.CommissionedAndCustody"
+		id="CommissionedAndCustodyListMap">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="employee_id" property="demandEmployeeId"
+			jdbcType="BIGINT" />
+		<result column="releaseTime" property="releaseTime" jdbcType="VARCHAR" />
+		<result column="demandType" property="demandType" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="demandProgress" property="demandProgress"
+			jdbcType="VARCHAR" />
+		<result column="nickName" property="nickName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="findCommissionedAndCustodySql">
+		select a.id id,a.employee_id
+		employee_id,a.releaseTime releaseTime,a.demandType demandType,a.title title,
+		a.demandProgress demandProgress,b.nickName nickName
+		from
+		demand a LEFT JOIN employee b on a.employee_id=b.id
+		where demandType in ('2','3','4')
+		<!-- 太美看所有，其他看自己，其他用户看不到托管 -->
+		<if test="roleId !=2">
+			and employee_id = #{employeeId,jdbcType=BIGINT}
+			and a.demandType in ('3','4')
+		</if>
+		<if test="demandType !='' and demandType !=null">
+			and a.demandType = #{demandType,jdbcType=VARCHAR}
+		</if>
+		<if test="demandProgress !='' and demandProgress != null and demandProgress !='ABC'">
+			and a.demandProgress =#{demandProgress,jdbcType=VARCHAR}
+		</if>
+		<if test="demandProgress =='ABC'">
+			and ((a.demandProgress in ('9','0','1','2','4','5') and a.demandType in ('3','4')) or (a.demandProgress  ='9' and a.demandType = '2')  )
+		</if>
+		order by releaseTime
+		<if test="releaseTime=='Desc'">
+			Desc
+		</if>
+		<if test="releaseTime=='Asc'">
+			Asc
+		</if>
+		<if test="releaseTime=='' or releaseTime==null">
+			Desc
+		</if>
+
+	</sql>
+	<select id="findCommissionedAndCustody" resultMap="CommissionedAndCustodyListMap">
+		SELECT a.id id,a.employee_id employee_id,a.releaseTime releaseTime,a.demandType demandType,a.title title,
+		a.demandProgress demandProgress,a.nickName nickName
+		FROM (
+		<include refid="findCommissionedAndCustodySql" />
+		) a
+
+		limit #{startIndex,jdbcType=INTEGER},#{pageNo,jdbcType=INTEGER}
+	</select>
+	<select id="findCountCommissionedAndCustodyDemand" resultType="java.lang.Integer">
+		select count(a.id)
+		FROM (
+		<include refid="findCommissionedAndCustodySql" />
+		) a
+	</select>
+	<!-- 根据委托id查子需求列表id -->
+	<select id="selectSonDemandsByParentDemandId" resultType="java.lang.Long"
+		parameterType="java.lang.Long">
+		select a.id
+		from demand a
+		where a.demand_id = #{demandId,jdbcType=BIGINT}
+	</select>
+
+
+	<resultMap id="ResponseReferenceDemandMap" type="org.ldd.ssm.hangyu.domain.Demand">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="demandType" jdbcType="VARCHAR" property="demandtype" />
+		<result column="releaseTime" jdbcType="VARCHAR" property="releasetime" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="dpt_state" jdbcType="VARCHAR" property="dptState" />
+		<result column="dpt" jdbcType="VARCHAR" property="dpt" />
+		<result column="dpt_acceptNearAirport" jdbcType="VARCHAR"
+			property="dptAcceptnearairport" />
+		<result column="dpt_timeResources" jdbcType="VARCHAR" property="dptTimeresources" />
+		<result column="dpt_time" jdbcType="VARCHAR" property="dptTime" />
+		<result column="pst_state" jdbcType="VARCHAR" property="pstState" />
+		<result column="pst" jdbcType="VARCHAR" property="pst" />
+		<result column="pst_acceptNearAirport" jdbcType="VARCHAR"
+			property="pstAcceptnearairport" />
+		<result column="pst_timeResources" jdbcType="VARCHAR" property="pstTimeresources" />
+		<result column="pst_time" jdbcType="VARCHAR" property="pstTime" />
+		<result column="arrv_state" jdbcType="VARCHAR" property="arrvState" />
+		<result column="arrv" jdbcType="VARCHAR" property="arrv" />
+		<result column="arrv_acceptNearAirport" jdbcType="VARCHAR"
+			property="arrvAcceptnearairport" />
+		<result column="arrv_timeResources" jdbcType="VARCHAR"
+			property="arrvTimeresources" />
+		<result column="arrv_time" jdbcType="VARCHAR" property="arrvTime" />
+		<result column="airCrftTyp" jdbcType="VARCHAR" property="aircrfttyp" />
+		<result column="days" jdbcType="VARCHAR" property="days" />
+		<result column="loadFactorsExpect" jdbcType="VARCHAR" property="loadfactorsexpect" />
+		<result column="avgGuestExpect" jdbcType="VARCHAR" property="avgguestexpect" />
+		<result column="subsidyPolicy" jdbcType="VARCHAR" property="subsidypolicy" />
+		<result column="sailingTime" jdbcType="VARCHAR" property="sailingtime" />
+		<result column="seating" jdbcType="VARCHAR" property="seating" />
+		<result column="capacityCompany" jdbcType="BIGINT" property="capacitycompany" />
+		<result column="capacityCompanyStr" jdbcType="BIGINT"
+			property="capacitycompanyStr" />
+		<result column="scheduling" jdbcType="VARCHAR" property="scheduling" />
+		<result column="schedulinePort" jdbcType="VARCHAR" property="schedulinePort" />
+		<result column="hoursCost" jdbcType="VARCHAR" property="hourscost" />
+		<result column="periodValidity" jdbcType="VARCHAR" property="periodValidity" />
+		<result column="num" jdbcType="INTEGER" property="num" />
+		<result column="contact" property="contact" jdbcType="VARCHAR" />
+		<result column="iHome" property="iHome" jdbcType="VARCHAR" />
+		<result column="demandprogressStr" property="demandprogressStr"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectResponseRefrenceDemand" resultMap="ResponseReferenceDemandMap">
+		select
+		id,title,DATE_FORMAT(releaseTime,'%Y.%m.%d') releaseTime,demandType,sailingTime,dpt_state,
+		(case when dpt_state='0' or dpt_state='2' then (select c.airln_Cd from
+		airportinfonewthree c where c.iATA = a.dpt) when dpt_state='1' then
+		dpt end) dpt,
+		dpt_acceptNearAirport,dpt_time,
+		(case when dpt_timeResources='0' then dpt_time when dpt_timeResources='1'
+		then '待协调' when dpt_timeResources = '2' then '时刻充足' end)
+		dpt_timeResources,
+		pst_state,
+		(case when pst_state='0' then (select c.airln_Cd from airportinfonewthree c
+		where c.iATA = a.pst) when pst_state='1' then pst end) pst,
+		pst_acceptNearAirport,
+		(case when pst_timeResources='0' then pst_time when pst_timeResources='1'
+		then '待协调' when pst_timeResources = '2' then '时刻充足' end)
+		pst_timeResources,
+		pst_time,arrv_state,
+		(case when arrv_state='0' then (select c.airln_Cd from airportinfonewthree
+		c where c.iATA = a.arrv) when arrv_state='1' then arrv end) arrv,
+		arrv_acceptNearAirport,
+		(case when arrv_timeResources='0' then arrv_time when
+		arrv_timeResources='1' then '待协调' when arrv_timeResources = '2' then
+		'时刻充足' end) arrv_timeResources,
+		arrv_time,airCrftTyp,days,seating,
+		(case when subsidyPolicy = '0' then '定补' when subsidyPolicy = '1' then '保底'
+		when subsidyPolicy = '2' then '人头补'
+		when subsidyPolicy = '3' then '其他' when subsidyPolicy = '4' then '待议' when
+		subsidyPolicy = '5' then '无补贴' end) subsidyPolicy,
+		scheduling,
+		(case when scheduling = '0' then (select c.airln_Cd from
+		airportinfonewthree c where c.iATA = a.schedulinePort ) end)
+		schedulinePort,
+		hoursCost,avgGuestExpect,loadFactorsExpect,capacityCompany,
+		(select airln_cd from aircompenyinfothree where id = capacityCompany)
+		capacityCompanyStr,
+		periodValidity,
+		(select count(*) from response b where a.id = b.demand_id) num,
+		CASE WHEN demandProgress = '0' THEN '需求发布' WHEN demandProgress = '1' THEN
+		'意向征集'
+		WHEN demandProgress = '2' THEN '订单确认' WHEN demandProgress = '3' THEN
+		(CASE WHEN (ISNULL(close_reason)=TRUE OR close_reason='') THEN '关闭' ELSE CONCAT('关闭（',close_reason,'）') END)
+		WHEN demandProgress = '4' THEN '订单完成' WHEN demandProgress = '5' THEN
+		'佣金支付'
+		WHEN demandProgress = '6' THEN '交易完成' WHEN demandProgress = '7' THEN '待处理'
+		WHEN demandProgress = '8' THEN '已接受' WHEN demandProgress = '9' THEN
+		'处理中'
+		WHEN demandProgress = '10' THEN '已拒绝' END AS demandprogressStr,
+		contact,iHome
+		from demand a
+		<where>
+			<if test="_parameter != null and _parameter >0">
+				and id = #{_parameter,jdbcType=BIGINT}
+			</if>
+		</where>
+	</select>
+	<resultMap id="DemandOfMine" type="org.ldd.ssm.hangyu.domain.Demand">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="demandType" jdbcType="VARCHAR" property="demandtype" />
+		<result column="demandTypeStr" jdbcType="VARCHAR" property="demandtypeStr" />
+		<result column="releaseTime" jdbcType="VARCHAR" property="releasetime" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="demandProgress" property="demandprogress"
+			jdbcType="VARCHAR" />
+		<result column="employeeNm" property="employeeNm" jdbcType="VARCHAR" />
+		<result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+		<result column="intentionMoneyState" property="intentionMoneyState"
+			jdbcType="VARCHAR" />
+		<result column="renew" property="renew" jdbcType="INTEGER" />
+	</resultMap>
+	<select id="selectTheReleasedDemandOfMine" resultMap="DemandOfMine">
+		select
+		id,intentionMoneyState,
+		CASE WHEN demandType = '0' THEN '航线需求' WHEN demandType = '1' THEN '运力投放'
+		WHEN demandType = '2' THEN '运营托管' WHEN demandType = '3' THEN '航线委托'
+		WHEN demandType = '4' THEN '运力委托' END AS demandTypeStr,
+		demandType,
+		title,
+		(select count(*) from employeeDemand d
+		<where>
+			d.demand_id = a.id
+			<if test="employeeId !=null and employeeId >0">
+				and d.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		) renew,
+		(select b.userName from employee b where b.id = a.employee_id) employeeNm,
+		<!-- DATE_FORMAT(releaseTime,'%m.%d.%Y') AS  -->releaseTime,
+		CASE WHEN demandProgress = '0' THEN '需求发布' WHEN demandProgress = '1' THEN
+		'意向征集'
+		WHEN demandProgress = '2' THEN '订单确认' WHEN demandProgress = '3' THEN
+		(CASE WHEN (ISNULL(close_reason)=TRUE OR close_reason='') THEN '关闭' ELSE CONCAT('关闭（',close_reason,'）') END)
+		WHEN demandProgress = '4' THEN '订单完成' WHEN demandProgress = '5' THEN
+		'佣金支付'
+		WHEN demandProgress = '6' THEN '交易完成' WHEN demandProgress = '7' THEN '待处理'
+		WHEN demandProgress = '8' THEN '已接受' WHEN demandProgress = '9' THEN
+		'处理中'
+		WHEN demandProgress = '10' THEN '已拒绝' END AS demandProgress
+		from demand a
+		<where>
+			<if test="demandType !=null and demandType != ''">
+				and demandType = #{demandType,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeId !=null and employeeId >0">
+				and employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+			<if test="demandprogress != null and demandprogress != ''">
+				and demandProgress = #{demandprogress,jdbcType=VARCHAR}
+			</if>
+		</where>
+		<if test="orderType > 0">
+			order by id ASC
+		</if>
+		<if test="orderType == 0">
+			order by id DESC
+		</if>
+		limit #{startIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+	</select>
+	<select id="selectCountTheReleasedDemandOfMine" resultType="java.lang.Integer">
+		select
+		count(*)
+		from demand
+		<where>
+			<if test="demandType !=null and demandType != ''">
+				and demandType = #{demandType,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeId !=null and employeeId >0">
+				and employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+			<if test="demandprogress != null and demandprogress != ''">
+				and demandProgress = #{demandprogress,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<resultMap id="DemandOfReview" type="org.ldd.ssm.hangyu.domain.Demand">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="demandType" jdbcType="VARCHAR" property="demandtype" />
+		<result column="demandTypeStr" jdbcType="VARCHAR" property="demandtypeStr" />
+		<result column="releaseTime" jdbcType="VARCHAR" property="releasetime" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="demandState" property="demandstate" jdbcType="VARCHAR" />
+		<result column="demandStateStr" property="demandStateStr"
+			jdbcType="VARCHAR" />
+		<result column="employeeNm" property="employeeNm" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectDemandOfReviewList" resultMap="BaseResultMap">
+		select
+		id,
+		CASE WHEN demandType = '0' THEN '航线需求' WHEN demandType = '1' THEN '运力投放'
+		WHEN demandType = '2' THEN '运营托管' WHEN demandType = '3' THEN '航线委托'
+		WHEN demandType = '4' THEN '运力委托' END AS demandTypeStr,
+		demandType,
+		title,
+		(select b.userName from employee b where b.id = a.employee_id) employeeNm,
+		<!-- DATE_FORMAT(releaseTime,'%m.%d.%Y') AS  -->releaseTime,
+		CASE WHEN demandState = '4' THEN '未处理' WHEN demandState = '5' THEN '审核未通过'
+		WHEN demandState = '6' THEN '审核通过' END AS demandStateStr,
+		demandState
+		from demand a
+		<where>
+			(demandState = '4' OR demandState = '5' OR demandState = '6')
+			AND (demandType = '0' OR demandType = '1') AND demandProgress = '0'
+			<if test="demandType !=null and demandType != ''">
+				and demandType = #{demandType,jdbcType=VARCHAR}
+			</if>
+			<if test="demandState != null and demandState != ''">
+				and demandState = #{demandState,jdbcType=VARCHAR}
+			</if>
+		</where>
+		<if test="orderType > 0">
+			order by id ASC
+		</if>
+		<if test="orderType == 0">
+			order by id DESC
+		</if>
+		limit #{startIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectCountDemandOfReviewList" resultType="java.lang.Integer">
+		select count(*) from demand
+		<where>
+			(demandState = '4' OR demandState = '5' OR demandState = '6')
+			AND (demandType = '0' OR demandType = '1') AND demandProgress = '0'
+			<if test="demandType !=null and demandType != ''">
+				and demandType = #{demandType,jdbcType=VARCHAR}
+			</if>
+			<if test="demandState != null and demandState != ''">
+				and demandState = #{demandState,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<update id="changeDemandIntentionStateByDemandId">
+		update demand set intentionMoneyState =
+		#{intentionMoneyState,jdbcType=VARCHAR}
+		where id=#{demandId,jdbcType=BIGINT}
+	</update>
+	<!-- 个人中心我的订单 -->
+	<resultMap type="org.ldd.ssm.hangyu.query.MyOrder" id="MyOrderListMap">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="responseId" property="responseId" jdbcType="BIGINT" />
+		<result column="demandEmployeeId" property="demandEmployeeId"
+			jdbcType="BIGINT" />
+		<result column="responseEmployeeId" property="responseEmployeeId"
+			jdbcType="BIGINT" />
+		<result column="releaseTime" property="releaseTime" jdbcType="VARCHAR" />
+		<result column="demandType" property="demandType" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="demandProgress" property="demandProgress"
+			jdbcType="VARCHAR" />
+		<result column="employeeId" property="employeeId" jdbcType="BIGINT" />
+		<result column="roleId" property="roleId" jdbcType="VARCHAR" />
+		<result column="startIndex" property="startIndex" jdbcType="BIGINT" />
+		<result column="pageNo" property="pageNo" jdbcType="BIGINT" />
+		<result column="page" property="page" jdbcType="BIGINT" />
+	</resultMap>
+
+	<!-- 类型 -->
+	<sql id="findMyOrderSql">
+		SELECT a.id id,b.id responseId,a.employee_id
+		demandEmployeeId,b.employee_id
+		responseEmployeeId,a.releaseTime releaseTime,a.demandType demandType,a.title title,a.demandProgress
+		demandProgress
+		from demand a 
+		left join response b 
+		on a.id=b.demand_id
+		<!-- demand表demandType判断订单类型 --> <!-- response表responseProgress判断订单状态 -->
+		where ((a.demandType in ('0','1') and a.demandProgress in ('6','4','5','3') 
+		and b.responseProgress in ('6','7','5','3') 
+		and b.releaseSelected='0' and b.responseSelected='0') 
+		or  (a.demandType in ('3','4') 
+		and a.demandProgress in ('6','3')))
+		<!-- 委托进订单只有交易完成或者关闭20180123与郑述文和李婉昭确认 -->
+
+		<!-- 太美看所有,其他用户看自己(自己发的需求或者响应) -->
+		<if test="roleId != 2 ">
+			and (a.employee_id=#{employeeId,jdbcType=BIGINT} or
+			b.employee_id=#{employeeId,jdbcType=BIGINT})
+		</if>
+		<if test="demandType !=null and demandType !='' ">
+			and a.demandType = #{demandType,jdbcType=VARCHAR}
+		</if>
+		<if test="roleId==0 and hangsiFinish==0">
+			and a.demandProgress in ('6','5')
+		</if>
+		<if test="demandProgress !='' and demandProgress != null">
+			and a.demandProgress =#{demandProgress,jdbcType=VARCHAR}
+		</if>
+		order by releaseTime
+		<if test="releaseTime=='Desc'">
+			Desc
+		</if>
+		<if test="releaseTime=='Asc'">
+			Asc
+		</if>
+		<if test="releaseTime=='' or releaseTime==null">
+			Desc
+		</if>
+	</sql>
+	<select id="findMyOrderList" resultMap="MyOrderListMap">
+		SELECT a.id id,a.responseId,a.demandEmployeeId
+		demandEmployeeId,a.responseEmployeeId
+		responseEmployeeId,a.releaseTime releaseTime,a.demandType
+		demandType,a.title title,a.demandProgress demandProgress
+		FROM (
+		<include refid="findMyOrderSql" />
+		) a
+		limit #{startIndex,jdbcType=INTEGER},#{pageNo,jdbcType=INTEGER}
+	</select>
+	<select id="findCountMyOrder" resultType="Integer">
+		select count(a.id)
+		FROM (
+		<include refid="findMyOrderSql" />
+		) a
+	</select>
+
+	<select id="selectSonDemandsByParentId" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM demand
+		WHERE demand_id=#{id,jdbcType=BIGINT}
+	</select>
+	<select id="selectDemandIdToSystemMessage" parameterType="org.ldd.ssm.hangyu.domain.Demand"
+		resultType="java.lang.Long">
+		SELECT d.id FROM demand d
+		WHERE d.employee_id=#{employeeId,jdbcType=BIGINT}
+		AND d.demandType=#{demandtype,jdbcType=VARCHAR}
+		AND d.releaseTime=#{releasetime,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getDemandsByCurrentCheckedAirportForEmployee" resultMap="PageResultMap">
+		select id, employee_id, intentionMoneyState, demandState,
+		demandType, releaseTime, title,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.dpt_state = '0' AND
+		a.dpt = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.dpt_state='2' AND a.dpt = c.city_icao) dpt_nm,
+		dpt,dpt_acceptNearAirport, dpt_timeResources,dpt_time,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.pst_state = '0' AND
+		a.pst = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.pst_state='2' AND a.pst = c.city_icao) pst_nm,
+		pst,pst_acceptNearAirport, pst_timeResources, pst_time,
+		(SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.arrv_state = '0' AND
+		a.arrv = b.iATA union all SELECT c.city_name FROM t_city_coordinate c
+		WHERE a.arrv_state='2' AND a.arrv = c.city_icao) arrv_nm,
+		arrv,arrv_acceptNearAirport, arrv_timeResources,
+		arrv_time, airCrftTyp, days,
+		blockBidPrice, loadFactorsExpect, avgGuestExpect,
+		subsidyPolicy, sailingTime,
+		seating, capacityCompany, scheduling,
+		hoursCost, intendedAirline, remark,
+		publicWay, directionalGoal,
+		demandProgress,finishDate,contact,iHome,fltNbr,periodValidity,dpt_state,dpt_ct,
+		pst_state,pst_ct,arrv_state,arrv_ct,schedulinePort,rek,demand_id,close_reason,
+		(select count(*) from employeeDemand e
+		<where>
+			e.demand_id = a.id
+			<if test="employeeId !=null and employeeId >0">
+				and e.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		) renew,
+		(select count(*) from collect e
+		<where>
+			e.demand_id = a.id
+			<if test="employeeId !=null and employeeId >0">
+				and e.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		) collect_type,
+		(select id from collect e
+		<where>
+			e.demand_id = a.id
+			<if test="employeeId !=null and employeeId >0">
+				and e.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		) collect_id,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.dpt_state = '0' AND
+		a.dpt = d.iATA) dpt_flt_lvl,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.pst_state = '0' AND
+		a.pst = d.iATA) pst_flt_lvl,
+		(SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.arrv_state = '0' AND
+		a.arrv = d.iATA) arrv_flt_lvl
+		FROM demand a
+		<where>
+			(a.demandType = '0' or a.demandType = '1') and a.demandProgress in
+			('0','1','2')
+			and (demandState = '6' or demandState = '4')
+			<if test="itia != null and itia != ''">
+				and
+				(
+				a.dpt = #{itia,jdbcType=VARCHAR}
+				or a.pst = #{itia,jdbcType=VARCHAR}
+				or a.arrv = #{itia,jdbcType=VARCHAR}
+				or (a.demandType = '1' and
+							(
+							select count(*) from intendedAirline b
+							 where b.demand_id = a.id and 
+							 	(
+								 	b.dpt = #{itia,jdbcType=VARCHAR}
+									or b.pst = #{itia,jdbcType=VARCHAR}
+									or b.arrv = #{itia,jdbcType=VARCHAR}
+								)
+							)>0
+						)
+				)
+			</if>
+			<if test="employeeId !=null and employeeId >0">
+				and a.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+		order by a.releaseTime Desc
+		limit #{startIndex,jdbcType=INTEGER},#{pageNo,jdbcType=INTEGER}
+	</select>
+
+	<select id="getDemandsByCurrentCheckedAirportForEmployeeCount" resultType="Integer">
+		select count(*) from demand a
+		<where>
+			(a.demandType = '0' or a.demandType = '1') and a.demandProgress in
+			('0','1','2')
+			and (demandState = '6' or demandState = '4')
+			<if test="itia != null and itia != ''">
+				and
+				(
+				a.dpt = #{itia,jdbcType=VARCHAR}
+				or a.pst = #{itia,jdbcType=VARCHAR}
+				or a.arrv = #{itia,jdbcType=VARCHAR}
+				or (a.demandType = '1' and
+							(
+							select count(*) from intendedAirline b
+							 where b.demand_id = a.id and 
+							 	(
+								 	b.dpt = #{itia,jdbcType=VARCHAR}
+									or b.pst = #{itia,jdbcType=VARCHAR}
+									or b.arrv = #{itia,jdbcType=VARCHAR}
+								)
+							)>0
+						)
+				)
+			</if>
+			<if test="employeeId !=null and employeeId >0">
+				and a.employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+		</where>
+	</select>
+</mapper>

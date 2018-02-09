@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.FlowOfSubsidiaryMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.FlowOfSubsidiary" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="passengerThroughput" property="passengerthroughput" jdbcType="VARCHAR" />
+    <result column="goodsThroughput" property="goodsthroughput" jdbcType="VARCHAR" />
+    <result column="takeOffAndLandingFlights" property="takeoffandlandingflights" jdbcType="VARCHAR" />
+    <result column="airportinfonewthree_id" property="airportinfonewthreeId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, year, passengerThroughput, goodsThroughput, takeOffAndLandingFlights, airportinfonewthree_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from flowofsubsidiary
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from flowofsubsidiary
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.FlowOfSubsidiary" >
+    insert into flowofsubsidiary (id, year, passengerThroughput, 
+      goodsThroughput, takeOffAndLandingFlights, 
+      airportinfonewthree_id)
+    values (#{id,jdbcType=BIGINT}, #{year,jdbcType=VARCHAR}, #{passengerthroughput,jdbcType=VARCHAR}, 
+      #{goodsthroughput,jdbcType=VARCHAR}, #{takeoffandlandingflights,jdbcType=VARCHAR}, 
+      #{airportinfonewthreeId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.FlowOfSubsidiary" >
+    insert into flowofsubsidiary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="passengerthroughput != null" >
+        passengerThroughput,
+      </if>
+      <if test="goodsthroughput != null" >
+        goodsThroughput,
+      </if>
+      <if test="takeoffandlandingflights != null" >
+        takeOffAndLandingFlights,
+      </if>
+      <if test="airportinfonewthreeId != null" >
+        airportinfonewthree_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="passengerthroughput != null" >
+        #{passengerthroughput,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsthroughput != null" >
+        #{goodsthroughput,jdbcType=VARCHAR},
+      </if>
+      <if test="takeoffandlandingflights != null" >
+        #{takeoffandlandingflights,jdbcType=VARCHAR},
+      </if>
+      <if test="airportinfonewthreeId != null" >
+        #{airportinfonewthreeId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.FlowOfSubsidiary" >
+    update flowofsubsidiary
+    <set >
+      <if test="year != null" >
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="passengerthroughput != null" >
+        passengerThroughput = #{passengerthroughput,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsthroughput != null" >
+        goodsThroughput = #{goodsthroughput,jdbcType=VARCHAR},
+      </if>
+      <if test="takeoffandlandingflights != null" >
+        takeOffAndLandingFlights = #{takeoffandlandingflights,jdbcType=VARCHAR},
+      </if>
+      <if test="airportinfonewthreeId != null" >
+        airportinfonewthree_id = #{airportinfonewthreeId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.FlowOfSubsidiary" >
+    update flowofsubsidiary
+    set year = #{year,jdbcType=VARCHAR},
+      passengerThroughput = #{passengerthroughput,jdbcType=VARCHAR},
+      goodsThroughput = #{goodsthroughput,jdbcType=VARCHAR},
+      takeOffAndLandingFlights = #{takeoffandlandingflights,jdbcType=VARCHAR},
+      airportinfonewthree_id = #{airportinfonewthreeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectFlowOfSubsidiaryForLastThreeYears" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from flowofsubsidiary
+  	<where>
+  		<if test="airportId !=null and airportId >0">
+  			airportinfonewthree_id = #{airportId,jdbcType=BIGINT}
+  		</if>
+  	</where>
+  	order by year desc limit 0,3
+  </select>
+</mapper>

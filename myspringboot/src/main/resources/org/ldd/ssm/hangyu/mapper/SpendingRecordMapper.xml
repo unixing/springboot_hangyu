@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.SpendingRecordMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.SpendingRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="toAccount_id" property="toAccountId" jdbcType="BIGINT" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="demand_id" property="demandId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="auditDate" property="auditDate" jdbcType="VARCHAR" />
+    <result column="audit_employee_id" property="auditEmployeeId" jdbcType="VARCHAR" />
+    <result column="serialNumber" property="serialNumber" jdbcType="VARCHAR"/>
+    <result property="jpg" column="jpg" jdbcType="BLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, account_id, toAccount_id, number , date ,demand_id,type,phase,auditDate,
+    audit_employee_id,serialNumber,jpg 
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from spendingRecord
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from spendingRecord
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.SpendingRecord" >
+    insert into spendingRecord (id, account_id, toAccount_id, 
+      number,date,demand_id,type,phase,auditDate,
+    audit_employee_id,serialNumber,jpg) 
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{toAccountId,jdbcType=BIGINT}, 
+      #{number,jdbcType=VARCHAR},#{date,jdbcType=VARCHAR},#{demandId,jdbcType=BIGINT},#{type,jdbcType=VARCHAR},
+      #{phase,jdbcType=VARCHAR},#{auditDate,jdbcType=VARCHAR},#{auditEmployeeId,jdbcType=BIGINT},
+      #{serialNumber,jdbcType=VARCHAR},#{jpg,jdbcType=BLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.SpendingRecord" >
+    insert into spendingRecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="toAccountId != null" >
+        toAccount_id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="demandId != null" >
+        demand_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="phase != null" >
+        phase,
+      </if>
+      <if test="auditDate != null" >
+        auditDate,
+      </if>
+      <if test="auditEmployeeId != null" >
+        audit_employee_id,
+      </if>
+      <if test="serialNumber != null" >
+        serialNumber,
+      </if>
+      <if test="jpg != null" >
+        jpg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="toAccountId != null" >
+        #{toAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="demandId != null" >
+        #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="phase != null" >
+        #{phase,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDate != null" >
+        #{auditDate,jdbcType=VARCHAR},
+      </if>
+      <if test="auditEmployeeId != null" >
+        #{auditEmployeeId,jdbcType=BIGINT},
+      </if>
+      <if test="serialNumber != null" >
+        #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="jpg != null" >
+        #{jpg,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.SpendingRecord" >
+    update spendingRecord
+    <set >
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="toAccountId != null" >
+        toAccount_id = #{toAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="demandId != null" >
+        demand_id = #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="phase != null" >
+        phase = #{phase,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDate != null" >
+        auditDate = #{auditDate,jdbcType=VARCHAR},
+      </if>
+      <if test="auditEmployeeId != null" >
+        audit_employee_id = #{auditEmployeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null" >
+        serialNumber = #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="jpg != null" >
+        jpg = #{jpg,jdbcType=BLOB},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.SpendingRecord" >
+    update spendingRecord
+    set account_id = #{accountId,jdbcType=BIGINT},
+      toAccount_id = #{toAccountId,jdbcType=BIGINT},
+      number = #{number,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR} ,
+      demand_id = #{demandId,jdbcType=BIGINT} ,
+      type = #{type,jdbcType=VARCHAR} ,
+      phase = #{phase,jdbcType=VARCHAR} ,
+      auditDate = #{auditDate,jdbcType=VARCHAR} ,
+      audit_employee_id = #{auditEmployeeId,jdbcType=BIGINT} ,
+      serialNumber = #{serialNumber,jdbcType=VARCHAR} ,
+      jpg = #{jpg,jdbcType=BLOB} 
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="spendingTransactionRecordList" resultMap="org.ldd.ssm.hangyu.mapper.IndividualCapitalAccountMapper.TransactionRecordMap" parameterType="java.lang.Long">
+  	SELECT s.id id,s.date date,s.type type,s.number number,s.demand_id demandId,d.demandType demandType,d.title demandTitle,d.demandProgress demandProgress,s.phase phase,s.serialNumber serialNumber
+  	,s.jpg jpg 
+	FROM 
+	IndividualCapitalAccount i 
+	join spendingRecord s on i.id=s.account_id 
+	LEFT join demand d on d.id=s.demand_id 
+	WHERE i.employee_id =#{employeeId,jdbcType=BIGINT}
+  
+  </select>
+  
+  <select id="spendingTransactionRecordDetails" resultMap="org.ldd.ssm.hangyu.mapper.IndividualCapitalAccountMapper.TransactionRecordMap" parameterType="java.lang.Long">
+  	SELECT s.id id,s.date date,s.type type,
+	s.number number,s.demand_id demandId,d.demandType demandType,d.title demandTitle,
+	d.demandProgress demandProgress,s.phase phase,s.serialNumber serialNumber 
+	FROM 
+	IndividualCapitalAccount i 
+	join spendingRecord s on i.id=s.account_id 
+	LEFT join demand d on d.id=s.demand_id 
+	WHERE s.id =#{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="spendingTransactionRecordJpg" resultMap="org.ldd.ssm.hangyu.mapper.IndividualCapitalAccountMapper.TransactionRecordMap" parameterType="java.lang.Long">
+  	SELECT jpg 
+	FROM  
+	spendingRecord
+	WHERE id =#{id,jdbcType=BIGINT}
+  </select>
+</mapper>

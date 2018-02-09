@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.CityinfoThreeMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.CityinfoThree" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="cityName" property="cityname" jdbcType="VARCHAR" />
+    <result column="cityLvl" property="citylvl" jdbcType="VARCHAR" />
+    <result column="provinces" property="provinces" jdbcType="VARCHAR" />
+    <result column="airport" property="airport" jdbcType="VARCHAR" />
+    <result column="airportPinyin" property="airportpinyin" jdbcType="VARCHAR" />
+    <result column="cityType" property="citytype" jdbcType="VARCHAR" />
+    <result column="largeEnterpriseNumber" property="largeenterprisenumber" jdbcType="VARCHAR" />
+    <result column="enterpriseEnumeration" property="enterpriseenumeration" jdbcType="VARCHAR" />
+    <result column="sitesNumber5A" property="sitesnumber5a" jdbcType="VARCHAR" />
+    <result column="sitesEnumeration5A" property="sitesenumeration5a" jdbcType="VARCHAR" />
+    <result column="sitesNumber4A" property="sitesnumber4a" jdbcType="VARCHAR" />
+    <result column="sitesEnumeration4A" property="sitesenumeration4a" jdbcType="VARCHAR" />
+    <result column="famousUniversities" property="famousuniversities" jdbcType="VARCHAR" />
+    <result column="famousUniversitiesEnumeration" property="famousuniversitiesenumeration" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cityName, cityLvl, provinces, airport, airportPinyin, cityType, largeEnterpriseNumber, 
+    enterpriseEnumeration, sitesNumber5A, sitesEnumeration5A, sitesNumber4A, sitesEnumeration4A, 
+    famousUniversities, famousUniversitiesEnumeration
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cityinfothree
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cityinfothree
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.CityinfoThree" >
+    insert into cityinfothree (id, cityName, cityLvl, 
+      provinces, airport, airportPinyin, 
+      cityType, largeEnterpriseNumber, enterpriseEnumeration, 
+      sitesNumber5A, sitesEnumeration5A, sitesNumber4A, 
+      sitesEnumeration4A, famousUniversities, 
+      famousUniversitiesEnumeration)
+    values (#{id,jdbcType=BIGINT}, #{cityname,jdbcType=VARCHAR}, #{citylvl,jdbcType=VARCHAR}, 
+      #{provinces,jdbcType=VARCHAR}, #{airport,jdbcType=VARCHAR}, #{airportpinyin,jdbcType=VARCHAR}, 
+      #{citytype,jdbcType=VARCHAR}, #{largeenterprisenumber,jdbcType=VARCHAR}, #{enterpriseenumeration,jdbcType=VARCHAR}, 
+      #{sitesnumber5a,jdbcType=VARCHAR}, #{sitesenumeration5a,jdbcType=VARCHAR}, #{sitesnumber4a,jdbcType=VARCHAR}, 
+      #{sitesenumeration4a,jdbcType=VARCHAR}, #{famousuniversities,jdbcType=VARCHAR}, 
+      #{famousuniversitiesenumeration,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.CityinfoThree" >
+    insert into cityinfothree
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cityname != null" >
+        cityName,
+      </if>
+      <if test="citylvl != null" >
+        cityLvl,
+      </if>
+      <if test="provinces != null" >
+        provinces,
+      </if>
+      <if test="airport != null" >
+        airport,
+      </if>
+      <if test="airportpinyin != null" >
+        airportPinyin,
+      </if>
+      <if test="citytype != null" >
+        cityType,
+      </if>
+      <if test="largeenterprisenumber != null" >
+        largeEnterpriseNumber,
+      </if>
+      <if test="enterpriseenumeration != null" >
+        enterpriseEnumeration,
+      </if>
+      <if test="sitesnumber5a != null" >
+        sitesNumber5A,
+      </if>
+      <if test="sitesenumeration5a != null" >
+        sitesEnumeration5A,
+      </if>
+      <if test="sitesnumber4a != null" >
+        sitesNumber4A,
+      </if>
+      <if test="sitesenumeration4a != null" >
+        sitesEnumeration4A,
+      </if>
+      <if test="famousuniversities != null" >
+        famousUniversities,
+      </if>
+      <if test="famousuniversitiesenumeration != null" >
+        famousUniversitiesEnumeration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cityname != null" >
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="citylvl != null" >
+        #{citylvl,jdbcType=VARCHAR},
+      </if>
+      <if test="provinces != null" >
+        #{provinces,jdbcType=VARCHAR},
+      </if>
+      <if test="airport != null" >
+        #{airport,jdbcType=VARCHAR},
+      </if>
+      <if test="airportpinyin != null" >
+        #{airportpinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="citytype != null" >
+        #{citytype,jdbcType=VARCHAR},
+      </if>
+      <if test="largeenterprisenumber != null" >
+        #{largeenterprisenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseenumeration != null" >
+        #{enterpriseenumeration,jdbcType=VARCHAR},
+      </if>
+      <if test="sitesnumber5a != null" >
+        #{sitesnumber5a,jdbcType=VARCHAR},
+      </if>
+      <if test="sitesenumeration5a != null" >
+        #{sitesenumeration5a,jdbcType=VARCHAR},
+      </if>
+      <if test="sitesnumber4a != null" >
+        #{sitesnumber4a,jdbcType=VARCHAR},
+      </if>
+      <if test="sitesenumeration4a != null" >
+        #{sitesenumeration4a,jdbcType=VARCHAR},
+      </if>
+      <if test="famousuniversities != null" >
+        #{famousuniversities,jdbcType=VARCHAR},
+      </if>
+      <if test="famousuniversitiesenumeration != null" >
+        #{famousuniversitiesenumeration,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.CityinfoThree" >
+    update cityinfothree
+    <set >
+      <if test="cityname != null" >
+        cityName = #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="citylvl != null" >
+        cityLvl = #{citylvl,jdbcType=VARCHAR},
+      </if>
+      <if test="provinces != null" >
+        provinces = #{provinces,jdbcType=VARCHAR},
+      </if>
+      <if test="airport != null" >
+        airport = #{airport,jdbcType=VARCHAR},
+      </if>
+      <if test="airportpinyin != null" >
+        airportPinyin = #{airportpinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="citytype != null" >
+        cityType = #{citytype,jdbcType=VARCHAR},
+      </if>
+      <if test="largeenterprisenumber != null" >
+        largeEnterpriseNumber = #{largeenterprisenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseenumeration != null" >
+        enterpriseEnumeration = #{enterpriseenumeration,jdbcType=VARCHAR},
+      </if>
+      <if test="sitesnumber5a != null" >
+        sitesNumber5A = #{sitesnumber5a,jdbcType=VARCHAR},
+      </if>
+      <if test="sitesenumeration5a != null" >
+        sitesEnumeration5A = #{sitesenumeration5a,jdbcType=VARCHAR},
+      </if>
+      <if test="sitesnumber4a != null" >
+        sitesNumber4A = #{sitesnumber4a,jdbcType=VARCHAR},
+      </if>
+      <if test="sitesenumeration4a != null" >
+        sitesEnumeration4A = #{sitesenumeration4a,jdbcType=VARCHAR},
+      </if>
+      <if test="famousuniversities != null" >
+        famousUniversities = #{famousuniversities,jdbcType=VARCHAR},
+      </if>
+      <if test="famousuniversitiesenumeration != null" >
+        famousUniversitiesEnumeration = #{famousuniversitiesenumeration,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.CityinfoThree" >
+    update cityinfothree
+    set cityName = #{cityname,jdbcType=VARCHAR},
+      cityLvl = #{citylvl,jdbcType=VARCHAR},
+      provinces = #{provinces,jdbcType=VARCHAR},
+      airport = #{airport,jdbcType=VARCHAR},
+      airportPinyin = #{airportpinyin,jdbcType=VARCHAR},
+      cityType = #{citytype,jdbcType=VARCHAR},
+      largeEnterpriseNumber = #{largeenterprisenumber,jdbcType=VARCHAR},
+      enterpriseEnumeration = #{enterpriseenumeration,jdbcType=VARCHAR},
+      sitesNumber5A = #{sitesnumber5a,jdbcType=VARCHAR},
+      sitesEnumeration5A = #{sitesenumeration5a,jdbcType=VARCHAR},
+      sitesNumber4A = #{sitesnumber4a,jdbcType=VARCHAR},
+      sitesEnumeration4A = #{sitesenumeration4a,jdbcType=VARCHAR},
+      famousUniversities = #{famousuniversities,jdbcType=VARCHAR},
+      famousUniversitiesEnumeration = #{famousuniversitiesenumeration,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectCityDetailByName" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from cityinfothree
+  	<where>
+  		<if test="cityName != null and cityName != ''">
+  			cityName LIKE CONCAT('%',#{cityName,jdbcType=VARCHAR},'%')
+  		</if>
+  	</where>
+  </select>
+</mapper>

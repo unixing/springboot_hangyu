@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.TrafficMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.Traffic" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="highwayType" property="highwaytype" jdbcType="VARCHAR" />
+    <result column="highwayCode" property="highwaycode" jdbcType="VARCHAR" />
+    <result column="highwayWayPoint" property="highwaywaypoint" jdbcType="VARCHAR" />
+    <result column="railType" property="railtype" jdbcType="VARCHAR" />
+    <result column="railCode" property="railcode" jdbcType="VARCHAR" />
+    <result column="railWayPoint" property="railwaypoint" jdbcType="VARCHAR" />
+    <result column="cityinfothree_id" property="cityinfothreeId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, highwayType, highwayCode, highwayWayPoint, railType, railCode, railWayPoint, 
+    cityinfothree_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from traffic
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from traffic
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.Traffic" >
+    insert into traffic (id, highwayType, highwayCode, 
+      highwayWayPoint, railType, railCode, 
+      railWayPoint, cityinfothree_id)
+    values (#{id,jdbcType=BIGINT}, #{highwaytype,jdbcType=VARCHAR}, #{highwaycode,jdbcType=VARCHAR}, 
+      #{highwaywaypoint,jdbcType=VARCHAR}, #{railtype,jdbcType=VARCHAR}, #{railcode,jdbcType=VARCHAR}, 
+      #{railwaypoint,jdbcType=VARCHAR}, #{cityinfothreeId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.Traffic" >
+    insert into traffic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="highwaytype != null" >
+        highwayType,
+      </if>
+      <if test="highwaycode != null" >
+        highwayCode,
+      </if>
+      <if test="highwaywaypoint != null" >
+        highwayWayPoint,
+      </if>
+      <if test="railtype != null" >
+        railType,
+      </if>
+      <if test="railcode != null" >
+        railCode,
+      </if>
+      <if test="railwaypoint != null" >
+        railWayPoint,
+      </if>
+      <if test="cityinfothreeId != null" >
+        cityinfothree_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="highwaytype != null" >
+        #{highwaytype,jdbcType=VARCHAR},
+      </if>
+      <if test="highwaycode != null" >
+        #{highwaycode,jdbcType=VARCHAR},
+      </if>
+      <if test="highwaywaypoint != null" >
+        #{highwaywaypoint,jdbcType=VARCHAR},
+      </if>
+      <if test="railtype != null" >
+        #{railtype,jdbcType=VARCHAR},
+      </if>
+      <if test="railcode != null" >
+        #{railcode,jdbcType=VARCHAR},
+      </if>
+      <if test="railwaypoint != null" >
+        #{railwaypoint,jdbcType=VARCHAR},
+      </if>
+      <if test="cityinfothreeId != null" >
+        #{cityinfothreeId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.Traffic" >
+    update traffic
+    <set >
+      <if test="highwaytype != null" >
+        highwayType = #{highwaytype,jdbcType=VARCHAR},
+      </if>
+      <if test="highwaycode != null" >
+        highwayCode = #{highwaycode,jdbcType=VARCHAR},
+      </if>
+      <if test="highwaywaypoint != null" >
+        highwayWayPoint = #{highwaywaypoint,jdbcType=VARCHAR},
+      </if>
+      <if test="railtype != null" >
+        railType = #{railtype,jdbcType=VARCHAR},
+      </if>
+      <if test="railcode != null" >
+        railCode = #{railcode,jdbcType=VARCHAR},
+      </if>
+      <if test="railwaypoint != null" >
+        railWayPoint = #{railwaypoint,jdbcType=VARCHAR},
+      </if>
+      <if test="cityinfothreeId != null" >
+        cityinfothree_id = #{cityinfothreeId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.Traffic" >
+    update traffic
+    set highwayType = #{highwaytype,jdbcType=VARCHAR},
+      highwayCode = #{highwaycode,jdbcType=VARCHAR},
+      highwayWayPoint = #{highwaywaypoint,jdbcType=VARCHAR},
+      railType = #{railtype,jdbcType=VARCHAR},
+      railCode = #{railcode,jdbcType=VARCHAR},
+      railWayPoint = #{railwaypoint,jdbcType=VARCHAR},
+      cityinfothree_id = #{cityinfothreeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectyTrafficsByCityId" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from traffic
+  	<where>
+  		<if test="cityId != null and cityId >0">
+  			cityinfothree_id=#{cityId,jdbcType=BIGINT}
+  		</if>
+  	</where>
+  </select>
+</mapper>

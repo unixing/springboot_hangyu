@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.AirTrafficServiceCommunicationFacilitiesMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.AirTrafficServiceCommunicationFacilities" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="serviceName" property="servicename" jdbcType="VARCHAR" />
+    <result column="callsign" property="callsign" jdbcType="VARCHAR" />
+    <result column="frequency" property="frequency" jdbcType="VARCHAR" />
+    <result column="workingTime" property="workingtime" jdbcType="VARCHAR" />
+    <result column="rek" property="rek" jdbcType="VARCHAR" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, serviceName, callsign, frequency, workingTime, rek, IATA
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from AirTrafficServiceCommunicationFacilities
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from AirTrafficServiceCommunicationFacilities
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.AirTrafficServiceCommunicationFacilities" >
+    insert into AirTrafficServiceCommunicationFacilities (id, serviceName, callsign, 
+      frequency, workingTime, rek, 
+      IATA)
+    values (#{id,jdbcType=BIGINT}, #{servicename,jdbcType=VARCHAR}, #{callsign,jdbcType=VARCHAR}, 
+      #{frequency,jdbcType=VARCHAR}, #{workingtime,jdbcType=VARCHAR}, #{rek,jdbcType=VARCHAR}, 
+      #{iata,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.AirTrafficServiceCommunicationFacilities" >
+    insert into AirTrafficServiceCommunicationFacilities
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="servicename != null" >
+        serviceName,
+      </if>
+      <if test="callsign != null" >
+        callsign,
+      </if>
+      <if test="frequency != null" >
+        frequency,
+      </if>
+      <if test="workingtime != null" >
+        workingTime,
+      </if>
+      <if test="rek != null" >
+        rek,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="servicename != null" >
+        #{servicename,jdbcType=VARCHAR},
+      </if>
+      <if test="callsign != null" >
+        #{callsign,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null" >
+        #{frequency,jdbcType=VARCHAR},
+      </if>
+      <if test="workingtime != null" >
+        #{workingtime,jdbcType=VARCHAR},
+      </if>
+      <if test="rek != null" >
+        #{rek,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.AirTrafficServiceCommunicationFacilities" >
+    update AirTrafficServiceCommunicationFacilities
+    <set >
+      <if test="servicename != null" >
+        serviceName = #{servicename,jdbcType=VARCHAR},
+      </if>
+      <if test="callsign != null" >
+        callsign = #{callsign,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null" >
+        frequency = #{frequency,jdbcType=VARCHAR},
+      </if>
+      <if test="workingtime != null" >
+        workingTime = #{workingtime,jdbcType=VARCHAR},
+      </if>
+      <if test="rek != null" >
+        rek = #{rek,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.AirTrafficServiceCommunicationFacilities" >
+    update AirTrafficServiceCommunicationFacilities
+    set serviceName = #{servicename,jdbcType=VARCHAR},
+      callsign = #{callsign,jdbcType=VARCHAR},
+      frequency = #{frequency,jdbcType=VARCHAR},
+      workingTime = #{workingtime,jdbcType=VARCHAR},
+      rek = #{rek,jdbcType=VARCHAR},
+      IATA = #{iata,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectAirTrafficServiceCommunicationFacilitiesByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from AirTrafficServiceCommunicationFacilities
+  	<where>
+  		<if test="iata!=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>

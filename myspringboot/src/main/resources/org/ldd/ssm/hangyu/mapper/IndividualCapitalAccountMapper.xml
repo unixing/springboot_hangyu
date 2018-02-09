@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.IndividualCapitalAccountMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.IndividualCapitalAccount" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="freezeNumber" property="freezeNumber" jdbcType="VARCHAR" />
+    <result column="totalNumber" property="totalNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, employee_id, number , freezeNumber , totalNumber
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from IndividualCapitalAccount
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from IndividualCapitalAccount
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.IndividualCapitalAccount" >
+    insert into IndividualCapitalAccount (id, employee_id, number , freezeNumber , totalNumber
+      )
+    values (#{id,jdbcType=BIGINT}, #{employeeId,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{freezeNumber,jdbcType=VARCHAR}, #{totalNumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.IndividualCapitalAccount" >
+    insert into IndividualCapitalAccount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="employeeId != null" >
+        employee_id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="number != null" >
+        freezeNumber,
+      </if>
+      <if test="number != null" >
+        totalNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="freezeNumber != null" >
+        #{freezeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNumber != null" >
+        #{totalNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.IndividualCapitalAccount" >
+    update IndividualCapitalAccount
+    <set >
+      <if test="employeeId != null" >
+        employee_id = #{employeeId,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="freezeNumber != null" >
+        freezeNumber = #{freezeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNumber != null" >
+        totalNumber = #{totalNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.IndividualCapitalAccount" >
+    update IndividualCapitalAccount
+    set employee_id = #{employeeId,jdbcType=BIGINT},
+      number = #{number,jdbcType=VARCHAR}
+       freezeNumber = #{freezeNumber,jdbcType=VARCHAR}
+        totalNumber = #{totalNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByEmployeeId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from IndividualCapitalAccount
+    where Employee_id = #{EmployeeId,jdbcType=BIGINT}
+  </select>
+  <resultMap type="org.ldd.ssm.hangyu.query.TransactionRecord" id="TransactionRecordMap">
+  	<id column="id" property="id" jdbcType="BIGINT" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="demandId" property="demandId" jdbcType="BIGINT" />
+    <result column="demandType" property="demandType" jdbcType="VARCHAR" />
+    <result column="demandTitle" property="demandTitle" jdbcType="VARCHAR" />
+    <result column="demandProgress" property="demandProgress" jdbcType="VARCHAR"/>
+    <result column="phase" property="phase" jdbcType="VARCHAR" />
+    <result column="serialNumber" property="serialNumber" jdbcType="VARCHAR" />
+  </resultMap>
+
+</mapper>

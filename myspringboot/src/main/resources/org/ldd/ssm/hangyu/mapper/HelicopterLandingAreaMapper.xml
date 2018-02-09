@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.HelicopterLandingAreaMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.HelicopterLandingArea" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+    <result column="tLOFCoordinatesOrFATOEntranceCoordinatesAndGeoidAmplitud" property="tlofcoordinatesorfatoentrancecoordinatesandgeoidamplitud" jdbcType="VARCHAR" />
+    <result column="tLOFAndOrFATOElevation" property="tlofandorfatoelevation" jdbcType="VARCHAR" />
+    <result column="tLOFAndFATOAreaRoadSurfaceStrengthAndMarks" property="tlofandfatoarearoadsurfacestrengthandmarks" jdbcType="VARCHAR" />
+    <result column="fATORealOrientationAndMagneticBearing" property="fatorealorientationandmagneticbearing" jdbcType="VARCHAR" />
+    <result column="releasedFrom" property="releasedfrom" jdbcType="VARCHAR" />
+    <result column="approachAndFATOLight" property="approachandfatolight" jdbcType="VARCHAR" />
+    <result column="helicopterNote" property="helicopterNote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, IATA, tLOFCoordinatesOrFATOEntranceCoordinatesAndGeoidAmplitud, tLOFAndOrFATOElevation, 
+    tLOFAndFATOAreaRoadSurfaceStrengthAndMarks, fATORealOrientationAndMagneticBearing, 
+    releasedFrom, approachAndFATOLight, helicopterNote
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from HelicopterLandingArea
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from HelicopterLandingArea
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.HelicopterLandingArea" >
+    insert into HelicopterLandingArea (id, IATA, tLOFCoordinatesOrFATOEntranceCoordinatesAndGeoidAmplitud, 
+      tLOFAndOrFATOElevation, tLOFAndFATOAreaRoadSurfaceStrengthAndMarks, 
+      fATORealOrientationAndMagneticBearing, releasedFrom, 
+      approachAndFATOLight, helicopterNote)
+    values (#{id,jdbcType=BIGINT}, #{iata,jdbcType=VARCHAR}, #{tlofcoordinatesorfatoentrancecoordinatesandgeoidamplitud,jdbcType=VARCHAR}, 
+      #{tlofandorfatoelevation,jdbcType=VARCHAR}, #{tlofandfatoarearoadsurfacestrengthandmarks,jdbcType=VARCHAR}, 
+      #{fatorealorientationandmagneticbearing,jdbcType=VARCHAR}, #{releasedfrom,jdbcType=VARCHAR}, 
+      #{approachandfatolight,jdbcType=VARCHAR}, #{helicopterNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.HelicopterLandingArea" >
+    insert into HelicopterLandingArea
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+      <if test="tlofcoordinatesorfatoentrancecoordinatesandgeoidamplitud != null" >
+        tLOFCoordinatesOrFATOEntranceCoordinatesAndGeoidAmplitud,
+      </if>
+      <if test="tlofandorfatoelevation != null" >
+        tLOFAndOrFATOElevation,
+      </if>
+      <if test="tlofandfatoarearoadsurfacestrengthandmarks != null" >
+        tLOFAndFATOAreaRoadSurfaceStrengthAndMarks,
+      </if>
+      <if test="fatorealorientationandmagneticbearing != null" >
+        fATORealOrientationAndMagneticBearing,
+      </if>
+      <if test="releasedfrom != null" >
+        releasedFrom,
+      </if>
+      <if test="approachandfatolight != null" >
+        approachAndFATOLight,
+      </if>
+      <if test="helicopterNote != null" >
+        helicopterNote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="tlofcoordinatesorfatoentrancecoordinatesandgeoidamplitud != null" >
+        #{tlofcoordinatesorfatoentrancecoordinatesandgeoidamplitud,jdbcType=VARCHAR},
+      </if>
+      <if test="tlofandorfatoelevation != null" >
+        #{tlofandorfatoelevation,jdbcType=VARCHAR},
+      </if>
+      <if test="tlofandfatoarearoadsurfacestrengthandmarks != null" >
+        #{tlofandfatoarearoadsurfacestrengthandmarks,jdbcType=VARCHAR},
+      </if>
+      <if test="fatorealorientationandmagneticbearing != null" >
+        #{fatorealorientationandmagneticbearing,jdbcType=VARCHAR},
+      </if>
+      <if test="releasedfrom != null" >
+        #{releasedfrom,jdbcType=VARCHAR},
+      </if>
+      <if test="approachandfatolight != null" >
+        #{approachandfatolight,jdbcType=VARCHAR},
+      </if>
+      <if test="helicopterNote != null" >
+        #{helicopterNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.HelicopterLandingArea" >
+    update HelicopterLandingArea
+    <set >
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="tlofcoordinatesorfatoentrancecoordinatesandgeoidamplitud != null" >
+        tLOFCoordinatesOrFATOEntranceCoordinatesAndGeoidAmplitud = #{tlofcoordinatesorfatoentrancecoordinatesandgeoidamplitud,jdbcType=VARCHAR},
+      </if>
+      <if test="tlofandorfatoelevation != null" >
+        tLOFAndOrFATOElevation = #{tlofandorfatoelevation,jdbcType=VARCHAR},
+      </if>
+      <if test="tlofandfatoarearoadsurfacestrengthandmarks != null" >
+        tLOFAndFATOAreaRoadSurfaceStrengthAndMarks = #{tlofandfatoarearoadsurfacestrengthandmarks,jdbcType=VARCHAR},
+      </if>
+      <if test="fatorealorientationandmagneticbearing != null" >
+        fATORealOrientationAndMagneticBearing = #{fatorealorientationandmagneticbearing,jdbcType=VARCHAR},
+      </if>
+      <if test="releasedfrom != null" >
+        releasedFrom = #{releasedfrom,jdbcType=VARCHAR},
+      </if>
+      <if test="approachandfatolight != null" >
+        approachAndFATOLight = #{approachandfatolight,jdbcType=VARCHAR},
+      </if>
+      <if test="helicopterNote != null" >
+        helicopterNote = #{helicopterNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.HelicopterLandingArea" >
+    update HelicopterLandingArea
+    set IATA = #{iata,jdbcType=VARCHAR},
+      tLOFCoordinatesOrFATOEntranceCoordinatesAndGeoidAmplitud = #{tlofcoordinatesorfatoentrancecoordinatesandgeoidamplitud,jdbcType=VARCHAR},
+      tLOFAndOrFATOElevation = #{tlofandorfatoelevation,jdbcType=VARCHAR},
+      tLOFAndFATOAreaRoadSurfaceStrengthAndMarks = #{tlofandfatoarearoadsurfacestrengthandmarks,jdbcType=VARCHAR},
+      fATORealOrientationAndMagneticBearing = #{fatorealorientationandmagneticbearing,jdbcType=VARCHAR},
+      releasedFrom = #{releasedfrom,jdbcType=VARCHAR},
+      approachAndFATOLight = #{approachandfatolight,jdbcType=VARCHAR},
+      helicopterNote = #{helicopterNote,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectHelicopterLandingAreaByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from HelicopterLandingArea
+  	<where>
+  		<if test="iata!=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>

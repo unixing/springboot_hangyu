@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.EachflightinfoMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.Eachflightinfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="dpt_AirPt_Cd" property="dptAirptCd" jdbcType="VARCHAR" />
+    <result column="arrv_Airpt_Cd" property="arrvAirptCd" jdbcType="VARCHAR" />
+    <result column="flt_nbr" property="fltNbr" jdbcType="VARCHAR" />
+    <result column="airCrft_Typ" property="aircrftTyp" jdbcType="VARCHAR" />
+    <result column="dpt_AirPt_pot" property="dptAirptPot" jdbcType="VARCHAR" />
+    <result column="lcl_Dpt_Tm" property="lclDptTm" jdbcType="VARCHAR" />
+    <result column="arrv_Airpt_pot" property="arrvAirptPot" jdbcType="VARCHAR" />
+    <result column="lcl_Arrv_Tm" property="lclArrvTm" jdbcType="VARCHAR" />
+    <result column="days" property="days" jdbcType="VARCHAR" />
+    <result column="get_tim" property="getTim" jdbcType="DATE" />
+    <result column="dpt_AirPt_Cd_itia" property="dptAirptCdItia" jdbcType="VARCHAR" />
+    <result column="arrv_Airpt_Cd_itia" property="arrvAirptCdItia" jdbcType="VARCHAR" />
+    <result column="air_line_km" property="airLineKm" jdbcType="VARCHAR" />
+    <result column="xcurl_id" property="xcurlId" jdbcType="BIGINT" />
+    <result column="crwl_created_time" property="crwlCreatedTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, dpt_AirPt_Cd, arrv_Airpt_Cd, flt_nbr, airCrft_Typ, dpt_AirPt_pot, lcl_Dpt_Tm, 
+    arrv_Airpt_pot, lcl_Arrv_Tm, days, get_tim, dpt_AirPt_Cd_itia, arrv_Airpt_Cd_itia, 
+    air_line_km, xcurl_id, crwl_created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from eachflightinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from eachflightinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.Eachflightinfo" >
+    insert into eachflightinfo (id, dpt_AirPt_Cd, arrv_Airpt_Cd, 
+      flt_nbr, airCrft_Typ, dpt_AirPt_pot, 
+      lcl_Dpt_Tm, arrv_Airpt_pot, lcl_Arrv_Tm, 
+      days, get_tim, dpt_AirPt_Cd_itia, 
+      arrv_Airpt_Cd_itia, air_line_km, xcurl_id, 
+      crwl_created_time)
+    values (#{id,jdbcType=BIGINT}, #{dptAirptCd,jdbcType=VARCHAR}, #{arrvAirptCd,jdbcType=VARCHAR}, 
+      #{fltNbr,jdbcType=VARCHAR}, #{aircrftTyp,jdbcType=VARCHAR}, #{dptAirptPot,jdbcType=VARCHAR}, 
+      #{lclDptTm,jdbcType=VARCHAR}, #{arrvAirptPot,jdbcType=VARCHAR}, #{lclArrvTm,jdbcType=VARCHAR}, 
+      #{days,jdbcType=VARCHAR}, #{getTim,jdbcType=DATE}, #{dptAirptCdItia,jdbcType=VARCHAR}, 
+      #{arrvAirptCdItia,jdbcType=VARCHAR}, #{airLineKm,jdbcType=VARCHAR}, #{xcurlId,jdbcType=BIGINT}, 
+      #{crwlCreatedTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.Eachflightinfo" >
+    insert into eachflightinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dptAirptCd != null" >
+        dpt_AirPt_Cd,
+      </if>
+      <if test="arrvAirptCd != null" >
+        arrv_Airpt_Cd,
+      </if>
+      <if test="fltNbr != null" >
+        flt_nbr,
+      </if>
+      <if test="aircrftTyp != null" >
+        airCrft_Typ,
+      </if>
+      <if test="dptAirptPot != null" >
+        dpt_AirPt_pot,
+      </if>
+      <if test="lclDptTm != null" >
+        lcl_Dpt_Tm,
+      </if>
+      <if test="arrvAirptPot != null" >
+        arrv_Airpt_pot,
+      </if>
+      <if test="lclArrvTm != null" >
+        lcl_Arrv_Tm,
+      </if>
+      <if test="days != null" >
+        days,
+      </if>
+      <if test="getTim != null" >
+        get_tim,
+      </if>
+      <if test="dptAirptCdItia != null" >
+        dpt_AirPt_Cd_itia,
+      </if>
+      <if test="arrvAirptCdItia != null" >
+        arrv_Airpt_Cd_itia,
+      </if>
+      <if test="airLineKm != null" >
+        air_line_km,
+      </if>
+      <if test="xcurlId != null" >
+        xcurl_id,
+      </if>
+      <if test="crwlCreatedTime != null" >
+        crwl_created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dptAirptCd != null" >
+        #{dptAirptCd,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvAirptCd != null" >
+        #{arrvAirptCd,jdbcType=VARCHAR},
+      </if>
+      <if test="fltNbr != null" >
+        #{fltNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="aircrftTyp != null" >
+        #{aircrftTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="dptAirptPot != null" >
+        #{dptAirptPot,jdbcType=VARCHAR},
+      </if>
+      <if test="lclDptTm != null" >
+        #{lclDptTm,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvAirptPot != null" >
+        #{arrvAirptPot,jdbcType=VARCHAR},
+      </if>
+      <if test="lclArrvTm != null" >
+        #{lclArrvTm,jdbcType=VARCHAR},
+      </if>
+      <if test="days != null" >
+        #{days,jdbcType=VARCHAR},
+      </if>
+      <if test="getTim != null" >
+        #{getTim,jdbcType=DATE},
+      </if>
+      <if test="dptAirptCdItia != null" >
+        #{dptAirptCdItia,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvAirptCdItia != null" >
+        #{arrvAirptCdItia,jdbcType=VARCHAR},
+      </if>
+      <if test="airLineKm != null" >
+        #{airLineKm,jdbcType=VARCHAR},
+      </if>
+      <if test="xcurlId != null" >
+        #{xcurlId,jdbcType=BIGINT},
+      </if>
+      <if test="crwlCreatedTime != null" >
+        #{crwlCreatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.Eachflightinfo" >
+    update eachflightinfo
+    <set >
+      <if test="dptAirptCd != null" >
+        dpt_AirPt_Cd = #{dptAirptCd,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvAirptCd != null" >
+        arrv_Airpt_Cd = #{arrvAirptCd,jdbcType=VARCHAR},
+      </if>
+      <if test="fltNbr != null" >
+        flt_nbr = #{fltNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="aircrftTyp != null" >
+        airCrft_Typ = #{aircrftTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="dptAirptPot != null" >
+        dpt_AirPt_pot = #{dptAirptPot,jdbcType=VARCHAR},
+      </if>
+      <if test="lclDptTm != null" >
+        lcl_Dpt_Tm = #{lclDptTm,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvAirptPot != null" >
+        arrv_Airpt_pot = #{arrvAirptPot,jdbcType=VARCHAR},
+      </if>
+      <if test="lclArrvTm != null" >
+        lcl_Arrv_Tm = #{lclArrvTm,jdbcType=VARCHAR},
+      </if>
+      <if test="days != null" >
+        days = #{days,jdbcType=VARCHAR},
+      </if>
+      <if test="getTim != null" >
+        get_tim = #{getTim,jdbcType=DATE},
+      </if>
+      <if test="dptAirptCdItia != null" >
+        dpt_AirPt_Cd_itia = #{dptAirptCdItia,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvAirptCdItia != null" >
+        arrv_Airpt_Cd_itia = #{arrvAirptCdItia,jdbcType=VARCHAR},
+      </if>
+      <if test="airLineKm != null" >
+        air_line_km = #{airLineKm,jdbcType=VARCHAR},
+      </if>
+      <if test="xcurlId != null" >
+        xcurl_id = #{xcurlId,jdbcType=BIGINT},
+      </if>
+      <if test="crwlCreatedTime != null" >
+        crwl_created_time = #{crwlCreatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.Eachflightinfo" >
+    update eachflightinfo
+    set dpt_AirPt_Cd = #{dptAirptCd,jdbcType=VARCHAR},
+      arrv_Airpt_Cd = #{arrvAirptCd,jdbcType=VARCHAR},
+      flt_nbr = #{fltNbr,jdbcType=VARCHAR},
+      airCrft_Typ = #{aircrftTyp,jdbcType=VARCHAR},
+      dpt_AirPt_pot = #{dptAirptPot,jdbcType=VARCHAR},
+      lcl_Dpt_Tm = #{lclDptTm,jdbcType=VARCHAR},
+      arrv_Airpt_pot = #{arrvAirptPot,jdbcType=VARCHAR},
+      lcl_Arrv_Tm = #{lclArrvTm,jdbcType=VARCHAR},
+      days = #{days,jdbcType=VARCHAR},
+      get_tim = #{getTim,jdbcType=DATE},
+      dpt_AirPt_Cd_itia = #{dptAirptCdItia,jdbcType=VARCHAR},
+      arrv_Airpt_Cd_itia = #{arrvAirptCdItia,jdbcType=VARCHAR},
+      air_line_km = #{airLineKm,jdbcType=VARCHAR},
+      xcurl_id = #{xcurlId,jdbcType=BIGINT},
+      crwl_created_time = #{crwlCreatedTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectAirportTimeInfo" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from
+  	eachflightinfo
+  	<where>
+  		<if test="itia!=null and itia != ''">
+  			(dpt_AirPt_Cd_itia = #{itia,jdbcType=VARCHAR}
+  			or
+  			arrv_Airpt_Cd_itia = #{itia,jdbcType=VARCHAR})
+  		</if>
+  		<if test="getTime != null and getTime != ''">
+  			and get_tim = #{getTime,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  	<if test="orderField !=null and orderField != ''">
+  		<if test="orderType >0 ">
+  			ORDER BY ${orderField} ASC
+  		</if>
+  		<if test="orderType == 0">
+  			ORDER BY ${orderField} DESC
+  		</if>
+  	</if>
+  </select>
+  <select id="getTimeList" resultType="java.lang.String">
+  	select
+  	DISTINCT get_tim
+  	from eachflightinfo
+  	order by get_tim DESC
+  	limit 0,5
+  </select>
+  
+  <resultMap type="org.ldd.ssm.hangyu.domain.EachflightDemo" id="EachflightMap">
+  	<result column="time" property="time" jdbcType="VARCHAR"/>
+  	<result column="monCnt" property="monCnt" jdbcType="INTEGER"/>
+  	<result column="tuesCnt" property="tuesCnt" jdbcType="INTEGER"/>
+  	<result column="wedCnt" property="wedCnt" jdbcType="INTEGER"/>
+  	<result column="thursCnt" property="thursCnt" jdbcType="INTEGER"/>
+  	<result column="friCnt" property="friCnt" jdbcType="INTEGER"/>
+  	<result column="staCnt" property="staCnt" jdbcType="INTEGER"/>
+  	<result column="sunCnt" property="sunCnt" jdbcType="INTEGER"/>
+  </resultMap>
+  
+  <select id="selectAirportTimeDistribution" resultMap="EachflightMap">
+  	SELECT SUBSTR(lcl_Dpt_Tm FROM 1 FOR 2) time,
+		sum((CASE WHEN (LOCATE('一',days)>0) THEN 1 ELSE 0 END)) as monCnt,
+		sum((CASE WHEN (LOCATE('二',days)>0) THEN 1 ELSE 0 END)) as tuesCnt,
+		sum((CASE WHEN (LOCATE('三',days)>0) THEN 1 ELSE 0 END)) as wedCnt,
+		sum((CASE WHEN (LOCATE('四',days)>0) THEN 1 ELSE 0 END)) as thursCnt,
+		sum((CASE WHEN (LOCATE('五',days)>0) THEN 1 ELSE 0 END)) as friCnt,
+		sum((CASE WHEN (LOCATE('六',days)>0) THEN 1 ELSE 0 END)) as staCnt,
+		sum((CASE WHEN (LOCATE('日',days)>0) THEN 1 ELSE 0 END)) as sunCnt
+ 	FROM eachflightinfo
+  	<where>
+  		<if test="itia!=null and itia != ''">
+  			(dpt_AirPt_Cd_itia = #{itia,jdbcType=VARCHAR}
+  			or
+  			arrv_Airpt_Cd_itia = #{itia,jdbcType=VARCHAR})
+  		</if>
+  		<if test="getTime != null and getTime != ''">
+  			and get_tim = #{getTime,jdbcType=VARCHAR}
+  		</if>
+  		and SUBSTR(lcl_Dpt_Tm FROM 1 FOR 2) in 
+  		('00','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23') 
+  		GROUP BY SUBSTR(lcl_Dpt_Tm FROM 1 FOR 2)
+  	</where>
+  </select>
+</mapper>

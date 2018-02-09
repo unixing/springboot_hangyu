@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.ProvideWeatherInformationMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.ProvideWeatherInformation" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+    <result column="nameRelatedMeteorologicalStation" property="namerelatedmeteorologicalstation" jdbcType="VARCHAR" />
+    <result column="meteorologicalServiceTime" property="meteorologicalservicetime" jdbcType="VARCHAR" />
+    <result column="responsibleForTheEditing" property="responsiblefortheediting" jdbcType="VARCHAR" />
+    <result column="trendForecastInterval" property="trendforecastinterval" jdbcType="VARCHAR" />
+    <result column="providedConsultingServices" property="providedconsultingservices" jdbcType="VARCHAR" />
+    <result column="flightFileUseLanguage" property="flightfileuselanguage" jdbcType="VARCHAR" />
+    <result column="chartsOtherInformation" property="chartsotherinformation" jdbcType="VARCHAR" />
+    <result column="provideAuxiliaryEquipmentMeteorologicalInformation" property="provideauxiliaryequipmentmeteorologicalinformation" jdbcType="VARCHAR" />
+    <result column="provideWeatherInformationAirTrafficServicesUnit" property="provideweatherinformationairtrafficservicesunit" jdbcType="VARCHAR" />
+    <result column="receiveMeteorologicalInformationOfAirTrafficServicesUnit" property="receivemeteorologicalinformationofairtrafficservicesunit" jdbcType="VARCHAR" />
+    <result column="receiveTheAuxiliaryEquipmentOfMeteorologicalInformation" property="receivetheauxiliaryequipmentofmeteorologicalinformation" jdbcType="VARCHAR" />
+    <result column="otherInformation" property="otherinformation" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, IATA, nameRelatedMeteorologicalStation, meteorologicalServiceTime, responsibleForTheEditing, 
+    trendForecastInterval, providedConsultingServices, flightFileUseLanguage, chartsOtherInformation, 
+    provideAuxiliaryEquipmentMeteorologicalInformation, provideWeatherInformationAirTrafficServicesUnit, 
+    receiveMeteorologicalInformationOfAirTrafficServicesUnit, receiveTheAuxiliaryEquipmentOfMeteorologicalInformation, 
+    otherInformation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ProvideWeatherInformation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ProvideWeatherInformation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.ProvideWeatherInformation" >
+    insert into ProvideWeatherInformation (id, IATA, nameRelatedMeteorologicalStation, 
+      meteorologicalServiceTime, responsibleForTheEditing, 
+      trendForecastInterval, providedConsultingServices, 
+      flightFileUseLanguage, chartsOtherInformation, 
+      provideAuxiliaryEquipmentMeteorologicalInformation, provideWeatherInformationAirTrafficServicesUnit, 
+      receiveMeteorologicalInformationOfAirTrafficServicesUnit, receiveTheAuxiliaryEquipmentOfMeteorologicalInformation, 
+      otherInformation)
+    values (#{id,jdbcType=BIGINT}, #{iata,jdbcType=VARCHAR}, #{namerelatedmeteorologicalstation,jdbcType=VARCHAR}, 
+      #{meteorologicalservicetime,jdbcType=VARCHAR}, #{responsiblefortheediting,jdbcType=VARCHAR}, 
+      #{trendforecastinterval,jdbcType=VARCHAR}, #{providedconsultingservices,jdbcType=VARCHAR}, 
+      #{flightfileuselanguage,jdbcType=VARCHAR}, #{chartsotherinformation,jdbcType=VARCHAR}, 
+      #{provideauxiliaryequipmentmeteorologicalinformation,jdbcType=VARCHAR}, #{provideweatherinformationairtrafficservicesunit,jdbcType=VARCHAR}, 
+      #{receivemeteorologicalinformationofairtrafficservicesunit,jdbcType=VARCHAR}, #{receivetheauxiliaryequipmentofmeteorologicalinformation,jdbcType=VARCHAR}, 
+      #{otherinformation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.ProvideWeatherInformation" >
+    insert into ProvideWeatherInformation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+      <if test="namerelatedmeteorologicalstation != null" >
+        nameRelatedMeteorologicalStation,
+      </if>
+      <if test="meteorologicalservicetime != null" >
+        meteorologicalServiceTime,
+      </if>
+      <if test="responsiblefortheediting != null" >
+        responsibleForTheEditing,
+      </if>
+      <if test="trendforecastinterval != null" >
+        trendForecastInterval,
+      </if>
+      <if test="providedconsultingservices != null" >
+        providedConsultingServices,
+      </if>
+      <if test="flightfileuselanguage != null" >
+        flightFileUseLanguage,
+      </if>
+      <if test="chartsotherinformation != null" >
+        chartsOtherInformation,
+      </if>
+      <if test="provideauxiliaryequipmentmeteorologicalinformation != null" >
+        provideAuxiliaryEquipmentMeteorologicalInformation,
+      </if>
+      <if test="provideweatherinformationairtrafficservicesunit != null" >
+        provideWeatherInformationAirTrafficServicesUnit,
+      </if>
+      <if test="receivemeteorologicalinformationofairtrafficservicesunit != null" >
+        receiveMeteorologicalInformationOfAirTrafficServicesUnit,
+      </if>
+      <if test="receivetheauxiliaryequipmentofmeteorologicalinformation != null" >
+        receiveTheAuxiliaryEquipmentOfMeteorologicalInformation,
+      </if>
+      <if test="otherinformation != null" >
+        otherInformation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="namerelatedmeteorologicalstation != null" >
+        #{namerelatedmeteorologicalstation,jdbcType=VARCHAR},
+      </if>
+      <if test="meteorologicalservicetime != null" >
+        #{meteorologicalservicetime,jdbcType=VARCHAR},
+      </if>
+      <if test="responsiblefortheediting != null" >
+        #{responsiblefortheediting,jdbcType=VARCHAR},
+      </if>
+      <if test="trendforecastinterval != null" >
+        #{trendforecastinterval,jdbcType=VARCHAR},
+      </if>
+      <if test="providedconsultingservices != null" >
+        #{providedconsultingservices,jdbcType=VARCHAR},
+      </if>
+      <if test="flightfileuselanguage != null" >
+        #{flightfileuselanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="chartsotherinformation != null" >
+        #{chartsotherinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="provideauxiliaryequipmentmeteorologicalinformation != null" >
+        #{provideauxiliaryequipmentmeteorologicalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="provideweatherinformationairtrafficservicesunit != null" >
+        #{provideweatherinformationairtrafficservicesunit,jdbcType=VARCHAR},
+      </if>
+      <if test="receivemeteorologicalinformationofairtrafficservicesunit != null" >
+        #{receivemeteorologicalinformationofairtrafficservicesunit,jdbcType=VARCHAR},
+      </if>
+      <if test="receivetheauxiliaryequipmentofmeteorologicalinformation != null" >
+        #{receivetheauxiliaryequipmentofmeteorologicalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="otherinformation != null" >
+        #{otherinformation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.ProvideWeatherInformation" >
+    update ProvideWeatherInformation
+    <set >
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="namerelatedmeteorologicalstation != null" >
+        nameRelatedMeteorologicalStation = #{namerelatedmeteorologicalstation,jdbcType=VARCHAR},
+      </if>
+      <if test="meteorologicalservicetime != null" >
+        meteorologicalServiceTime = #{meteorologicalservicetime,jdbcType=VARCHAR},
+      </if>
+      <if test="responsiblefortheediting != null" >
+        responsibleForTheEditing = #{responsiblefortheediting,jdbcType=VARCHAR},
+      </if>
+      <if test="trendforecastinterval != null" >
+        trendForecastInterval = #{trendforecastinterval,jdbcType=VARCHAR},
+      </if>
+      <if test="providedconsultingservices != null" >
+        providedConsultingServices = #{providedconsultingservices,jdbcType=VARCHAR},
+      </if>
+      <if test="flightfileuselanguage != null" >
+        flightFileUseLanguage = #{flightfileuselanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="chartsotherinformation != null" >
+        chartsOtherInformation = #{chartsotherinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="provideauxiliaryequipmentmeteorologicalinformation != null" >
+        provideAuxiliaryEquipmentMeteorologicalInformation = #{provideauxiliaryequipmentmeteorologicalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="provideweatherinformationairtrafficservicesunit != null" >
+        provideWeatherInformationAirTrafficServicesUnit = #{provideweatherinformationairtrafficservicesunit,jdbcType=VARCHAR},
+      </if>
+      <if test="receivemeteorologicalinformationofairtrafficservicesunit != null" >
+        receiveMeteorologicalInformationOfAirTrafficServicesUnit = #{receivemeteorologicalinformationofairtrafficservicesunit,jdbcType=VARCHAR},
+      </if>
+      <if test="receivetheauxiliaryequipmentofmeteorologicalinformation != null" >
+        receiveTheAuxiliaryEquipmentOfMeteorologicalInformation = #{receivetheauxiliaryequipmentofmeteorologicalinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="otherinformation != null" >
+        otherInformation = #{otherinformation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.ProvideWeatherInformation" >
+    update ProvideWeatherInformation
+    set IATA = #{iata,jdbcType=VARCHAR},
+      nameRelatedMeteorologicalStation = #{namerelatedmeteorologicalstation,jdbcType=VARCHAR},
+      meteorologicalServiceTime = #{meteorologicalservicetime,jdbcType=VARCHAR},
+      responsibleForTheEditing = #{responsiblefortheediting,jdbcType=VARCHAR},
+      trendForecastInterval = #{trendforecastinterval,jdbcType=VARCHAR},
+      providedConsultingServices = #{providedconsultingservices,jdbcType=VARCHAR},
+      flightFileUseLanguage = #{flightfileuselanguage,jdbcType=VARCHAR},
+      chartsOtherInformation = #{chartsotherinformation,jdbcType=VARCHAR},
+      provideAuxiliaryEquipmentMeteorologicalInformation = #{provideauxiliaryequipmentmeteorologicalinformation,jdbcType=VARCHAR},
+      provideWeatherInformationAirTrafficServicesUnit = #{provideweatherinformationairtrafficservicesunit,jdbcType=VARCHAR},
+      receiveMeteorologicalInformationOfAirTrafficServicesUnit = #{receivemeteorologicalinformationofairtrafficservicesunit,jdbcType=VARCHAR},
+      receiveTheAuxiliaryEquipmentOfMeteorologicalInformation = #{receivetheauxiliaryequipmentofmeteorologicalinformation,jdbcType=VARCHAR},
+      otherInformation = #{otherinformation,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectProvideWeatherInformationByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from ProvideWeatherInformation
+  	<where>
+  		<if test="iata!=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>

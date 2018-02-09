@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.AirportLocationAndManagementInformationMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.AirportLocationAndManagementInformation" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+    <result column="airportCoordinatesOrAtTheAirport" property="airportcoordinatesorattheairport" jdbcType="VARCHAR" />
+    <result column="cityLocation" property="citylocation" jdbcType="VARCHAR" />
+    <result column="airportElevationOrReferenceTemperature" property="airportelevationorreferencetemperature" jdbcType="VARCHAR" />
+    <result column="airportElevationOrGeoidBandPosition" property="airportelevationorgeoidbandposition" jdbcType="VARCHAR" />
+    <result column="airportElevationOrHeightAnomaly" property="airportelevationorheightanomaly" jdbcType="VARCHAR" />
+    <result column="variationOrAnnualVariationRate" property="variationorannualvariationrate" jdbcType="VARCHAR" />
+    <result column="openingHoursAtTheAirport" property="openinghoursattheairport" jdbcType="VARCHAR" />
+    <result column="airporManagementDepartmentInfo" property="airpormanagementdepartmentinfo" jdbcType="VARCHAR" />
+    <result column="allowedToFlySpecies" property="allowedtoflyspecies" jdbcType="VARCHAR" />
+    <result column="natureOfTheAirportOrAirfieldIndicators" property="natureoftheairportorairfieldindicators" jdbcType="VARCHAR" />
+    <result column="airportnoteNote" property="airportnoteNote" jdbcType="VARCHAR" />
+    <result column="pdfPath" property="pdfPath" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, IATA, airportCoordinatesOrAtTheAirport, cityLocation, airportElevationOrReferenceTemperature, 
+    airportElevationOrGeoidBandPosition, airportElevationOrHeightAnomaly, variationOrAnnualVariationRate, 
+    openingHoursAtTheAirport, airporManagementDepartmentInfo, allowedToFlySpecies, natureOfTheAirportOrAirfieldIndicators, 
+    airportnoteNote,pdfPath
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from AirportLocationAndManagementInformation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from AirportLocationAndManagementInformation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.AirportLocationAndManagementInformation" >
+    insert into AirportLocationAndManagementInformation (id, IATA, airportCoordinatesOrAtTheAirport, 
+      cityLocation, airportElevationOrReferenceTemperature, 
+      airportElevationOrGeoidBandPosition, airportElevationOrHeightAnomaly, 
+      variationOrAnnualVariationRate, openingHoursAtTheAirport, 
+      airporManagementDepartmentInfo, allowedToFlySpecies, 
+      natureOfTheAirportOrAirfieldIndicators, airportnoteNote,pdfPath)
+    values (#{id,jdbcType=BIGINT}, #{iata,jdbcType=VARCHAR}, #{airportcoordinatesorattheairport,jdbcType=VARCHAR}, 
+      #{citylocation,jdbcType=VARCHAR}, #{airportelevationorreferencetemperature,jdbcType=VARCHAR}, 
+      #{airportelevationorgeoidbandposition,jdbcType=VARCHAR}, #{airportelevationorheightanomaly,jdbcType=VARCHAR}, 
+      #{variationorannualvariationrate,jdbcType=VARCHAR}, #{openinghoursattheairport,jdbcType=VARCHAR}, 
+      #{airpormanagementdepartmentinfo,jdbcType=VARCHAR}, #{allowedtoflyspecies,jdbcType=VARCHAR}, 
+      #{natureoftheairportorairfieldindicators,jdbcType=VARCHAR}, #{airportnoteNote,jdbcType=VARCHAR},
+      #{pdfPath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.AirportLocationAndManagementInformation" >
+    insert into AirportLocationAndManagementInformation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+      <if test="airportcoordinatesorattheairport != null" >
+        airportCoordinatesOrAtTheAirport,
+      </if>
+      <if test="citylocation != null" >
+        cityLocation,
+      </if>
+      <if test="airportelevationorreferencetemperature != null" >
+        airportElevationOrReferenceTemperature,
+      </if>
+      <if test="airportelevationorgeoidbandposition != null" >
+        airportElevationOrGeoidBandPosition,
+      </if>
+      <if test="airportelevationorheightanomaly != null" >
+        airportElevationOrHeightAnomaly,
+      </if>
+      <if test="variationorannualvariationrate != null" >
+        variationOrAnnualVariationRate,
+      </if>
+      <if test="openinghoursattheairport != null" >
+        openingHoursAtTheAirport,
+      </if>
+      <if test="airpormanagementdepartmentinfo != null" >
+        airporManagementDepartmentInfo,
+      </if>
+      <if test="allowedtoflyspecies != null" >
+        allowedToFlySpecies,
+      </if>
+      <if test="natureoftheairportorairfieldindicators != null" >
+        natureOfTheAirportOrAirfieldIndicators,
+      </if>
+      <if test="airportnoteNote != null" >
+        airportnoteNote,
+      </if>
+      <if test="pdfPath !=null">
+      	pdfPath,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="airportcoordinatesorattheairport != null" >
+        #{airportcoordinatesorattheairport,jdbcType=VARCHAR},
+      </if>
+      <if test="citylocation != null" >
+        #{citylocation,jdbcType=VARCHAR},
+      </if>
+      <if test="airportelevationorreferencetemperature != null" >
+        #{airportelevationorreferencetemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="airportelevationorgeoidbandposition != null" >
+        #{airportelevationorgeoidbandposition,jdbcType=VARCHAR},
+      </if>
+      <if test="airportelevationorheightanomaly != null" >
+        #{airportelevationorheightanomaly,jdbcType=VARCHAR},
+      </if>
+      <if test="variationorannualvariationrate != null" >
+        #{variationorannualvariationrate,jdbcType=VARCHAR},
+      </if>
+      <if test="openinghoursattheairport != null" >
+        #{openinghoursattheairport,jdbcType=VARCHAR},
+      </if>
+      <if test="airpormanagementdepartmentinfo != null" >
+        #{airpormanagementdepartmentinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="allowedtoflyspecies != null" >
+        #{allowedtoflyspecies,jdbcType=VARCHAR},
+      </if>
+      <if test="natureoftheairportorairfieldindicators != null" >
+        #{natureoftheairportorairfieldindicators,jdbcType=VARCHAR},
+      </if>
+      <if test="airportnoteNote != null" >
+        #{airportnoteNote,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfPath != null">
+      	#{pdfPath,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.AirportLocationAndManagementInformation" >
+    update AirportLocationAndManagementInformation
+    <set >
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="airportcoordinatesorattheairport != null" >
+        airportCoordinatesOrAtTheAirport = #{airportcoordinatesorattheairport,jdbcType=VARCHAR},
+      </if>
+      <if test="citylocation != null" >
+        cityLocation = #{citylocation,jdbcType=VARCHAR},
+      </if>
+      <if test="airportelevationorreferencetemperature != null" >
+        airportElevationOrReferenceTemperature = #{airportelevationorreferencetemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="airportelevationorgeoidbandposition != null" >
+        airportElevationOrGeoidBandPosition = #{airportelevationorgeoidbandposition,jdbcType=VARCHAR},
+      </if>
+      <if test="airportelevationorheightanomaly != null" >
+        airportElevationOrHeightAnomaly = #{airportelevationorheightanomaly,jdbcType=VARCHAR},
+      </if>
+      <if test="variationorannualvariationrate != null" >
+        variationOrAnnualVariationRate = #{variationorannualvariationrate,jdbcType=VARCHAR},
+      </if>
+      <if test="openinghoursattheairport != null" >
+        openingHoursAtTheAirport = #{openinghoursattheairport,jdbcType=VARCHAR},
+      </if>
+      <if test="airpormanagementdepartmentinfo != null" >
+        airporManagementDepartmentInfo = #{airpormanagementdepartmentinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="allowedtoflyspecies != null" >
+        allowedToFlySpecies = #{allowedtoflyspecies,jdbcType=VARCHAR},
+      </if>
+      <if test="natureoftheairportorairfieldindicators != null" >
+        natureOfTheAirportOrAirfieldIndicators = #{natureoftheairportorairfieldindicators,jdbcType=VARCHAR},
+      </if>
+      <if test="airportnoteNote != null" >
+        airportnoteNote = #{airportnoteNote,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfPath != null">
+      	pdfPath = #{pdfPath,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.AirportLocationAndManagementInformation" >
+    update AirportLocationAndManagementInformation
+    set IATA = #{iata,jdbcType=VARCHAR},
+      airportCoordinatesOrAtTheAirport = #{airportcoordinatesorattheairport,jdbcType=VARCHAR},
+      cityLocation = #{citylocation,jdbcType=VARCHAR},
+      airportElevationOrReferenceTemperature = #{airportelevationorreferencetemperature,jdbcType=VARCHAR},
+      airportElevationOrGeoidBandPosition = #{airportelevationorgeoidbandposition,jdbcType=VARCHAR},
+      airportElevationOrHeightAnomaly = #{airportelevationorheightanomaly,jdbcType=VARCHAR},
+      variationOrAnnualVariationRate = #{variationorannualvariationrate,jdbcType=VARCHAR},
+      openingHoursAtTheAirport = #{openinghoursattheairport,jdbcType=VARCHAR},
+      airporManagementDepartmentInfo = #{airpormanagementdepartmentinfo,jdbcType=VARCHAR},
+      allowedToFlySpecies = #{allowedtoflyspecies,jdbcType=VARCHAR},
+      natureOfTheAirportOrAirfieldIndicators = #{natureoftheairportorairfieldindicators,jdbcType=VARCHAR},
+      airportnoteNote = #{airportnoteNote,jdbcType=VARCHAR},
+      pdfPath = #{pdfPath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectAirportLocationByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from AirportLocationAndManagementInformation
+  	<where>
+  		<if test="iata!=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>

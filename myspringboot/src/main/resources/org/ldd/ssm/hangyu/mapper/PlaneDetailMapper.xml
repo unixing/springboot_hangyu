@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.PlaneDetailMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.PlaneDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="airportType" property="airporttype" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="aircompenyinfothree_id" property="aircompenyinfothreeId" jdbcType="BIGINT" />
+    <result column="count_Set" property="countSet" jdbcType="VARCHAR" />
+    <result column="air_speed" property="airSpeed" jdbcType="VARCHAR" />
+    <result column="hour_income" property="hourIncome" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, airportType, number, aircompenyinfothree_id, count_Set, air_speed, hour_income
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from planedetail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from planedetail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.PlaneDetail" >
+    insert into planedetail (id, airportType, number, 
+      aircompenyinfothree_id, count_Set, air_speed, 
+      hour_income)
+    values (#{id,jdbcType=BIGINT}, #{airporttype,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
+      #{aircompenyinfothreeId,jdbcType=BIGINT}, #{countSet,jdbcType=VARCHAR}, #{airSpeed,jdbcType=VARCHAR}, 
+      #{hourIncome,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.PlaneDetail" >
+    insert into planedetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="airporttype != null" >
+        airportType,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="aircompenyinfothreeId != null" >
+        aircompenyinfothree_id,
+      </if>
+      <if test="countSet != null" >
+        count_Set,
+      </if>
+      <if test="airSpeed != null" >
+        air_speed,
+      </if>
+      <if test="hourIncome != null" >
+        hour_income,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="airporttype != null" >
+        #{airporttype,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="aircompenyinfothreeId != null" >
+        #{aircompenyinfothreeId,jdbcType=BIGINT},
+      </if>
+      <if test="countSet != null" >
+        #{countSet,jdbcType=VARCHAR},
+      </if>
+      <if test="airSpeed != null" >
+        #{airSpeed,jdbcType=VARCHAR},
+      </if>
+      <if test="hourIncome != null" >
+        #{hourIncome,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.PlaneDetail" >
+    update planedetail
+    <set >
+      <if test="airporttype != null" >
+        airportType = #{airporttype,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="aircompenyinfothreeId != null" >
+        aircompenyinfothree_id = #{aircompenyinfothreeId,jdbcType=BIGINT},
+      </if>
+      <if test="countSet != null" >
+        count_Set = #{countSet,jdbcType=VARCHAR},
+      </if>
+      <if test="airSpeed != null" >
+        air_speed = #{airSpeed,jdbcType=VARCHAR},
+      </if>
+      <if test="hourIncome != null" >
+        hour_income = #{hourIncome,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.PlaneDetail" >
+    update planedetail
+    set airportType = #{airporttype,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      aircompenyinfothree_id = #{aircompenyinfothreeId,jdbcType=BIGINT},
+      count_Set = #{countSet,jdbcType=VARCHAR},
+      air_speed = #{airSpeed,jdbcType=VARCHAR},
+      hour_income = #{hourIncome,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectPlaneDetailsByAircompenyId" resultMap="BaseResultMap">
+  	select
+  	airportType,number
+  	from planedetail
+  	<where>
+  		<if test="aircompenyId !=null and aircompenyId >0">
+  			aircompenyinfothree_id = #{aircompenyId,jdbcType=BIGINT}
+  		</if>
+  	</where>
+  </select>
+</mapper>

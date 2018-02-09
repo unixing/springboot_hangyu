@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.hangyu.mapper.PhysicalCharacteristicsOfRunwayMapper">
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.PhysicalCharacteristicsOfRunway">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="runNO" jdbcType="VARCHAR" property="runno" />
+    <result column="orientation" jdbcType="VARCHAR" property="orientation" />
+    <result column="trackWidth" jdbcType="VARCHAR" property="trackwidth" />
+    <result column="runwayIntensity" jdbcType="VARCHAR" property="runwayintensity" />
+    <result column="runwayEntrance" jdbcType="VARCHAR" property="runwayentrance" />
+    <result column="runwayElevation" jdbcType="VARCHAR" property="runwayelevation" />
+    <result column="runwaySlope" jdbcType="VARCHAR" property="runwayslope" />
+    <result column="runwayStoplongWidth" jdbcType="VARCHAR" property="runwaystoplongwidth" />
+    <result column="runwayNetlongWide" jdbcType="VARCHAR" property="runwaynetlongwide" />
+    <result column="runwayLiftingBeltWidth" jdbcType="VARCHAR" property="runwayliftingbeltwidth" />
+    <result column="runwayEndOfRunwaySafetyAspect" jdbcType="VARCHAR" property="runwayendofrunwaysafetyaspect" />
+    <result column="runwayNoObstacleArea" jdbcType="VARCHAR" property="runwaynoobstaclearea" />
+    <result column="rek" jdbcType="VARCHAR" property="rek" />
+    <result column="IATA" jdbcType="VARCHAR" property="iata" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, runNO, orientation, trackWidth, runwayIntensity, runwayEntrance, runwayElevation, 
+    runwaySlope, runwayStoplongWidth, runwayNetlongWide, runwayLiftingBeltWidth, runwayEndOfRunwaySafetyAspect, 
+    runwayNoObstacleArea, rek, IATA
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PhysicalCharacteristicsOfRunway
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from PhysicalCharacteristicsOfRunway
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.PhysicalCharacteristicsOfRunway">
+    insert into PhysicalCharacteristicsOfRunway (id, runNO, orientation, 
+      trackWidth, runwayIntensity, runwayEntrance, 
+      runwayElevation, runwaySlope, runwayStoplongWidth, 
+      runwayNetlongWide, runwayLiftingBeltWidth, 
+      runwayEndOfRunwaySafetyAspect, runwayNoObstacleArea, 
+      rek, IATA)
+    values (#{id,jdbcType=BIGINT}, #{runno,jdbcType=VARCHAR}, #{orientation,jdbcType=VARCHAR}, 
+      #{trackwidth,jdbcType=VARCHAR}, #{runwayintensity,jdbcType=VARCHAR}, #{runwayentrance,jdbcType=VARCHAR}, 
+      #{runwayelevation,jdbcType=VARCHAR}, #{runwayslope,jdbcType=VARCHAR}, #{runwaystoplongwidth,jdbcType=VARCHAR}, 
+      #{runwaynetlongwide,jdbcType=VARCHAR}, #{runwayliftingbeltwidth,jdbcType=VARCHAR}, 
+      #{runwayendofrunwaysafetyaspect,jdbcType=VARCHAR}, #{runwaynoobstaclearea,jdbcType=VARCHAR}, 
+      #{rek,jdbcType=VARCHAR}, #{iata,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.PhysicalCharacteristicsOfRunway">
+    insert into PhysicalCharacteristicsOfRunway
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="runno != null">
+        runNO,
+      </if>
+      <if test="orientation != null">
+        orientation,
+      </if>
+      <if test="trackwidth != null">
+        trackWidth,
+      </if>
+      <if test="runwayintensity != null">
+        runwayIntensity,
+      </if>
+      <if test="runwayentrance != null">
+        runwayEntrance,
+      </if>
+      <if test="runwayelevation != null">
+        runwayElevation,
+      </if>
+      <if test="runwayslope != null">
+        runwaySlope,
+      </if>
+      <if test="runwaystoplongwidth != null">
+        runwayStoplongWidth,
+      </if>
+      <if test="runwaynetlongwide != null">
+        runwayNetlongWide,
+      </if>
+      <if test="runwayliftingbeltwidth != null">
+        runwayLiftingBeltWidth,
+      </if>
+      <if test="runwayendofrunwaysafetyaspect != null">
+        runwayEndOfRunwaySafetyAspect,
+      </if>
+      <if test="runwaynoobstaclearea != null">
+        runwayNoObstacleArea,
+      </if>
+      <if test="rek != null">
+        rek,
+      </if>
+      <if test="iata != null">
+        IATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="runno != null">
+        #{runno,jdbcType=VARCHAR},
+      </if>
+      <if test="orientation != null">
+        #{orientation,jdbcType=VARCHAR},
+      </if>
+      <if test="trackwidth != null">
+        #{trackwidth,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayintensity != null">
+        #{runwayintensity,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayentrance != null">
+        #{runwayentrance,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayelevation != null">
+        #{runwayelevation,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayslope != null">
+        #{runwayslope,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaystoplongwidth != null">
+        #{runwaystoplongwidth,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaynetlongwide != null">
+        #{runwaynetlongwide,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayliftingbeltwidth != null">
+        #{runwayliftingbeltwidth,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayendofrunwaysafetyaspect != null">
+        #{runwayendofrunwaysafetyaspect,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaynoobstaclearea != null">
+        #{runwaynoobstaclearea,jdbcType=VARCHAR},
+      </if>
+      <if test="rek != null">
+        #{rek,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null">
+        #{iata,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.PhysicalCharacteristicsOfRunway">
+    update PhysicalCharacteristicsOfRunway
+    <set>
+      <if test="runno != null">
+        runNO = #{runno,jdbcType=VARCHAR},
+      </if>
+      <if test="orientation != null">
+        orientation = #{orientation,jdbcType=VARCHAR},
+      </if>
+      <if test="trackwidth != null">
+        trackWidth = #{trackwidth,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayintensity != null">
+        runwayIntensity = #{runwayintensity,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayentrance != null">
+        runwayEntrance = #{runwayentrance,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayelevation != null">
+        runwayElevation = #{runwayelevation,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayslope != null">
+        runwaySlope = #{runwayslope,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaystoplongwidth != null">
+        runwayStoplongWidth = #{runwaystoplongwidth,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaynetlongwide != null">
+        runwayNetlongWide = #{runwaynetlongwide,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayliftingbeltwidth != null">
+        runwayLiftingBeltWidth = #{runwayliftingbeltwidth,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayendofrunwaysafetyaspect != null">
+        runwayEndOfRunwaySafetyAspect = #{runwayendofrunwaysafetyaspect,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaynoobstaclearea != null">
+        runwayNoObstacleArea = #{runwaynoobstaclearea,jdbcType=VARCHAR},
+      </if>
+      <if test="rek != null">
+        rek = #{rek,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null">
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.PhysicalCharacteristicsOfRunway">
+    update PhysicalCharacteristicsOfRunway
+    set runNO = #{runno,jdbcType=VARCHAR},
+      orientation = #{orientation,jdbcType=VARCHAR},
+      trackWidth = #{trackwidth,jdbcType=VARCHAR},
+      runwayIntensity = #{runwayintensity,jdbcType=VARCHAR},
+      runwayEntrance = #{runwayentrance,jdbcType=VARCHAR},
+      runwayElevation = #{runwayelevation,jdbcType=VARCHAR},
+      runwaySlope = #{runwayslope,jdbcType=VARCHAR},
+      runwayStoplongWidth = #{runwaystoplongwidth,jdbcType=VARCHAR},
+      runwayNetlongWide = #{runwaynetlongwide,jdbcType=VARCHAR},
+      runwayLiftingBeltWidth = #{runwayliftingbeltwidth,jdbcType=VARCHAR},
+      runwayEndOfRunwaySafetyAspect = #{runwayendofrunwaysafetyaspect,jdbcType=VARCHAR},
+      runwayNoObstacleArea = #{runwaynoobstaclearea,jdbcType=VARCHAR},
+      rek = #{rek,jdbcType=VARCHAR},
+      IATA = #{iata,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <resultMap id="ListResultMap" type="org.ldd.ssm.hangyu.domain.PhysicalCharacteristicsOfRunway" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="runNO" property="runno" jdbcType="VARCHAR" />
+    <result column="orientation" property="orientation" jdbcType="VARCHAR" />
+    <result column="trackWidth" property="trackwidth" jdbcType="VARCHAR" />
+    <result column="runwayIntensity" property="runwayintensity" jdbcType="VARCHAR" />
+    <result column="runwayEntrance" property="runwayentrance" jdbcType="VARCHAR" />
+    <result column="runwayElevation" property="runwayelevation" jdbcType="VARCHAR" />
+    <result column="runwaySlope" property="runwayslope" jdbcType="VARCHAR" />
+    <result column="runwayStoplongWidth" property="runwaystoplongwidth" jdbcType="VARCHAR" />
+    <result column="runwayNetlongWide" property="runwaynetlongwide" jdbcType="VARCHAR" />
+    <result column="runwayLiftingBeltWidth" property="runwayliftingbeltwidth" jdbcType="VARCHAR" />
+    <result column="runwayEndOfRunwaySafetyAspect" property="runwayendofrunwaysafetyaspect" jdbcType="VARCHAR" />
+    <result column="runwayNoObstacleArea" property="runwaynoobstaclearea" jdbcType="VARCHAR" />
+    <result column="runwayAvailable" property="runwayavailable" jdbcType="VARCHAR" />
+    <result column="runwayTakeDistance" property="runwaytakedistance" jdbcType="VARCHAR" />
+    <result column="runwayStoppingDistance" property="runwaystoppingdistance" jdbcType="VARCHAR" />
+    <result column="runwayLandingDistance" property="runwaylandingdistance" jdbcType="VARCHAR" />
+    <result column="rek" property="rek" jdbcType="VARCHAR" />
+    <result column="lengthIntensity" property="lengthintensity" jdbcType="VARCHAR" />
+    <result column="lightColor" property="lightcolor" jdbcType="VARCHAR" />
+    <result column="lampType" property="lamptype" jdbcType="VARCHAR" />
+    <result column="engthStripLights" property="engthstriplights" jdbcType="VARCHAR" />
+    <result column="runwayCenterlineLightsLength" property="runwaycenterlinelightslength" jdbcType="VARCHAR" />
+    <result column="runwayEdgeLengthLamp" property="runwayedgelengthlamp" jdbcType="VARCHAR" />
+    <result column="runwayAt" property="runwayat" jdbcType="VARCHAR" />
+    <result column="stopLampLength" property="stoplamplength" jdbcType="VARCHAR" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="selectPhysicalCharacteristicsOfRunwaysByIata" resultMap="ListResultMap">
+  	SELECT c.*,d.runwayAvailable, d.runwayTakeDistance, d.runwayStoppingDistance, d.runwayLandingDistance FROM 
+  		(SELECT a.*,b.lengthIntensity, b.lightColor, b.lampType, b.engthStripLights, b.runwayCenterlineLightsLength, b.runwayEdgeLengthLamp, b.runwayAt, b.stopLampLength FROM 
+  			(SELECT * FROM LengthIntensity WHERE IATA = #{iata,jdbcType=VARCHAR}) b 
+  			LEFT JOIN 
+  			(SELECT * FROM PhysicalCharacteristicsOfRunway WHERE IATA = #{iata,jdbcType=VARCHAR}) a 
+  			ON a.runNO = b.runNO) c 
+  		LEFT JOIN 
+  		(SELECT * FROM ReleasedFrom WHERE IATA = #{iata,jdbcType=VARCHAR}) d 
+  		ON c.runNO = d.runNO
+	UNION
+	SELECT c.*,d.runwayAvailable, d.runwayTakeDistance, d.runwayStoppingDistance, d.runwayLandingDistance FROM 
+		(SELECT a.*,b.lengthIntensity, b.lightColor, b.lampType, b.engthStripLights, b.runwayCenterlineLightsLength, b.runwayEdgeLengthLamp, b.runwayAt, b.stopLampLength FROM 
+			(SELECT * FROM PhysicalCharacteristicsOfRunway WHERE IATA = #{iata,jdbcType=VARCHAR}) a 
+			LEFT JOIN 
+			(SELECT * FROM LengthIntensity WHERE IATA = #{iata,jdbcType=VARCHAR}) b 
+			ON a.runNO = b.runNO) c 
+		LEFT JOIN 
+		(SELECT * FROM ReleasedFrom WHERE IATA = #{iata,jdbcType=VARCHAR}) d 
+		ON c.runNO = d.runNO
+	UNION
+	SELECT d.*,c.lengthIntensity, c.lightColor, c.lampType, c.engthStripLights, c.runwayCenterlineLightsLength, c.runwayEdgeLengthLamp, c.runwayAt, c.stopLampLength,c.runwayAvailable, c.runwayTakeDistance, c.runwayStoppingDistance, c.runwayLandingDistance FROM 
+		(SELECT a.runwayAvailable, a.runwayTakeDistance, a.runwayStoppingDistance, a.runwayLandingDistance, a.runNO, b.lengthIntensity, b.lightColor, b.lampType, b.engthStripLights, b.runwayCenterlineLightsLength, b.runwayEdgeLengthLamp, b.runwayAt, b.stopLampLength FROM 
+			(SELECT * FROM ReleasedFrom WHERE IATA = #{iata,jdbcType=VARCHAR}) a 
+			LEFT JOIN 
+			(SELECT * FROM LengthIntensity WHERE IATA = #{iata,jdbcType=VARCHAR}) b 
+			ON a.runNO = b.runNO) c 
+		LEFT JOIN 
+		(SELECT * FROM PhysicalCharacteristicsOfRunway WHERE IATA = #{iata,jdbcType=VARCHAR}) d 
+		ON c.runNO = d.runNO;
+
+  </select>
+</mapper>

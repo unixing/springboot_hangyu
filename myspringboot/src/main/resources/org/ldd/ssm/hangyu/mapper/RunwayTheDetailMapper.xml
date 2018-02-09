@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.RunwayTheDetailMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.RunwayTheDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="runwayNumber" property="runwaynumber" jdbcType="VARCHAR" />
+    <result column="runwayLvl" property="runwaylvl" jdbcType="VARCHAR" />
+    <result column="runwayLENGTH" property="runwaylength" jdbcType="VARCHAR" />
+    <result column="runwayWidth" property="runwaywidth" jdbcType="VARCHAR" />
+    <result column="airportinfonewthree_id" property="airportinfonewthreeId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, runwayNumber, runwayLvl, runwayLENGTH, runwayWidth, airportinfonewthree_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from runwaythedetail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from runwaythedetail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.RunwayTheDetail" >
+    insert into runwaythedetail (id, runwayNumber, runwayLvl, 
+      runwayLENGTH, runwayWidth, airportinfonewthree_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{runwaynumber,jdbcType=VARCHAR}, #{runwaylvl,jdbcType=VARCHAR}, 
+      #{runwaylength,jdbcType=VARCHAR}, #{runwaywidth,jdbcType=VARCHAR}, #{airportinfonewthreeId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.RunwayTheDetail" >
+    insert into runwaythedetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="runwaynumber != null" >
+        runwayNumber,
+      </if>
+      <if test="runwaylvl != null" >
+        runwayLvl,
+      </if>
+      <if test="runwaylength != null" >
+        runwayLENGTH,
+      </if>
+      <if test="runwaywidth != null" >
+        runwayWidth,
+      </if>
+      <if test="airportinfonewthreeId != null" >
+        airportinfonewthree_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="runwaynumber != null" >
+        #{runwaynumber,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaylvl != null" >
+        #{runwaylvl,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaylength != null" >
+        #{runwaylength,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaywidth != null" >
+        #{runwaywidth,jdbcType=VARCHAR},
+      </if>
+      <if test="airportinfonewthreeId != null" >
+        #{airportinfonewthreeId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.RunwayTheDetail" >
+    update runwaythedetail
+    <set >
+      <if test="runwaynumber != null" >
+        runwayNumber = #{runwaynumber,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaylvl != null" >
+        runwayLvl = #{runwaylvl,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaylength != null" >
+        runwayLENGTH = #{runwaylength,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaywidth != null" >
+        runwayWidth = #{runwaywidth,jdbcType=VARCHAR},
+      </if>
+      <if test="airportinfonewthreeId != null" >
+        airportinfonewthree_id = #{airportinfonewthreeId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.RunwayTheDetail" >
+    update runwaythedetail
+    set runwayNumber = #{runwaynumber,jdbcType=VARCHAR},
+      runwayLvl = #{runwaylvl,jdbcType=VARCHAR},
+      runwayLENGTH = #{runwaylength,jdbcType=VARCHAR},
+      runwayWidth = #{runwaywidth,jdbcType=VARCHAR},
+      airportinfonewthree_id = #{airportinfonewthreeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectRunwaysForAirport" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from runwaythedetail
+  	<where>
+  		<if test="airportId != null and airportId >0">
+  			airportinfonewthree_id = #{airportId,jdbcType=BIGINT}
+  		</if>
+  	</where>
+  </select>
+  
+</mapper>

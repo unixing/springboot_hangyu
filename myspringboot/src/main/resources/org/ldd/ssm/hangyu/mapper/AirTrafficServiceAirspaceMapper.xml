@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.AirTrafficServiceAirspaceMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.AirTrafficServiceAirspace" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="levelRange" property="levelrange" jdbcType="VARCHAR" />
+    <result column="verticalScope" property="verticalscope" jdbcType="VARCHAR" />
+    <result column="rek" property="rek" jdbcType="VARCHAR" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, levelRange, verticalScope, rek, IATA
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from AirTrafficServiceAirspace
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from AirTrafficServiceAirspace
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.AirTrafficServiceAirspace" >
+    insert into AirTrafficServiceAirspace (id, name, levelRange, 
+      verticalScope, rek, IATA
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{levelrange,jdbcType=VARCHAR}, 
+      #{verticalscope,jdbcType=VARCHAR}, #{rek,jdbcType=VARCHAR}, #{iata,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.AirTrafficServiceAirspace" >
+    insert into AirTrafficServiceAirspace
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="levelrange != null" >
+        levelRange,
+      </if>
+      <if test="verticalscope != null" >
+        verticalScope,
+      </if>
+      <if test="rek != null" >
+        rek,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="levelrange != null" >
+        #{levelrange,jdbcType=VARCHAR},
+      </if>
+      <if test="verticalscope != null" >
+        #{verticalscope,jdbcType=VARCHAR},
+      </if>
+      <if test="rek != null" >
+        #{rek,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.AirTrafficServiceAirspace" >
+    update AirTrafficServiceAirspace
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="levelrange != null" >
+        levelRange = #{levelrange,jdbcType=VARCHAR},
+      </if>
+      <if test="verticalscope != null" >
+        verticalScope = #{verticalscope,jdbcType=VARCHAR},
+      </if>
+      <if test="rek != null" >
+        rek = #{rek,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.AirTrafficServiceAirspace" >
+    update AirTrafficServiceAirspace
+    set name = #{name,jdbcType=VARCHAR},
+      levelRange = #{levelrange,jdbcType=VARCHAR},
+      verticalScope = #{verticalscope,jdbcType=VARCHAR},
+      rek = #{rek,jdbcType=VARCHAR},
+      IATA = #{iata,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectAirTrafficServiceAirspacesByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from AirTrafficServiceAirspace
+  	<where>
+  		<if test="iata!=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>

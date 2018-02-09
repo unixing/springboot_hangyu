@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.hangyu.mapper.CityCoordinateMapper">
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.CityCoordinate">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="city_icao" jdbcType="VARCHAR" property="cityIcao" />
+    <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+    <result column="city_coordinate" jdbcType="VARCHAR" property="cityCoordinate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, city_icao, city_name, city_coordinate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_city_coordinate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_city_coordinate
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.CityCoordinate">
+    insert into t_city_coordinate (id, city_icao, city_name, 
+      city_coordinate)
+    values (#{id,jdbcType=BIGINT}, #{cityIcao,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, 
+      #{cityCoordinate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.CityCoordinate">
+    insert into t_city_coordinate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cityIcao != null">
+        city_icao,
+      </if>
+      <if test="cityName != null">
+        city_name,
+      </if>
+      <if test="cityCoordinate != null">
+        city_coordinate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cityIcao != null">
+        #{cityIcao,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCoordinate != null">
+        #{cityCoordinate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.CityCoordinate">
+    update t_city_coordinate
+    <set>
+      <if test="cityIcao != null">
+        city_icao = #{cityIcao,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCoordinate != null">
+        city_coordinate = #{cityCoordinate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.CityCoordinate">
+    update t_city_coordinate
+    set city_icao = #{cityIcao,jdbcType=VARCHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      city_coordinate = #{cityCoordinate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByCityIcao" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from
+  	t_city_coordinate
+  	<where>
+  		<if test="icao !=null and icao != ''">
+  			city_icao = #{icao,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+  <select id="selectByAirIcao" resultMap="BaseResultMap">
+  	select
+  	a.id, a.city_icao, a.city_name, a.city_coordinate
+  	from
+  	t_city_coordinate a,airportinfonewthree b
+  	<where>
+  		a.city_name = b.city
+  		<if test="icao !=null and icao != ''">
+  			and b.IATA = #{icao,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+  <select id="selectAllCityList" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from
+  	t_city_coordinate
+  	<where>
+  		city_icao !='null' AND city_icao != ''
+  	</where>
+  </select>
+</mapper>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.RadioNavigationAndLandingFacilitiesMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.RadioNavigationAndLandingFacilities" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="nameAndTypeOfFacilities" property="nameandtypeoffacilities" jdbcType="VARCHAR" />
+    <result column="identify" property="identify" jdbcType="VARCHAR" />
+    <result column="frequency" property="frequency" jdbcType="VARCHAR" />
+    <result column="coordinates" property="coordinates" jdbcType="VARCHAR" />
+    <result column="relativePosition" property="relativeposition" jdbcType="VARCHAR" />
+    <result column="transmittingAntennaElevation" property="transmittingantennaelevation" jdbcType="VARCHAR" />
+    <result column="rek" property="rek" jdbcType="VARCHAR" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, nameAndTypeOfFacilities, identify, frequency, coordinates, relativePosition, 
+    transmittingAntennaElevation, rek, IATA
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from RadioNavigationAndLandingFacilities
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from RadioNavigationAndLandingFacilities
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.RadioNavigationAndLandingFacilities" >
+    insert into RadioNavigationAndLandingFacilities (id, nameAndTypeOfFacilities, identify, 
+      frequency, coordinates, relativePosition, 
+      transmittingAntennaElevation, rek, IATA
+      )
+    values (#{id,jdbcType=BIGINT}, #{nameandtypeoffacilities,jdbcType=VARCHAR}, #{identify,jdbcType=VARCHAR}, 
+      #{frequency,jdbcType=VARCHAR}, #{coordinates,jdbcType=VARCHAR}, #{relativeposition,jdbcType=VARCHAR}, 
+      #{transmittingantennaelevation,jdbcType=VARCHAR}, #{rek,jdbcType=VARCHAR}, #{iata,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.RadioNavigationAndLandingFacilities" >
+    insert into RadioNavigationAndLandingFacilities
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="nameandtypeoffacilities != null" >
+        nameAndTypeOfFacilities,
+      </if>
+      <if test="identify != null" >
+        identify,
+      </if>
+      <if test="frequency != null" >
+        frequency,
+      </if>
+      <if test="coordinates != null" >
+        coordinates,
+      </if>
+      <if test="relativeposition != null" >
+        relativePosition,
+      </if>
+      <if test="transmittingantennaelevation != null" >
+        transmittingAntennaElevation,
+      </if>
+      <if test="rek != null" >
+        rek,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="nameandtypeoffacilities != null" >
+        #{nameandtypeoffacilities,jdbcType=VARCHAR},
+      </if>
+      <if test="identify != null" >
+        #{identify,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null" >
+        #{frequency,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinates != null" >
+        #{coordinates,jdbcType=VARCHAR},
+      </if>
+      <if test="relativeposition != null" >
+        #{relativeposition,jdbcType=VARCHAR},
+      </if>
+      <if test="transmittingantennaelevation != null" >
+        #{transmittingantennaelevation,jdbcType=VARCHAR},
+      </if>
+      <if test="rek != null" >
+        #{rek,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.RadioNavigationAndLandingFacilities" >
+    update RadioNavigationAndLandingFacilities
+    <set >
+      <if test="nameandtypeoffacilities != null" >
+        nameAndTypeOfFacilities = #{nameandtypeoffacilities,jdbcType=VARCHAR},
+      </if>
+      <if test="identify != null" >
+        identify = #{identify,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null" >
+        frequency = #{frequency,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinates != null" >
+        coordinates = #{coordinates,jdbcType=VARCHAR},
+      </if>
+      <if test="relativeposition != null" >
+        relativePosition = #{relativeposition,jdbcType=VARCHAR},
+      </if>
+      <if test="transmittingantennaelevation != null" >
+        transmittingAntennaElevation = #{transmittingantennaelevation,jdbcType=VARCHAR},
+      </if>
+      <if test="rek != null" >
+        rek = #{rek,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.RadioNavigationAndLandingFacilities" >
+    update RadioNavigationAndLandingFacilities
+    set nameAndTypeOfFacilities = #{nameandtypeoffacilities,jdbcType=VARCHAR},
+      identify = #{identify,jdbcType=VARCHAR},
+      frequency = #{frequency,jdbcType=VARCHAR},
+      coordinates = #{coordinates,jdbcType=VARCHAR},
+      relativePosition = #{relativeposition,jdbcType=VARCHAR},
+      transmittingAntennaElevation = #{transmittingantennaelevation,jdbcType=VARCHAR},
+      rek = #{rek,jdbcType=VARCHAR},
+      IATA = #{iata,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectRadioNavigationAndLandingFacilitiesByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from RadioNavigationAndLandingFacilities
+  	<where>
+  		<if test="iata!=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>

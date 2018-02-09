@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.ChatMapper" >
+	<select id="getEmployeeIdByName" resultType="Long" parameterType="string">
+		select id from employee where userName=#{name}
+	</select>
+	<insert id="insertChatText" parameterType="Chat">
+		insert into chat(fromName_id,toName_id,demand_id,date,text,textType,title,state)
+		values
+		(#{fromNameId},#{toNameId},#{demandId},#{date},#{text},#{textType},#{title},#{state})
+	</insert>
+	<select id="employees" resultType="java.lang.Long" parameterType="string">
+		select id from employee where userName != #{userName}
+	</select>
+	<select id="employeesChat" parameterType="Long" resultType="Chat">
+		select fromName_id fromNameId,toName_id toNameId,demand_id demandId,date,text,textType,state from chat 
+		where 
+		(fromName_id = #{fromName} and toName_id = #{toName})
+		or
+		(fromName_id = #{toName} and toName_id = #{fromName})
+	</select>
+	
+<!-- wxm begin  -->
+	<!-- 聊天记录 -->
+	<select id="findChatRecord" parameterType="org.ldd.ssm.hangyu.query.ChatDto" resultType="org.ldd.ssm.hangyu.domain.Chat">
+	select fromName_id fromNameId,DATE_FORMAT(date,'%Y.%m.%d %H:%i:%s') date,text,textType from chat
+		<where>
+			<if test="demandId != null">
+			and demand_id=#{demandId}
+			</if>
+			<if test="fromNameId != null and toNameId != null">
+			and (
+				(fromName_id=#{toNameId} and toName_id=#{fromNameId} and textType='1') 
+				or (fromName_id=#{toNameId} and toName_id=#{fromNameId} and textType='0') 
+				or (fromName_id=#{fromNameId} and toName_id=#{toNameId} and textType='0')
+			) 
+			</if>
+		</where> 
+		ORDER BY date desc
+		limit #{startIndex,jdbcType=INTEGER},#{pageNo,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getChatRecordCount" parameterType="org.ldd.ssm.hangyu.query.ChatDto" resultType="java.lang.Integer">
+		select count(*) from chat
+		<where>
+			<if test="demandId != null">
+			and demand_id=#{demandId}
+			</if>
+			<if test="fromNameId != null and toNameId != null">
+			and (
+				(fromName_id=#{toNameId} and toName_id=#{fromNameId} and textType='1') 
+				or (fromName_id=#{toNameId} and toName_id=#{fromNameId} and textType='0') 
+				or (fromName_id=#{fromNameId} and toName_id=#{toNameId} and textType='0')
+			) 
+			</if>
+		</where> 
+	</select>
+	
+	<select id="getNoReadChatRecordCount" parameterType="org.ldd.ssm.hangyu.query.ChatDto" resultType="java.lang.Integer">
+		select count(*) from chat
+		<where>
+			state='1' and textType!='2'
+			<if test="demandId != null">
+			and demand_id=#{demandId}
+			</if>
+			<if test="demandId == null">
+			and demand_id is null
+			</if>
+			<if test="fromNameId != null">
+			and toName_id=#{fromNameId}
+			</if>
+			<if test="toNameId != null">
+			and fromName_id=#{toNameId}
+			</if>
+		</where>
+	</select>
+	
+	<select id="getNoReadSystemRecordCount" parameterType="org.ldd.ssm.hangyu.query.ChatDto" resultType="java.lang.Integer">
+		select count(*) from chat
+		where
+			state='1' and textType='2' and  toName_id=#{fromNameId}
+	</select>
+	
+	<!-- 修改记录 -->
+	<select id="findModifyRecord" parameterType="org.ldd.ssm.hangyu.query.ChatDto" resultType="org.ldd.ssm.hangyu.domain.Chat">
+		select fromName_id fromNameId,DATE_FORMAT(date,'%Y.%m.%d') date, "修改了方案" as text,textType from chat
+		where textType='1' and  demand_id=#{demandId} and  (fromName_id=#{toNameId} and toName_id=#{fromNameId} ) 
+		ORDER BY date 
+		limit #{startIndex,jdbcType=INTEGER},#{pageNo,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getModifyRecordCount" parameterType="org.ldd.ssm.hangyu.query.ChatDto" resultType="java.lang.Integer">
+		select count(*) from chat
+		where textType='1'  and demand_id=#{demandId} and(fromName_id=#{toNameId} and toName_id=#{fromNameId} ) 
+	</select>
+	<!-- 太美信息 -->
+	<select id="getCompanyInfo"  resultType="java.util.Map">
+		select a.nickName name,c.Cpy_Nm companyName,c.Cpy_Ads companyAddr,c.Cpy_Pho companyPho from employee  a 
+		LEFT JOIN department b on a.department_id=b.id 
+		LEFT JOIN company c on b.company_id=c.id where a.id=1
+	</select>
+	
+	<select id="getChatObject"  resultType="java.util.Map" parameterType="org.ldd.ssm.hangyu.query.ChatDto">
+		select c.nickName name,d.Dpt_Nm department,e.Cpy_Nm company,a.iHome phone,c.airlineRetrievalCondition iata
+			from employee c 
+			LEFT JOIN department d on d.id=c.department_id
+			LEFT JOIN company e on e.id=d.company_id
+			LEFT JOIN demand a on a.employee_id=c.id
+			where c.id=#{toNameId} and a.id=#{demandId}
+		UNION
+		select c.nickName name,d.Dpt_Nm department,e.Cpy_Nm company,a.iHome phone,c.airlineRetrievalCondition iata
+			from employee c 
+			LEFT JOIN department d on d.id=c.department_id
+			LEFT JOIN company e on e.id=d.company_id
+			LEFT JOIN response a on a.employee_id=c.id 
+			where c.id=#{toNameId} and a.demand_id=#{demandId}
+	</select>
+
+	
+	<!-- 需求信息 -->
+	<select id="getDemandDtail" parameterType="java.lang.Long" resultType="org.ldd.ssm.hangyu.domain.Demand">
+		select  a.demandProgress demandprogress,a.demandType demandtype,a.demandState demandstate,a.title title,a.sailingTime sailingtime,a.days days,a.airCrftTyp aircrfttyp,
+				a.seating seating,a.avgGuestExpect avgguestexpect,
+				a.dpt_state dptState,a.dpt,a.dpt_time dptTime,a.dpt_acceptNearAirport dptAcceptNearAirport,
+				a.pst_state pstState,a.pst,a.pst_time pstTime,a.pst_acceptNearAirport pstAcceptNearAirport,
+				a.arrv_state arrvState,a.arrv,a.arrv_time arrvTime,a.arrv_acceptNearAirport arrvAcceptNearAirport,
+				b.airln_cd airCompany,a.periodValidity periodValidity,a.blockBidPrice blockbidprice,
+				a.loadFactorsExpect loadfactorsexpect,a.hoursCost hourscost,a.remark remark,a.contact contact,
+				a.fltNbr fltNbr,iHome iHome
+				from demand a
+				LEFT JOIN aircompenyinfothree b on a.capacityCompany=b.id where a.id=#{id} <!-- and a.demandState in (0,6) -->
+	</select>
+	
+	<!-- 获取响应方案详情 -->
+	<select id="getResponseDtail" parameterType="org.ldd.ssm.hangyu.query.ChatDto" resultType="org.ldd.ssm.hangyu.domain.Demand">
+		select  a.demandType demandtype,a.title title,a.sailingTime sailingtime,a.days days,a.airCrftTyp aircrfttyp,
+				a.seating seating,a.avgGuestExpect avgguestexpect,a.dpt_timeResources dptTimeresources,a.pst_timeResources pstTimeresources,
+				a.dpt_state dptState,a.dpt,a.dpt_time dptTime,a.dpt_acceptNearAirport dptAcceptNearAirport,
+				a.pst_state pstState,a.pst,a.pst_time pstTime,a.pst_acceptNearAirport pstAcceptNearAirport,
+				a.arrv_state arrvState,a.arrv,a.arrv_time arrvTime,a.arrv_acceptNearAirport arrvAcceptNearAirport,
+				b.airln_cd airCompany,a.blockBidPrice blockbidprice,a.arrv_timeResources arrvTimeresources,
+				a.loadFactorsExpect loadfactorsexpect,a.hoursCost hourscost,a.remark remark,a.contact contact,
+				a.fltNbr fltNbr,iHome iHome
+				from response a
+				LEFT JOIN aircompenyinfothree b on a.capacityCompany=b.id 
+				where (a.employee_id=#{fromNameId}  or a.employee_id=#{toNameId}) and a.demand_id=#{demandId} 
+	</select>
+	
+	<update id="updateState" parameterType="org.ldd.ssm.hangyu.query.ChatDto" >
+	update  chat set state="0"
+	<where>
+		state='1' 
+		<if test="demandId != null">
+			and demand_id=#{demandId}
+			</if>
+			<if test="demandId == null">
+			and demand_id is null
+			</if>
+			<if test="fromNameId != null">
+			and toName_id=#{fromNameId}
+			</if>
+			<if test="fromNameId == null">
+			and toName_id is null
+			</if>
+			<if test="toNameId != null">
+			and fromName_id=#{toNameId}
+			</if>
+			<if test="toNameId == null">
+			and fromName_id is null
+			</if>
+		</where>
+	</update>
+	
+	<update id="updateSystemState" parameterType="org.ldd.ssm.hangyu.query.ChatDto" >
+	update  chat set state="0"
+	where
+		state='1' and textType='2' and toName_id=#{fromNameId}  
+	</update>
+	
+	<!-- 返回和当前用户聊过天的对象及需求id -->
+	<select id="findChatObject" parameterType="org.ldd.ssm.hangyu.query.ChatDto" resultType="org.ldd.ssm.hangyu.query.ChatDto">
+	select fromNameId,toNameId, demandId,MAX(date),state from (
+		(select a.toName_id fromNameId,a.fromName_id toNameId,a.demand_id demandId,date,state from chat a
+		where  a.toName_id=#{fromNameId} and demand_id is null and textType!='2' and state='1' ORDER BY a.date desc)
+		UNION  all
+		<!-- (select a.fromName_id fromNameId,a.toName_id toNameId , a.demand_id demandId,date,null as state from chat a
+		where a.fromName_id=#{fromNameId} and demand_id is null and textType!='2' and state='1'  ORDER BY a.date desc)
+		UNION all
+		(select a.fromName_id fromNameId,a.toName_id toNameId,a.demand_id demandId,date,null as state from chat a
+		left JOIN demand b on a.demand_id=b.id
+		where a.fromName_id=#{fromNameId}   and  b.demandState in (0,6) and textType!='2' and state='1' ORDER BY a.date desc)
+		UNION all -->
+		(select a.toName_id fromNameId,a.fromName_id toNameId,a.demand_id demandId,date,state from chat a
+		left JOIN demand b on a.demand_id=b.id
+		where a.toName_id=#{fromNameId}  <!-- and  b.demandState in (0,6) --> and textType!='2' and state='1' ORDER BY a.date desc)
+		) p
+	GROUP BY fromNameId,toNameId,demandId
+	ORDER BY state desc,date desc
+	</select>
+	
+	
+	<select id="findSystemMessage" parameterType="org.ldd.ssm.hangyu.query.ChatDto" resultType="org.ldd.ssm.hangyu.domain.Chat">
+		select a.toName_id toNameId,a.fromName_id demandEmployeeId,a.demand_id demandId,DATE_FORMAT(a.date,'%Y.%m.%d %H:%i:%s') date,a.title title,
+		a.text text,a.state state,b.demandState demandState ,b.demandType demandType
+		from chat a
+		left join demand b on a.demand_id=b.id
+		where
+		a.textType='2' and  a.toName_id=#{fromNameId} 
+		ORDER BY state desc,date desc
+		limit #{startIndex,jdbcType=INTEGER},#{pageNo,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getSystemMessageCount" parameterType="org.ldd.ssm.hangyu.query.ChatDto" resultType="java.lang.Integer">
+		select count(*) from chat
+		where
+			textType='2' and  toName_id=#{fromNameId} 
+	</select>
+<!-- wxm end -->
+
+	<select id="getUnreadMesseageCountByEmployeeAndDemandId" resultType="java.lang.Integer">
+		select 
+		count(*)
+		from chat
+		<where>
+			<!-- 修改我的发布列表中消息显示（系统消息） 2018.02.01-->
+			<!-- textType = '0' and state = '1' -->
+			textType in ('0','2') and state='1'
+			<if test="employeeId != null and employeeId >0">
+				and toName_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+			<if test="demandId != null and demandId >0">
+				and demand_id = #{demandId,jdbcType=BIGINT}
+			</if>
+		</where>
+	</select>
+	<insert id="insertChatSelective" parameterType="org.ldd.ssm.hangyu.domain.Chat">
+		insert into chat 
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fromNameId != null" >
+        fromName_id,
+      </if>
+      <if test="toNameId != null" >
+        toName_id,
+      </if>
+      <if test="demandId != null" >
+        demand_id,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="text != null" >
+        text,
+      </if>
+      <if test="textType != null" >
+        textType,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="fromNameId != null" >
+        #{fromNameId,jdbcType=BIGINT},
+      </if>
+      <if test="toNameId != null">
+      	#{toNameId,jdbcType=BIGINT},
+      </if>
+      <if test="demandId != null">
+      	#{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null" >
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="textType != null" >
+        #{textType,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+		
+	</insert>
+	<select id="selectUnReadMessageCountForMyReleaseDemandList" resultType="Integer">
+		SELECT COUNT(*) FROM chat a WHERE a.toName_id = #{employeeId,jdbcType=BIGINT} 
+		AND a.demand_id in (SELECT id FROM demand b WHERE b.employee_id = #{employeeId,jdbcType=BIGINT}) AND a.state = '1' AND textType IN ('0','2')
+	</select>
+</mapper>

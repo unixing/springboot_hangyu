@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.hangyu.mapper.ResponseCopyMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.ResponseCopy">
+		<id column="response_id" jdbcType="BIGINT" property="responseId" />
+		<result column="id" jdbcType="BIGINT" property="id" />
+	    <result column="employee_id" jdbcType="BIGINT" property="employeeId" />
+	    <result column="demand_id" jdbcType="BIGINT" property="demandId" />
+	    <result column="intentionMoneyState" jdbcType="VARCHAR" property="intentionmoneystate" />
+	    <result column="whetherHosting" jdbcType="VARCHAR" property="whetherhosting" />
+	    <result column="whetherNavigation" jdbcType="VARCHAR" property="whethernavigation" />
+	    <result column="releaseSelected" jdbcType="VARCHAR" property="releaseselected" />
+	    <result column="responseSelected" jdbcType="VARCHAR" property="responseselected" />
+	    <result column="demandType" jdbcType="VARCHAR" property="demandtype" />
+	    <result column="releaseTime" jdbcType="VARCHAR" property="releasetime" />
+	    <result column="title" jdbcType="VARCHAR" property="title" />
+	    <result column="dpt_state" jdbcType="VARCHAR" property="dptState" />
+	    <result column="dpt" jdbcType="VARCHAR" property="dpt" />
+	    <result column="dpt_ct" jdbcType="VARCHAR" property="dptCt" />
+	    <result column="dpt_acceptNearAirport" jdbcType="VARCHAR" property="dptAcceptnearairport" />
+	    <result column="dpt_timeResources" jdbcType="VARCHAR" property="dptTimeresources" />
+	    <result column="dpt_time" jdbcType="VARCHAR" property="dptTime" />
+	    <result column="pst_state" jdbcType="VARCHAR" property="pstState" />
+	    <result column="pst" jdbcType="VARCHAR" property="pst" />
+	    <result column="pst_ct" jdbcType="VARCHAR" property="pstCt" />
+	    <result column="pst_acceptNearAirport" jdbcType="VARCHAR" property="pstAcceptnearairport" />
+	    <result column="pst_timeResources" jdbcType="VARCHAR" property="pstTimeresources" />
+	    <result column="pst_time" jdbcType="VARCHAR" property="pstTime" />
+	    <result column="arrv_state" jdbcType="VARCHAR" property="arrvState" />
+	    <result column="arrv" jdbcType="VARCHAR" property="arrv" />
+	    <result column="arrv_ct" jdbcType="VARCHAR" property="arrvCt" />
+	    <result column="arrv_acceptNearAirport" jdbcType="VARCHAR" property="arrvAcceptnearairport" />
+	    <result column="arrv_timeResources" jdbcType="VARCHAR" property="arrvTimeresources" />
+	    <result column="arrv_time" jdbcType="VARCHAR" property="arrvTime" />
+	    <result column="airCrftTyp" jdbcType="VARCHAR" property="aircrfttyp" />
+	    <result column="days" jdbcType="VARCHAR" property="days" />
+	    <result column="blockBidPrice" jdbcType="VARCHAR" property="blockbidprice" />
+	    <result column="loadFactorsExpect" jdbcType="VARCHAR" property="loadfactorsexpect" />
+	    <result column="avgGuestExpect" jdbcType="VARCHAR" property="avgguestexpect" />
+	    <result column="subsidyPolicy" jdbcType="VARCHAR" property="subsidypolicy" />
+	    <result column="sailingTime" jdbcType="VARCHAR" property="sailingtime" />
+	    <result column="seating" jdbcType="VARCHAR" property="seating" />
+	    <result column="capacityCompany" jdbcType="BIGINT" property="capacitycompany" />
+	    <result column="capacityBase" jdbcType="VARCHAR" property="capacityBase" />
+	    <result column="scheduling" jdbcType="VARCHAR" property="scheduling" />
+	    <result column="schedulinePort" jdbcType="VARCHAR" property="schedulineport" />
+	    <result column="hoursCost" jdbcType="VARCHAR" property="hourscost" />
+	    <result column="remark" jdbcType="VARCHAR" property="remark" />
+	    <result column="publicWay" jdbcType="VARCHAR" property="publicway" />
+	    <result column="directionalGoal" jdbcType="BIGINT" property="directionalgoal" />
+	    <result column="fltNbr" jdbcType="VARCHAR" property="fltnbr" />
+	    <result column="contact" jdbcType="VARCHAR" property="contact" />
+	    <result column="iHome" jdbcType="VARCHAR" property="ihome" />
+	    <result column="responseDate" jdbcType="VARCHAR" property="responsedate" />
+	    <result column="updateDate" jdbcType="VARCHAR" property="updatedate" />
+	    <result column="newInfo" jdbcType="VARCHAR" property="newinfo" />
+	    <result column="responseProgress" jdbcType="VARCHAR" property="responseProgress" />
+	</resultMap>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+	    select response_id,
+	    <include refid="org.ldd.ssm.hangyu.mapper.ResponseMapper.Base_Column_List" />
+	    from response_copy
+	    where response_id = #{responseId,jdbcType=BIGINT}
+  	</select>
+	
+	<insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.ResponseCopy">
+    insert into response_copy (response_id,id, employee_id, demand_id, 
+      intentionMoneyState, whetherHosting, whetherNavigation, 
+      releaseSelected, responseSelected, demandType, 
+      releaseTime, title, dpt_state, 
+      dpt, dpt_ct, dpt_acceptNearAirport, 
+      dpt_timeResources, dpt_time, pst_state, 
+      pst, pst_ct, pst_acceptNearAirport, 
+      pst_timeResources, pst_time, arrv_state, 
+      arrv, arrv_ct, arrv_acceptNearAirport, 
+      arrv_timeResources, arrv_time, airCrftTyp, 
+      days, blockBidPrice, loadFactorsExpect, 
+      avgGuestExpect, subsidyPolicy, sailingTime, 
+      seating, capacityCompany,capacityBase, scheduling, 
+      schedulinePort, hoursCost, 
+      remark, publicWay, directionalGoal, 
+      fltNbr, contact, iHome, 
+      responseDate, updateDate, newInfo,responseProgress
+      )
+    values (#{responseId,jdbcType=BIGINT},#{id,jdbcType=BIGINT}, #{employeeId,jdbcType=BIGINT}, #{demandId,jdbcType=BIGINT}, 
+      #{intentionmoneystate,jdbcType=VARCHAR}, #{whetherhosting,jdbcType=VARCHAR}, #{whethernavigation,jdbcType=VARCHAR}, 
+      #{releaseselected,jdbcType=VARCHAR}, #{responseselected,jdbcType=VARCHAR}, #{demandtype,jdbcType=VARCHAR}, 
+      #{releasetime,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{dptState,jdbcType=VARCHAR}, 
+      #{dpt,jdbcType=VARCHAR}, #{dptCt,jdbcType=VARCHAR}, #{dptAcceptnearairport,jdbcType=VARCHAR}, 
+      #{dptTimeresources,jdbcType=VARCHAR}, #{dptTime,jdbcType=VARCHAR}, #{pstState,jdbcType=VARCHAR}, 
+      #{pst,jdbcType=VARCHAR}, #{pstCt,jdbcType=VARCHAR}, #{pstAcceptnearairport,jdbcType=VARCHAR}, 
+      #{pstTimeresources,jdbcType=VARCHAR}, #{pstTime,jdbcType=VARCHAR}, #{arrvState,jdbcType=VARCHAR}, 
+      #{arrv,jdbcType=VARCHAR}, #{arrvCt,jdbcType=VARCHAR}, #{arrvAcceptnearairport,jdbcType=VARCHAR}, 
+      #{arrvTimeresources,jdbcType=VARCHAR}, #{arrvTime,jdbcType=VARCHAR}, #{aircrfttyp,jdbcType=VARCHAR}, 
+      #{days,jdbcType=VARCHAR}, #{blockbidprice,jdbcType=VARCHAR}, #{loadfactorsexpect,jdbcType=VARCHAR}, 
+      #{avgguestexpect,jdbcType=VARCHAR}, #{subsidypolicy,jdbcType=VARCHAR}, #{sailingtime,jdbcType=VARCHAR}, 
+      #{seating,jdbcType=VARCHAR}, #{capacitycompany,jdbcType=BIGINT}, #{capacityBase,jdbcType=VARCHAR}, #{scheduling,jdbcType=VARCHAR}, 
+      #{schedulineport,jdbcType=VARCHAR}, #{hourscost,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{publicway,jdbcType=VARCHAR}, #{directionalgoal,jdbcType=BIGINT}, 
+      #{fltnbr,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{ihome,jdbcType=VARCHAR}, 
+      #{responsedate,jdbcType=VARCHAR}, #{updatedate,jdbcType=VARCHAR}, #{newinfo,jdbcType=VARCHAR}
+      , #{responseProgress,jdbcType=VARCHAR}
+      )
+  </insert>
+	
+	<insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.ResponseCopy">
+    insert into response_copy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="responseId != null">
+        response_id,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="demandId != null">
+        demand_id,
+      </if>
+      <if test="intentionmoneystate != null">
+        intentionMoneyState,
+      </if>
+      <if test="whetherhosting != null">
+        whetherHosting,
+      </if>
+      <if test="whethernavigation != null">
+        whetherNavigation,
+      </if>
+      <if test="releaseselected != null">
+        releaseSelected,
+      </if>
+      <if test="responseselected != null">
+        responseSelected,
+      </if>
+      <if test="demandtype != null">
+        demandType,
+      </if>
+      <if test="releasetime != null">
+        releaseTime,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="dptState != null">
+        dpt_state,
+      </if>
+      <if test="dpt != null">
+        dpt,
+      </if>
+      <if test="dptCt != null">
+        dpt_ct,
+      </if>
+      <if test="dptAcceptnearairport != null">
+        dpt_acceptNearAirport,
+      </if>
+      <if test="dptTimeresources != null">
+        dpt_timeResources,
+      </if>
+      <if test="dptTime != null">
+        dpt_time,
+      </if>
+      <if test="pstState != null">
+        pst_state,
+      </if>
+      <if test="pst != null">
+        pst,
+      </if>
+      <if test="pstCt != null">
+        pst_ct,
+      </if>
+      <if test="pstAcceptnearairport != null">
+        pst_acceptNearAirport,
+      </if>
+      <if test="pstTimeresources != null">
+        pst_timeResources,
+      </if>
+      <if test="pstTime != null">
+        pst_time,
+      </if>
+      <if test="arrvState != null">
+        arrv_state,
+      </if>
+      <if test="arrv != null">
+        arrv,
+      </if>
+      <if test="arrvCt != null">
+        arrv_ct,
+      </if>
+      <if test="arrvAcceptnearairport != null">
+        arrv_acceptNearAirport,
+      </if>
+      <if test="arrvTimeresources != null">
+        arrv_timeResources,
+      </if>
+      <if test="arrvTime != null">
+        arrv_time,
+      </if>
+      <if test="aircrfttyp != null">
+        airCrftTyp,
+      </if>
+      <if test="days != null">
+        days,
+      </if>
+      <if test="blockbidprice != null">
+        blockBidPrice,
+      </if>
+      <if test="loadfactorsexpect != null">
+        loadFactorsExpect,
+      </if>
+      <if test="avgguestexpect != null">
+        avgGuestExpect,
+      </if>
+      <if test="subsidypolicy != null">
+        subsidyPolicy,
+      </if>
+      <if test="sailingtime != null">
+        sailingTime,
+      </if>
+      <if test="seating != null">
+        seating,
+      </if>
+      <if test="capacitycompany != null">
+        capacityCompany,
+      </if>
+      <if test="capacityBase != null">
+        capacityBase,
+      </if>
+      <if test="scheduling != null">
+        scheduling,
+      </if>
+      <if test="schedulineport != null">
+        schedulinePort,
+      </if>
+      <if test="hourscost != null">
+        hoursCost,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="publicway != null">
+        publicWay,
+      </if>
+      <if test="directionalgoal != null">
+        directionalGoal,
+      </if>
+      <if test="fltnbr != null">
+        fltNbr,
+      </if>
+      <if test="contact != null">
+        contact,
+      </if>
+      <if test="ihome != null">
+        iHome,
+      </if>
+      <if test="responsedate != null">
+        responseDate,
+      </if>
+      <if test="updatedate != null">
+        updateDate,
+      </if>
+      <if test="newinfo != null">
+        newInfo,
+      </if>
+      <if test="responseProgress != null">
+        responseProgress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="responseId != null">
+        #{responseId,jdbcType=BIGINT},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=BIGINT},
+      </if>
+      <if test="demandId != null">
+        #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="intentionmoneystate != null">
+        #{intentionmoneystate,jdbcType=VARCHAR},
+      </if>
+      <if test="whetherhosting != null">
+        #{whetherhosting,jdbcType=VARCHAR},
+      </if>
+      <if test="whethernavigation != null">
+        #{whethernavigation,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseselected != null">
+        #{releaseselected,jdbcType=VARCHAR},
+      </if>
+      <if test="responseselected != null">
+        #{responseselected,jdbcType=VARCHAR},
+      </if>
+      <if test="demandtype != null">
+        #{demandtype,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null">
+        #{releasetime,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="dptState != null">
+        #{dptState,jdbcType=VARCHAR},
+      </if>
+      <if test="dpt != null">
+        #{dpt,jdbcType=VARCHAR},
+      </if>
+      <if test="dptCt != null">
+        #{dptCt,jdbcType=VARCHAR},
+      </if>
+      <if test="dptAcceptnearairport != null">
+        #{dptAcceptnearairport,jdbcType=VARCHAR},
+      </if>
+      <if test="dptTimeresources != null">
+        #{dptTimeresources,jdbcType=VARCHAR},
+      </if>
+      <if test="dptTime != null">
+        #{dptTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pstState != null">
+        #{pstState,jdbcType=VARCHAR},
+      </if>
+      <if test="pst != null">
+        #{pst,jdbcType=VARCHAR},
+      </if>
+      <if test="pstCt != null">
+        #{pstCt,jdbcType=VARCHAR},
+      </if>
+      <if test="pstAcceptnearairport != null">
+        #{pstAcceptnearairport,jdbcType=VARCHAR},
+      </if>
+      <if test="pstTimeresources != null">
+        #{pstTimeresources,jdbcType=VARCHAR},
+      </if>
+      <if test="pstTime != null">
+        #{pstTime,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvState != null">
+        #{arrvState,jdbcType=VARCHAR},
+      </if>
+      <if test="arrv != null">
+        #{arrv,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvCt != null">
+        #{arrvCt,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvAcceptnearairport != null">
+        #{arrvAcceptnearairport,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvTimeresources != null">
+        #{arrvTimeresources,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvTime != null">
+        #{arrvTime,jdbcType=VARCHAR},
+      </if>
+      <if test="aircrfttyp != null">
+        #{aircrfttyp,jdbcType=VARCHAR},
+      </if>
+      <if test="days != null">
+        #{days,jdbcType=VARCHAR},
+      </if>
+      <if test="blockbidprice != null">
+        #{blockbidprice,jdbcType=VARCHAR},
+      </if>
+      <if test="loadfactorsexpect != null">
+        #{loadfactorsexpect,jdbcType=VARCHAR},
+      </if>
+      <if test="avgguestexpect != null">
+        #{avgguestexpect,jdbcType=VARCHAR},
+      </if>
+      <if test="subsidypolicy != null">
+        #{subsidypolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="sailingtime != null">
+        #{sailingtime,jdbcType=VARCHAR},
+      </if>
+      <if test="seating != null">
+        #{seating,jdbcType=VARCHAR},
+      </if>
+      <if test="capacitycompany != null">
+        #{capacitycompany,jdbcType=BIGINT},
+      </if>
+      <if test="capacityBase != null">
+        #{capacityBase,jdbcType=VARCHAR},
+      </if>
+      <if test="scheduling != null">
+        #{scheduling,jdbcType=VARCHAR},
+      </if>
+      <if test="schedulineport != null">
+        #{schedulineport,jdbcType=VARCHAR},
+      </if>
+      <if test="hourscost != null">
+        #{hourscost,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="publicway != null">
+        #{publicway,jdbcType=VARCHAR},
+      </if>
+      <if test="directionalgoal != null">
+        #{directionalgoal,jdbcType=BIGINT},
+      </if>
+      <if test="fltnbr != null">
+        #{fltnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="ihome != null">
+        #{ihome,jdbcType=VARCHAR},
+      </if>
+      <if test="responsedate != null">
+        #{responsedate,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null">
+        #{updatedate,jdbcType=VARCHAR},
+      </if>
+      <if test="newinfo != null">
+        #{newinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="responseProgress != null">
+        #{responseProgress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+	
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from response_copy
+    where response_id = #{responseId,jdbcType=BIGINT}
+  </delete>
+	
+	<select id="selectByResponseCopy" parameterType="org.ldd.ssm.hangyu.domain.ResponseCopy" resultMap="BaseResultMap">
+    select response_id,
+	    <include refid="org.ldd.ssm.hangyu.mapper.ResponseMapper.Base_Column_List" />
+	    from response_copy
+    <where> 
+    <trim suffixOverrides="and" > 
+      <if test="responseId != null">
+        response_id = #{responseId,jdbcType=BIGINT} and 
+      </if> 
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT} and 
+      </if>
+      <if test="employeeId != null">
+        employee_id = #{employeeId,jdbcType=BIGINT} and 
+      </if>
+      <if test="demandId != null">
+        demand_id = #{demandId,jdbcType=BIGINT} and 
+      </if>
+      <if test="intentionmoneystate != null">
+        intentionMoneyState = #{intentionmoneystate,jdbcType=VARCHAR} and 
+      </if>
+      <if test="whetherhosting != null">
+        whetherHosting = #{whetherhosting,jdbcType=VARCHAR} and 
+      </if>
+      <if test="whethernavigation != null">
+        whetherNavigation = #{whethernavigation,jdbcType=VARCHAR} and 
+      </if>
+      <if test="releaseselected != null">
+        releaseSelected = #{releaseselected,jdbcType=VARCHAR} and 
+      </if>
+      <if test="responseselected != null">
+        responseSelected = #{responseselected,jdbcType=VARCHAR} and 
+      </if>
+      <if test="demandtype != null">
+        demandType = #{demandtype,jdbcType=VARCHAR} and 
+      </if>
+      <if test="releasetime != null">
+        releaseTime = #{releasetime,jdbcType=VARCHAR} and 
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR} and 
+      </if>
+      <if test="dptState != null">
+        dpt_state = #{dptState,jdbcType=VARCHAR} and 
+      </if>
+      <if test="dpt != null">
+        dpt = #{dpt,jdbcType=VARCHAR} and 
+      </if>
+      <if test="dptCt != null">
+        dpt_ct = #{dptCt,jdbcType=VARCHAR} and 
+      </if>
+      <if test="dptAcceptnearairport != null">
+        dpt_acceptNearAirport = #{dptAcceptnearairport,jdbcType=VARCHAR} and 
+      </if>
+      <if test="dptTimeresources != null">
+        dpt_timeResources = #{dptTimeresources,jdbcType=VARCHAR} and 
+      </if>
+      <if test="dptTime != null">
+        dpt_time = #{dptTime,jdbcType=VARCHAR} and 
+      </if>
+      <if test="pstState != null">
+        pst_state = #{pstState,jdbcType=VARCHAR} and 
+      </if>
+      <if test="pst != null">
+        pst = #{pst,jdbcType=VARCHAR} and 
+      </if>
+      <if test="pstCt != null">
+        pst_ct = #{pstCt,jdbcType=VARCHAR} and 
+      </if>
+      <if test="pstAcceptnearairport != null">
+        pst_acceptNearAirport = #{pstAcceptnearairport,jdbcType=VARCHAR} and 
+      </if>
+      <if test="pstTimeresources != null">
+        pst_timeResources = #{pstTimeresources,jdbcType=VARCHAR} and 
+      </if>
+      <if test="pstTime != null">
+        pst_time = #{pstTime,jdbcType=VARCHAR} and 
+      </if>
+      <if test="arrvState != null">
+        arrv_state = #{arrvState,jdbcType=VARCHAR} and 
+      </if>
+      <if test="arrv != null">
+        arrv = #{arrv,jdbcType=VARCHAR} and 
+      </if>
+      <if test="arrvCt != null">
+        arrv_ct = #{arrvCt,jdbcType=VARCHAR} and 
+      </if>
+      <if test="arrvAcceptnearairport != null">
+        arrv_acceptNearAirport = #{arrvAcceptnearairport,jdbcType=VARCHAR} and 
+      </if>
+      <if test="arrvTimeresources != null">
+        arrv_timeResources = #{arrvTimeresources,jdbcType=VARCHAR} and 
+      </if>
+      <if test="arrvTime != null">
+        arrv_time = #{arrvTime,jdbcType=VARCHAR} and 
+      </if>
+      <if test="aircrfttyp != null">
+        airCrftTyp = #{aircrfttyp,jdbcType=VARCHAR} and 
+      </if>
+      <if test="days != null">
+        days = #{days,jdbcType=VARCHAR} and 
+      </if>
+      <if test="blockbidprice != null">
+        blockBidPrice = #{blockbidprice,jdbcType=VARCHAR} and 
+      </if>
+      <if test="loadfactorsexpect != null">
+        loadFactorsExpect = #{loadfactorsexpect,jdbcType=VARCHAR} and 
+      </if>
+      <if test="avgguestexpect != null">
+        avgGuestExpect = #{avgguestexpect,jdbcType=VARCHAR} and 
+      </if>
+      <if test="subsidypolicy != null">
+        subsidyPolicy = #{subsidypolicy,jdbcType=VARCHAR} and 
+      </if>
+      <if test="sailingtime != null">
+        sailingTime = #{sailingtime,jdbcType=VARCHAR} and 
+      </if>
+      <if test="seating != null">
+        seating = #{seating,jdbcType=VARCHAR} and 
+      </if>
+      <if test="capacitycompany != null">
+        capacityCompany = #{capacitycompany,jdbcType=BIGINT} and 
+      </if>
+      <if test="capacityBase != null">
+        capacityBase = #{capacityBase,jdbcType=VARCHAR} and 
+      </if>
+      <if test="scheduling != null">
+        scheduling = #{scheduling,jdbcType=VARCHAR} and 
+      </if>
+      <if test="schedulineport != null">
+        schedulinePort = #{schedulineport,jdbcType=VARCHAR} and 
+      </if>
+      <if test="hourscost != null">
+        hoursCost = #{hourscost,jdbcType=VARCHAR} and 
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR} and 
+      </if>
+      <if test="publicway != null">
+        publicWay = #{publicway,jdbcType=VARCHAR} and 
+      </if>
+      <if test="directionalgoal != null">
+        directionalGoal = #{directionalgoal,jdbcType=BIGINT} and 
+      </if>
+      <if test="fltnbr != null">
+        fltNbr = #{fltnbr,jdbcType=VARCHAR} and 
+      </if>
+      <if test="contact != null">
+        contact = #{contact,jdbcType=VARCHAR} and 
+      </if>
+      <if test="ihome != null">
+        iHome = #{ihome,jdbcType=VARCHAR} and 
+      </if>
+      <if test="responsedate != null">
+        responseDate = #{responsedate,jdbcType=VARCHAR} and 
+      </if>
+      <if test="updatedate != null">
+        updateDate = #{updatedate,jdbcType=VARCHAR} and 
+      </if>
+      <if test="newinfo != null">
+        newInfo = #{newinfo,jdbcType=VARCHAR} and 
+      </if>
+      <if test="newinfo != null">
+        responseProgress = #{responseProgress,jdbcType=VARCHAR} and 
+      </if>
+      </trim>
+     </where>
+  </select>
+	
+	<select id="selectLastRecord" parameterType="org.ldd.ssm.hangyu.domain.ResponseCopy" resultMap="BaseResultMap">
+		select response_id,
+	    <include refid="org.ldd.ssm.hangyu.mapper.ResponseMapper.Base_Column_List" />
+	    from response_copy
+    <where> 
+    <trim suffixOverrides="and" > 
+      <if test="employeeId != null">
+        employee_id = #{employeeId,jdbcType=BIGINT} and 
+      </if>
+      <if test="demandId != null">
+        demand_id = #{demandId,jdbcType=BIGINT} and 
+      </if>
+     </trim>
+     </where>
+     ORDER BY STR_TO_DATE(updateDate,'%Y-%m-%d %H:%i:%s') DESC LIMIT 1
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

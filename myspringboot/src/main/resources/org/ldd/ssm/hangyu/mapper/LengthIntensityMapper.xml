@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.LengthIntensityMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.LengthIntensity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="runNO" property="runno" jdbcType="VARCHAR" />
+    <result column="lengthIntensity" property="lengthintensity" jdbcType="VARCHAR" />
+    <result column="lightColor" property="lightcolor" jdbcType="VARCHAR" />
+    <result column="lampType" property="lamptype" jdbcType="VARCHAR" />
+    <result column="engthStripLights" property="engthstriplights" jdbcType="VARCHAR" />
+    <result column="runwayCenterlineLightsLength" property="runwaycenterlinelightslength" jdbcType="VARCHAR" />
+    <result column="runwayEdgeLengthLamp" property="runwayedgelengthlamp" jdbcType="VARCHAR" />
+    <result column="runwayAt" property="runwayat" jdbcType="VARCHAR" />
+    <result column="stopLampLength" property="stoplamplength" jdbcType="VARCHAR" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, runNO, lengthIntensity, lightColor, lampType, engthStripLights, runwayCenterlineLightsLength, 
+    runwayEdgeLengthLamp, runwayAt, stopLampLength, IATA
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from LengthIntensity
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from LengthIntensity
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.LengthIntensity" >
+    insert into LengthIntensity (id, runNO, lengthIntensity, 
+      lightColor, lampType, engthStripLights, 
+      runwayCenterlineLightsLength, runwayEdgeLengthLamp, 
+      runwayAt, stopLampLength, IATA
+      )
+    values (#{id,jdbcType=BIGINT}, #{runno,jdbcType=VARCHAR}, #{lengthintensity,jdbcType=VARCHAR}, 
+      #{lightcolor,jdbcType=VARCHAR}, #{lamptype,jdbcType=VARCHAR}, #{engthstriplights,jdbcType=VARCHAR}, 
+      #{runwaycenterlinelightslength,jdbcType=VARCHAR}, #{runwayedgelengthlamp,jdbcType=VARCHAR}, 
+      #{runwayat,jdbcType=VARCHAR}, #{stoplamplength,jdbcType=VARCHAR}, #{iata,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.LengthIntensity" >
+    insert into LengthIntensity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="runno != null" >
+        runNO,
+      </if>
+      <if test="lengthintensity != null" >
+        lengthIntensity,
+      </if>
+      <if test="lightcolor != null" >
+        lightColor,
+      </if>
+      <if test="lamptype != null" >
+        lampType,
+      </if>
+      <if test="engthstriplights != null" >
+        engthStripLights,
+      </if>
+      <if test="runwaycenterlinelightslength != null" >
+        runwayCenterlineLightsLength,
+      </if>
+      <if test="runwayedgelengthlamp != null" >
+        runwayEdgeLengthLamp,
+      </if>
+      <if test="runwayat != null" >
+        runwayAt,
+      </if>
+      <if test="stoplamplength != null" >
+        stopLampLength,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="runno != null" >
+        #{runno,jdbcType=VARCHAR},
+      </if>
+      <if test="lengthintensity != null" >
+        #{lengthintensity,jdbcType=VARCHAR},
+      </if>
+      <if test="lightcolor != null" >
+        #{lightcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="lamptype != null" >
+        #{lamptype,jdbcType=VARCHAR},
+      </if>
+      <if test="engthstriplights != null" >
+        #{engthstriplights,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaycenterlinelightslength != null" >
+        #{runwaycenterlinelightslength,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayedgelengthlamp != null" >
+        #{runwayedgelengthlamp,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayat != null" >
+        #{runwayat,jdbcType=VARCHAR},
+      </if>
+      <if test="stoplamplength != null" >
+        #{stoplamplength,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.LengthIntensity" >
+    update LengthIntensity
+    <set >
+      <if test="runno != null" >
+        runNO = #{runno,jdbcType=VARCHAR},
+      </if>
+      <if test="lengthintensity != null" >
+        lengthIntensity = #{lengthintensity,jdbcType=VARCHAR},
+      </if>
+      <if test="lightcolor != null" >
+        lightColor = #{lightcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="lamptype != null" >
+        lampType = #{lamptype,jdbcType=VARCHAR},
+      </if>
+      <if test="engthstriplights != null" >
+        engthStripLights = #{engthstriplights,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaycenterlinelightslength != null" >
+        runwayCenterlineLightsLength = #{runwaycenterlinelightslength,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayedgelengthlamp != null" >
+        runwayEdgeLengthLamp = #{runwayedgelengthlamp,jdbcType=VARCHAR},
+      </if>
+      <if test="runwayat != null" >
+        runwayAt = #{runwayat,jdbcType=VARCHAR},
+      </if>
+      <if test="stoplamplength != null" >
+        stopLampLength = #{stoplamplength,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.LengthIntensity" >
+    update LengthIntensity
+    set runNO = #{runno,jdbcType=VARCHAR},
+      lengthIntensity = #{lengthintensity,jdbcType=VARCHAR},
+      lightColor = #{lightcolor,jdbcType=VARCHAR},
+      lampType = #{lamptype,jdbcType=VARCHAR},
+      engthStripLights = #{engthstriplights,jdbcType=VARCHAR},
+      runwayCenterlineLightsLength = #{runwaycenterlinelightslength,jdbcType=VARCHAR},
+      runwayEdgeLengthLamp = #{runwayedgelengthlamp,jdbcType=VARCHAR},
+      runwayAt = #{runwayat,jdbcType=VARCHAR},
+      stopLampLength = #{stoplamplength,jdbcType=VARCHAR},
+      IATA = #{iata,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectLengthIntensitysByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from LengthIntensity
+  	<where>
+  		<if test="iata !=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>

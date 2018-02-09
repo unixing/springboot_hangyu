@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.AirPortWeatherInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.AirPortWeatherInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="stationName" property="stationname" jdbcType="VARCHAR" />
+    <result column="stationCode" property="stationcode" jdbcType="VARCHAR" />
+    <result column="frequency" property="frequency" jdbcType="VARCHAR" />
+    <result column="equipment" property="equipment" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="installationPosition" property="installationposition" jdbcType="VARCHAR" />
+    <result column="workTime" property="worktime" jdbcType="VARCHAR" />
+    <result column="climateData" property="climatedata" jdbcType="VARCHAR" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, stationName, stationCode, frequency, equipment, type, installationPosition, workTime, 
+    climateData, IATA
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from AirPortWeatherInfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from AirPortWeatherInfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.AirPortWeatherInfo" >
+    insert into AirPortWeatherInfo (id, stationName, stationCode, 
+      frequency, equipment, type, 
+      installationPosition, workTime, climateData, 
+      IATA)
+    values (#{id,jdbcType=BIGINT}, #{stationname,jdbcType=VARCHAR}, #{stationcode,jdbcType=VARCHAR}, 
+      #{frequency,jdbcType=VARCHAR}, #{equipment,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{installationposition,jdbcType=VARCHAR}, #{worktime,jdbcType=VARCHAR}, #{climatedata,jdbcType=VARCHAR}, 
+      #{iata,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.AirPortWeatherInfo" >
+    insert into AirPortWeatherInfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stationname != null" >
+        stationName,
+      </if>
+      <if test="stationcode != null" >
+        stationCode,
+      </if>
+      <if test="frequency != null" >
+        frequency,
+      </if>
+      <if test="equipment != null" >
+        equipment,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="installationposition != null" >
+        installationPosition,
+      </if>
+      <if test="worktime != null" >
+        workTime,
+      </if>
+      <if test="climatedata != null" >
+        climateData,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="stationname != null" >
+        #{stationname,jdbcType=VARCHAR},
+      </if>
+      <if test="stationcode != null" >
+        #{stationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null" >
+        #{frequency,jdbcType=VARCHAR},
+      </if>
+      <if test="equipment != null" >
+        #{equipment,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="installationposition != null" >
+        #{installationposition,jdbcType=VARCHAR},
+      </if>
+      <if test="worktime != null" >
+        #{worktime,jdbcType=VARCHAR},
+      </if>
+      <if test="climatedata != null" >
+        #{climatedata,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.AirPortWeatherInfo" >
+    update AirPortWeatherInfo
+    <set >
+      <if test="stationname != null" >
+        stationName = #{stationname,jdbcType=VARCHAR},
+      </if>
+      <if test="stationcode != null" >
+        stationCode = #{stationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null" >
+        frequency = #{frequency,jdbcType=VARCHAR},
+      </if>
+      <if test="equipment != null" >
+        equipment = #{equipment,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="installationposition != null" >
+        installationPosition = #{installationposition,jdbcType=VARCHAR},
+      </if>
+      <if test="worktime != null" >
+        workTime = #{worktime,jdbcType=VARCHAR},
+      </if>
+      <if test="climatedata != null" >
+        climateData = #{climatedata,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.AirPortWeatherInfo" >
+    update AirPortWeatherInfo
+    set stationName = #{stationname,jdbcType=VARCHAR},
+      stationCode = #{stationcode,jdbcType=VARCHAR},
+      frequency = #{frequency,jdbcType=VARCHAR},
+      equipment = #{equipment,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      installationPosition = #{installationposition,jdbcType=VARCHAR},
+      workTime = #{worktime,jdbcType=VARCHAR},
+      climateData = #{climatedata,jdbcType=VARCHAR},
+      IATA = #{iata,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectAirPortWeatherInfosByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from AirPortWeatherInfo
+  	<where>
+  		<if test="iata!=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.CollectMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.Collect" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+    <result column="demand_id" property="demandId" jdbcType="BIGINT" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, employee_id,demand_id from collect
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from collect
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.Collect" >
+    insert into collect (id, employee_id,demand_id)
+    values (#{id,jdbcType=BIGINT}, #{employeeId,jdbcType=BIGINT}, #{demandId,jdbcType=BIGINT})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.Collect" useGeneratedKeys="true" keyProperty="id">
+    insert into collect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="employeeId != null" >
+        employee_id,
+      </if>
+      <if test="demandId != null" >
+        demand_id
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=BIGINT},
+      </if>
+      <if test="demandId != null" >
+        #{demandId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.Collect" >
+    update collect
+    <set >
+      <if test="employeeId != null" >
+        employee_id = #{employeeId,jdbcType=BIGINT},
+      </if>
+      <if test="demandId != null" >
+        demand_id = #{demandId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.Collect" >
+    update collect
+    set employee_id = #{employeeId,jdbcType=BIGINT}
+    	demand_id = #{demandId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectDemandCountByEmployeeId" resultType="java.lang.Integer">
+  	select count(*) FROM demand a where (demandType = '0' or demandType = '1') and a.id in
+    	(
+    		select b.demand_id from collect b
+    		<where>
+    			<if test="employeeId != null and employeeId >0">
+    				employee_id = #{employeeId,jdbcType=BIGINT}
+    			</if>
+    		</where>
+    	)
+  </select>
+  
+  <resultMap id="DemandResultMap" type="org.ldd.ssm.hangyu.domain.Demand" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+    <result column="demandState" property="demandstate" jdbcType="VARCHAR" />
+    <result column="demandType" property="demandtype" jdbcType="VARCHAR" />
+    <result column="releaseTime" property="releasetime" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="dpt" property="dpt" jdbcType="VARCHAR" />
+    <result column="dpt_acceptNearAirport" property="dptAcceptnearairport" jdbcType="VARCHAR" />
+    <result column="dpt_timeResources" property="dptTimeresources" jdbcType="VARCHAR" />
+    <result column="dpt_time" property="dptTime" jdbcType="VARCHAR" />
+    <result column="pst" property="pst" jdbcType="VARCHAR" />
+    <result column="pst_acceptNearAirport" property="pstAcceptnearairport" jdbcType="VARCHAR" />
+    <result column="pst_timeResources" property="pstTimeresources" jdbcType="VARCHAR" />
+    <result column="pst_time" property="pstTime" jdbcType="VARCHAR" />
+    <result column="arrv" property="arrv" jdbcType="VARCHAR" />
+    <result column="arrv_acceptNearAirport" property="arrvAcceptnearairport" jdbcType="VARCHAR" />
+    <result column="arrv_timeResources" property="arrvTimeresources" jdbcType="VARCHAR" />
+    <result column="arrv_time" property="arrvTime" jdbcType="VARCHAR" />
+    <result column="airCrftTyp" property="aircrfttyp" jdbcType="VARCHAR" />
+    <result column="days" property="days" jdbcType="VARCHAR" />
+    <result column="blockBidPrice" property="blockbidprice" jdbcType="INTEGER" />
+    <result column="loadFactorsExpect" property="loadfactorsexpect" jdbcType="INTEGER" />
+    <result column="avgGuestExpect" property="avgguestexpect" jdbcType="INTEGER" />
+    <result column="subsidyPolicy" property="subsidypolicy" jdbcType="VARCHAR" />
+    <result column="sailingTime" property="sailingtime" jdbcType="VARCHAR" />
+    <result column="seating" property="seating" jdbcType="VARCHAR" />
+    <result column="capacityCompany" property="capacitycompany" jdbcType="BIGINT" />
+    <result column="scheduling" property="scheduling" jdbcType="VARCHAR" />
+    <result column="schedulinePort" property="schedulinePort" jdbcType="VARCHAR"/>
+    <result column="hoursCost" property="hourscost" jdbcType="VARCHAR" />
+    <result column="intendedAirline" property="intendedairline" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="publicWay" property="publicway" jdbcType="VARCHAR" />
+    <result column="directionalGoal" property="directionalgoal" jdbcType="VARCHAR" />
+    <result column="demandProgress" property="demandprogress" jdbcType="VARCHAR" />
+    <result column="contact" property="contact" jdbcType="VARCHAR"/>
+    <result column="iHome" property="iHome" jdbcType="VARCHAR"/>
+    <result column="fltNbr" property="fltNbr" jdbcType="VARCHAR"/>
+    <result column="periodValidity" property="periodValidity" jdbcType="VARCHAR"/>
+    <result column="dpt_state" property="dptState" jdbcType="VARCHAR"/>
+    <result column="dpt_ct" property="dptCt" jdbcType="VARCHAR"/>
+    <result column="pst_state" property="pstState" jdbcType="VARCHAR"/>
+    <result column="pst_ct" property="pstCt" jdbcType="VARCHAR"/>
+    <result column="arrv_state" property="arrvState" jdbcType="VARCHAR"/>
+    <result column="arrv_ct" property="arrvCt" jdbcType="VARCHAR"/>
+    <result column="dpt_flt_lvl" property="dptFltLvl" jdbcType="VARCHAR"/>
+    <result column="pst_flt_lvl" property="pstFltLvl" jdbcType="VARCHAR"/>
+    <result column="arrv_flt_lvl" property="arrvFltLvl" jdbcType="VARCHAR"/>
+    <result column="dpt_nm" property="dptNm" jdbcType="VARCHAR"/>
+    <result column="pst_nm" property="pstNm" jdbcType="VARCHAR"/>
+    <result column="arrv_nm" property="arrvNm" jdbcType="VARCHAR"/>
+    <association  column="capacityCompany" property="capacityCompany" select="org.ldd.ssm.hangyu.mapper.AirCompenyInfoThreeMapper.selectByPrimaryKey" />
+  </resultMap>
+  
+  <select id="selectDemandListByEmployeeId" resultMap="DemandResultMap">
+  	select id, employee_id, demandState, 
+      demandType, releaseTime,
+      (SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.dpt_state = '0' AND a.dpt = d.iATA) dpt_flt_lvl,
+      (SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.pst_state = '0' AND a.pst = d.iATA) pst_flt_lvl,
+      (SELECT d.airfieldLvl FROM airportinfonewthree d WHERE a.arrv_state = '0' AND a.arrv = d.iATA) arrv_flt_lvl,
+       title, 
+      (SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.dpt_state = '0' AND a.dpt = b.iATA union all SELECT c.city_name FROM t_city_coordinate c WHERE a.dpt_state='2' AND a.dpt = c.city_icao) dpt_nm, 
+      dpt,dpt_acceptNearAirport, dpt_timeResources, dpt_time,
+      (SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.pst_state = '0' AND a.pst = b.iATA union all SELECT c.city_name FROM t_city_coordinate c WHERE a.pst_state='2' AND a.pst = c.city_icao) pst_nm,
+      pst,pst_acceptNearAirport, pst_timeResources, pst_time,
+      (SELECT b.airln_Cd FROM airportinfonewthree b WHERE a.arrv_state = '0' AND a.arrv = b.iATA union all SELECT c.city_name FROM t_city_coordinate c WHERE a.arrv_state='2' AND a.arrv = c.city_icao) arrv_nm, 
+      arrv,arrv_acceptNearAirport, arrv_timeResources, 
+      arrv_time, airCrftTyp, days, 
+      blockBidPrice, loadFactorsExpect, avgGuestExpect, 
+      subsidyPolicy, sailingTime, 
+      seating, capacityCompany, scheduling, 
+      hoursCost, intendedAirline, remark, 
+      publicWay, directionalGoal, demandProgress,contact,iHome,fltNbr,periodValidity,dpt_state,dpt_ct,
+      pst_state,pst_ct,arrv_state,arrv_ct,schedulinePort
+    FROM demand a where (demandType = '0' or demandType = '1') and a.id in
+    	(
+    		select d.demand_id from collect d
+    		<where>
+    			<if test="employeeId != null and employeeId >0">
+    				employee_id = #{employeeId,jdbcType=BIGINT}
+    			</if>
+    		</where>
+    	)
+      order by releaseTime Desc
+      limit #{startIndex,jdbcType=INTEGER},#{pageNo,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectCollect" resultMap="BaseResultMap">
+  	select
+  	id, employee_id,demand_id
+  	from
+  	collect
+  	<where>
+  		<if test="employeeId !=null and employeeId>0">
+  			and employee_id = #{employeeId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="demandId !=null and demandId>0">
+  			and demand_id = #{demandId,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+  
+  <resultMap type="org.ldd.ssm.hangyu.query.MyCollect" id="MyCollectListMap">
+  	<id column="id" property="id" jdbcType="BIGINT"/>
+  	<result column="releaseTime" property="releaseTime" jdbcType="VARCHAR" />
+    <result column="demandType" property="demandType" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="demandEmployeeId" property="demandEmployeeId" jdbcType="BIGINT" />
+    <result column="demandProgress" property="demandProgress" jdbcType="VARCHAR" />
+    <result column="employeeId" property="employeeId" jdbcType="BIGINT" />
+    <result column="roleId" property="roleId" jdbcType="VARCHAR" />
+    <result column="startIndex" property="startIndex" jdbcType="BIGINT" />
+    <result column="pageNo" property="pageNo" jdbcType="BIGINT" />
+    <result column="page" property="page" jdbcType="BIGINT" />
+    
+    
+  </resultMap>
+  
+  <!-- 类型 -->
+  <sql id="findMyCollectSql">
+  	SELECT a.id id,a.releaseTime releaseTime,
+  	a.demandType demandType,a.title title,a.demandProgress demandProgress,a.employee_id demandEmployeeId 
+ from demand a LEFT JOIN collect b
+ on b.demand_id=a.id
+ WHERE b.employee_id = #{employeeId,jdbcType=VARCHAR}
+ <!-- 条件查询 -->
+  	<if test="demandType !=null and demandType !='' ">
+  		and a.demandType = #{demandType,jdbcType=VARCHAR}
+  	</if>
+  	<if test="demandProgress !='' and demandProgress != null">
+    	and a.demandProgress =#{demandProgress,jdbcType=VARCHAR}
+    </if>
+     order by releaseTime
+	 <if test="releaseTime=='Desc'">
+	 	Desc
+	 </if>
+	 <if test="releaseTime=='Asc'">
+	 	Asc
+	 </if>
+	 <if test="releaseTime=='' or releaseTime==null">
+	 	Desc
+	 </if>
+  </sql>
+    <select id="selectMyCollectList"  resultMap="MyCollectListMap">
+  	SELECT a.id id,a.releaseTime releaseTime,a.demandType demandType,a.title title,a.demandProgress demandProgress,a.demandEmployeeId demandEmployeeId
+	FROM  (<include refid="findMyCollectSql"/>) a
+	 limit #{startIndex,jdbcType=INTEGER},#{pageNo,jdbcType=INTEGER}
+  </select>
+  <select id="selectMyCollectListCount"  resultType="Integer">
+  	select count(a.id) 
+	FROM (
+	<include refid="findMyCollectSql"/> ) a
+  </select>
+  <delete id="deleteByEmployeeIdAndDemandId" parameterType="org.ldd.ssm.hangyu.domain.Collect" >
+    delete from collect
+    where employee_id = #{employeeId,jdbcType=BIGINT} and 
+    demand_id=#{demandId,jdbcType=BIGINT}
+  </delete>
+  <select id="isAlreadyCollect" parameterType="org.ldd.ssm.hangyu.domain.Collect" resultType="Integer">
+  	select count(c.id) 
+	from collect c where c.employee_id=#{employeeId,jdbcType=BIGINT} 
+	and c.demand_id=#{demandId,jdbcType=BIGINT}
+  </select>
+  <select id="selectCollectsByDemandId"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+  	select id, employee_id,demand_id from collect
+    where demand_id = #{demandId,jdbcType=BIGINT}
+  </select>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.IntentionMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.Intention" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+    <result column="demand_id" property="demandId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, employee_id, demand_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from intention
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from intention
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.Intention" >
+    insert into intention (id, employee_id, demand_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{employeeId,jdbcType=BIGINT}, #{demandId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.Intention" >
+    insert into intention
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="employeeId != null" >
+        employee_id,
+      </if>
+      <if test="demandId != null" >
+        demand_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=BIGINT},
+      </if>
+      <if test="demandId != null" >
+        #{demandId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.Intention" >
+    update intention
+    <set >
+      <if test="employeeId != null" >
+        employee_id = #{employeeId,jdbcType=BIGINT},
+      </if>
+      <if test="demandId != null" >
+        demand_id = #{demandId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.Intention" >
+    update intention
+    set employee_id = #{employeeId,jdbcType=BIGINT},
+      demand_id = #{demandId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

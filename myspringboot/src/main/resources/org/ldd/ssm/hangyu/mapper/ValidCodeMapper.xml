@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.ValidCodeMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.ValidCode" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="contact_way" property="contactWay" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, create_time,contact_way,state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from valid_code
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from valid_code
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.ValidCode" >
+    insert into valid_code (id, code,
+      create_time,contact_way)
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=BIGINT},#{contactWay,jdbcType=VARCHAR},
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.ValidCode" >
+    insert into valid_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="contactWay != null" >
+        contact_way,
+      </if>
+      <if test="state != null">
+      	state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="contactWay != null" >
+        #{contactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+      	#{state,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.ValidCode" >
+    update valid_code
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="contactWay != null">
+      	contact_way = #{contactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+      	state = #{state,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.ValidCode" >
+    update valid_code
+    set code = #{code,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      contact_way = #{contactWay,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectValidCode" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from valid_code
+  	<where>
+  		state = '0'
+  		<if test="contactWay !=null and contactWay != ''">
+  			and contact_way = #{contactWay,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  	order by create_time desc limit 0,1
+  </select>
+  <delete id="deleteValidCodeByContactWay">
+  	delete from valid_code
+  	<where>
+  		<if test="contactWay !=null and contactWay != ''">
+  			and contact_way = #{contactWay,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </delete>
+  <update id="updateValidCodeByContactWay">
+  	update valid_code set state='1'
+  	<where>
+  		<if test="contactWay !=null and contactWay != ''">
+  			and contact_way = #{contactWay,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </update>
+</mapper>

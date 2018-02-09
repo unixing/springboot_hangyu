@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.GroundServicesAndFacilitiesMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.GroundServicesAndFacilities" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+    <result column="cargoHandlingFacilities" property="cargohandlingfacilities" jdbcType="VARCHAR" />
+    <result column="theFuelOrOilBrand" property="thefueloroilbrand" jdbcType="VARCHAR" />
+    <result column="refuelingFacilitiesOrAbility" property="refuelingfacilitiesorability" jdbcType="VARCHAR" />
+    <result column="deicingFacilities" property="deicingfacilities" jdbcType="VARCHAR" />
+    <result column="standingAircraftHangar" property="standingaircrafthangar" jdbcType="VARCHAR" />
+    <result column="inAircraftMaintenanceFacilities" property="inaircraftmaintenancefacilities" jdbcType="VARCHAR" />
+    <result column="groundNote" property="groundNote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, IATA, cargoHandlingFacilities, theFuelOrOilBrand, refuelingFacilitiesOrAbility, 
+    deicingFacilities, standingAircraftHangar, inAircraftMaintenanceFacilities, groundNote
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from GroundServicesAndFacilities
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from GroundServicesAndFacilities
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.GroundServicesAndFacilities" >
+    insert into GroundServicesAndFacilities (id, IATA, cargoHandlingFacilities, 
+      theFuelOrOilBrand, refuelingFacilitiesOrAbility, 
+      deicingFacilities, standingAircraftHangar, 
+      inAircraftMaintenanceFacilities, groundNote)
+    values (#{id,jdbcType=BIGINT}, #{iata,jdbcType=VARCHAR}, #{cargohandlingfacilities,jdbcType=VARCHAR}, 
+      #{thefueloroilbrand,jdbcType=VARCHAR}, #{refuelingfacilitiesorability,jdbcType=VARCHAR}, 
+      #{deicingfacilities,jdbcType=VARCHAR}, #{standingaircrafthangar,jdbcType=VARCHAR}, 
+      #{inaircraftmaintenancefacilities,jdbcType=VARCHAR}, #{groundNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.GroundServicesAndFacilities" >
+    insert into GroundServicesAndFacilities
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+      <if test="cargohandlingfacilities != null" >
+        cargoHandlingFacilities,
+      </if>
+      <if test="thefueloroilbrand != null" >
+        theFuelOrOilBrand,
+      </if>
+      <if test="refuelingfacilitiesorability != null" >
+        refuelingFacilitiesOrAbility,
+      </if>
+      <if test="deicingfacilities != null" >
+        deicingFacilities,
+      </if>
+      <if test="standingaircrafthangar != null" >
+        standingAircraftHangar,
+      </if>
+      <if test="inaircraftmaintenancefacilities != null" >
+        inAircraftMaintenanceFacilities,
+      </if>
+      <if test="groundNote != null" >
+        groundNote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="cargohandlingfacilities != null" >
+        #{cargohandlingfacilities,jdbcType=VARCHAR},
+      </if>
+      <if test="thefueloroilbrand != null" >
+        #{thefueloroilbrand,jdbcType=VARCHAR},
+      </if>
+      <if test="refuelingfacilitiesorability != null" >
+        #{refuelingfacilitiesorability,jdbcType=VARCHAR},
+      </if>
+      <if test="deicingfacilities != null" >
+        #{deicingfacilities,jdbcType=VARCHAR},
+      </if>
+      <if test="standingaircrafthangar != null" >
+        #{standingaircrafthangar,jdbcType=VARCHAR},
+      </if>
+      <if test="inaircraftmaintenancefacilities != null" >
+        #{inaircraftmaintenancefacilities,jdbcType=VARCHAR},
+      </if>
+      <if test="groundNote != null" >
+        #{groundNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.GroundServicesAndFacilities" >
+    update GroundServicesAndFacilities
+    <set >
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="cargohandlingfacilities != null" >
+        cargoHandlingFacilities = #{cargohandlingfacilities,jdbcType=VARCHAR},
+      </if>
+      <if test="thefueloroilbrand != null" >
+        theFuelOrOilBrand = #{thefueloroilbrand,jdbcType=VARCHAR},
+      </if>
+      <if test="refuelingfacilitiesorability != null" >
+        refuelingFacilitiesOrAbility = #{refuelingfacilitiesorability,jdbcType=VARCHAR},
+      </if>
+      <if test="deicingfacilities != null" >
+        deicingFacilities = #{deicingfacilities,jdbcType=VARCHAR},
+      </if>
+      <if test="standingaircrafthangar != null" >
+        standingAircraftHangar = #{standingaircrafthangar,jdbcType=VARCHAR},
+      </if>
+      <if test="inaircraftmaintenancefacilities != null" >
+        inAircraftMaintenanceFacilities = #{inaircraftmaintenancefacilities,jdbcType=VARCHAR},
+      </if>
+      <if test="groundNote != null" >
+        groundNote = #{groundNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.GroundServicesAndFacilities" >
+    update GroundServicesAndFacilities
+    set IATA = #{iata,jdbcType=VARCHAR},
+      cargoHandlingFacilities = #{cargohandlingfacilities,jdbcType=VARCHAR},
+      theFuelOrOilBrand = #{thefueloroilbrand,jdbcType=VARCHAR},
+      refuelingFacilitiesOrAbility = #{refuelingfacilitiesorability,jdbcType=VARCHAR},
+      deicingFacilities = #{deicingfacilities,jdbcType=VARCHAR},
+      standingAircraftHangar = #{standingaircrafthangar,jdbcType=VARCHAR},
+      inAircraftMaintenanceFacilities = #{inaircraftmaintenancefacilities,jdbcType=VARCHAR},
+      groundNote = #{groundNote,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectGroundServicesAndFacilitiesByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from GroundServicesAndFacilities
+  	<where>
+  		<if test="iata!=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>

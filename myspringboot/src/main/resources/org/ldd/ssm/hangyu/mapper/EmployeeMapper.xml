@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.Employee" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="nickName" property="nickName" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="whetherSign" property="whethersign" jdbcType="VARCHAR" />
+    <result column="airlineRetrievalCondition" property="airlineretrievalcondition" jdbcType="VARCHAR" />
+    <result column="intentionMoney" property="intentionMoney" jdbcType="VARCHAR"/>
+    <result column="uuid" property="uuid" jdbcType="VARCHAR"/>
+    <result column="head_portrait" property="headPortrait" jdbcType="VARCHAR"/>
+    <result column="phone" property="phone" jdbcType="VARCHAR"/>
+    <result column="email" property="email" jdbcType="VARCHAR"/>
+    <result column="concat" property="concat" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="company_addr" property="companyAddr" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userName, password, nickName, role, whetherSign, airlineRetrievalCondition,intentionMoney,
+    uuid,head_portrait,phone,email, concat, company_name, department, position, company_addr
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from employee
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.Employee" >
+    insert into employee (id, userName, password, 
+      role, whetherSign, airlineRetrievalCondition,intentionMoney,uuid,head_portrait,phone,email
+      , concat, company_name, department, position, company_addr,nickName
+      )
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{role,jdbcType=VARCHAR}, #{whethersign,jdbcType=VARCHAR}, #{airlineretrievalcondition,jdbcType=VARCHAR},
+      #{intentionMoney,jdbcType=VARCHAR},#{uuid,jdbcType=VARCHAR},#{headPortrait,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR}, #{concat,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{companyAddr,jdbcType=VARCHAR},#{nickName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.Employee" >
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="whethersign != null" >
+        whetherSign,
+      </if>
+      <if test="airlineretrievalcondition != null" >
+        airlineRetrievalCondition,
+      </if>
+      <if test="intentionMoney != null">
+      	intentionMoney,
+      </if>
+      <if test="uuid != null">
+      	uuid,
+      </if>
+      <if test="head_portrait != null">
+      	head_portrait,
+      </if>
+      <if test="phone != null">
+      	phone,
+      </if>
+      <if test="email != null">
+      	email,
+      </if>
+      <if test="concat != null" >
+        concat,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="companyAddr != null" >
+        company_addr,
+      </if>
+      <if test="nickName !=null">
+      	nickName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="whethersign != null" >
+        #{whethersign,jdbcType=VARCHAR},
+      </if>
+      <if test="airlineretrievalcondition != null" >
+        #{airlineretrievalcondition,jdbcType=VARCHAR},
+      </if>
+      <if test="intentionMoney != null">
+      	#{intentionMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null">
+      	#{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortrait != null">
+      	#{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+      	#{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+      	#{email,jdbcType=VARCHAR},
+      </if>
+      <if test="concat != null" >
+        #{concat,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null" >
+        #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+      	#{nickName,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.Employee" >
+    update employee
+    <set >
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="whethersign != null" >
+        whetherSign = #{whethersign,jdbcType=VARCHAR},
+      </if>
+      <if test="airlineretrievalcondition != null" >
+        airlineRetrievalCondition = #{airlineretrievalcondition,jdbcType=VARCHAR},
+      </if>
+      <if test="intentionMoney != null">
+      	intentionMoney = #{intentionMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null">
+      	uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortrait != null">
+      	head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+      	phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+      	email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="concat != null" >
+        concat = #{concat,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null" >
+        company_addr = #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+      	nickName = #{nickName,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.Employee" >
+    update employee
+    set userName = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR},
+      whetherSign = #{whethersign,jdbcType=VARCHAR},
+      airlineRetrievalCondition = #{airlineretrievalcondition,jdbcType=VARCHAR},
+      intentionMoney = #{intentionMoney,jdbcType=VARCHAR},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      concat = #{concat,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      company_addr = #{companyAddr,jdbcType=VARCHAR},
+      nickName = #{nickName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateEmployeeIntentionMoneyStatus" parameterType="org.ldd.ssm.hangyu.domain.Employee">
+    update employee
+    set intentionMoney = #{intentionMoney,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectCpyNmByEmployeeId" resultType="java.lang.String" parameterType="java.lang.Long" >
+    select c.Cpy_Nm from employee e join department d on e.department_id=d.id join company c on d.company_id=c.id
+ 	where e.id = #{id,jdbcType=BIGINT}
+  </select>
+  <resultMap id="EmployeChatMap" type="org.ldd.ssm.hangyu.domain.Employee" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="nickName" property="nickName" jdbcType="VARCHAR" />
+    <result column="head_portrait" property="headPortrait" jdbcType="VARCHAR"/>
+    <result column="chat_num" property="chatNum" jdbcType="INTEGER"/>
+  </resultMap>
+  <select id="selectEmployeesByDemandId" resultMap="EmployeChatMap">
+  	select 
+  	id, userName, nickName,head_portrait, 
+  	(SELECT COUNT(*) FROM chat WHERE toName_id = #{employeeId,jdbcType=BIGINT} AND state='1' AND textType = '0') chat_num 
+  	from employee
+  	<where>
+  		id in 
+  		(select employee_id from response 
+  		<where>
+  			intentionMoneyState = '0'
+  			<if test="demandId != null and demandId >0">
+  				and demand_id = #{demandId,jdbcType=VARCHAR}
+  			</if>
+  		</where>)
+  	</where>
+  	union 
+  	select 
+  	id, userName, nickName,head_portrait, 
+  	(SELECT COUNT(*) FROM chat WHERE toName_id = #{employeeId,jdbcType=BIGINT} AND state='1' AND textType = '0') chat_num 
+  	from employee
+  	<where>
+  		whetherSign = '0' and id in 
+  		(select employee_id from response 
+  		<where>
+  			<if test="demandId != null and demandId >0">
+  				demand_id = #{demandId,jdbcType=VARCHAR}
+  			</if>
+  		</where>)
+  	</where>
+  </select>
+  <select id="selectEmployeesByRole" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select  
+  	id, userName, password, nickName, role, whetherSign, airlineRetrievalCondition,intentionMoney,head_portrait 
+  	from employee 
+  	WHERE role=#{role,jdbcType=VARCHAR}
+  </select>
+  <update id="unbindMail">
+	UPDATE employee set email=null WHERE id=#{id}
+  </update>
+	
+  <update id="updateHeadPath" parameterType="org.ldd.ssm.hangyu.domain.Employee">
+	update employee
+	set head_portrait = #{headPortrait,jdbcType=VARCHAR}
+	where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="validPhone" resultType="java.lang.Integer">
+  	select count(*) from employee a,platform_user b
+  	<where>
+  		<if test="phone != null and phone != ''">
+  			a.phone = #{phone,jdbcType=VARCHAR} 
+  			or
+  			b.tel = #{phone,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+  
+   <select id="validBindPhone" resultType="java.lang.Integer">
+  	select count(*) from employee
+  	<where>
+  		<if test="phone != null and phone != ''">
+  			phone = #{phone,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="validEmail" resultType="java.lang.Integer">
+  	select count(*) from employee a,platform_user b
+  	<where>
+  		<if test="phone != null and phone != ''">
+  			a.email = #{email,jdbcType=VARCHAR} 
+  			or
+  			b.email = #{email,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+  
+  <update id="resetPwd">
+  	update employee set password = #{newPwd,jdbcType=VARCHAR} where id=#{id,jdbcType=BIGINT}  	
+  </update>
+  
+  <select id="selectEmployeeByContactWay" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from employee
+    <where>
+    	<if test="contactWay != null and contactWay != ''">
+    		phone = #{contactWay,jdbcType=VARCHAR} or email = #{contactWay,jdbcType=VARCHAR}
+    	</if>
+    </where>
+  </select>
+</mapper>

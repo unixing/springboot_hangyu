@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.EmployeeDemandMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.EmployeeDemand" >
+    <result column="demand_id" property="demandId" jdbcType="BIGINT" />
+    <result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+  </resultMap>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.EmployeeDemand" >
+    insert into employeeDemand (demand_id, employee_id)
+    values (#{demandId,jdbcType=BIGINT}, #{employeeId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.EmployeeDemand" >
+    insert into employeeDemand
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="demandId != null" >
+        demand_id,
+      </if>
+      <if test="employeeId != null" >
+        employee_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="demandId != null" >
+        #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <delete id="delete" parameterType="Long">
+  	delete from employeeDemand
+    where employee_id = #{employeeId,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByEmployeeId" parameterType="Long" resultMap="BaseResultMap">
+  	select
+  	demand_id, employee_id
+  	from employeeDemand
+  	<where>
+  		<if test="employeeId !=null and employeeId >0">
+  			employee_id = #{employeeId,jdbcType=BIGINT}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="selectByEmployeeDemand" resultType="Integer" parameterType="org.ldd.ssm.hangyu.domain.EmployeeDemand" >
+  	select
+  	count(*)
+  	from employeeDemand 
+  	<where>
+  		<if test="employeeId !=null and employeeId >0">
+  			employee_id = #{employeeId,jdbcType=BIGINT}
+  		</if>
+  		
+  		<if test="demandId != null and demandId >0 ">
+				and demand_id = #{demandId}
+		</if>
+  		
+  	</where>
+  </select>
+</mapper>

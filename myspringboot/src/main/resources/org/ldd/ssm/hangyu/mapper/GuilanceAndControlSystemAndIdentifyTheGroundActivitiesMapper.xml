@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.GuilanceAndControlSystemAndIdentifyTheGroundActivitiesMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.GuilanceAndControlSystemAndIdentifyTheGroundActivities" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+    <result column="aircraftFlightNumberMarkCard" property="aircraftflightnumbermarkcard" jdbcType="VARCHAR" />
+    <result column="runwaysAndTaxiwaysSignsAndLights" property="runwaysandtaxiwayssignsandlights" jdbcType="VARCHAR" />
+    <result column="stoppingDischargingLamp" property="stoppingdischarginglamp" jdbcType="VARCHAR" />
+    <result column="guilanceNote" property="guilanceNote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, IATA, aircraftFlightNumberMarkCard, runwaysAndTaxiwaysSignsAndLights, stoppingDischargingLamp, 
+    guilanceNote
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from GuilanceAndControlSystemAndIdentifyTheGroundActivities
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from GuilanceAndControlSystemAndIdentifyTheGroundActivities
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.GuilanceAndControlSystemAndIdentifyTheGroundActivities" >
+    insert into GuilanceAndControlSystemAndIdentifyTheGroundActivities (id, IATA, aircraftFlightNumberMarkCard, 
+      runwaysAndTaxiwaysSignsAndLights, stoppingDischargingLamp, 
+      guilanceNote)
+    values (#{id,jdbcType=BIGINT}, #{iata,jdbcType=VARCHAR}, #{aircraftflightnumbermarkcard,jdbcType=VARCHAR}, 
+      #{runwaysandtaxiwayssignsandlights,jdbcType=VARCHAR}, #{stoppingdischarginglamp,jdbcType=VARCHAR}, 
+      #{guilanceNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.GuilanceAndControlSystemAndIdentifyTheGroundActivities" >
+    insert into GuilanceAndControlSystemAndIdentifyTheGroundActivities
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+      <if test="aircraftflightnumbermarkcard != null" >
+        aircraftFlightNumberMarkCard,
+      </if>
+      <if test="runwaysandtaxiwayssignsandlights != null" >
+        runwaysAndTaxiwaysSignsAndLights,
+      </if>
+      <if test="stoppingdischarginglamp != null" >
+        stoppingDischargingLamp,
+      </if>
+      <if test="guilanceNote != null" >
+        guilanceNote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="aircraftflightnumbermarkcard != null" >
+        #{aircraftflightnumbermarkcard,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaysandtaxiwayssignsandlights != null" >
+        #{runwaysandtaxiwayssignsandlights,jdbcType=VARCHAR},
+      </if>
+      <if test="stoppingdischarginglamp != null" >
+        #{stoppingdischarginglamp,jdbcType=VARCHAR},
+      </if>
+      <if test="guilanceNote != null" >
+        #{guilanceNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.GuilanceAndControlSystemAndIdentifyTheGroundActivities" >
+    update GuilanceAndControlSystemAndIdentifyTheGroundActivities
+    <set >
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="aircraftflightnumbermarkcard != null" >
+        aircraftFlightNumberMarkCard = #{aircraftflightnumbermarkcard,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaysandtaxiwayssignsandlights != null" >
+        runwaysAndTaxiwaysSignsAndLights = #{runwaysandtaxiwayssignsandlights,jdbcType=VARCHAR},
+      </if>
+      <if test="stoppingdischarginglamp != null" >
+        stoppingDischargingLamp = #{stoppingdischarginglamp,jdbcType=VARCHAR},
+      </if>
+      <if test="guilanceNote != null" >
+        guilanceNote = #{guilanceNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.GuilanceAndControlSystemAndIdentifyTheGroundActivities" >
+    update GuilanceAndControlSystemAndIdentifyTheGroundActivities
+    set IATA = #{iata,jdbcType=VARCHAR},
+      aircraftFlightNumberMarkCard = #{aircraftflightnumbermarkcard,jdbcType=VARCHAR},
+      runwaysAndTaxiwaysSignsAndLights = #{runwaysandtaxiwayssignsandlights,jdbcType=VARCHAR},
+      stoppingDischargingLamp = #{stoppingdischarginglamp,jdbcType=VARCHAR},
+      guilanceNote = #{guilanceNote,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectGuilanceAndControlSystemAndIdentifyTheGroundActivitiesByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from GuilanceAndControlSystemAndIdentifyTheGroundActivities
+  	<where>
+  		<if test="iata!=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.ApronTaxiwayAndCalibrationLocationDataMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.ApronTaxiwayAndCalibrationLocationData" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+    <result column="airfieldPavementAndIntensity" property="airfieldpavementandintensity" jdbcType="VARCHAR" />
+    <result column="taxiwayWidthPavementAndStrength" property="taxiwaywidthpavementandstrength" jdbcType="VARCHAR" />
+    <result column="altimeterCalibrationPointPositionAndElevation" property="altimetercalibrationpointpositionandelevation" jdbcType="VARCHAR" />
+    <result column="VOROrINSCalibrationPoints" property="vororinscalibrationpoints" jdbcType="VARCHAR" />
+    <result column="apronNote" property="apronNote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, IATA, airfieldPavementAndIntensity, taxiwayWidthPavementAndStrength, altimeterCalibrationPointPositionAndElevation, 
+    VOROrINSCalibrationPoints, apronNote
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ApronTaxiwayAndCalibrationLocationData
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ApronTaxiwayAndCalibrationLocationData
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.ApronTaxiwayAndCalibrationLocationData" >
+    insert into ApronTaxiwayAndCalibrationLocationData (id, IATA, airfieldPavementAndIntensity, 
+      taxiwayWidthPavementAndStrength, altimeterCalibrationPointPositionAndElevation, 
+      VOROrINSCalibrationPoints, apronNote)
+    values (#{id,jdbcType=BIGINT}, #{iata,jdbcType=VARCHAR}, #{airfieldpavementandintensity,jdbcType=VARCHAR}, 
+      #{taxiwaywidthpavementandstrength,jdbcType=VARCHAR}, #{altimetercalibrationpointpositionandelevation,jdbcType=VARCHAR}, 
+      #{vororinscalibrationpoints,jdbcType=VARCHAR}, #{apronNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.ApronTaxiwayAndCalibrationLocationData" >
+    insert into ApronTaxiwayAndCalibrationLocationData
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+      <if test="airfieldpavementandintensity != null" >
+        airfieldPavementAndIntensity,
+      </if>
+      <if test="taxiwaywidthpavementandstrength != null" >
+        taxiwayWidthPavementAndStrength,
+      </if>
+      <if test="altimetercalibrationpointpositionandelevation != null" >
+        altimeterCalibrationPointPositionAndElevation,
+      </if>
+      <if test="vororinscalibrationpoints != null" >
+        VOROrINSCalibrationPoints,
+      </if>
+      <if test="apronNote != null" >
+        apronNote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="airfieldpavementandintensity != null" >
+        #{airfieldpavementandintensity,jdbcType=VARCHAR},
+      </if>
+      <if test="taxiwaywidthpavementandstrength != null" >
+        #{taxiwaywidthpavementandstrength,jdbcType=VARCHAR},
+      </if>
+      <if test="altimetercalibrationpointpositionandelevation != null" >
+        #{altimetercalibrationpointpositionandelevation,jdbcType=VARCHAR},
+      </if>
+      <if test="vororinscalibrationpoints != null" >
+        #{vororinscalibrationpoints,jdbcType=VARCHAR},
+      </if>
+      <if test="apronNote != null" >
+        #{apronNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.ApronTaxiwayAndCalibrationLocationData" >
+    update ApronTaxiwayAndCalibrationLocationData
+    <set >
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="airfieldpavementandintensity != null" >
+        airfieldPavementAndIntensity = #{airfieldpavementandintensity,jdbcType=VARCHAR},
+      </if>
+      <if test="taxiwaywidthpavementandstrength != null" >
+        taxiwayWidthPavementAndStrength = #{taxiwaywidthpavementandstrength,jdbcType=VARCHAR},
+      </if>
+      <if test="altimetercalibrationpointpositionandelevation != null" >
+        altimeterCalibrationPointPositionAndElevation = #{altimetercalibrationpointpositionandelevation,jdbcType=VARCHAR},
+      </if>
+      <if test="vororinscalibrationpoints != null" >
+        VOROrINSCalibrationPoints = #{vororinscalibrationpoints,jdbcType=VARCHAR},
+      </if>
+      <if test="apronNote != null" >
+        apronNote = #{apronNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.ApronTaxiwayAndCalibrationLocationData" >
+    update ApronTaxiwayAndCalibrationLocationData
+    set IATA = #{iata,jdbcType=VARCHAR},
+      airfieldPavementAndIntensity = #{airfieldpavementandintensity,jdbcType=VARCHAR},
+      taxiwayWidthPavementAndStrength = #{taxiwaywidthpavementandstrength,jdbcType=VARCHAR},
+      altimeterCalibrationPointPositionAndElevation = #{altimetercalibrationpointpositionandelevation,jdbcType=VARCHAR},
+      VOROrINSCalibrationPoints = #{vororinscalibrationpoints,jdbcType=VARCHAR},
+      apronNote = #{apronNote,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectApronTaxiwayAndCalibrationLocationByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from ApronTaxiwayAndCalibrationLocationData
+  	<where>
+  		<if test="iata!=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>

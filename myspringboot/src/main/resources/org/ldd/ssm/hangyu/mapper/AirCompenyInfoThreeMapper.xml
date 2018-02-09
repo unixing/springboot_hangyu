@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.AirCompenyInfoThreeMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.AirCompenyInfoThree" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="airln_cd" property="airlnCd" jdbcType="VARCHAR" />
+    <result column="iata" property="iata" jdbcType="VARCHAR" />
+    <result column="icao" property="icao" jdbcType="VARCHAR" />
+    <result column="establishTime" property="establishtime" jdbcType="VARCHAR" />
+    <result column="headquartersLocation" property="headquarterslocation" jdbcType="VARCHAR" />
+    <result column="baseDistribution" property="basedistribution" jdbcType="VARCHAR" />
+    <result column="shippingCountry" property="shippingcountry" jdbcType="VARCHAR" />
+    <result column="navigationAirport" property="navigationairport" jdbcType="VARCHAR" />
+    <result column="systemAirpot" property="systemairpot" jdbcType="VARCHAR" />
+    <result column="airlineAlliance" property="airlinealliance" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, airln_cd, iata, icao, establishTime, headquartersLocation, baseDistribution, 
+    shippingCountry, navigationAirport, systemAirpot, airlineAlliance
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from aircompenyinfothree
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from aircompenyinfothree
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.AirCompenyInfoThree" >
+    insert into aircompenyinfothree (id, airln_cd, iata, 
+      icao, establishTime, headquartersLocation, 
+      baseDistribution, shippingCountry, navigationAirport, 
+      systemAirpot, airlineAlliance)
+    values (#{id,jdbcType=BIGINT}, #{airlnCd,jdbcType=VARCHAR}, #{iata,jdbcType=VARCHAR}, 
+      #{icao,jdbcType=VARCHAR}, #{establishtime,jdbcType=VARCHAR}, #{headquarterslocation,jdbcType=VARCHAR}, 
+      #{basedistribution,jdbcType=VARCHAR}, #{shippingcountry,jdbcType=VARCHAR}, #{navigationairport,jdbcType=VARCHAR}, 
+      #{systemairpot,jdbcType=VARCHAR}, #{airlinealliance,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.AirCompenyInfoThree" >
+    insert into aircompenyinfothree
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="airlnCd != null" >
+        airln_cd,
+      </if>
+      <if test="iata != null" >
+        iata,
+      </if>
+      <if test="icao != null" >
+        icao,
+      </if>
+      <if test="establishtime != null" >
+        establishTime,
+      </if>
+      <if test="headquarterslocation != null" >
+        headquartersLocation,
+      </if>
+      <if test="basedistribution != null" >
+        baseDistribution,
+      </if>
+      <if test="shippingcountry != null" >
+        shippingCountry,
+      </if>
+      <if test="navigationairport != null" >
+        navigationAirport,
+      </if>
+      <if test="systemairpot != null" >
+        systemAirpot,
+      </if>
+      <if test="airlinealliance != null" >
+        airlineAlliance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="airlnCd != null" >
+        #{airlnCd,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="icao != null" >
+        #{icao,jdbcType=VARCHAR},
+      </if>
+      <if test="establishtime != null" >
+        #{establishtime,jdbcType=VARCHAR},
+      </if>
+      <if test="headquarterslocation != null" >
+        #{headquarterslocation,jdbcType=VARCHAR},
+      </if>
+      <if test="basedistribution != null" >
+        #{basedistribution,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingcountry != null" >
+        #{shippingcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="navigationairport != null" >
+        #{navigationairport,jdbcType=VARCHAR},
+      </if>
+      <if test="systemairpot != null" >
+        #{systemairpot,jdbcType=VARCHAR},
+      </if>
+      <if test="airlinealliance != null" >
+        #{airlinealliance,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.AirCompenyInfoThree" >
+    update aircompenyinfothree
+    <set >
+      <if test="airlnCd != null" >
+        airln_cd = #{airlnCd,jdbcType=VARCHAR},
+      </if>
+      <if test="iata != null" >
+        iata = #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="icao != null" >
+        icao = #{icao,jdbcType=VARCHAR},
+      </if>
+      <if test="establishtime != null" >
+        establishTime = #{establishtime,jdbcType=VARCHAR},
+      </if>
+      <if test="headquarterslocation != null" >
+        headquartersLocation = #{headquarterslocation,jdbcType=VARCHAR},
+      </if>
+      <if test="basedistribution != null" >
+        baseDistribution = #{basedistribution,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingcountry != null" >
+        shippingCountry = #{shippingcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="navigationairport != null" >
+        navigationAirport = #{navigationairport,jdbcType=VARCHAR},
+      </if>
+      <if test="systemairpot != null" >
+        systemAirpot = #{systemairpot,jdbcType=VARCHAR},
+      </if>
+      <if test="airlinealliance != null" >
+        airlineAlliance = #{airlinealliance,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.AirCompenyInfoThree" >
+    update aircompenyinfothree
+    set airln_cd = #{airlnCd,jdbcType=VARCHAR},
+      iata = #{iata,jdbcType=VARCHAR},
+      icao = #{icao,jdbcType=VARCHAR},
+      establishTime = #{establishtime,jdbcType=VARCHAR},
+      headquartersLocation = #{headquarterslocation,jdbcType=VARCHAR},
+      baseDistribution = #{basedistribution,jdbcType=VARCHAR},
+      shippingCountry = #{shippingcountry,jdbcType=VARCHAR},
+      navigationAirport = #{navigationairport,jdbcType=VARCHAR},
+      systemAirpot = #{systemairpot,jdbcType=VARCHAR},
+      airlineAlliance = #{airlinealliance,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from
+  	aircompenyinfothree
+  </select>
+  
+  <select id="selectCompenyIcaoByIata" resultType="java.lang.String">
+  	select
+  	icao
+  	from aircompenyinfothree
+  	<where>
+  		<if test="iata!=null and iata !=''">
+  			iata = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="selectAircompenyByIcao" resultMap="BaseResultMap">
+  	select
+  	id, airln_cd, iata, icao, establishTime, headquartersLocation, 
+  	(SELECT GROUP_CONCAT(b.airln_Cd) from airportinfonewthree b WHERE LOCATE(b.iATA,a.baseDistribution)>0) baseDistribution, 
+    shippingCountry, navigationAirport, systemAirpot, airlineAlliance
+  	from
+  	aircompenyinfothree a
+  	<where>
+  		<if test="icao != null and icao != ''">
+  			icao = #{icao,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="selectAirCompenyByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from
+  	aircompenyinfothree
+  	<where>
+  		<if test="iata !=null and iata != ''">
+  			iata = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+  <select id="selectAirCompenysByIcao" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from aircompenyinfothree
+  	<where>
+  		<if test="icao != null and icao != ''">
+  			baseDistribution like CONCAT("%",#{icao,jdbcType=VARCHAR},"%") 
+  		</if>
+  	</where>
+  </select>
+  <select id="selectAirCompenysForDemand" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from aircompenyinfothree
+  	<where>
+  		<if test="ids != null and ids != ''">
+  			id in (${ids})
+  		</if>
+  	</where>
+  </select>
+</mapper>

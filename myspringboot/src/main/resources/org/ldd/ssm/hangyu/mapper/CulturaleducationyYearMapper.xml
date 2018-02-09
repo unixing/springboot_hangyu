@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.hangyu.mapper.CulturaleducationyYearMapper">
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.CulturaleducationyYear">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="culturaleducationYear" jdbcType="VARCHAR" property="culturaleducationyear" />
+    <result column="passengersNumberYear" jdbcType="VARCHAR" property="passengersnumberyear" />
+    <result column="domesticPassengerNumberYear" jdbcType="VARCHAR" property="domesticpassengernumberyear" />
+    <result column="foreignPassengerNumberYear" jdbcType="VARCHAR" property="foreignpassengernumberyear" />
+    <result column="tourismIncome" jdbcType="VARCHAR" property="tourismincome" />
+    <result column="tourismRMBIncome" jdbcType="VARCHAR" property="tourismrmbincome" />
+    <result column="tourismMYIncome" jdbcType="VARCHAR" property="tourismmyincome" />
+    <result column="exchangeRate" jdbcType="VARCHAR" property="exchangerate" />
+    <result column="cityinfothree_id" jdbcType="BIGINT" property="cityinfothreeId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, culturaleducationYear, passengersNumberYear, domesticPassengerNumberYear, foreignPassengerNumberYear, 
+    tourismIncome, tourismRMBIncome, tourismMYIncome, exchangeRate, cityinfothree_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from culturaleducationy_year
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from culturaleducationy_year
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.CulturaleducationyYear">
+    insert into culturaleducationy_year (id, culturaleducationYear, passengersNumberYear, 
+      domesticPassengerNumberYear, foreignPassengerNumberYear, 
+      tourismIncome, tourismRMBIncome, tourismMYIncome, 
+      exchangeRate, cityinfothree_id)
+    values (#{id,jdbcType=BIGINT}, #{culturaleducationyear,jdbcType=VARCHAR}, #{passengersnumberyear,jdbcType=VARCHAR}, 
+      #{domesticpassengernumberyear,jdbcType=VARCHAR}, #{foreignpassengernumberyear,jdbcType=VARCHAR}, 
+      #{tourismincome,jdbcType=VARCHAR}, #{tourismrmbincome,jdbcType=VARCHAR}, #{tourismmyincome,jdbcType=VARCHAR}, 
+      #{exchangerate,jdbcType=VARCHAR}, #{cityinfothreeId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.CulturaleducationyYear">
+    insert into culturaleducationy_year
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="culturaleducationyear != null">
+        culturaleducationYear,
+      </if>
+      <if test="passengersnumberyear != null">
+        passengersNumberYear,
+      </if>
+      <if test="domesticpassengernumberyear != null">
+        domesticPassengerNumberYear,
+      </if>
+      <if test="foreignpassengernumberyear != null">
+        foreignPassengerNumberYear,
+      </if>
+      <if test="tourismincome != null">
+        tourismIncome,
+      </if>
+      <if test="tourismrmbincome != null">
+        tourismRMBIncome,
+      </if>
+      <if test="tourismmyincome != null">
+        tourismMYIncome,
+      </if>
+      <if test="exchangerate != null">
+        exchangeRate,
+      </if>
+      <if test="cityinfothreeId != null">
+        cityinfothree_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="culturaleducationyear != null">
+        #{culturaleducationyear,jdbcType=VARCHAR},
+      </if>
+      <if test="passengersnumberyear != null">
+        #{passengersnumberyear,jdbcType=VARCHAR},
+      </if>
+      <if test="domesticpassengernumberyear != null">
+        #{domesticpassengernumberyear,jdbcType=VARCHAR},
+      </if>
+      <if test="foreignpassengernumberyear != null">
+        #{foreignpassengernumberyear,jdbcType=VARCHAR},
+      </if>
+      <if test="tourismincome != null">
+        #{tourismincome,jdbcType=VARCHAR},
+      </if>
+      <if test="tourismrmbincome != null">
+        #{tourismrmbincome,jdbcType=VARCHAR},
+      </if>
+      <if test="tourismmyincome != null">
+        #{tourismmyincome,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangerate != null">
+        #{exchangerate,jdbcType=VARCHAR},
+      </if>
+      <if test="cityinfothreeId != null">
+        #{cityinfothreeId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.CulturaleducationyYear">
+    update culturaleducationy_year
+    <set>
+      <if test="culturaleducationyear != null">
+        culturaleducationYear = #{culturaleducationyear,jdbcType=VARCHAR},
+      </if>
+      <if test="passengersnumberyear != null">
+        passengersNumberYear = #{passengersnumberyear,jdbcType=VARCHAR},
+      </if>
+      <if test="domesticpassengernumberyear != null">
+        domesticPassengerNumberYear = #{domesticpassengernumberyear,jdbcType=VARCHAR},
+      </if>
+      <if test="foreignpassengernumberyear != null">
+        foreignPassengerNumberYear = #{foreignpassengernumberyear,jdbcType=VARCHAR},
+      </if>
+      <if test="tourismincome != null">
+        tourismIncome = #{tourismincome,jdbcType=VARCHAR},
+      </if>
+      <if test="tourismrmbincome != null">
+        tourismRMBIncome = #{tourismrmbincome,jdbcType=VARCHAR},
+      </if>
+      <if test="tourismmyincome != null">
+        tourismMYIncome = #{tourismmyincome,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangerate != null">
+        exchangeRate = #{exchangerate,jdbcType=VARCHAR},
+      </if>
+      <if test="cityinfothreeId != null">
+        cityinfothree_id = #{cityinfothreeId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.CulturaleducationyYear">
+    update culturaleducationy_year
+    set culturaleducationYear = #{culturaleducationyear,jdbcType=VARCHAR},
+      passengersNumberYear = #{passengersnumberyear,jdbcType=VARCHAR},
+      domesticPassengerNumberYear = #{domesticpassengernumberyear,jdbcType=VARCHAR},
+      foreignPassengerNumberYear = #{foreignpassengernumberyear,jdbcType=VARCHAR},
+      tourismIncome = #{tourismincome,jdbcType=VARCHAR},
+      tourismRMBIncome = #{tourismrmbincome,jdbcType=VARCHAR},
+      tourismMYIncome = #{tourismmyincome,jdbcType=VARCHAR},
+      exchangeRate = #{exchangerate,jdbcType=VARCHAR},
+      cityinfothree_id = #{cityinfothreeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectCulturaleducationyYearListByCityId" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from
+  	culturaleducationy_year
+  	<where>
+  		<if test="cityId !=null and cityId &gt;0">
+  			cityinfothree_id = #{cityId,jdbcType=BIGINT}
+  		</if>
+  	</where>
+  </select>
+</mapper>

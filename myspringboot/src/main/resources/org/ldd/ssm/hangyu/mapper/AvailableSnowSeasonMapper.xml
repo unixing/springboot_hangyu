@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.AvailableSnowSeasonMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.hangyu.domain.AvailableSnowSeason" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="IATA" property="iata" jdbcType="VARCHAR" />
+    <result column="availableAndSeasonToSweepDeviceType" property="availableandseasontosweepdevicetype" jdbcType="VARCHAR" />
+    <result column="snowOrder" property="snoworder" jdbcType="VARCHAR" />
+    <result column="availableNote" property="availableNote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, IATA, availableAndSeasonToSweepDeviceType, snowOrder, availableNote
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from AvailableSnowSeason
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from AvailableSnowSeason
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.hangyu.domain.AvailableSnowSeason" >
+    insert into AvailableSnowSeason (id, IATA, availableAndSeasonToSweepDeviceType, 
+      snowOrder, availableNote)
+    values (#{id,jdbcType=BIGINT}, #{iata,jdbcType=VARCHAR}, #{availableandseasontosweepdevicetype,jdbcType=VARCHAR}, 
+      #{snoworder,jdbcType=VARCHAR}, #{availableNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.hangyu.domain.AvailableSnowSeason" >
+    insert into AvailableSnowSeason
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="iata != null" >
+        IATA,
+      </if>
+      <if test="availableandseasontosweepdevicetype != null" >
+        availableAndSeasonToSweepDeviceType,
+      </if>
+      <if test="snoworder != null" >
+        snowOrder,
+      </if>
+      <if test="availableNote != null" >
+        availableNote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="iata != null" >
+        #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="availableandseasontosweepdevicetype != null" >
+        #{availableandseasontosweepdevicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="snoworder != null" >
+        #{snoworder,jdbcType=VARCHAR},
+      </if>
+      <if test="availableNote != null" >
+        #{availableNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.hangyu.domain.AvailableSnowSeason" >
+    update AvailableSnowSeason
+    <set >
+      <if test="iata != null" >
+        IATA = #{iata,jdbcType=VARCHAR},
+      </if>
+      <if test="availableandseasontosweepdevicetype != null" >
+        availableAndSeasonToSweepDeviceType = #{availableandseasontosweepdevicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="snoworder != null" >
+        snowOrder = #{snoworder,jdbcType=VARCHAR},
+      </if>
+      <if test="availableNote != null" >
+        availableNote = #{availableNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.hangyu.domain.AvailableSnowSeason" >
+    update AvailableSnowSeason
+    set IATA = #{iata,jdbcType=VARCHAR},
+      availableAndSeasonToSweepDeviceType = #{availableandseasontosweepdevicetype,jdbcType=VARCHAR},
+      snowOrder = #{snoworder,jdbcType=VARCHAR},
+      availableNote = #{availableNote,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectAvailableSnowSeasonByIata" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from AvailableSnowSeason
+  	<where>
+  		<if test="iata!=null and iata != ''">
+  			IATA = #{iata,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
+</mapper>
