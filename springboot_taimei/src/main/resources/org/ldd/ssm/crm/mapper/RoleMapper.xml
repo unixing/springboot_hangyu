@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.RoleMapper">
+	<resultMap type="org.ldd.ssm.crm.domain.Role" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="sn" property="sn" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="create_id" property="createId" jdbcType="BIGINT" />
+		<result column="company_id" property="companyId" jdbcType="BIGINT" />
+		<association column="create_id" property="creator"
+			select="org.ldd.ssm.crm.mapper.EmployeeMapper.get" jdbcType="BIGINT" />
+		<association column="company_id" property="company"
+			select="org.ldd.ssm.crm.mapper.CompanyMapper.selectByPrimaryKey"
+			jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,sn,name,create_id,company_id
+	</sql>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.Role">
+		insert into
+		t_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null and id>0">
+				id,
+			</if>
+			<if test="sn!=null and sn!=''">
+				sn,
+			</if>
+			<if test="name!=null and name !=''">
+				name,
+			</if>
+			<if test="companyId != null and companyId >0">
+				company_id,
+			</if>
+			<if test="createId != null and createId >0">
+				create_id,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null and id>0">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="sn!=null and sn!=''">
+				#{sn,jdbcType=VARCHAR},
+			</if>
+			<if test="name!=null and name != ''">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="companyId!=null and companyId >0">
+				#{companyId,jdbcType=VARCHAR},
+			</if>
+			<if test="createId!=null and createId >0">
+				#{createId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="org.ldd.ssm.crm.domain.Role">
+		update t_role
+		<set>
+			<if test="sn !=null and sn !=''">
+				sn = #{sn,jdbcType=VARCHAR},
+			</if>
+			<if test="name !=null and name !=''">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="companyId !=null and companyId >0">
+				company_id = #{companyId,jdbcType=VARCHAR},
+			</if>
+			<if test="createId !=null and createId >0">
+				create_id = #{createId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<delete id="delete" parameterType="long">
+		delete from t_role
+		where 1=1
+		<if test="roleId != null and roleId >0">
+			and id = #{roleId,jdbcType=BIGINT}
+		</if>
+	</delete>
+	<select id="load" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_role
+		where id = #{roleId,jdbcType=BIGINT}
+		limit 1
+	</select>
+	<select id="selectRoles" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_role a
+		where 1=1
+		<if test="companyId != null and companyId >0">
+			and company_id = #{companyId,jdbcType=BIGINT}
+		</if>
+		<if test="name != null and name != ''">
+			and name like CONCAT('%',#{name,jdbcType=BIGINT},'%')
+		</if>
+		<if test="createId != null and createId >0">
+			and create_id = #{createId,jdbcType=BIGINT}
+		</if>
+	</select>
+</mapper> 

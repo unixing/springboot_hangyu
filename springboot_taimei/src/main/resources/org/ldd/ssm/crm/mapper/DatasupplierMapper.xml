@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.DatasupplierMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.Datasupplier">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="Dat_Sre_Way" property="datSreWay" jdbcType="VARCHAR" />
+		<result column="Dat_Sre_Phe" property="datSrePhe" jdbcType="VARCHAR" />
+		<result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+		<result column="Dat_Sre_Cpy_id" property="datSreCpyId"
+			jdbcType="BIGINT" />
+		<association column="employee_id" property="employee"
+			select="org.ldd.ssm.crm.mapper.EmployeeMapper.get" jdbcType="BIGINT" />
+		<association column="Dat_Sre_Cpy_id" property="company"
+			select="org.ldd.ssm.crm.mapper.CompanyMapper.selectByPrimaryKey"
+			jdbcType="BIGINT"></association>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, Dat_Sre_Cpy_id, Dat_Sre_Way, Dat_Sre_Phe, employee_id
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from datasupplier
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from datasupplier
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.Datasupplier">
+		insert into datasupplier (id, Dat_Sre_Cpy_id, Dat_Sre_Way,
+		Dat_Sre_Phe, employee_id)
+		values (#{id,jdbcType=BIGINT}, #{datSreCpyId,jdbcType=BIGINT},
+		#{datSreWay,jdbcType=VARCHAR},
+		#{datSrePhe,jdbcType=VARCHAR}, #{employeeId,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.Datasupplier">
+		insert into datasupplier
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="datSreCpyId != null">
+				Dat_Sre_Cpy_id,
+			</if>
+			<if test="datSreWay != null">
+				Dat_Sre_Way,
+			</if>
+			<if test="datSrePhe != null">
+				Dat_Sre_Phe,
+			</if>
+			<if test="employeeId != null">
+				employee_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="datSreCpyId != null">
+				#{datSreCpyId,jdbcType=BIGINT},
+			</if>
+			<if test="datSreWay != null">
+				#{datSreWay,jdbcType=VARCHAR},
+			</if>
+			<if test="datSrePhe != null">
+				#{datSrePhe,jdbcType=VARCHAR},
+			</if>
+			<if test="employeeId != null">
+				#{employeeId,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.Datasupplier">
+		update datasupplier
+		<set>
+			<if test="datSreCpyId != null">
+				Dat_Sre_Cpy_id = #{datSreCpyId,jdbcType=BIGINT},
+			</if>
+			<if test="datSreWay != null">
+				Dat_Sre_Way = #{datSreWay,jdbcType=VARCHAR},
+			</if>
+			<if test="datSrePhe != null">
+				Dat_Sre_Phe = #{datSrePhe,jdbcType=VARCHAR},
+			</if>
+			<if test="employeeId != null">
+				employee_id = #{employeeId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.Datasupplier">
+		update datasupplier
+		set Dat_Sre_Cpy_id = #{datSreCpyId,jdbcType=BIGINT},
+		Dat_Sre_Way = #{datSreWay,jdbcType=VARCHAR},
+		Dat_Sre_Phe = #{datSrePhe,jdbcType=VARCHAR},
+		employee_id = #{employeeId,jdbcType=BIGINT}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="load" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from datasupplier
+		where employee_id = #{employeeId,jdbcType=BIGINT}
+		and Dat_Sre_Cpy_id = #{datSreCpyId,jdbcType=BIGINT}
+		limit 1
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from datasupplier
+		where 1=1
+		<if test="employeeId != null and employeeId>0">
+			and employee_id = #{employeeId,jdbcType=BIGINT}
+		</if>
+	</select>
+	<select id="selectByCompanyId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from datasupplier
+		where 1=1
+		<if test="companyId != null and companyId >0">
+			and Dat_Sre_Cpy_id = #{companyId,jdbcType=BIGINT}
+		</if>
+	</select>
+	<select id="getDataSource" resultType="java.lang.String">
+		select
+		DISTINCT Dta_Sce
+		from z_airdata
+		<where>
+			<if test="companyId != null and companyId >0">
+				company_id = #{companyId,jdbcType=BIGINT}
+			</if>
+		</where>
+	</select>
+</mapper>

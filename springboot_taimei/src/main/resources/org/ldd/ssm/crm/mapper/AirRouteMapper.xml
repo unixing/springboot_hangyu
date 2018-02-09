@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.AirRouteAddMapper">
+
+	
+	<insert id="airRouteAdd" useGeneratedKeys="true" parameterType="org.ldd.ssm.crm.domain.AirRoute">
+		insert into airlineCompany (air_line,state,company,itia,flt_nbr) 
+		values
+		<foreach collection="airLineList" item="item" index="index" separator="," >
+			(#{item},#{state},#{companyId},#{itia},#{fltNbr})
+		</foreach>
+	</insert>
+	
+	<!-- 真删除  -->
+	<delete id="airRouteDelete" parameterType="java.lang.Long" >
+		delete from airlineCompany where id=#{id}
+	</delete>
+	
+	<update id="airRouteEdit" parameterType="org.ldd.ssm.crm.domain.AirRoute">
+		update airlineCompany set
+		<if test="airLine != null and airLine !=''">
+			and air_line=#{airLine}
+		</if>
+		where id=#{id}
+	</update>
+	
+	<update id="airRouteEditBatch" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" separator=";" >
+			update airlineCompany set
+			<if test="item.airLine != null and item.airLine !=''">
+				 air_line=#{item.airLine}
+			</if>
+			where id=#{item.id}
+		</foreach>
+	</update>
+
+
+	<!-- 无数据航线查询接口 -->
+	<select id="findAirRouteList" parameterType="org.ldd.ssm.crm.domain.AirRoute" resultType="org.ldd.ssm.crm.domain.AirRoute">
+		select id,air_line airLine from airlineCompany 
+		<where>
+		<if test="state != null and state !=''">
+			and state=#{state}
+		</if>
+		<if test="companyId != null and companyId !=''">
+			and company=#{companyId}
+		</if>
+		<if test="itia != null and itia !=''">
+			and itia =#{itia}
+		</if>
+		</where>
+	</select>
+	<!-- 有数据航线-->
+	<select id="findOnlineDataList" parameterType="java.lang.String" resultType="java.lang.String">
+		select air_line airLine from airlineCompany 
+		<where>
+		<if test="_parameter != null and _parameter !=''">
+			and itia =#{_parameter}
+			and air_line LIKE CONCAT('%','${_parameter}','%' ) 
+		</if>
+		</where>
+	</select>
+</mapper> 

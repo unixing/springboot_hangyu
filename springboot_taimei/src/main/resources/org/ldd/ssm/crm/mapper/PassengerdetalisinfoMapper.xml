@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- dao的sql语句执行方法的映射文件 -->
+<!-- 命名空间必须和dao接口类的全限定类名一致 -->
+<mapper namespace="org.ldd.ssm.crm.mapper.PassengerdetalisinfoMapper">
+
+	<!-- id的值必须和dao接口类里面的方法名一致 -->
+	<select id="get" resultType="string" parameterType="string">
+		SELECT IATA
+		FROM extractcode WHERE Cty_Cha_Nm=#{name}
+	</select>
+	<select id="list" resultType="string" parameterType="string">
+		SELECT
+		Cty_Cha_Nm
+		FROM extractcode
+	</select>
+	<insert id="save" parameterType="Eachflightinfo">
+		INSERT INTO
+		eachflightinfo(dpt_AirPt_Cd,arrv_Airpt_Cd,flt_nbr,airCrft_Typ,dpt_AirPt_pot,lcl_Dpt_Tm,arrv_Airpt_pot,lcl_Arrv_Tm,days,get_tim)
+		values(#{dpt_AirPt_Cd},#{arrv_Airpt_Cd},#{flt_nbr},#{airCrft_Typ},#{dpt_AirPt_pot},#{lcl_Dpt_Tm},#{arrv_Airpt_pot},#{lcl_Arrv_Tm},#{days},#{get_tim})
+	</insert>
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			<if test="fieldArray!=null and fieldArray!=''">
+				<foreach collection="fieldArray" item="field" index="index"
+					open="" separator="," close="">
+					${field}
+				</foreach>
+			</if>
+		</trim>
+	</sql>
+	<sql id="page">
+		<where>
+			<if test="dpt_AirPt_Cd!=null">
+				AND e.dpt_AirPt_Cd = #{dpt_AirPt_Cd}
+			</if>
+			<if test="arrv_Airpt_Cd!=null">
+				AND e.arrv_Airpt_Cd = #{arrv_Airpt_Cd}
+			</if>
+			<if test="get_tim!=null">
+				AND DATE_FORMAT(e.crwl_created_time,'%Y-%m-%d') = #{get_tim}
+			</if>
+			<if test="mu!='' and mu!=null">
+				And e.flt_nbr like CONCAT(#{mu}, '%')
+			</if>
+			<if test="dpt_AirPt_Cd_itia!=null and dpt_AirPt_Cd_itia!=''">
+				And e.dpt_AirPt_Cd_itia = #{dpt_AirPt_Cd_itia}
+			</if>
+			<if test="arrv_Airpt_Cd_itia!=null and arrv_Airpt_Cd_itia!=''">
+				And e.arrv_Airpt_Cd_itia = #{arrv_Airpt_Cd_itia}
+			</if>
+		</where>
+	</sql>
+	<sql id="pageAll">
+		<where>
+			<if test="dpt_AirPt_Cd!=null">
+				AND (e.dpt_AirPt_Cd = #{dpt_AirPt_Cd}
+			</if>
+			<if test="dpt_AirPt_Cd!=null">
+				or e.arrv_Airpt_Cd = #{dpt_AirPt_Cd})
+			</if>
+			<if test="arrv_Airpt_Cd!=null">
+				AND (e.dpt_AirPt_Cd = #{arrv_Airpt_Cd}
+			</if>
+			<if test="arrv_Airpt_Cd!=null">
+				or e.arrv_Airpt_Cd = #{arrv_Airpt_Cd})
+			</if>
+			<if test="get_tim!=null">
+				AND DATE_FORMAT(e.crwl_created_time,'%Y-%m-%d') = #{get_tim}
+			</if>
+			<if test="mu!='' and mu!=null">
+				And e.flt_nbr like CONCAT(#{mu}, '%')
+			</if>
+			<if test="dpt_AirPt_Cd_itia!=null and dpt_AirPt_Cd_itia!=''">
+				And (e.dpt_AirPt_Cd_itia = #{dpt_AirPt_Cd_itia}
+			</if>
+			<if test="dpt_AirPt_Cd_itia!=null and dpt_AirPt_Cd_itia!=''">
+				or e.arrv_Airpt_Cd_itia = #{dpt_AirPt_Cd_itia})
+			</if>
+			<if test="arrv_Airpt_Cd_itia!=null and arrv_Airpt_Cd_itia!=''">
+				And (e.dpt_AirPt_Cd_itia = #{arrv_Airpt_Cd_itia}
+			</if>
+			<if test="arrv_Airpt_Cd_itia!=null and arrv_Airpt_Cd_itia!=''">
+				or e.arrv_Airpt_Cd_itia = #{arrv_Airpt_Cd_itia})
+			</if>
+		</where>
+	</sql>
+	<sql id="pageToRoRreturn">
+		<where>
+			<if
+				test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd !='' and arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+				AND ((e.dpt_AirPt_Cd = #{dpt_AirPt_Cd} AND e.arrv_Airpt_Cd =
+				#{arrv_Airpt_Cd}) or (e.dpt_AirPt_Cd = #{arrv_Airpt_Cd} AND
+				e.arrv_Airpt_Cd = #{dpt_AirPt_Cd}))
+			</if>
+			<if
+				test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!='' and (arrv_Airpt_Cd==null or arrv_Airpt_Cd =='')">
+				AND (e.dpt_AirPt_Cd = #{dpt_AirPt_Cd} or e.arrv_Airpt_Cd =
+				#{dpt_AirPt_Cd})
+			</if>
+			<if
+				test="(dpt_AirPt_Cd==null and dpt_AirPt_Cd=='') and arrv_Airpt_Cd !=null and arrv_Airpt_Cd !=''">
+				AND (e.dpt_AirPt_Cd = #{arrv_Airpt_Cd} or e.arrv_Airpt_Cd =
+				#{arrv_Airpt_Cd})
+			</if>
+			<if test="get_tim!=null">
+				AND DATE_FORMAT(e.crwl_created_time,'%Y-%m-%d') = #{get_tim}
+			</if>
+			<if test="mu!='' and mu!=null">
+				And e.flt_nbr like CONCAT(#{mu}, '%')
+			</if>
+			<if
+				test="dpt_AirPt_Cd_itia!=null and dpt_AirPt_Cd_itia!='' and arrv_Airpt_Cd_itia!=null and arrv_Airpt_Cd_itia!=''">
+				And ((e.dpt_AirPt_Cd_itia = #{dpt_AirPt_Cd_itia} And
+				e.arrv_Airpt_Cd_itia = #{arrv_Airpt_Cd_itia}) or
+				(e.dpt_AirPt_Cd_itia = #{arrv_Airpt_Cd_itia} And
+				e.arrv_Airpt_Cd_itia = #{dpt_AirPt_Cd_itia}))
+			</if>
+			<if
+				test="dpt_AirPt_Cd_itia!=null and dpt_AirPt_Cd_itia!='' and (arrv_Airpt_Cd_itia==null or arrv_Airpt_Cd_itia=='')">
+				And (e.dpt_AirPt_Cd_itia = #{dpt_AirPt_Cd_itia} or
+				e.arrv_Airpt_Cd_itia = #{dpt_AirPt_Cd_itia})
+			</if>
+			<if
+				test="arrv_Airpt_Cd_itia!=null and arrv_Airpt_Cd_itia!='' and (dpt_AirPt_Cd_itia==null or dpt_AirPt_Cd_itia =='')">
+				And (e.dpt_AirPt_Cd_itia = #{arrv_Airpt_Cd_itia} or
+				e.arrv_Airpt_Cd_itia = #{arrv_Airpt_Cd_itia})
+			</if>
+		</where>
+	</sql>
+	<!-- 高级查询加分页 -->
+	<select id="query" resultType="Eachflightinfo" parameterType="ProcessTaskQuery">
+		select distinct e.dpt_AirPt_Cd,e.arrv_Airpt_Cd,e.flt_nbr,
+		e.airCrft_Typ,e.dpt_AirPt_pot,e.lcl_Dpt_Tm,e.arrv_Airpt_pot,
+		e.lcl_Arrv_Tm,e.days
+		from eachflightinfo e
+		<include refid="page" />
+		ORDER BY e.dpt_AirPt_Cd
+		<if test="limit!=null and offset!=null">
+			limit #{offset},#{limit}
+		</if>
+	</select>
+
+	<!-- 高级查询加分页查询八天最新有数据的日期 -->
+	<select id="getNewEstCollectDate" resultType="String"
+		parameterType="ProcessTaskQuery">
+		select DISTINCT DATE_FORMAT(crwl_created_time,'%Y-%m-%d') crwl_created_time from
+		eachflightinfo where crwl_created_time != 'null' order by crwl_created_time
+	</select>
+
+	<!-- 高级查询加分页 -->
+	<select id="queryByIata" resultType="Eachflightinfo"
+		parameterType="ProcessTaskQuery">
+		select
+		<include refid="columnList" />
+		from eachflightinfo e
+		<include refid="page" />
+		<if test="dptTmStart!=null and dptTmStart!=''">
+			And e.lcl_Dpt_Tm &gt;= #{dptTmStart}
+		</if>
+		<if test="dptTmEnd!=null and dptTmEnd!=''">
+			And e.lcl_Dpt_Tm &lt;= #{dptTmEnd}
+		</if>
+		<if test="arrvTmStart!=null and arrvTmStart!=''">
+			And e.lcl_Arrv_Tm &gt;= #{arrvTmStart}
+		</if>
+		<if test="arrvTmEnd!=null and arrvTmEnd!=''">
+			And e.lcl_Arrv_Tm &lt;= #{arrvTmEnd}
+		</if>
+		<!-- <if test="fltNbrSort!=null and fltNbrSort!=''">
+			ORDER BY e.flt_nbr ${fltNbrSort}
+		</if>
+		<if test="dptTmSort!=null and dptTmSort!=''">
+			ORDER BY e.lcl_Dpt_Tm ${dptTmSort}
+		</if>
+		<if test="arrvTmSort!=null and arrvTmSort!=''">
+			ORDER BY e.lcl_Arrv_Tm ${arrvTmSort}
+		</if> -->
+		<if test="sorttype==1">
+			ORDER BY e.flt_nbr ${fltNbrSort},e.lcl_Dpt_Tm ASC,e.lcl_Arrv_Tm ASC
+		</if>
+		<if test="sorttype==2">
+			ORDER BY e.lcl_Dpt_Tm ${dptTmSort},e.lcl_Arrv_Tm ASC,e.flt_nbr ASC
+		</if>
+		<if test="sorttype==3">
+			ORDER BY e.lcl_Arrv_Tm ${arrvTmSort},e.lcl_Dpt_Tm ASC,e.flt_nbr ASC
+		</if>
+		<if test="limit!=null and offset!=null">
+			limit #{offset},#{limit}
+		</if>
+	</select>
+	<!-- 高级查询加分页 -->
+	<select id="queryAll" resultType="Eachflightinfo" parameterType="ProcessTaskQuery">
+		select distinct e.dpt_AirPt_Cd,e.arrv_Airpt_Cd,e.flt_nbr,
+		e.airCrft_Typ,e.dpt_AirPt_pot,e.lcl_Dpt_Tm,e.arrv_Airpt_pot,
+		e.lcl_Arrv_Tm,e.days
+		from eachflightinfo e
+		<include refid="pageAll" />
+		ORDER BY e.dpt_AirPt_Cd
+		<if test="limit!=null and offset!=null">
+			limit #{offset},#{limit}
+		</if>
+	</select>
+	<select id="queryAllByIata" resultType="Eachflightinfo"
+		parameterType="ProcessTaskQuery">
+		select
+		<include refid="columnList" />
+		from eachflightinfo e
+		<include refid="pageAll" />
+		<if test="dptTmStart!=null and dptTmStart!=''">
+			And e.lcl_Dpt_Tm &gt;= #{dptTmStart}
+		</if>
+		<if test="dptTmEnd!=null and dptTmEnd!=''">
+			And e.lcl_Dpt_Tm &lt;= #{dptTmEnd}
+		</if>
+		<if test="arrvTmStart!=null and arrvTmStart!=''">
+			And e.lcl_Arrv_Tm &gt;= #{arrvTmStart}
+		</if>
+		<if test="arrvTmEnd!=null and arrvTmEnd!=''">
+			And e.lcl_Arrv_Tm &lt;= #{arrvTmEnd}
+		</if>
+		<if test="fltNbrSort!=null and fltNbrSort!=''">
+			ORDER BY e.flt_nbr ${fltNbrSort}
+		</if>
+		<if test="dptTmSort!=null and dptTmSort!=''">
+			ORDER BY e.lcl_Dpt_Tm ${dptTmSort}
+		</if>
+		<if test="arrvTmSort!=null and arrvTmSort!=''">
+			ORDER BY e.lcl_Arrv_Tm ${arrvTmSort}
+		</if>
+		<if test="limit!=null and offset!=null">
+			limit #{offset},#{limit}
+		</if>
+	</select>
+	<!-- 高级查询加分页 -->
+	<select id="queryToRoRreturn" resultType="Eachflightinfo"
+		parameterType="ProcessTaskQuery">
+		select distinct e.dpt_AirPt_Cd,e.arrv_Airpt_Cd,e.flt_nbr,
+		e.airCrft_Typ,e.dpt_AirPt_pot,e.lcl_Dpt_Tm,e.arrv_Airpt_pot,
+		e.lcl_Arrv_Tm,e.days
+		from eachflightinfo e
+		<include refid="pageToRoRreturn" />
+		ORDER BY
+		<trim prefix="" suffix="" suffixOverrides=",">
+			<if test="dpt_AirPt_Cd !=null and dpt_AirPt_Cd != ''">
+				e.dpt_AirPt_Cd,
+			</if>
+			<if test="arrv_Airpt_Cd !=null and arrv_Airpt_Cd != ''">
+				e.arrv_Airpt_Cd,
+			</if>
+		</trim>
+
+		<if test="limit!=null and offset!=null">
+			limit #{offset},#{limit}
+		</if>
+	</select>
+	<select id="queryToRoRreturnByIata" resultType="Eachflightinfo"
+		parameterType="ProcessTaskQuery">
+		select
+		<include refid="columnList" />
+		from eachflightinfo e
+		<include refid="pageToRoRreturn" />
+		<if test="dptTmStart!=null and dptTmStart!=''">
+			And e.lcl_Dpt_Tm &gt;= #{dptTmStart}
+		</if>
+		<if test="dptTmEnd!=null and dptTmEnd!=''">
+			And e.lcl_Dpt_Tm &lt;= #{dptTmEnd}
+		</if>
+		<if test="arrvTmStart!=null and arrvTmStart!=''">
+			And e.lcl_Arrv_Tm &gt;= #{arrvTmStart}
+		</if>
+		<if test="arrvTmEnd!=null and arrvTmEnd!=''">
+			And e.lcl_Arrv_Tm &lt;= #{arrvTmEnd}
+		</if>
+		<if test="fltNbrSort!=null and fltNbrSort!=''">
+			ORDER BY e.flt_nbr ${fltNbrSort}
+		</if>
+		<if test="dptTmSort!=null and dptTmSort!=''">
+			ORDER BY e.lcl_Dpt_Tm ${dptTmSort}
+		</if>
+		<if test="arrvTmSort!=null and arrvTmSort!=''">
+			ORDER BY e.lcl_Arrv_Tm ${arrvTmSort}
+		</if>
+		<if test="limit!=null and offset!=null">
+			limit #{offset},#{limit}
+		</if>
+	</select>
+
+	<select id="queryTotal" resultType="int" parameterType="ProcessTaskQuery">
+		select count(distinct e.dpt_AirPt_Cd,e.arrv_Airpt_Cd,e.flt_nbr,
+		e.airCrft_Typ,e.dpt_AirPt_pot,e.lcl_Dpt_Tm,e.arrv_Airpt_pot,e.lcl_Arrv_Tm,e.days)
+		from eachflightinfo e
+		<include refid="page" />
+	</select>
+	<select id="queryTotalByIata" resultType="int" parameterType="ProcessTaskQuery">
+		select count(*) from eachflightinfo e
+		<include refid="page" />
+		<if test="dptTmStart!=null and dptTmStart!=''">
+			And e.lcl_Dpt_Tm &gt;= #{dptTmStart}
+		</if>
+		<if test="dptTmEnd!=null and dptTmEnd!=''">
+			And e.lcl_Dpt_Tm &lt;= #{dptTmEnd}
+		</if>
+		<if test="arrvTmStart!=null and arrvTmStart!=''">
+			And e.lcl_Arrv_Tm &gt;= #{arrvTmStart}
+		</if>
+		<if test="arrvTmEnd!=null and arrvTmEnd!=''">
+			And e.lcl_Arrv_Tm &lt;= #{arrvTmEnd}
+		</if>
+	</select>
+	<select id="queryTotalAll" resultType="int" parameterType="ProcessTaskQuery">
+		select count(distinct e.dpt_AirPt_Cd,e.arrv_Airpt_Cd,e.flt_nbr,
+		e.airCrft_Typ,e.dpt_AirPt_pot,e.lcl_Dpt_Tm,e.arrv_Airpt_pot,e.lcl_Arrv_Tm,e.days)
+		from eachflightinfo e
+		<include refid="pageAll" />
+	</select>
+	<select id="queryTotalAllByIata" resultType="int" parameterType="ProcessTaskQuery">
+		select count(*) from eachflightinfo e
+		<include refid="pageAll" />
+		<if test="dptTmStart!=null and dptTmStart!=''">
+			And e.lcl_Dpt_Tm &gt;= #{dptTmStart}
+		</if>
+		<if test="dptTmEnd!=null and dptTmEnd!=''">
+			And e.lcl_Dpt_Tm &lt;= #{dptTmEnd}
+		</if>
+		<if test="arrvTmStart!=null and arrvTmStart!=''">
+			And e.lcl_Arrv_Tm &gt;= #{arrvTmStart}
+		</if>
+		<if test="arrvTmEnd!=null and arrvTmEnd!=''">
+			And e.lcl_Arrv_Tm &lt;= #{arrvTmEnd}
+		</if>
+	</select>
+	<select id="queryTotalToRoRreturn" resultType="int"
+		parameterType="ProcessTaskQuery">
+		select count(distinct e.dpt_AirPt_Cd,e.arrv_Airpt_Cd,e.flt_nbr,
+		e.airCrft_Typ,e.dpt_AirPt_pot,e.lcl_Dpt_Tm,e.arrv_Airpt_pot,e.lcl_Arrv_Tm,e.days)
+		from eachflightinfo e
+		<include refid="pageToRoRreturn" />
+	</select>
+	<select id="queryTotalToRoRreturnByIata" resultType="int"
+		parameterType="ProcessTaskQuery">
+		select count(*) from eachflightinfo e
+		<include refid="pageToRoRreturn" />
+		<if test="dptTmStart!=null and dptTmStart!=''">
+			And e.lcl_Dpt_Tm &gt;= #{dptTmStart}
+		</if>
+		<if test="dptTmEnd!=null and dptTmEnd!=''">
+			And e.lcl_Dpt_Tm &lt;= #{dptTmEnd}
+		</if>
+		<if test="arrvTmStart!=null and arrvTmStart!=''">
+			And e.lcl_Arrv_Tm &gt;= #{arrvTmStart}
+		</if>
+		<if test="arrvTmEnd!=null and arrvTmEnd!=''">
+			And e.lcl_Arrv_Tm &lt;= #{arrvTmEnd}
+		</if>
+	</select>
+	<!-- 生成所有数据库名和表名,字段名 -->
+	<select id="databaseTableName" resultType="TableName">
+
+		select table_name,table_comment from TABLES where TABLE_SCHEMA='taimei_air'
+	</select>
+	<select id="databaseTableName1" resultType="TableName">
+		use
+		information_schema
+	</select>
+	<select id="databaseTableName3" resultType="TableAnnotation"
+		parameterType="string">
+		select * from information_schema.columns where
+		table_schema ='taimei_air' and table_name = #{tableName};
+	</select>
+
+	<select id="queryPort" resultType="Eachflightinfo"
+		parameterType="ProcessTaskQuery">
+		select e.dpt_AirPt_Cd,e.arrv_Airpt_Cd,e.flt_nbr,
+		e.airCrft_Typ,e.dpt_AirPt_pot,e.lcl_Dpt_Tm,e.arrv_Airpt_pot,
+		e.lcl_Arrv_Tm,e.days
+		from eachflightinfo e
+		<include refid="page" />
+	</select>
+	<select id="queryPortReturn" resultType="Eachflightinfo"
+		parameterType="ProcessTaskQuery">
+		select e.dpt_AirPt_Cd,e.arrv_Airpt_Cd,e.flt_nbr,
+		e.airCrft_Typ,e.dpt_AirPt_pot,e.lcl_Dpt_Tm,e.arrv_Airpt_pot,
+		e.lcl_Arrv_Tm,e.days
+		from eachflightinfo e
+		<include refid="pageToRoRreturn" />
+	</select>
+	<!-- 查询所有的采集时间 -->
+	<select id="getAll" resultType="AcquisitionTime">
+		select distinct get_tim as
+		lcl_Dpt_Day from eachflightinfo
+	</select>
+</mapper>

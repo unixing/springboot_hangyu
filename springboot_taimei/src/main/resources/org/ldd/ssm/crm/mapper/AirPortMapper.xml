@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.AirPortMapper">
+	<!-- 添删改 正式系统中没有使用，只是为了测试-->
+	<insert id="save" parameterType="AirPort">
+		insert into
+		eachflightinfo(Lcl_Dpt_Day,Dpt_AirPt_Cd,Arrv_Airpt_Cd,Yb_Pri,Flt_nbr,AirCrft_Typ,Cls_Cpn_Qty
+		,AirCrft_Reg_Nbr,Airln_cd,Flt_Rte_Cd,Lcl_Dpt_Tm,Lcl_Arrv_Tm,Seats,Gosh_Ind,Nosh_Ind,Chile_Pax_Qty,Inft_Qty
+		,uuid,Dat_Gat_Tme,Dat_Gat_Acc_Nbr,Dat_Gat_Ist)values(#{Lcl_Dpt_Day},#{Dpt_AirPt_Cd},#{Arrv_Airpt_Cd},#{Yb_Pri},#{Flt_nbr},#{AirCrft_Typ},#{Cls_Cpn_Qty
+		},#{AirCrft_Reg_Nbr},#{Airln_cd},#{Flt_Rte_Cd},#{Lcl_Dpt_Tm},#{Lcl_Arrv_Tm},#{Seats},#{Gosh_Ind},#{Nosh_Ind},#{Chile_Pax_Qty},#{Inft_Qty
+		},#{uuid},#{Dat_Gat_Tme},#{Dat_Gat_Acc_Nbr},#{Dat_Gat_Ist})
+	</insert>
+	<insert id="save2" parameterType="Traveler">
+		insert into
+		traveler(Pax_Id_Nbr,Tit_Pre,Frt_Spe,Grp_Ind,Bk_Ofc_Cd,Rsp_Ofc_Cd,Pen_Tye,TKT_No,uuid)
+		values(#{Pax_Id_Nbr},#{Tit_Pre},#{Frt_Spe},#{Grp_Ind},#{Bk_Ofc_Cd},#{Rsp_Ofc_Cd},#{Pen_Tye},#{TKT_No},#{uuid})
+	</insert>
+	<insert id="save3" parameterType="Passengerdetalisinfo">
+		insert into
+		passengerdetalisinfo(Pax_Chn_Nm,Pax_Id_Nbr,Pax_Enh_Nm,Pax_Bdy,Pax_Sex,Pax_Eml,Pax_Pho,Pax_ads,Pax_Qq,Vip_Ind,Pax_Pat_No,Pax_Diy_Hat,country)
+		values(#{Pax_Chn_Nm},#{Pax_Id_Nbr},#{Pax_Enh_Nm},#{Pax_Bdy},#{Pax_Sex},#{Pax_Eml},#{Pax_Pho},#{Pax_ads},#{Pax_Qq},#{Vip_Ind},#{Pax_Pat_No},#{Pax_Diy_Hat},#{country})
+	</insert>
+
+</mapper> 

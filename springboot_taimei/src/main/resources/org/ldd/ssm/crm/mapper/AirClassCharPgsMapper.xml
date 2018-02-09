@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.AirClassCharPgsMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.AirClassCharPgs" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="Dct_Chr" property="dctChr" jdbcType="VARCHAR" />
+    <result column="Dct_pgs" property="dctPgs" jdbcType="VARCHAR" />
+    <result column="guestrateFlpj_id" property="guestrateflpjId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, Dct_Chr, Dct_pgs, guestrateFlpj_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from airClassCharPgs
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from airClassCharPgs
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.crm.domain.AirClassCharPgs" >
+    insert into airClassCharPgs (id, Dct_Chr, Dct_pgs, 
+      guestrateFlpj_id)
+    values (#{id,jdbcType=BIGINT}, #{dctChr,jdbcType=VARCHAR}, #{dctPgs,jdbcType=VARCHAR}, 
+      #{guestrateflpjId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.AirClassCharPgs" >
+    insert into airClassCharPgs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dctChr != null" >
+        Dct_Chr,
+      </if>
+      <if test="dctPgs != null" >
+        Dct_pgs,
+      </if>
+      <if test="guestrateflpjId != null" >
+        guestrateFlpj_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dctChr != null" >
+        #{dctChr,jdbcType=VARCHAR},
+      </if>
+      <if test="dctPgs != null" >
+        #{dctPgs,jdbcType=VARCHAR},
+      </if>
+      <if test="guestrateflpjId != null" >
+        #{guestrateflpjId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.AirClassCharPgs" >
+    update airClassCharPgs
+    <set >
+      <if test="dctChr != null" >
+        Dct_Chr = #{dctChr,jdbcType=VARCHAR},
+      </if>
+      <if test="dctPgs != null" >
+        Dct_pgs = #{dctPgs,jdbcType=VARCHAR},
+      </if>
+      <if test="guestrateflpjId != null" >
+        guestrateFlpj_id = #{guestrateflpjId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.AirClassCharPgs" >
+    update airClassCharPgs
+    set Dct_Chr = #{dctChr,jdbcType=VARCHAR},
+      Dct_pgs = #{dctPgs,jdbcType=VARCHAR},
+      guestrateFlpj_id = #{guestrateflpjId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

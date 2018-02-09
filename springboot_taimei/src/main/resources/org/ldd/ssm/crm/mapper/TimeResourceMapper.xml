@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.TimeResourceMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.TimeResource">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="terminal" property="terminal" jdbcType="VARCHAR" />
+		<result column="proofread_airline" property="proofreadAirline"
+			jdbcType="VARCHAR" />
+		<result column="flight_nbr" property="flightNbr" jdbcType="VARCHAR" />
+		<result column="air_route" property="airRoute" jdbcType="VARCHAR" />
+		<result column="plane_type" property="planeType" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, terminal, proofread_airline, flight_nbr, air_route, plane_type
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from t_time_resource
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from t_time_resource
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.TimeResource">
+		insert into t_time_resource (id, terminal, proofread_airline,
+		flight_nbr, air_route, plane_type
+		)
+		values (#{id,jdbcType=INTEGER}, #{terminal,jdbcType=VARCHAR},
+		#{proofreadAirline,jdbcType=VARCHAR},
+		#{flightNbr,jdbcType=VARCHAR}, #{airRoute,jdbcType=VARCHAR}, #{planeType,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.TimeResource">
+		insert into t_time_resource
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="terminal != null">
+				terminal,
+			</if>
+			<if test="proofreadAirline != null">
+				proofread_airline,
+			</if>
+			<if test="flightNbr != null">
+				flight_nbr,
+			</if>
+			<if test="airRoute != null">
+				air_route,
+			</if>
+			<if test="planeType != null">
+				plane_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="terminal != null">
+				#{terminal,jdbcType=VARCHAR},
+			</if>
+			<if test="proofreadAirline != null">
+				#{proofreadAirline,jdbcType=VARCHAR},
+			</if>
+			<if test="flightNbr != null">
+				#{flightNbr,jdbcType=VARCHAR},
+			</if>
+			<if test="airRoute != null">
+				#{airRoute,jdbcType=VARCHAR},
+			</if>
+			<if test="planeType != null">
+				#{planeType,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.TimeResource">
+		update t_time_resource
+		<set>
+			<if test="terminal != null">
+				terminal = #{terminal,jdbcType=VARCHAR},
+			</if>
+			<if test="proofreadAirline != null">
+				proofread_airline = #{proofreadAirline,jdbcType=VARCHAR},
+			</if>
+			<if test="flightNbr != null">
+				flight_nbr = #{flightNbr,jdbcType=VARCHAR},
+			</if>
+			<if test="airRoute != null">
+				air_route = #{airRoute,jdbcType=VARCHAR},
+			</if>
+			<if test="planeType != null">
+				plane_type = #{planeType,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.TimeResource">
+		update t_time_resource
+		set terminal = #{terminal,jdbcType=VARCHAR},
+		proofread_airline = #{proofreadAirline,jdbcType=VARCHAR},
+		flight_nbr = #{flightNbr,jdbcType=VARCHAR},
+		air_route = #{airRoute,jdbcType=VARCHAR},
+		plane_type = #{planeType,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectByName" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_time_resource
+		where 1=1
+		<if test="name !=null and name != ''">
+			and terminal like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+</mapper>

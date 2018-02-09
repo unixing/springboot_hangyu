@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ <mapper namespace="org.ldd.ssm.crm.mapper.WatchFlightMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.WatchFlight" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="flt_nbr" property="fltNbr" jdbcType="VARCHAR" />
+    <result column="Dpt_AirPt_Cd" property="dptAirptCd" jdbcType="VARCHAR" />
+    <result column="Arrv_Airpt_Cd" property="arrvAirptCd" jdbcType="VARCHAR" />
+    <result column="TKTIncome_id" property="tktincomeId" jdbcType="BIGINT" />
+    <result column="start_watch_time" property="startWatchTime" jdbcType="VARCHAR" />
+    <result column="end_watch_time" property="endWatchTime" jdbcType="VARCHAR" />
+    <result column="up_price" property="upPrice" jdbcType="VARCHAR" />
+    <result column="down_price" property="downPrice" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_tel" property="userTel" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, flt_nbr, Dpt_AirPt_Cd, Arrv_Airpt_Cd, TKTIncome_id, start_watch_time, end_watch_time, 
+    up_price, down_price, user_id, user_tel, state
+  </sql>
+  <select id="findWatchFlight" resultType="org.ldd.ssm.crm.query.WatchFlightDto" parameterType="java.lang.String" >
+    select b.flt_nbr relFltNbr, b.Dpt_AirPt_Cd relDptAirptCd, b.Arrv_Airpt_Cd relArrvAirptCd,a.flt_nbr fltNbr, a.Dpt_AirPt_Cd dptAirptCd, a.Arrv_Airpt_Cd arrvAirptCd,a.TKTIncome_id tktincomeId, a.start_watch_time startWatchTime, a.end_watch_time endWatchTime,
+    a.up_price upPrice, a.down_price downPrice,a.user_id userId, a.user_tel userTel,a.user_email userEmail
+    from watch_flight a  left join TKTIncome b on a.TKTIncome_id=b.id
+    <![CDATA[where a.state='1' and  a.start_watch_time<=#{currentTime} and a.end_watch_time>=#{currentTime}]]>
+  </select>
+  
+  <delete id="deleteByTktId" parameterType="java.lang.Long" >
+    delete from watch_flight
+    where TKTIncome_id = #{tktincomeId,jdbcType=BIGINT}
+  </delete>
+  
+   <delete id="batchDeleteByTktId" parameterType="java.util.List">
+    delete from watch_flight
+     where TKTIncome_id in 
+     <foreach collection="list" index="index" item="item" open="(" separator="," close=")">    
+          #{item.id}    
+     </foreach> 
+  </delete>
+  
+  <insert id="insert" parameterType="org.ldd.ssm.crm.query.WatchFlightDto" >
+    insert into watch_flight ( flt_nbr, Dpt_AirPt_Cd,Arrv_Airpt_Cd,Rel_Dpt_AirPt_Cd, 
+      Rel_Arrv_Airpt_Cd, TKTIncome_id, start_watch_time, 
+      end_watch_time, up_price, down_price, 
+      user_id, user_tel,user_email, state
+      )
+    values (#{fltNbr,jdbcType=VARCHAR}, #{dptAirptCd,jdbcType=VARCHAR},#{arrvAirptCd,jdbcType=VARCHAR}, 
+    #{relDptAirptCd,jdbcType=VARCHAR},#{relArrvAirptCd,jdbcType=VARCHAR}, 
+    #{tktincomeId,jdbcType=BIGINT}, #{startWatchTime,jdbcType=VARCHAR}, 
+      #{endWatchTime,jdbcType=VARCHAR}, #{upPrice,jdbcType=VARCHAR}, #{downPrice,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=BIGINT}, #{userTel,jdbcType=VARCHAR},#{userEmail,jdbcType=VARCHAR},#{state,jdbcType=VARCHAR}
+      )
+  </insert>
+
+<update id="batchUpdate" parameterType="org.ldd.ssm.crm.query.FlightManageInDto" >
+    update watch_flight
+    <set >
+      <if test="watchFlight.upPrice != null" >
+        up_price = #{watchFlight.upPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="watchFlight.downPrice != null" >
+        down_price = #{watchFlight.downPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="watchFlight.startWatchTime != null" >
+        start_watch_time = #{watchFlight.startWatchTime,jdbcType=VARCHAR},
+      </if>
+      <if test="watchFlight.endWatchTime != null" >
+        end_watch_time = #{watchFlight.endWatchTime,jdbcType=VARCHAR},
+      </if>
+       <if test="watchFlight.state != null" >
+        state = #{watchFlight.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <where>  TKTIncome_id  in     
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">    
+            #{item.id}    
+        </foreach> 
+    </where>  
+  </update>
+
+
+<!-- 修改管理航班后联动修改监控 -->
+  <update id="updateByTKTIncome" parameterType="org.ldd.ssm.crm.domain.TKTIncome" >
+    update watch_flight
+    <set >
+      <if test="fltNbr != null" >
+        flt_nbr = #{fltNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="dptAirptCd != null" >
+        Dpt_AirPt_Cd = #{dptAirptCd,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvAirptCd != null" >
+        Arrv_Airpt_Cd = #{arrvAirptCd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where  TKTIncome_id = #{tktincomeId,jdbcType=BIGINT}
+  </update>
+<!--   获得涨跌提醒的初始值 -->
+  <select id="getWatchFlight" parameterType="org.ldd.ssm.crm.domain.WatchFlight" resultType="org.ldd.ssm.crm.domain.WatchFlight">
+  select 
+    id,start_watch_time startWatchTime, end_watch_time endWatchTime, 
+    up_price upPrice, down_price downPrice,state
+    from watch_flight
+    <where>
+      <if test="fltNbr != null and fltNbr !=''" >
+      and   flt_nbr = #{fltNbr,jdbcType=VARCHAR}
+      </if>
+      <if test="dptAirptCd != null and dptAirptCd !=''" >
+       and Dpt_AirPt_Cd = #{dptAirptCd,jdbcType=VARCHAR}
+      </if>
+      <if test="arrvAirptCd != null and arrvAirptCd !=''" >
+      and  Arrv_Airpt_Cd = #{arrvAirptCd,jdbcType=VARCHAR}
+      </if>
+       <if test="userId != null " >
+       and user_id =#{userId}
+      </if>
+    </where>
+    limit 1
+  </select>
+  
+  <insert id="batchInsert" parameterType="org.ldd.ssm.crm.query.FlightManageInDto" >
+    insert into watch_flight ( flt_nbr, Dpt_AirPt_Cd, Rel_Dpt_AirPt_Cd, 
+      Rel_Arrv_Airpt_Cd,
+      Arrv_Airpt_Cd, TKTIncome_id, start_watch_time, 
+      end_watch_time, up_price, down_price, 
+      user_id, user_tel,user_email, state
+      )
+    values
+     <foreach collection="list" item="item" index="index" separator="," >  
+     (#{currentFlight.fltNbr,jdbcType=VARCHAR}, #{currentFlight.dptAirptCd,jdbcType=VARCHAR}, 
+     #{item.dptAirptCd,jdbcType=VARCHAR},#{item.arrvAirptCd,jdbcType=VARCHAR},
+      #{currentFlight.arrvAirptCd,jdbcType=VARCHAR}, #{item.id,jdbcType=BIGINT}, #{watchFlight.startWatchTime,jdbcType=VARCHAR}, 
+      #{watchFlight.endWatchTime,jdbcType=VARCHAR}, #{watchFlight.upPrice,jdbcType=VARCHAR}, #{watchFlight.downPrice,jdbcType=VARCHAR}, 
+      #{watchFlight.userId,jdbcType=BIGINT}, #{watchFlight.userTel,jdbcType=VARCHAR}, #{watchFlight.userEmail,jdbcType=VARCHAR},#{watchFlight.state,jdbcType=VARCHAR}
+      )
+   </foreach>  
+  </insert>
+  
+  <select id="getWatchFlightCount" parameterType="org.ldd.ssm.crm.domain.WatchFlight" resultType="int">
+  select count(*) from watch_flight where 
+       flt_nbr = #{fltNbr,jdbcType=VARCHAR}
+       and Dpt_AirPt_Cd = #{dptAirptCd,jdbcType=VARCHAR}
+       and  Arrv_Airpt_Cd = #{arrvAirptCd,jdbcType=VARCHAR}
+       and user_id =#{userId}
+       and state=#{state}
+  </select>
+  
+</mapper>

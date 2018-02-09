@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.ApplyMeasureHistoryMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.ApplyMeasureHistory" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="Flt_Rte_Cd" property="fltRteCd" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="apply_measure_time" property="applyMeasureTime" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="CHAR" />
+    <result column="distance" property="distance" jdbcType="REAL" />
+    <result column="aircompanyName" property="aircompanyName" jdbcType="VARCHAR" />
+    <result column="aircompanyId" property="aircompanyId" jdbcType="BIGINT" />
+    <result column="aircraft_model" property="aircraftModel" jdbcType="VARCHAR" />
+    <result column="sites" property="sites" jdbcType="VARCHAR" />
+    <result column="hour_cost" property="hourCost" jdbcType="REAL" />
+    <result column="speed" property="speed" jdbcType="REAL" />
+  </resultMap>
+ 
+  <!-- 插入 -->
+  <insert id="insertApplyMeasure" parameterType="org.ldd.ssm.crm.domain.ApplyMeasureHistory" >
+    insert into apply_measure_history (Flt_Rte_Cd, start_time, 
+      end_time, user_id, apply_measure_time, 
+      state, distance, aircompany_name,aircompany_id, 
+      aircraft_model, sites, hour_cost,roundInTime,
+      speed)
+    values (#{fltRteCd,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{applyMeasureTime,jdbcType=VARCHAR}, 
+      #{state,jdbcType=CHAR}, #{distance,jdbcType=REAL}, #{aircompanyName,jdbcType=VARCHAR}, #{aircompanyId,jdbcType=BIGINT},
+      #{aircraftModel,jdbcType=VARCHAR}, #{sites,jdbcType=VARCHAR}, #{hourCost,jdbcType=REAL}, #{ldsj,jdbcType=VARCHAR},
+      #{speed,jdbcType=REAL})
+  </insert>
+  <!-- 修改状态 -->
+  <update id="updateState" parameterType="org.ldd.ssm.crm.domain.ApplyMeasureHistory" >
+    update apply_measure_history
+    set  state = #{state,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!-- 查询列表 根据用户id 查询 -->
+   <select id="findApplyMeasureList" resultType="org.ldd.ssm.crm.domain.ApplyMeasureHistory" parameterType="java.lang.Long" >
+    select 
+      id,Flt_Rte_Cd fltRteCd,apply_measure_time applyMeasureTime,state
+    from apply_measure_history
+    where user_id = #{userId,jdbcType=BIGINT} and state!='4'
+  </select>
+  
+    <select id="getApplyMeasure" resultType="org.ldd.ssm.crm.query.LegProfitFocastQuery" parameterType="java.lang.Long" >
+    select 
+       Flt_Rte_Cd fltRteCd,start_time startTime,end_time endTime, distance,aircompany_name aircompanyName,aircompany_id aircompanyId,
+       aircraft_model aircraftModel,
+      sites, hour_cost hourCost,roundInTime ldsj,speed
+    from apply_measure_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+<!--   传入航司id 得到机型 -->
+  <select id="getAllAirType" resultType="String" parameterType="java.lang.Long">
+   select DISTINCT(airportType) from planedetail 
+    <where>
+         airportType is not null and airportType!=''
+          <if test="_parameter!=null and _parameter!=''">
+				and aircompenyinfothree_id=#{_parameter}
+		  </if>
+      </where>
+  </select>
+<!--   传入机型得到航司 -->
+  <select id="getAllAirCompany" resultType="org.ldd.ssm.crm.query.AirCompanyInfoQuery" parameterType="java.lang.String">
+      select DISTINCT(CONCAT(b.id,b.airln_cd)),b.id id,b.airln_cd airlnCd from planedetail a 
+      LEFT JOIN  aircompenyinfothree b on a.aircompenyinfothree_id=b.id 
+      <where>
+          <if test="_parameter!=null and _parameter!=''">
+				 a.airportType=#{_parameter}
+			</if>
+      </where>
+  </select>
+   
+</mapper>

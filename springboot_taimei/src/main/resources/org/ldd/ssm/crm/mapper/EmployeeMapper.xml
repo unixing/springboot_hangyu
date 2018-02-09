@@ -1,0 +1,206 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.crm.mapper.EmployeeMapper">
+	<resultMap type="org.ldd.ssm.crm.domain.Employee" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="Usr_Nm" property="usrNm" jdbcType="VARCHAR" />
+		<result column="Usr_Pwd" property="usrPwd" jdbcType="VARCHAR" />
+		<result column="department_id" property="departmentId"
+			jdbcType="BIGINT" />
+		<result column="Compellation" property="compellation" jdbcType="VARCHAR"/>
+		<result column="Usr_Sts" property="usrSts" jdbcType="INTEGER" />
+		<result column="weixin" property="weixin" jdbcType="VARCHAR" />
+		<result column="qq_nbr" property="qqNbr" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="bg_path" property="bgPath" jdbcType="VARCHAR" />
+		<result column="head_path" property="headPath" jdbcType="VARCHAR" />
+		<result column="duty" property="duty" jdbcType="VARCHAR" />
+		<result column="create_id" property="createId" jdbcType="BIGINT" />
+		<result column="first_login" property="firstLogin" jdbcType="INTEGER"/>
+	</resultMap>
+	<insert id="save" parameterType="Employee" useGeneratedKeys="true" keyProperty="id">
+		insert into t_employee(Usr_Nm,Usr_Pwd,Usr_Sts,department_id,create_id,first_login,Compellation,phone,defeated_number,isContinueCheck,ischeck) values
+		(#{usrNm},#{usrPwd},#{usrSts},#{departmentId},#{createId},#{firstLogin},#{compellation},#{phone},0,1,0)
+	</insert>
+	<sql id="Base_Column_List">
+		id,Usr_Nm,Usr_Pwd,Usr_Sts,Compellation,department_id,weixin,qq_nbr,email,phone,bg_path,head_path,duty,create_id,first_login
+	</sql>
+	<update id="update" parameterType="Employee">
+		UPDATE t_employee
+		<set>
+			<if test="usrNm != null and usrNm !=''">
+				Usr_Nm=#{usrNm},
+			</if>
+			<if test="usrPwd != null and usrPwd != ''">
+				Usr_Pwd=#{usrPwd},
+			</if>
+			<if test="compellation !=null and compellation != ''">
+				Compellation = #{compellation},
+			</if>
+			<if test="departmentId !=null and departmentId>0">
+				department_id=#{departmentId},
+			</if>
+			<if test="usrSts!=null and usrSts >0">
+				Usr_Sts=#{usrSts},
+			</if>
+			<if test="weixin !=null and weixin !=''">
+				weixin=#{weixin},
+			</if>
+			<if test="qqNbr !=null and qqNbr !=''">
+				qq_nbr = #{qqNbr},
+			</if>
+			<if test="email !=null and email !=''">
+				email = #{email},
+			</if>
+			<if test="phone !=null and phone !=''">
+				phone = #{phone},
+			</if>
+			<if test="bgPath !=null and bgPath !=''">
+				bg_path = #{bgPath},
+			</if>
+			<if test="headPath !=null and headPath !=''">
+				head_path = #{headPath},
+			</if>
+			<if test="duty !=null and duty !=''">
+				duty = #{duty},
+			</if>
+			<if test="createId !=null and createId >0">
+				create_id = #{createId},
+			</if>
+			<if test="ischeck">
+				ischeck = #{ischeck},
+			</if>
+			<if test="firstLogin > 0">
+				first_login=#{firstLogin}
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="long">
+		DELETE FROM t_employee
+		WHERE id=#{id}
+	</delete>
+	<select id="get" resultMap="BaseResultMap" parameterType="long">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM t_employee WHERE id = #{id}
+	</select>
+	<select id="list" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM t_employee where Usr_Sts != 99
+		<if test="dptId != null and dptId >0">
+			and department_id = #{dptId,jdbcType=BIGINT}
+		</if>
+	</select>
+	<select id="getEmployeeByUsername" resultType="Employee">
+		SELECT
+		id id,Usr_Nm usrNm,Usr_Pwd usrPwd,department_id departmentId,Compellation compellation,
+		Usr_Sts usrSts,weixin,qq_nbr qqNbr,email,phone,bg_path bgPath,
+		head_path headPath,duty,create_id createId,first_login firstLogin,	
+		validity,defeated_number,isContinueCheck,ischeck
+		FROM t_employee
+		<where>
+			<if test="usrNm != null and usrNm != ''">
+				Usr_Nm = #{usrNm,jdbcType=VARCHAR}
+				or
+				phone = #{usrNm,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<select id="getEmployeeByUUID" resultType="Employee">
+		SELECT
+		id id,Usr_Nm usrNm,Usr_Pwd usrPwd,department_id departmentId,Compellation compellation,
+		Usr_Sts usrSts,weixin,qq_nbr qqNbr,email,phone,bg_path bgPath,
+		head_path headPath,duty,create_id createId,first_login firstLogin,	
+		validity,defeated_number,isContinueCheck,ischeck
+		FROM t_employee
+		<where>
+			<if test="uuid != null and uuid != ''">
+				uuid = #{uuid,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<select id="getCompanyId" parameterType="long" resultType="long">
+		select com.id from t_employee t_e join department depa on
+		t_e.department_id = depa.id
+		join company com on depa.company_id = com.id where t_e.id = #{id}
+	</select>
+	<sql id="Data_Column_List">
+		a.id,Usr_Nm,Usr_Pwd,Usr_Sts,a.department_id,weixin,qq_nbr,email,phone,bg_path,head_path,duty,create_id,first_login
+	</sql>
+	<select id="getEmployeeByCompanyId" resultMap="BaseResultMap">
+		select
+		<include refid="Data_Column_List" />
+		from
+		t_employee a,department b,company c
+		where c.id = b.company_id and
+		b.id = a.department_id
+		<if test="companyId != null and companyId >0">
+			and b.company_id = #{companyId,jdbcType=BIGINT}
+		</if>
+		<if test="cpyNm != null and cpyNm != ''">
+			and b.Cpy_Nm = #{cpyNm,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<!-- IOS的方法 -->
+	<delete id="deleteTokenByemp_id" parameterType="long">
+		delete from token
+		where employee_id = #{id}
+	</delete>
+	<insert id="saveToken" parameterType="Token">
+		insert into
+		token(uuid,employee_id)values(#{uuid},#{employee_id})
+	</insert>
+	<select id="getToken" parameterType="string" resultMap="BaseResultMap">
+		select
+		t_e.id,t_e.Usr_Nm,t_e.Usr_Pwd,t_e.Usr_Sts,t_e.department_id from token
+		tok join t_employee t_e on tok.employee_id = t_e.id where uuid =
+		#{parameter};
+	</select>
+	
+	<update id="unbindMail">
+		UPDATE t_employee set email=null WHERE id=#{id}
+	</update>
+	
+	<update id="updateHeadPath" parameterType="Employee">
+		update t_employee
+		set head_path = #{headPath,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateBackgroundPath" parameterType="Employee">
+		update t_employee
+		set bg_path = #{bgPath,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="getEmployeeByPhone" parameterType="String" resultMap="BaseResultMap">
+		select * from t_employee
+		where phone=#{phone} LIMIT 1
+	</select>
+	<update id="updateDefeated_number" >
+		update t_employee set defeated_number = defeated_number + #{i} where Usr_Nm = #{username} or phone = #{username}
+	</update>
+	<update id="updateDefeated_number_new" >
+		update t_employee set defeated_number = 0 where Usr_Nm = #{username} or phone = #{username}
+	</update>
+	<select id="findEMP" resultType="string" parameterType="string">
+		select Usr_Nm from t_employee where Usr_Nm = #{userName} or phone = #{userName}
+	</select>
+	<select id="updateDefeatedNnone" parameterType="string">
+		update t_employee set defeated_number = 0 where Usr_Nm = #{username}  or phone = #{username}
+	</select>
+	<select id="updateDefeatedNnoneBymobile" parameterType="string">
+		update t_employee set defeated_number = 0 where phone = #{username}
+	</select>
+	<update id="updateEmployeeForPwd">
+		update t_employee
+		set Usr_Pwd = #{password,jdbcType=VARCHAR} where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>
+
+
+
+
+

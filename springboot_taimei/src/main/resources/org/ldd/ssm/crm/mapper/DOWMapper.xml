@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.DOWMapper">
+
+	<!-- 普通查询 -->
+	<select id="getMethod" parameterType="DOWQuery" resultType="DOW">
+		select distinct DATE_FORMAT(Lcl_Dpt_Day,'%m') method from z_airdata
+		where year(Lcl_Dpt_Day)=#{lcl_Dpt_Day}
+		<include refid="getmontha" />
+		order by method
+	</select>
+	<!-- 查询公司 -->
+	<select id="getCompany" resultType="Z_Airdata">
+		select distinct Dta_Sce as
+		dta_Sce from z_airdata
+	</select>
+	<!-- 查询时间 -->
+	<select id="getDOW_Date" resultType="AcquisitionTime">
+		select distinct
+		DATE_FORMAT(Lcl_Dpt_Day,'%y') lcl_Dpt_Day from z_airdata order by
+		lcl_Dpt_Day
+	</select>
+	<sql id="getWeekDatePage">
+		<where>
+			<if test="lcl_Dpt_Day!=null">
+				AND year(Lcl_Dpt_Day)=#{lcl_Dpt_Day}
+			</if>
+			<if test="month!=null">
+				AND month(Lcl_Dpt_Day)=#{month}
+			</if>
+			<if test="dpt_AirPt_Cd!=null">
+				AND Dpt_AirPt_Cd=#{dpt_AirPt_Cd}
+			</if>
+			<if test="arrv_Airpt_Cd!=null">
+				AND Arrv_Airpt_Cd=#{arrv_Airpt_Cd}
+			</if>
+			<if test="flt_nbr!=null">
+				AND Flt_Nbr = #{flt_nbr}
+			</if>
+		</where>
+	</sql>
+	<sql id="getmontha">
+		<if test="dpt_AirPt_Cd!=null">
+			AND Dpt_AirPt_Cd=#{dpt_AirPt_Cd}
+		</if>
+		<if test="arrv_Airpt_Cd!=null">
+			AND Arrv_Airpt_Cd=#{arrv_Airpt_Cd}
+		</if>
+	</sql>
+	<!-- 根据年份月份查询数据去程数据 -->
+	<select id="getWeekDate" resultType="Z_Airdata" parameterType="DOWQuery">
+		select * from z_airdata
+		<include refid="getWeekDatePage" />
+	</select>
+	<select id="getSunAndCount" resultType="SunAndCount"
+		parameterType="DOWQuery">
+		select sum(Pgs_Per_Cls) as sum, count(id) as count from
+		z_airdata where year(Lcl_Dpt_Day)=#{lcl_Dpt_Day} and
+		month(Lcl_Dpt_Day)=#{month} and Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and
+		Arrv_Airpt_Cd=#{arrv_Airpt_Cd}
+	</select>
+	<!-- 根据年份月份查询数据反程数据 -->
+	<select id="getWeekDate2" resultType="Z_Airdata" parameterType="DOWQuery">
+		select * from z_airdata where year(Lcl_Dpt_Day)=#{lcl_Dpt_Day} and
+		month(Lcl_Dpt_Day)=#{month} and Dpt_AirPt_Cd=#{arrv_Airpt_Cd} and
+		Arrv_Airpt_Cd=#{dpt_AirPt_Cd}
+	</select>
+	<select id="getSunAndCount2" resultType="SunAndCount"
+		parameterType="DOWQuery">
+		select sum(Pgs_Per_Cls) as sum, count(distinct
+		Lcl_Dpt_Day) as count from z_airdata where
+		year(Lcl_Dpt_Day)=#{lcl_Dpt_Day} and month(Lcl_Dpt_Day)=#{month} and
+		Dpt_AirPt_Cd=#{arrv_Airpt_Cd} and Arrv_Airpt_Cd=#{dpt_AirPt_Cd}
+	</select>
+	<!-- 查询出一个月内所有有符合数据的日期 -->
+	<select id="getTime" resultType="String" parameterType="DOWQuery">
+		select
+		distinct Lcl_Dpt_Day as lcl_Dpt_Day from z_airdata where
+		year(Lcl_Dpt_Day)=#{lcl_Dpt_Day} and month(Lcl_Dpt_Day)=#{month} and
+		((Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and Arrv_Airpt_Cd=#{arrv_Airpt_Cd}) or
+		(Dpt_AirPt_Cd=#{arrv_Airpt_Cd} and Arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+	</select>
+	<select id="getMonthData" resultType="String" parameterType="DOWQuery">
+		select sum(Pgs_Per_Cls) as pgs_Per_Cls from z_airdata where
+		Lcl_Dpt_Day=#{lcl_Dpt_Day} and Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and
+		Arrv_Airpt_Cd=#{arrv_Airpt_Cd}
+	</select>
+	<select id="getMonthData2" resultType="String" parameterType="DOWQuery">
+		select sum(Pgs_Per_Cls) as pgs_Per_Cls from z_airdata where
+		Lcl_Dpt_Day=#{lcl_Dpt_Day} and Dpt_AirPt_Cd=#{arrv_Airpt_Cd} and
+		Arrv_Airpt_Cd=#{dpt_AirPt_Cd}
+	</select>
+	<!-- 查询中文名的三字码 -->
+	<select id="getAirPort2" resultType="String" parameterType="String">
+		select voyageCode from fare where voyageName = #{str};
+	</select>
+</mapper> 

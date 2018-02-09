@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.IITIAMapper">
+	<select id="find" resultType="Fare" parameterType="string">
+		select * from
+		fare where voyageCode = #{str}
+	</select>
+	<select id="save" parameterType="Fare">
+		insert into
+		fare(voyageCode,voyageName,yBFare,sailingDistance)values(#{voyageCode},#{voyageName},#{yBFare},#{sailingDistance})
+	</select>
+</mapper> 

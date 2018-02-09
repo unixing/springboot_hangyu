@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.OutPortMapper">
+
+	<!-- 统计月数据 -->
+	<select id="getMonthDate" resultType="OutPort" parameterType="DOWQuery">
+		select count(id) Cla_Nbr,sum(Tal_Nbr_Set) tal_Nbr_Set,sum(Pgs_Per_Cls)
+		idd_moh,sum(Grp_Nbr) grp_moh,
+		sum(Grp_Ine) grp_Ine,sum(Tal_Nbr)
+		tol_Ine,(sum(Tal_Nbr)/sum(Tal_Nbr_Set)) flt_Ser_Ine, avg(avg_Dct)
+		avg_Dct,
+		avg(Idd_Dct) idd_Dct,avg(Grp_Dct) grp_Dct
+		from z_airdata
+		<include refid="page" />
+	</select>
+	<!-- 航段 -->
+	<select id="getAirDistacne" resultType="int" parameterType="string">
+		select sailingDistance from fare where voyageCode = #{dta_Sce}
+	</select>
+	<!-- 线性图表获得的数据 -->
+	<select id="getOutPort" resultType="OutPort" parameterType="DOWQuery">
+		select DATE_FORMAT(Lcl_Dpt_Day,'%m') month, count(id)
+		Cla_Nbr,sum(Tal_Nbr_Set) tal_Nbr_Set,sum(Pgs_Per_Cls)
+		idd_moh,sum(Grp_Nbr) grp_moh,
+		sum(Grp_Ine) grp_Ine,sum(Tal_Nbr)
+		tol_Ine,(sum(Tal_Nbr)/sum(Tal_Nbr_Set)) flt_Ser_Ine, avg(avg_Dct)
+		avg_Dct,
+		avg(Idd_Dct) idd_Dct,avg(Grp_Dct) grp_Dct
+		from z_airdata
+		<include refid="page" />
+	</select>
+	<select id="getEvenPort" resultType="EvenPort" parameterType="DOWQuery">
+		select DATE_FORMAT(Lcl_Dpt_Day,'%m') month,count(id)
+		cla_Nbr,(count(Flt_Nbr)/count(DISTINCT Lcl_Dpt_Day))
+		tme_Cla_Moh,avg(Tal_Nbr_Set) cla_Set,
+		avg(Pgs_Per_Cls)
+		cla_Per,avg(Grp_Nbr) cla_Grp,(sum(Grp_Ine)/count(Flt_Nbr))
+		flt_Ser_Ine, (avg(Pgs_Per_Cls)/avg(Tal_Nbr_Set))
+		lod_For,(sum(Tal_Nbr)/count(Flt_Nbr)) idd_Dct
+		from z_airdata
+		<include refid="page" />
+	</select>
+	<sql id="page">
+		<where>
+			<if test="lcl_Dpt_Day!=null and lcl_Dpt_Day!=''">
+				AND year(Lcl_Dpt_Day)=#{lcl_Dpt_Day}
+			</if>
+			<if test="month!=null and month!=''">
+				AND month(Lcl_Dpt_Day)=#{month}
+			</if>
+			<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+				AND Dpt_AirPt_Cd=#{dpt_AirPt_Cd}
+			</if>
+			<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+				AND Arrv_Airpt_Cd=#{arrv_Airpt_Cd}
+			</if>
+			<if test="cpy_Nm!=null and cpy_Nm!=''">
+				AND Cpy_Nm=#{cpy_Nm}
+			</if>
+			<if test="flt_Rte_Cd!=null and flt_Rte_Cd!=''">
+				AND Flt_Rte_Cd = #{flt_Rte_Cd}
+			</if>
+			<if test="flt_nbr!=null and flt_nbr!=''">
+				AND Flt_Nbr = #{flt_nbr}
+			</if>
+		</where>
+	</sql>
+	<!-- 班次前十排名 -->
+	<select id="getClassRanking" resultType="ClassRanking"
+		parameterType="DOWQuery">
+		SELECT DISTINCT count( * ) AS count, Dpt_AirPt_Cd,Arrv_Airpt_Cd
+		FROM z_airdata
+		<include refid="page2" />
+		GROUP BY Dpt_AirPt_Cd,Arrv_Airpt_Cd
+		ORDER BY count DESC
+		LIMIT 10
+	</select>
+	<!-- 班次前十排名 -->
+	<select id="getCpy_ClassRanking" resultType="ClassRanking"
+		parameterType="DOWQuery">
+		SELECT DISTINCT count( * ) AS count, Cpy_Nm
+		FROM z_airdata
+		<include refid="page2" />
+		GROUP BY Cpy_Nm
+		ORDER BY count DESC
+		LIMIT 10
+	</select>
+	<!-- 座公里前十排名 -->
+	<select id="getSet_Ktr_Ine" resultType="ClassRanking"
+		parameterType="DOWQuery">
+		select (sum(Set_Ktr_Ine)/count(Set_Ktr_Ine))*100 as count ,
+		(sum(Tal_Nbr)/count(Tal_Nbr))/1000 as
+		Set_Ktr_Ine,Dpt_AirPt_Cd,Arrv_Airpt_Cd
+		from z_airdata
+		<include refid="page2" />
+		GROUP BY Dpt_AirPt_Cd,Arrv_Airpt_Cd
+		ORDER BY count DESC
+		limit 10
+	</select>
+	<!-- 座公里前十排名New -->
+	<select id="getSet_Ktr_IneNew" resultType="Z_Airdata" parameterType="DOWQuery">
+		select id as id,
+			Lcl_Dpt_Day as lcl_Dpt_Day,
+			Dpt_AirPt_Cd as dpt_AirPt_Cd,
+			Arrv_Airpt_Cd as arrv_Airpt_Cd,
+			Flt_Nbr as flt_Nbr,
+			Cpy_Nm as cpy_Nm,
+			Flt_Rte_Cd as flt_Rte_Cd,
+			Tal_Nbr_Set as tal_Nbr_Set,
+			count_Set as count_Set,
+			Pgs_Per_Cls as pgs_Per_Cls,
+			Grp_Nbr as grp_Nbr,
+			Ech_Cls_Grp as ech_Cls_Grp,
+			Grp_Fng_Rte as grp_Fng_Per,
+			Egs_Lod_Fts as egs_Lod_Fts,
+			Tal_Nbr as totalNumber,
+			Set_Ktr_Ine as Set_Ktr_Ine,
+			Grp_Ine as grp_Ine,
+			Grp_Ppt as grp_Ppt,
+			Egs_Lod_Fts as egs_Lod_Fts,
+			avg_Dct as avg_Dct,
+			Idd_Dct as idd_Dct,
+			Grp_Dct as grp_Dct,
+			Dta_Dte as dta_Dte,
+			sailingDistance as sailingDistance,
+			company_id as company,
+		allData as allData,
+		comeAndGo as comeAndGo
+ 		from z_airdata 
+		<include refid="pageNew"/>
+	</select>
+	<select id="getZairdatasList" resultType="Z_Airdata" parameterType="AirportOperatingHistoryQuery">
+		select id as id,
+			Lcl_Dpt_Day as lcl_Dpt_Day,
+			Dpt_AirPt_Cd as dpt_AirPt_Cd,
+			Arrv_Airpt_Cd as arrv_Airpt_Cd,
+			Flt_Nbr as flt_Nbr,
+			Cpy_Nm as cpy_Nm,
+			Lcl_Dpt_Tm as lcl_Dpt_Tm,
+			Lcl_Arrv_Tm as lcl_Arrv_Tm,
+			Flt_Rte_Cd as flt_Rte_Cd,
+			Tal_Nbr_Set as tal_Nbr_Set,
+			count_Set as count_Set,
+			Pgs_Per_Cls as pgs_Per_Cls,
+			Grp_Nbr as grp_Nbr,
+			Ech_Cls_Grp as ech_Cls_Grp,
+			Grp_Fng_Rte as grp_Fng_Per,
+			Egs_Lod_Fts as egs_Lod_Fts,
+			Tal_Nbr as totalNumber,
+			Set_Ktr_Ine as Set_Ktr_Ine,
+			Grp_Ine as grp_Ine,
+			Grp_Ppt as grp_Ppt,
+			Egs_Lod_Fts as egs_Lod_Fts,
+			avg_Dct as avg_Dct,
+			Idd_Dct as idd_Dct,
+			Grp_Dct as grp_Dct,
+			Two_Tak_Ppt as two_Tak_Ppt,
+			Ful_Pce_Ppt as ful_Pce_Ppt,
+			Nne_Dnt_Ppt as nne_Dnt_Ppt,
+			Eht_Five_Dnt_Ppt as eht_Five_Dnt_Ppt,
+			Eht_Dnt_Ppt as eht_Dnt_Ppt,
+			Sen_Five_Dnt_Ppt as sen_Five_Dnt_Ppt,
+			Sen_Dnt_Ppt as sen_Dnt_Ppt,
+			Six_Five_Dnt_Ppt as six_Five_Dnt_Ppt,
+			Six_Dnt_Ppt as six_Dnt_Ppt,
+			Fve_Fve_Dnt_Ppt as fve_Fve_Dnt_Ppt,
+			Fve_Dnt_Ppt as fve_Dnt_Ppt,
+			Fur_Fve_Dnt_Ppt as fur_Fve_Dnt_Ppt,
+			Fur_Dnt_Ppt as fur_Dnt_Ppt,
+			Thr_Fve_Dnt_Ppt as thr_Fve_Dnt_Ppt,
+			Thr_Dnt_Ppt as thr_Dnt_Ppt,
+			Two_Fve_Dnt_Ppt as two_Fve_Dnt_Ppt,
+			Two_Dnt_Ppt as two_Dnt_Ppt,
+			Sal_Tak_Ppt as sal_Tak_Ppt,
+			R_Tak_Ppt as r_Tak_Ppt,
+			U_Tak_Ppt as u_Tak_Ppt,
+			I_Tak_Ppt as i_Tak_Ppt,
+			Z_Tak_Ppt as z_Tak_Ppt,
+			E_Tak_Ppt as e_Tak_Ppt,
+			A_Tak_Ppt as a_Tak_Ppt,
+			O_Tak_Ppt as o_Tak_Ppt,
+			S_Tak_Ppt as s_Tak_Ppt,
+			H_Tak_Ppt as h_Tak_Ppt,
+			X_Tak_Ppt as x_Tak_Ppt,
+			Children as children,
+			yBFare as yBFare,
+			sailingDistance as sailingDistance,
+			Dta_Dte as dta_Dte,
+			company_id as company,
+		allData as allData,
+		comeAndGo as comeAndGo
+ 		from z_airdata 
+		<include refid="checkAirportData"/>
+	</select>
+	<!-- 出港均班客量前十排名 -->
+	<select id="getGuestamount" resultType="ClassRanking"
+		parameterType="DOWQuery">
+		select (sum(Tal_Nbr_Set)/count(Tal_Nbr_Set)) as count ,
+		(sum(Pgs_Per_Cls)/count(Pgs_Per_Cls)) as Set_Ktr_Ine,Ech_Cls_Grp as
+		guestamount,Dpt_AirPt_Cd,Arrv_Airpt_Cd
+		from z_airdata
+		<include refid="page2" />
+		GROUP BY Dpt_AirPt_Cd,Arrv_Airpt_Cd
+		ORDER BY Set_Ktr_Ine DESC
+		limit 10
+	</select>
+	<!-- 通过中文城市名会的对应的三字码 -->
+	<select id="getAirCodeByName" parameterType="string" resultType="String">
+		select IATA from airportmappingcode
+		where
+		Cty_Cha_Nm = #{dpt_AirPt_Cd}
+	</select>
+	<!-- 通过中文机场名取得对应的三字码 -->
+	<select id="getAirportCodeByAirportName" parameterType="string"
+		resultType="String">
+		select IATA from airportmappingcode
+		where
+		Apt_Cha_Nm = #{dpt_AirPt_Cd}
+	</select>
+	<!-- 通过中文城市名会的对应的三字码 -->
+	<select id="getNameByCode" parameterType="string" resultType="String">
+		select Cty_Cha_Nm from airportmappingcode
+		where
+		IATA = #{dpt_AirPt_Cd}
+	</select>
+	<!-- 通过中文城市名称获取该城市机场三字码列表 -->
+	<select id="getAirCodesByCityName" parameterType="string" resultType="String">
+		select IATA from airportmappingcode
+		where
+		Cty_Cha_Nm = #{dpt_AirPt_Cd}
+	</select>
+	<select id="getairportNameByCode" parameterType="string"
+		resultType="String">
+		select Apt_Cha_Nm from airportmappingcode
+		where
+		IATA = #{code}
+	</select>
+	<select id="getAirPortData" resultType="AirportData">
+		select IATA
+		iata,Cty_Cha_Nm ctyChaNam, Apt_Cha_Nm aptChaNam,icao from
+		airportmappingcode
+	</select>
+	<select id="getAirPortDataNew" resultType="AirportData">
+		select a.IATA
+		iata,a.city ctyChaNam, a.airln_Cd aptChaNam,a.ICAO icao, CONCAT(a.city_coordinate_j,",",a.city_coordinate_w) coordinate from
+		airportinfonewthree a
+	</select>
+	<select id="getAmountRanking" parameterType="DOWQuery"
+		resultType="ClassRanking">
+		select sum(Pgs_Per_Cls) value ,Dpt_AirPt_Cd,Arrv_Airpt_Cd
+		from z_airdata
+		<include refid="page2" />
+		GROUP BY Dpt_AirPt_Cd,Arrv_Airpt_Cd
+		ORDER BY value DESC
+		limit 10
+	</select>
+	<select id="getCpy_AmountRanking" parameterType="DOWQuery"
+		resultType="ClassRanking">
+		select sum(Pgs_Per_Cls) value ,Cpy_Nm
+		from z_airdata
+		<include refid="page2" />
+		GROUP BY Cpy_Nm
+		ORDER BY value DESC
+		limit 10
+	</select>
+	<sql id="page2">
+		<where>
+			<if test="lcl_Dpt_Day!=null and lcl_Dpt_Day!=''">
+				AND year(Lcl_Dpt_Day)=#{lcl_Dpt_Day}
+			</if>
+			<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+				and Dpt_AirPt_Cd=#{dpt_AirPt_Cd}
+			</if>
+			<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+				AND Arrv_Airpt_Cd=#{arrv_Airpt_Cd}
+			</if>
+			<if test="cpy_Nm!=null and cpy_Nm!=''">
+				AND Cpy_Nm=#{cpy_Nm}
+			</if>
+		</where>
+	</sql>
+	<sql id="pageNew">
+		<where>
+			<if test="startTime!=null and startTime!=''">
+				AND Lcl_Dpt_Day&gt;=#{startTime}
+			</if>
+			<if test="endTime!=null and endTime!=''">
+				AND Lcl_Dpt_Day&lt;=#{endTime}
+			</if>
+			<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+				and Dpt_AirPt_Cd=#{dpt_AirPt_Cd} 
+			</if>
+			<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+				AND Arrv_Airpt_Cd=#{arrv_Airpt_Cd} 
+			</if>
+			<if test="cpy_Nm!=null and cpy_Nm!=''">
+				AND Cpy_Nm=#{cpy_Nm} 
+			</if>
+		</where>
+	</sql>
+	<sql id="checkAirportData">
+		<where>
+			<if test="startTime!=null and startTime!=''">
+				AND Lcl_Dpt_Day&gt;=#{startTime}
+			</if>
+			<if test="endTime!=null and endTime!=''">
+				AND Lcl_Dpt_Day&lt;=#{endTime}
+			</if>
+			<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+				AND Flt_Rte_Cd like CONCAT('%',#{dpt_AirPt_Cd},'%' )
+			</if>
+			<if test="cpy_Nm!=null and cpy_Nm!=''">
+				AND Cpy_Nm=#{cpy_Nm} 
+			</if>
+		</where>
+	</sql>
+	<select id="getAirdiscountByCompany" resultType="Airdiscount"
+		parameterType="company">
+		select * from airdiscount where Cpy_Nm = #{company}
+		order by Dct_Ppt DESC
+	</select>
+	<select id="getYearList" resultType="String">
+		select Lcl_Dpt_Day date from z_airdata
+		<where>
+			<if test="itia!=null and itia !=''">
+				Dpt_AirPt_Cd = #{itia,jdbcType=VARCHAR}
+				or 
+				Arrv_Airpt_Cd=#{itia,jdbcType=VARCHAR}
+			</if>
+		</where>
+		ORDER BY date DESC limit 1
+	</select>
+</mapper> 

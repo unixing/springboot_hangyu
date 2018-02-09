@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.DatasupplierRoleMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.DatasupplierRole">
+		<result column="datasupplier_id" property="datasupplierId"
+			jdbcType="BIGINT" />
+		<result column="role_id" property="roleId" jdbcType="BIGINT" />
+	</resultMap>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.DatasupplierRole">
+		insert into datasupplier_role (datasupplier_id, role_id)
+		values (#{datasupplierId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
+	</insert>
+	<sql id="Base_Column_List">
+		datasupplier_id,role_id
+	</sql>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.DatasupplierRole">
+		insert into datasupplier_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="datasupplierId != null">
+				datasupplier_id,
+			</if>
+			<if test="roleId != null">
+				role_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="datasupplierId != null">
+				#{datasupplierId,jdbcType=BIGINT},
+			</if>
+			<if test="roleId != null">
+				#{roleId,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from datasupplier_role
+		where role_id = #{roleId,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByDatasupplierId" parameterType="java.lang.Long">
+		delete from datasupplier_role
+		where datasupplier_id = #{datasupplierId,jdbcType=BIGINT}
+	</delete>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from
+		datasupplier_role
+		where 1=1
+		<if test="datasupplierId != null and datasupplierId >0">
+			and datasupplier_id = #{datasupplierId,jdbcType=BIGINT}
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.UpdataMapper">
+	<!-- 添删改 -->
+	<select id="get" parameterType="Fare" resultType="Fare">
+		select * from
+		fare where voyageCode=#{voyageCode}
+	</select>
+	<select id="getAll" resultType="Fare">
+		select * from fare
+	</select>
+	<insert id="save" parameterType="Z_Airdata" statementType="STATEMENT">
+		insert into
+		${itia}(Lcl_Dpt_Day,Dpt_AirPt_Cd,Arrv_Airpt_Cd,Flt_Nbr,Cpy_Nm,Flt_Rte_Cd,Tal_Nbr_Set,Pgs_Per_Cls,Grp_Nbr,Ech_Cls_Grp,Grp_Fng_Rte,Tal_Nbr,Set_Ktr_Ine,Grp_Ine,Grp_Ppt,Egs_Lod_Fts,avg_Dct
+		,Idd_Dct,Grp_Dct,Two_Tak_Ppt,Ful_Pce_Ppt,Nne_Dnt_Ppt,Eht_Five_Dnt_Ppt,Eht_Dnt_Ppt,Sen_Five_Dnt_Ppt,Sen_Dnt_Ppt,Six_Five_Dnt_Ppt,Six_Dnt_Ppt,Fve_Fve_Dnt_Ppt,Fve_Dnt_Ppt
+		,Fur_Fve_Dnt_Ppt,Fur_Dnt_Ppt,Sal_Tak_Ppt,R_Tak_Ppt,U_Tak_Ppt,I_Tak_Ppt,Z_Tak_Ppt,E_Tak_Ppt,A_Tak_Ppt,O_Tak_Ppt,S_Tak_Ppt,H_Tak_Ppt,X_Tak_Ppt,yBFare,sailingDistance,Children,Dta_Sce,Dta_Dte,company_id)
+		values(${lcl_Dpt_Day_Str},${dpt_AirPt_Cd},${arrv_Airpt_Cd},${flt_Nbr},${cpy_Nm},${flt_Rte_Cd},${tal_Nbr_Set},${pgs_Per_Cls},${grp_Nbr},${ech_Cls_Grp},${grp_Fng_Rte},${totalNumber},${Set_Ktr_Ine},${grp_Ine},${grp_Ppt},${egs_Lod_Fts},${avg_Dct}
+		,${idd_Dct},${grp_Dct},${two_Tak_Ppt},${ful_Pce_Ppt},${nne_Dnt_Ppt},${eht_Five_Dnt_Ppt},${eht_Dnt_Ppt},${sen_Five_Dnt_Ppt},${sen_Dnt_Ppt},${six_Five_Dnt_Ppt},${six_Dnt_Ppt},${fve_Fve_Dnt_Ppt},${fve_Dnt_Ppt}
+		,${fur_Fve_Dnt_Ppt},${fur_Dnt_Ppt},${sal_Tak_Ppt},${r_Tak_Ppt},${u_Tak_Ppt},${i_Tak_Ppt},${z_Tak_Ppt},${e_Tak_Ppt},${a_Tak_Ppt},${o_Tak_Ppt},${s_Tak_Ppt},${h_Tak_Ppt},${x_Tak_Ppt},${yBFare},${sailingDistance},${children},${dta_Sce},${data_Date},${company})
+	</insert>
+	<select id="getCkeckData" parameterType="Z_Airdata" resultType="Z_Airdata"
+		statementType="STATEMENT">
+		select lcl_Dpt_Day from ${itia}
+		where
+		Lcl_Dpt_Day= ${lcl_Dpt_Day_Str}
+		AND Dpt_AirPt_Cd=${dpt_AirPt_Cd}
+		AND Arrv_Airpt_Cd=${arrv_Airpt_Cd}
+		AND Flt_Nbr=${flt_Nbr}
+	</select>
+	<select id="getCompany" resultType="string" parameterType="string">
+		select Cpy_Itia from company where Cpy_Nm = #{user}
+	</select>
+	<select id="getUpFile_company_list" resultType="string">
+		select Cpy_Nm
+		from company
+	</select>
+	<select id="getUpFile_company" parameterType="long" resultType="string">
+		select Cpy_Nm from company where id = #{company_Id}
+	</select>
+	<insert id="externalYBsave" parameterType="Fare">
+		insert into
+		fare(voyageCode,voyageName,yBFare,sailingDistance)values(#{voyageCode},#{voyageName},#{yBFare},#{sailingDistance})
+	</insert>
+	<select id="getStratDateAndEndDate" parameterType="StartDateAndEndDate"
+		resultType="Z_Airdata">
+		select * from z_airdata where Lcl_Dpt_Day >=#{start} and Lcl_Dpt_Day
+		&lt;=#{end}
+		<if test="dpt_AirPt_Cd != '' and dpt_AirPt_Cd != null ">
+			and dpt_AirPt_Cd = #{dpt_AirPt_Cd}
+		</if>
+		<if test="arrv_Airpt_Cd != '' and arrv_Airpt_Cd != null">
+			and arrv_Airpt_Cd =#{arrv_Airpt_Cd}
+		</if>
+	</select>
+	<insert id="saveList" parameterType="java.util.List">
+		insert into z_airdata
+		(Lcl_Dpt_Day,Dpt_AirPt_Cd,Arrv_Airpt_Cd,Flt_Nbr,Cpy_Nm,Flt_Rte_Cd,Tal_Nbr_Set,Pgs_Per_Cls,Grp_Nbr,Ech_Cls_Grp,Grp_Fng_Rte,Tal_Nbr,Set_Ktr_Ine,Grp_Ine,Grp_Ppt,Egs_Lod_Fts,avg_Dct
+		,Idd_Dct,Grp_Dct,Two_Tak_Ppt,Ful_Pce_Ppt,Nne_Dnt_Ppt,Eht_Five_Dnt_Ppt,Eht_Dnt_Ppt,Sen_Five_Dnt_Ppt,Sen_Dnt_Ppt,Six_Five_Dnt_Ppt,Six_Dnt_Ppt,Fve_Fve_Dnt_Ppt,Fve_Dnt_Ppt
+		,Fur_Fve_Dnt_Ppt,Fur_Dnt_Ppt,Sal_Tak_Ppt,R_Tak_Ppt,U_Tak_Ppt,I_Tak_Ppt,Z_Tak_Ppt,E_Tak_Ppt,A_Tak_Ppt,O_Tak_Ppt,S_Tak_Ppt,H_Tak_Ppt,X_Tak_Ppt,yBFare,sailingDistance,Children,Dta_Sce,Dta_Dte,company_id)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.lcl_Dpt_Day},#{item.dpt_AirPt_Cd},#{item.arrv_Airpt_Cd},#{item.flt_Nbr},#{item.cpy_Nm},#{item.flt_Rte_Cd},#{item.tal_Nbr_Set},#{item.pgs_Per_Cls},#{item.grp_Nbr},#{item.ech_Cls_Grp},#{item.grp_Fng_Rte},#{item.totalNumber},#{item.Set_Ktr_Ine},#{item.grp_Ine},#{item.grp_Ppt},#{item.egs_Lod_Fts},#{item.avg_Dct}
+			,#{item.idd_Dct},#{item.grp_Dct},#{item.two_Tak_Ppt},#{item.ful_Pce_Ppt},#{item.nne_Dnt_Ppt},#{item.eht_Five_Dnt_Ppt},#{item.eht_Dnt_Ppt},#{item.sen_Five_Dnt_Ppt},#{item.sen_Dnt_Ppt},#{item.six_Five_Dnt_Ppt},#{item.six_Dnt_Ppt},#{item.fve_Fve_Dnt_Ppt},#{item.fve_Dnt_Ppt}
+			,#{item.fur_Fve_Dnt_Ppt},#{item.fur_Dnt_Ppt},#{item.sal_Tak_Ppt},#{item.r_Tak_Ppt},#{item.u_Tak_Ppt},#{item.i_Tak_Ppt},#{item.z_Tak_Ppt},#{item.e_Tak_Ppt},#{item.a_Tak_Ppt},#{item.o_Tak_Ppt},#{item.s_Tak_Ppt},#{item.h_Tak_Ppt},#{item.x_Tak_Ppt},#{item.yBFare},#{item.sailingDistance},#{item.children},#{item.dta_Sce},#{item.dta_Dte},#{item.company})
+		</foreach>
+	</insert>
+	<select id="getData_Source" parameterType="StartDateAndEndDate"
+		resultType="Z_Airdata">
+		select * from alldata where Lcl_Dpt_Day >=#{start} and Lcl_Dpt_Day
+		&lt;=#{end} and Dta_Sce = #{dta_Sce}
+		<if test="dpt_AirPt_Cd != '' and dpt_AirPt_Cd != null ">
+			and dpt_AirPt_Cd = #{dpt_AirPt_Cd}
+		</if>
+		<if test="arrv_Airpt_Cd != '' and arrv_Airpt_Cd != null">
+			and arrv_Airpt_Cd =#{arrv_Airpt_Cd}
+		</if>
+	</select>
+	<insert id="saveData_Source" parameterType="java.util.List">
+		insert into allData
+		(Lcl_Dpt_Day,Dpt_AirPt_Cd,Arrv_Airpt_Cd,Flt_Nbr,Cpy_Nm,Flt_Rte_Cd,Tal_Nbr_Set,Pgs_Per_Cls,Grp_Nbr,Ech_Cls_Grp,Grp_Fng_Rte,Tal_Nbr,Set_Ktr_Ine,Grp_Ine,Grp_Ppt,Egs_Lod_Fts,avg_Dct
+		,Idd_Dct,Grp_Dct,Two_Tak_Ppt,Ful_Pce_Ppt,Nne_Dnt_Ppt,Eht_Five_Dnt_Ppt,Eht_Dnt_Ppt,Sen_Five_Dnt_Ppt,Sen_Dnt_Ppt,Six_Five_Dnt_Ppt,Six_Dnt_Ppt,Fve_Fve_Dnt_Ppt,Fve_Dnt_Ppt
+		,Fur_Fve_Dnt_Ppt,Fur_Dnt_Ppt,Sal_Tak_Ppt,R_Tak_Ppt,U_Tak_Ppt,I_Tak_Ppt,Z_Tak_Ppt,E_Tak_Ppt,A_Tak_Ppt,O_Tak_Ppt,S_Tak_Ppt,H_Tak_Ppt,X_Tak_Ppt,yBFare,sailingDistance,Children,Dta_Sce,Dta_Dte,company_id)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.lcl_Dpt_Day},#{item.dpt_AirPt_Cd},#{item.arrv_Airpt_Cd},#{item.flt_Nbr},#{item.cpy_Nm},#{item.flt_Rte_Cd},#{item.tal_Nbr_Set},#{item.pgs_Per_Cls},#{item.grp_Nbr},#{item.ech_Cls_Grp},#{item.grp_Fng_Rte},#{item.totalNumber},#{item.Set_Ktr_Ine},#{item.grp_Ine},#{item.grp_Ppt},#{item.egs_Lod_Fts},#{item.avg_Dct}
+			,#{item.idd_Dct},#{item.grp_Dct},#{item.two_Tak_Ppt},#{item.ful_Pce_Ppt},#{item.nne_Dnt_Ppt},#{item.eht_Five_Dnt_Ppt},#{item.eht_Dnt_Ppt},#{item.sen_Five_Dnt_Ppt},#{item.sen_Dnt_Ppt},#{item.six_Five_Dnt_Ppt},#{item.six_Dnt_Ppt},#{item.fve_Fve_Dnt_Ppt},#{item.fve_Dnt_Ppt}
+			,#{item.fur_Fve_Dnt_Ppt},#{item.fur_Dnt_Ppt},#{item.sal_Tak_Ppt},#{item.r_Tak_Ppt},#{item.u_Tak_Ppt},#{item.i_Tak_Ppt},#{item.z_Tak_Ppt},#{item.e_Tak_Ppt},#{item.a_Tak_Ppt},#{item.o_Tak_Ppt},#{item.s_Tak_Ppt},#{item.h_Tak_Ppt},#{item.x_Tak_Ppt},#{item.yBFare},#{item.sailingDistance},#{item.children},#{item.dta_Sce},#{item.dta_Dte},#{item.company})
+		</foreach>
+	</insert>
+
+</mapper> 

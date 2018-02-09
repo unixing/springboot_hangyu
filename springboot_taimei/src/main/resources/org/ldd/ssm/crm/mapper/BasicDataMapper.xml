@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.BasicDataMapper">
+
+	<select id="getDigitt" resultType="Digitt">
+		select *
+		from z_digit
+	</select>
+	<update id="updateDigitt" parameterType="Digitt">
+		update z_digit
+		set
+		digit=#{digit},
+		expression=#{expression}
+		where id=#{id}
+	</update>
+	<select id="getDailyParametersList" resultType="DailyParameters"
+		parameterType="DailyParametersQuery">
+		select *
+		from t_dailyparameters
+		<include refid="isCheckNull" />
+	</select>
+	<insert id="saveDailyParameters" parameterType="DailyParameters">
+		insert into
+		t_dailyparameters
+		(start_time,end_time,fly_site_min,fly_site,hour_price,agence_price,role_id)
+		values(#{start_time},#{end_time},#{fly_site_min},#{fly_site},#{hour_price},#{agence_price},#{role_id})
+	</insert>
+	<update id="updateDailyParameters" parameterType="DailyParameters">
+		update
+		t_dailyparameters
+		set
+		start_time=#{start_time},
+		end_time=#{end_time},
+		fly_site_min=#{fly_site_min},
+		fly_site=#{fly_site},
+		hour_price=#{hour_price},
+		agence_price=#{agence_price},
+		role_id=#{role_id}
+		where id=#{id}
+	</update>
+	<delete id="deleteDailyParameters" parameterType="String">
+		delete from
+		t_dailyparameters where id =#{id}
+	</delete>
+	<sql id="isCheckNull">
+		<where>
+			<if test="dayTime!=null">
+				AND end_time &gt;= #{dayTime} AND start_time &lt;= #{dayTime}
+			</if>
+			<if test="roleId!=null">
+				AND role_id=#{roleId}
+			</if>
+			<if test="fly_site!=null">
+				<if test="fly_site!=0">
+					AND fly_site &lt;= #{fly_site} order by fly_site limit 1
+				</if>
+			</if>
+		</where>
+	</sql>
+	<select id="selectHourCost" resultType="java.lang.Double">
+		select
+		hour_price
+		from
+		t_dailyparameters
+		<where>
+			<if test="monthNbr != null and monthNbr != ''">
+				and Date_Format(start_time,'%Y-%m') &lt;=
+				#{monthNbr,jdbcType=VARCHAR}
+				and Date_Format(end_time,'%Y-%m') &gt;=
+				#{monthNbr,jdbcType=VARCHAR}
+			</if>
+			<if test="siteCount >0">
+				and fly_site_min &lt;= #{siteCount,jdbcType=INTEGER}
+				and
+				fly_site &gt;= #{siteCount,jdbcType=INTEGER}
+			</if>
+		</where>
+		order by hour_price desc limit 1
+	</select>
+</mapper> 

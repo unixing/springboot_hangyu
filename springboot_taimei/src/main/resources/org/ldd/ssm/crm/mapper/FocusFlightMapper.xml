@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.FocusFlightMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.FocusFlight" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="flight_number" property="flightNumber" jdbcType="VARCHAR" />
+    <result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+    <result column="dpt_airport" property="dptAirport" jdbcType="VARCHAR" />
+    <result column="pas_airport" property="pasAirport" jdbcType="VARCHAR" />
+    <result column="arrv_airport" property="arrvAirport" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, flight_number, employee_id,dpt_airport,pas_airport,arrv_airport,create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_focus_flight
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_focus_flight
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.crm.domain.FocusFlight" >
+    insert into t_focus_flight (id, flight_number, employee_id,dpt_airport,pas_airport,arrv_airport,create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{flightNumber,jdbcType=VARCHAR}, 
+    #{employeeId,jdbcType=BIGINT},#{dptAirport,jdbcType=VARCHAR},
+    #{pasAirport,jdbcType=VARCHAR},#{arrvAirport,jdbcType=VARCHAR},
+    #{createTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.FocusFlight" >
+    insert into t_focus_flight
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="flightNumber != null" >
+        flight_number,
+      </if>
+      <if test="employeeId != null" >
+        employee_id,
+      </if>
+      <if test="dptAirport !=null and dptAirport !=''">
+      	dpt_airport,
+      </if>
+      <if test="pasAirport !=null and pasAirport !=''">
+      	pas_airport,
+      </if>
+      <if test="arrvAirport !=null and arrvAirport !=''">
+      	arrv_airport,
+      </if>
+      <if test="createTime !=null and createTime !=''">
+      	create_time
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="flightNumber != null" >
+        #{flightNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=BIGINT},
+      </if>
+      <if test="dptAirport != null and dptAirport !=''">
+      	#{dptAirport,jdbcType=VARCHAR},
+      </if>
+      <if test="pasAirport != null and pasAirport !=''">
+      	#{pasAirport,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvAirport != null and arrvAirport !=''">
+      	#{arrvAirport,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime !=null and createTime !=''">
+      	#{createTime,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.FocusFlight" >
+    update t_focus_flight
+    <set >
+      <if test="flightNumber != null" >
+        flight_number = #{flightNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        employee_id = #{employeeId,jdbcType=BIGINT},
+      </if>
+      <if test="dptAirport !=null and dptAirport !=''">
+      	dpt_airport = #{dptAirport,jdbcType=VARCHAR},
+      </if>
+      <if test="pasAirport !=null and pasAirport !=''">
+      	pas_airport = #{dptAirport,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvAirport !=null and arrvAirport !=''">
+      	arrv_airport = #{arrvAirport,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.FocusFlight" >
+    update t_focus_flight
+    set flight_number = #{flightNumber,jdbcType=VARCHAR},
+      employee_id = #{employeeId,jdbcType=BIGINT},
+      dpt_airport = #{dptAirport,jdbcType=VARCHAR},
+      pas_airport = #{pasAirport,jdbcType=VARCHAR},
+      arrv_airport = #{arrvAirport,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="batchUpdate" parameterType="java.util.List">
+  	update t_focus_flight
+  	set flight_number=
+  	<foreach collection="list" item="list" index="index" separator=" ">
+      when #{list.dptAirport,jdbcType=VARCHAR} and #{list.pasAirport,jdbcType=VARCHAR} and #{list.arrvAirport,jdbcType=VARCHAR} and #{list.employee_id,jdbcType=BIGINT} then #{item.Name,jdbcType=VARCHAR}
+  	</foreach>
+  	where employee_id in
+  	<foreach collection="list" item="list" index="index" separator="," open="(" close=")">
+      #{list.id,jdbcType=BIGINT}
+  	</foreach>
+  	and dpt_airport in
+  	<foreach collection="list" item="list" index="index" separator="," open="(" close=")">
+      #{list.dptAirport,jdbcType=VARCHAR}
+  	</foreach>
+  	and pas_airport in
+  	<foreach collection="list" item="list" index="index" separator="," open="(" close=")">
+      #{list.pasAirport,jdbcType=VARCHAR}
+  	</foreach>
+  	and arrv_airport in
+  	<foreach collection="list" item="list" index="index" separator="," open="(" close=")">
+      #{list.arrvAirport,jdbcType=VARCHAR}
+  	</foreach>
+  </update>
+  
+  <update id="update">
+  	update t_focus_flight
+  	set flight_number = #{flightNumber}
+  	where
+  	dpt_airport = #{dptAirport}
+  	<if test="pasAirport!=null and pasAirport !=''">
+  		and pas_airport = #{pasAirport}
+  	</if>
+  	and arrv_airport = #{arrvAirport}
+  	and employee_id = #{employeeId}
+  </update>
+  
+  <delete id="delete">
+  	delete from t_focus_flight
+  	where
+  	dpt_airport = #{dptAirport}
+  	<if test="pasAirport!=null and pasAirport !=''">
+  		and pas_airport = #{pasAirport}
+  	</if>
+  	and arrv_airport = #{arrvAirport}
+  	and employee_id = #{employeeId}
+  </delete>
+  
+  <select id="load" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from
+  	t_focus_flight
+  	where
+  	dpt_airport = #{record.dptAirport}
+  	<if test="record.pasAirport==null or record.pasAirport==''">
+  		and ISNULL(pas_airport)
+  	</if>
+  	<if test="record.pasAirport!=null and record.pasAirport!=''">
+  		and pas_airport = #{record.pasAirport}
+  	</if>
+  	and arrv_airport = #{record.arrvAirport}
+  	and employee_id = #{record.employeeId}
+  	<if test="startDate !=null and startDate !=''">
+  		and create_time &gt;=#{startDate,jdbcType=VARCHAR}
+  	</if>
+  	<if test="endDate !=null and endDate !=''">
+  		and create_time &lt;#{endDate,jdbcType=VARCHAR}
+  	</if>
+  </select>
+  
+  <insert id="save" parameterType="java.util.List">
+  	insert into t_focus_flight
+  	(flight_number,employee_id,dpt_airport,pas_airport,arrv_airport,create_time)
+  	values
+  	<foreach collection="list" item="list" index="index" separator=",">
+  		(#{list.flightNumber},#{list.employeeId},#{list.dptAirport},#{list.pasAirport},
+  		#{list.arrvAirport},#{list.createTime})
+  	</foreach>
+  </insert>
+  <delete id="deleteByEmployeeId">
+  	delete from t_focus_flight
+  	<where>
+  		<if test="employeeId != null and employeeId >0">
+  			employee_id = #{employeeId,jdbcType=BIGINT}
+  		</if>
+  	</where>
+  </delete>
+  <select id="getFocusFlight" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from
+  	t_focus_flight
+  	<where>
+  		<if test="employeeId !=null and employeeId >0">
+  			employee_id = #{employeeId,jdbcType=BIGINT}
+  		</if>
+  		<if test="startDate!=null and startDate !=''">
+  			and create_time &gt;=#{startDate,jdbcType=VARCHAR}
+  		</if>
+  		<if test="endDate !=null and endDate !=''">
+  			and create_time &lt;#{endDate,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  	order by
+  	pas_airport,
+  	arrv_airport
+  </select>
+</mapper>

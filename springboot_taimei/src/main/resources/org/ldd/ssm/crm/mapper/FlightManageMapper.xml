@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.FlightManageMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.FlightManage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="Flt_nbr" property="fltNbr" jdbcType="VARCHAR" />
+    <result column="Dpt_AirPt_Cd" property="dptAirptCd" jdbcType="VARCHAR" />
+    <result column="Arrv_Airpt_Cd" property="arrvAirptCd" jdbcType="VARCHAR" />
+    <result column="TKTIncome_id" property="tktincomeId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+  </resultMap>
+  <select id="getCurrentTktId" parameterType="org.ldd.ssm.crm.domain.FlightManage" resultType="java.lang.Long">
+  select a.Current_TKT_id from flight_manage a where a.Flt_Nbr=#{fltNbr} and a.Dpt_AirPt_Cd=#{dptAirptCd} 
+		and a.Arrv_Airpt_Cd=#{arrvAirptCd} and a.user_id=#{userId} limit 1
+  
+  </select>
+  
+  <select id="findFlightManage" parameterType="org.ldd.ssm.crm.domain.FlightManage" resultType="org.ldd.ssm.crm.domain.TKTIncome"> 
+	 SELECT b.id id,b.Flt_nbr fltNbr, b.Dpt_AirPt_Cd dptAirPtCd,b.Arrv_Airpt_Cd arrvAirptCd from flight_manage a
+		LEFT JOIN TKTIncome b on a.TKTIncome_id=b.id
+		where a.Flt_Nbr=#{fltNbr} and a.Dpt_AirPt_Cd=#{dptAirptCd} 
+		and a.Arrv_Airpt_Cd=#{arrvAirptCd} and a.user_id=#{userId} 
+  </select>
+  
+  <!-- 取消航班管理时删除 -->
+   <delete id="deleteFlightManage" parameterType="java.lang.Long" >
+   delete from flight_manage where TKTIncome_id=#{tktincomeId}  </delete>
+  
+  
+   <!-- 批量插入 -->
+   <insert id="insert" parameterType="org.ldd.ssm.crm.domain.FlightManage" >
+    insert into flight_manage (Flt_nbr, Dpt_AirPt_Cd,Current_TKT_id,
+      Arrv_Airpt_Cd, TKTIncome_id, user_id
+      )
+       VALUES  
+            (#{fltNbr}, #{dptAirptCd},#{currentTktId},#{arrvAirptCd},#{tktincomeId}, #{userId})
+  </insert>
+  
+  <update id="update" parameterType="org.ldd.ssm.crm.domain.FlightManage">
+  update set flight_manage Flt_nbr=#{fltNbr}, Dpt_AirPt_Cd=#{dptAirptCd}, 
+      Arrv_Airpt_Cd=#{arrvAirptCd}  
+      where TKTIncome_id=#{tktincomeId}
+  </update>
+
+</mapper>

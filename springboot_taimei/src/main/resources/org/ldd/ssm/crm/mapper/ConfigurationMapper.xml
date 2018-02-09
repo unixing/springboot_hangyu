@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.EtermConfigMapper">
+	<select id="getConfiguration_list" resultType="Instructions"
+		parameterType="long">
+		select eterm.*, auto.Aic_Tie aic_Tie,conf.Dte_Aic_Rrt
+		dte_Aic_Rrt
+		from
+		eterm_account eterm
+		join automaticmanual auto on eterm.id = auto.eterm_account_id
+		join
+		conflictresolution conf on eterm.id = conf.eterm_account_id
+		where
+		employee_id = #{id}
+	</select>
+	<update id="updateEterm_account" parameterType="Instructions">
+		update
+		eterm_account set
+		Isc_Tem =#{Isc_Tem},
+		Etm_Usr=#{Etm_Usr},
+		Etm_Psw=#{Etm_Psw},
+		Etm_Pot=#{Etm_Pot},
+		Etm_IP=#{Etm_IP},
+		Off_ID=#{Off_ID},
+		Off_Pwd=#{Off_Pwd},
+		Acc_Lvl=#{Acc_Lvl}
+		where id = #{id}
+	</update>
+	<update id="updateConflictresolution" parameterType="Instructions">
+		update
+		conflictresolution set
+		Dte_Aic_Rrt = #{dte_Aic_Rrt}
+		where eterm_account_id = #{id}
+	</update>
+	<update id="updateAutomaticmanual" parameterType="Instructions">
+		update
+		automaticmanual set
+		Aic_Tie = #{aic_Tie}
+		where eterm_account_id = #{id}
+	</update>
+	<insert id="saveEterm_account" parameterType="Instructions"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into eterm_account
+		(Isc_Tem,Etm_Usr,Etm_Psw,Etm_Pot,Etm_IP,Off_ID,Off_Pwd,Acc_Lvl,Is_Four,state,employee_id)
+		value
+		(#{Isc_Tem},#{Etm_Usr},#{Etm_Psw},#{Etm_Pot},#{Etm_IP},#{Off_ID},#{Off_Pwd},#{Acc_Lvl},#{Is_Four},#{state},#{employee_id})
+	</insert>
+	<insert id="saveConflictresolution" parameterType="Instructions">
+		insert into
+		conflictresolution(Cct_Ron,Dte_Aic_Rrt,eterm_account_id)value(#{cct_Ron},#{dte_Aic_Rrt},#{id})
+	</insert>
+	<insert id="saveAutomaticmanual" parameterType="Instructions">
+		insert into
+		automaticmanual(Aic_Mal,Aic_Tie,eterm_account_id)value(#{aic_Mal},#{aic_Tie},#{id})
+	</insert>
+	<delete id="deleteEterm_account" parameterType="long">
+		delete from
+		eterm_account where id = #{id}
+	</delete>
+	<delete id="deleteConflictresolution" parameterType="long">
+		delete from
+		conflictresolution where eterm_account_id = #{id}
+	</delete>
+	<delete id="deleteAutomaticmanual" parameterType="long">
+		delete from
+		automaticmanual where eterm_account_id = #{id}
+	</delete>
+	<select id="getEtermsByName" resultType="Instructions">
+		select * from eterm_account where Etm_Usr = #{etermName,jdbcType=VARCHAR}
+	</select>
+</mapper> 

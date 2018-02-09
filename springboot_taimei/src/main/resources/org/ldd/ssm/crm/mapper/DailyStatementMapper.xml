@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.DailyStatementMapper">
+	<insert id="save" parameterType="DailyStatement">
+		insert into t_dailystatement(
+		flightDate,leg,yPrice,priceTeam
+		,f,y,b,h,k,l,m,q,x,u,e,t,z,g,o,s,v
+		,yElse,combinedGroup,totalNumber,individualIncome,teamTotalRevenue,kilometerIncome,averageDiscount)
+		values(
+		#{flightDate},#{leg},#{yPrice},#{priceTeam}
+		,#{f},#{y},#{b},#{h},#{k},#{l},#{m},#{q},#{x},#{u},#{e},#{t},#{z},#{g},#{o},#{s},#{v}
+		,#{yElse},#{combinedGroup},#{totalNumber},#{individualIncome},#{teamTotalRevenue},#{kilometerIncome},#{averageDiscount}
+		)
+	</insert>
+	<insert id="saveCount" parameterType="DailyStatementTotal">
+		insert into
+		t_total(f,y,b,h,k,l,m,q,x,u,e,t,z,g,o,s,v
+		,yElse,combinedGroup,totalNumber,individualIncome,teamTotalRevenue,kilometerIncome,averageDiscount
+		,scatteredRegimentTotalRevenue,HourlyEarnings,averageLoadFactors,incomeGoalHours,SubsidiesOfClass,monthAccumulativetotalsubsidy)
+		values(
+		#{f},#{y},#{b},#{h},#{k},#{l},#{m},#{q},#{x},#{u},#{e},#{t},#{z},#{g},#{o},#{s},#{v}
+		,#{yElse},#{combinedGroup},#{totalNumber},#{individualIncome},#{teamTotalRevenue},#{kilometerIncome},#{averageDiscount}
+		,#{scatteredRegimentTotalRevenue},#{HourlyEarnings},#{averageLoadFactors},#{incomeGoalHours},#{SubsidiesOfClass},#{monthAccumulativetotalsubsidy}
+		)
+	</insert>
+
+	<sql id="querySql">
+		<where>
+			<if test="searchKey!=null and searchKey!=''">
+				leg like conCat('%',#{searchKey},'%')
+			</if>
+			<if test="inputTimeStart!=null">
+				and flightDate>=#{inputTimeStart}
+			</if>
+			<if test="inputTimeEnd!=null">
+				and flightDate&lt;=#{inputTimeEnd}
+			</if>
+		</where>
+	</sql>
+	<!-- <resultMap type="SystemLog" id="SystemId"> -->
+	<!-- <id column="id" property="id"/> -->
+	<!-- <result column="opTime" property="opTime"/> -->
+	<!-- <result column="opIp" property="opIp"/> -->
+	<!-- <result column="function" property="function"/> -->
+	<!-- <association property="opUser" javaType="Employee"> -->
+	<!-- <result column="eName" property="username"/> -->
+	<!-- </association> -->
+	<!-- </resultMap> -->
+
+	<!-- 高级查询和分页 -->
+	<select id="list" parameterType="SystemLogQuery" resultType="DailyStatement">
+		select * from t_dailystatement
+		<include refid="querySql" />
+		<if test="page!=null and rows!=null">
+			limit #{beginIndex},#{rows}
+		</if>
+	</select>
+
+	<select id="count" parameterType="SystemLogQuery" resultType="long">
+		select count(id) from t_dailystatement
+		<include refid="querySql" />
+	</select>
+	<select id="findByGroupBy1" parameterType="SystemLogQuery"
+		resultType="DailyStatementTotal">
+		select sum(f) f,sum(y) y, sum(b) b, sum(h) h, sum(k) k,
+		sum(l) l, sum(m) m,
+		sum(q) q, sum(x) x, sum(u) u, sum(e) e, sum(t) t, sum(z) z, sum(g) g,
+		sum(o) o, sum(s) s, sum(v) v, sum(yElse) y, sum(combinedGroup)
+		combinedGroup,
+		sum(totalNumber) totalNumber, sum(individualIncome) individualIncome,
+		sum(teamTotalRevenue) teamTotalRevenue, sum(kilometerIncome)
+		kilometerIncome,
+		sum(averageDiscount) averageDiscount
+		from t_dailystatement;
+	</select>
+</mapper> 

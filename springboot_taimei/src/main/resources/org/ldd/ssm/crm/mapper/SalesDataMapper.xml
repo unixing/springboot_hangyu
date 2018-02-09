@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.SalesDataMapper">
+	<!-- 航线接口 -->
+	<select id="findFltRteCdList" parameterType="org.ldd.ssm.crm.query.SalesDateQuery" resultType="java.lang.String">
+		select DISTINCT(Flt_Rte_Cd) from z_airdata
+		<where>
+		<if test="startTime != null and startTime !=''">
+			and <![CDATA[ Lcl_Dpt_Day>=#{startTime}]]>
+		</if>
+		<if test="endTime != null and endTime !=''">
+			and <![CDATA[Lcl_Dpt_Day<=#{endTime}]]>
+		</if>
+		<if test="flightNum != null and flightNum !=''">
+			and Flt_Nbr =#{flightNum}
+		</if>
+		</where>
+	</select>
+	
+	<sql id="salesDataQue">
+		<where>
+		<if test="startTime != null and startTime !=''">
+			and <![CDATA[b.Lcl_Dpt_Day>=#{startTime}]]>
+		</if>
+		<if test="endTime != null and endTime !=''">
+			and <![CDATA[b.Lcl_Dpt_Day<=#{endTime}]]>
+		</if>
+		<if test="flightNum != null and flightNum !=''">
+			and b.Flt_Nbr=#{flightNum}
+		</if>
+		<if test="FltRteCd != null and FltRteCd !=''">
+			and b.Flt_Rte_Cd =#{FltRteCd}
+		</if>
+		</where>
+	</sql>
+	
+	<!-- 获取航段汇总信息   不用z_airdata表 航线从airinfo表中去取-->
+	<select id="findSegmentInfo" parameterType="org.ldd.ssm.crm.query.SalesDateQuery" resultType="org.ldd.ssm.crm.domain.SegmentInfo">
+		select
+			   b.Flt_nbr flightNum,concat_ws('-',b.Dpt_AirPt_Cd,b.Arrv_Airpt_Cd) leg,
+		       IFNULL(sum(a.Tit_Pre),0) ticketPriTotal,count(a.id)  personNum
+		from traveler a
+		LEFT JOIN airinfo b on a.eachflightinfo_id=b.id
+		<include refid="salesDataQue" />
+		GROUP BY leg
+	</select>
+	
+	<!-- 获取舱位信息 -->
+	<select id="findSpaceInfo" parameterType="org.ldd.ssm.crm.query.SalesDateQuery" resultType="org.ldd.ssm.crm.domain.SpaceInfo">
+		select 
+		count(a.id)  personNum,concat_ws('-',b.Dpt_AirPt_Cd,b.Arrv_Airpt_Cd) leg,
+		IFNULL(a.Frt_Spe,'-') frtSpe,IFNULL(sum(a.Tit_Pre),0) ticketPri
+		from traveler a
+		LEFT JOIN airinfo b on a.eachflightinfo_id=b.id
+		<include refid="salesDataQue" />
+		GROUP BY leg,frtSpe
+	</select>
+	<!--获取票面信息 -->
+	<select id="findTravellerTicket" parameterType="org.ldd.ssm.crm.query.SalesDateQuery" resultType="org.ldd.ssm.crm.domain.TravellerTicketInfo">
+		select left(b.Flt_nbr,2) as carrier,b.Lcl_Dpt_Day flightDate,concat_ws('-',b.Dpt_AirPt_Cd,b.Arrv_Airpt_Cd) leg,
+		b.Flt_nbr flightNum,left(b.Flt_nbr,2) companyName,concat(left(a.TKT_No,3),"*******",right(a.TKT_No,4)) ticketNum,
+		(case when a.Pen_Tye=0 then '成人' when a.Pen_Tye=1 then '儿童' when a.Pen_Tye=2 then '婴儿' end) as penType
+		,IFNULL(a.Frt_Spe,'-') frtSpe,IFNULL(a.Tit_Pre,0) ticketPri
+		from traveler a
+		LEFT JOIN airinfo b on a.eachflightinfo_id=b.id
+		<include refid="salesDataQueTwo" />
+		ORDER BY b.Lcl_Dpt_Day DESC
+		limit #{begin},#{rows}
+	</select>
+	
+	<!-- 获取航段汇总信息 z_airData 在traveller没有数据的情况下 用这个方法查汇总数据 -->
+	<select id="findSegmentInfoByAirData" parameterType="org.ldd.ssm.crm.query.SalesDateQuery" resultType="org.ldd.ssm.crm.domain.SegmentInfo">
+		select  TRUNCATE(SUM(b.Tal_Nbr)*100/(b.yBFare*sum(b.Pgs_Per_Cls)),2) avgDct,
+			    b.Flt_Nbr flightNum,concat_ws('-',b.Dpt_AirPt_Cd,b.Arrv_Airpt_Cd) leg ,
+			    SUM(b.Tal_Nbr) ticketPriTotal,sum(b.Pgs_Per_Cls) personNum,
+			    TRUNCATE(SUM(b.Tal_Nbr)/sum(b.Pgs_Per_Cls),2) ticketPriAvg
+ 		from z_airdata b
+ 		<include refid="salesDataQue" />
+		GROUP BY leg;
+	</select>
+	<!-- z_airdata 获得舱位人数 航段 -->
+	<select id="findSpaceAirData" parameterType="org.ldd.ssm.crm.query.SalesDateQuery" resultType="org.ldd.ssm.crm.domain.SpaceAirData">
+		SELECT concat_ws('-',b.Dpt_AirPt_Cd,b.Arrv_Airpt_Cd) leg,
+			SUM(Two_Tak_Ppt) twoTakPpt,SUM(Ful_Pce_Ppt) fulPcePpt,SUM(Nne_Dnt_Ppt) nneDntPpt,
+			SUM(Eht_Five_Dnt_Ppt) ehtFiveDntPpt,SUM(Eht_Dnt_Ppt) ehtDntPpt,
+			SUM(Sen_Five_Dnt_Ppt) senFiveDntPpt,SUM(Sen_Dnt_Ppt) senDntPpt,
+			SUM(Six_Five_Dnt_Ppt) sixFiveDntPpt,SUM(Six_Dnt_Ppt) sixDntPpt,
+			SUM(Fve_Fve_Dnt_Ppt) fveFveDntPpt,SUM(Fve_Dnt_Ppt) fveDntPpt,
+			SUM(Fur_Fve_Dnt_Ppt) furFveDntPpt,SUM(Fur_Dnt_Ppt) furDntPpt,
+			SUM(Thr_Fve_Dnt_Ppt) thrFveDntPpt,SUM(Thr_Dnt_Ppt) thrDntPpt,
+			SUM(Two_Fve_Dnt_Ppt) twoFveDntPpt,SUM(Two_Dnt_Ppt) twoDntPpt,
+			SUM(Sal_Tak_Ppt) salTakPpt 
+		from z_airdata b
+ 		<include refid="salesDataQue" />
+		GROUP BY leg;
+	</select>
+	
+	<!-- 获得每个航司折扣比例对应的舱位号 -->
+	<select id="findFlightSpaceNum" parameterType="java.lang.String" resultType="org.ldd.ssm.crm.domain.FlightSpaceNum">
+		select a.Dct_Chr DctChr,a.Dct_Ppt DctPpt from airdiscount a
+		where a.Cpy_Nm=#{CpyNm}
+	</select>
+	
+	<!-- 导出 -->
+	<sql id="salesDataQueTwo">
+		<where>
+		<if test="startTime != null and startTime !=''">
+			and <![CDATA[b.Lcl_Dpt_Day>=#{startTime}]]>
+		</if>
+		<if test="endTime != null and endTime !=''">
+			and <![CDATA[b.Lcl_Dpt_Day<=#{endTime}]]>
+		</if>
+		<if test="flightNum != null and flightNum !=''">
+			and b.Flt_Nbr=#{flightNum}
+		</if>
+		<if test="FltRteCd != null and FltRteCd !=''">
+			and b.Flt_Rte_Cd =#{FltRteCd}
+		</if>
+		<if test="leg != null and leg !=''">
+			and concat_ws('-',b.Dpt_AirPt_Cd,b.Arrv_Airpt_Cd)=#{leg}
+		</if>
+		</where>
+	</sql>
+	<!-- 获取航段信息 -->
+	<select id="findSegmentList" parameterType="org.ldd.ssm.crm.query.SalesDateQuery" resultType="java.lang.String">
+		select concat_ws('-',b.Dpt_AirPt_Cd,b.Arrv_Airpt_Cd) leg
+		from traveler a
+		LEFT JOIN airinfo b on a.eachflightinfo_id=b.id
+		<include refid="salesDataQueTwo" />
+		GROUP BY leg
+	</select>
+	<!-- 根据航段获取票面信息 -->
+	<select id="findTravellerTicketExc" parameterType="org.ldd.ssm.crm.query.SalesDateQuery" resultType="org.ldd.ssm.crm.domain.TravellerTicketInfo">
+		select left(b.Flt_nbr,2) as carrier,b.Lcl_Dpt_Day flightDate,concat_ws('-',b.Dpt_AirPt_Cd,b.Arrv_Airpt_Cd) leg,
+		b.Flt_nbr flightNum,left(b.Flt_nbr,2) companyName,concat(left(a.TKT_No,3),"*******",right(a.TKT_No,4)) ticketNum,
+		(case when a.Pen_Tye=0 then '成人' when a.Pen_Tye=1 then '儿童' when a.Pen_Tye=2 then '婴儿' end) as penType
+		,IFNULL(a.Frt_Spe,'-') frtSpe,IFNULL(a.Tit_Pre,0) ticketPri
+		from traveler a
+		LEFT JOIN airinfo b on a.eachflightinfo_id=b.id
+		<include refid="salesDataQueTwo" />
+		ORDER BY b.Lcl_Dpt_Day DESC
+	</select>
+
+	<!-- 根据航段获取票面信息 排序 -->
+	<select id="findTicketInfo" parameterType="org.ldd.ssm.crm.query.SalesDateQuery" resultType="org.ldd.ssm.crm.domain.TravellerTicketInfo">
+		select left(b.Flt_nbr,2) as carrier,b.Lcl_Dpt_Day flightDate,concat_ws('-',b.Dpt_AirPt_Cd,b.Arrv_Airpt_Cd) leg,
+		b.Flt_nbr flightNum,left(b.Flt_nbr,2) companyName,concat(left(a.TKT_No,3),"*******",right(a.TKT_No,4)) ticketNum,
+		(case when a.Pen_Tye=0 then '成人' when a.Pen_Tye=1 then '儿童' when a.Pen_Tye=2 then '婴儿' end) as penType
+		,IFNULL(a.Frt_Spe,'-') frtSpe,IFNULL(a.Tit_Pre,0) ticketPri
+		from traveler a
+		LEFT JOIN airinfo b on a.eachflightinfo_id=b.id
+		<include refid="salesDataQueTwo" />
+		ORDER BY ${order} ${sort}
+		limit #{begin},#{rows}
+	</select>
+	
+	<select id="getCurrentTime" parameterType="org.ldd.ssm.crm.query.SalesDateQuery" resultType="java.lang.String">
+		 select  b.Lcl_Dpt_Day from z_airdata b 
+		<!--  WHERE  b.Flt_nbr=#{flightNum} and b.Flt_Rte_Cd=#{FltRteCd}  -->
+		<where>
+		 <if test="flightNum != null and flightNum !=''">
+			and b.Flt_Nbr=#{flightNum}
+		</if>
+		<if test="FltRteCd != null and FltRteCd !=''">
+			and (b.Flt_Rte_Cd =#{FltRteCd} or b.Flt_Rte_Cd =#{FltRteCdOther})
+		</if>
+		</where>
+		 ORDER BY b.Lcl_Dpt_Day desc limit 0,1
+	</select>
+	<select id="findTicketInfoList" parameterType="org.ldd.ssm.crm.query.SalesDateQuery" resultType="org.ldd.ssm.crm.domain.TicketInfo">
+		select b.Lcl_Dpt_Day flightDate,concat_ws('-',b.Dpt_AirPt_Cd,b.Arrv_Airpt_Cd) leg,
+		b.Flt_nbr flightNum,concat(left(a.TKT_No,3),"*******",right(a.TKT_No,4)) ticketNumDetail ,a.TKT_No ticketNum,
+		IFNULL(a.Tit_Pre,0) ticketPri,IFNULL(a.Tit_Pre_state,0) flag
+		from traveler a
+		LEFT JOIN airinfo b on a.eachflightinfo_id=b.id
+		<where>
+		<if test="startTime != null and startTime !=''">
+			and <![CDATA[b.Lcl_Dpt_Day>=#{startTime}]]>
+		</if>
+		<if test="endTime != null and endTime !=''">
+			and <![CDATA[b.Lcl_Dpt_Day<=#{endTime}]]>
+		</if>
+		<if test="flightNum != null and flightNum !=''">
+			and b.Flt_Nbr=#{flightNum}
+		</if>
+		<if test="FltRteCd != null and FltRteCd !=''">
+			and (b.Flt_Rte_Cd =#{FltRteCd} or b.Flt_Rte_Cd =#{FltRteCdOther})
+		</if>
+		</where>
+	</select>
+</mapper> 

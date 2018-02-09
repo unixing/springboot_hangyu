@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.BuidScheduleMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.BuidSchedule">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="airport_name" property="airportName" jdbcType="VARCHAR" />
+		<result column="init_buid_date" property="initBuidDate"
+			jdbcType="VARCHAR" />
+		<result column="accept_date" property="acceptDate" jdbcType="VARCHAR" />
+		<result column="test_flight_date" property="testFlightDate"
+			jdbcType="VARCHAR" />
+		<result column="planed_ship_date" property="planedShipDate"
+			jdbcType="VARCHAR" />
+		<result column="revised_date" property="revisedDate" jdbcType="VARCHAR" />
+		<result column="destination" property="destination" jdbcType="VARCHAR" />
+		<result column="target_throughput" property="targetThroughput"
+			jdbcType="INTEGER" />
+		<result column="awarding_policy" property="awardingPolicy"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, airport_name, init_buid_date, accept_date, test_flight_date,
+		planed_ship_date,
+		destination, target_throughput, awarding_policy,revised_date
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from t_buidschedule
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from t_buidschedule
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.BuidSchedule">
+		insert into t_buidschedule (id, airport_name, init_buid_date,
+		accept_date, test_flight_date, planed_ship_date,
+		destination, target_throughput, awarding_policy,revised_date
+		)
+		values (#{id,jdbcType=INTEGER}, #{airportName,jdbcType=VARCHAR},
+		#{initBuidDate,jdbcType=VARCHAR},
+		#{acceptDate,jdbcType=VARCHAR}, #{testFlightDate,jdbcType=VARCHAR},
+		#{planedShipDate,jdbcType=VARCHAR},
+		#{destination,jdbcType=VARCHAR}, #{targetThroughput,jdbcType=INTEGER},
+		#{awardingPolicy,jdbcType=VARCHAR},#{revisedDate,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.BuidSchedule">
+		insert into t_buidschedule
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="airportName != null">
+				airport_name,
+			</if>
+			<if test="initBuidDate != null">
+				init_buid_date,
+			</if>
+			<if test="acceptDate != null">
+				accept_date,
+			</if>
+			<if test="testFlightDate != null">
+				test_flight_date,
+			</if>
+			<if test="planedShipDate != null">
+				planed_ship_date,
+			</if>
+			<if test="destination != null">
+				destination,
+			</if>
+			<if test="targetThroughput != null">
+				target_throughput,
+			</if>
+			<if test="awardingPolicy != null">
+				awarding_policy,
+			</if>
+			<if test="revisedDate !=null">
+				revised_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="airportName != null">
+				#{airportName,jdbcType=VARCHAR},
+			</if>
+			<if test="initBuidDate != null">
+				#{initBuidDate,jdbcType=VARCHAR},
+			</if>
+			<if test="acceptDate != null">
+				#{acceptDate,jdbcType=VARCHAR},
+			</if>
+			<if test="testFlightDate != null">
+				#{testFlightDate,jdbcType=VARCHAR},
+			</if>
+			<if test="planedShipDate != null">
+				#{planedShipDate,jdbcType=VARCHAR},
+			</if>
+			<if test="destination != null">
+				#{destination,jdbcType=VARCHAR},
+			</if>
+			<if test="targetThroughput != null">
+				#{targetThroughput,jdbcType=INTEGER},
+			</if>
+			<if test="awardingPolicy != null">
+				#{awardingPolicy,jdbcType=VARCHAR},
+			</if>
+			<if test="revisedDate !=null">
+				#{revisedDate,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.BuidSchedule">
+		update t_buidschedule
+		<set>
+			<if test="airportName != null">
+				airport_name = #{airportName,jdbcType=VARCHAR},
+			</if>
+			<if test="initBuidDate != null">
+				init_buid_date = #{initBuidDate,jdbcType=VARCHAR},
+			</if>
+			<if test="acceptDate != null">
+				accept_date = #{acceptDate,jdbcType=VARCHAR},
+			</if>
+			<if test="testFlightDate != null">
+				test_flight_date = #{testFlightDate,jdbcType=VARCHAR},
+			</if>
+			<if test="planedShipDate != null">
+				planed_ship_date = #{planedShipDate,jdbcType=VARCHAR},
+			</if>
+			<if test="destination != null">
+				destination = #{destination,jdbcType=VARCHAR},
+			</if>
+			<if test="targetThroughput != null">
+				target_throughput = #{targetThroughput,jdbcType=INTEGER},
+			</if>
+			<if test="awardingPolicy != null">
+				awarding_policy = #{awardingPolicy,jdbcType=VARCHAR},
+			</if>
+			<if test="revisedDate !=null">
+				revised_date = #{revisedDate,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.BuidSchedule">
+		update t_buidschedule
+		set airport_name = #{airportName,jdbcType=VARCHAR},
+		init_buid_date = #{initBuidDate,jdbcType=VARCHAR},
+		accept_date = #{acceptDate,jdbcType=VARCHAR},
+		test_flight_date = #{testFlightDate,jdbcType=VARCHAR},
+		planed_ship_date = #{planedShipDate,jdbcType=VARCHAR},
+		destination = #{destination,jdbcType=VARCHAR},
+		target_throughput = #{targetThroughput,jdbcType=INTEGER},
+		awarding_policy = #{awardingPolicy,jdbcType=VARCHAR},
+		revised_date = #{revisedDate,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectByName" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_buidschedule
+		where 1=1
+		<if test="name !=null and name != ''">
+			and airport_name like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+</mapper>

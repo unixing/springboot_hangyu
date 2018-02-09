@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.HomePageMapper">
+
+	<select id="getYesterdayEarnings" resultType="String"
+		parameterType="HomePageQuery">
+		select SUM(Tal_Nbr) from z_airdata a where a.Flt_Rte_Cd in (select
+		Flt_Rte_Cd from (select * from z_airdata
+		<include refid="checkAcdition1" />
+		GROUP BY Flt_Rte_Cd) as t) AND Lcl_Dpt_Day=#{date}
+	</select>
+
+	<select id="getYesterdayClasses" resultType="String"
+		parameterType="HomePageQuery">
+		select count(id)
+		from z_airdata
+		<include refid="checkAcdition2" />
+	</select>
+	<select id="getChinaAirLineDataList" resultType="String">
+		select airline
+		from airline_ch where date = (select date from airline_ch order by date desc limit 1)
+		<if test="itia !=null and itia !=''">
+			and airline like CONCAT('%',#{itia,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+	<select id="getIntrutionsFlyNbr" resultType="String" parameterType="String">
+		select DISTINCT Flt_Nbr from guestrate 
+		<include refid="checkAirport" />
+	</select>
+	
+	<select id="getOnInstrutionsLinees" resultType="String">
+		select DISTINCT air_line from instructions 
+	</select>
+	<sql id="checkAirport">
+		<where>
+			<if test="_parameter!=null">
+				and Dpt_AirPt_Cd=#{_parameter} OR Arrv_Airpt_Cd=#{_parameter}
+			</if>
+		</where>
+	</sql>
+	<select id="getYesterdayPutin" resultType="String"
+		parameterType="HomePageQuery">
+		select SUM(Pgs_Per_Cls)
+		from z_airdata
+		<include refid="checkAcdition3" />
+	</select>
+
+	<select id="getYesterdayLeave" resultType="String"
+		parameterType="HomePageQuery">
+		select SUM(Pgs_Per_Cls)
+		from z_airdata
+		<include refid="checkAcdition4" />
+	</select>
+
+	<select id="getYesterdayAllLineTraveller" resultType="String"
+		parameterType="HomePageQuery">
+		select SUM(Pgs_Per_Cls)
+		from z_airdata
+		<include refid="checkAcdition5" />
+	</select>
+
+	<select id="getAirportFlowDataList" resultType="HomePageData"
+		parameterType="HomePageQuery">
+		select Lcl_Dpt_Day date, SUM(Pgs_Per_Cls) persons
+		from z_airdata
+		<include refid="checkAirportFlowData" />
+		group by Lcl_Dpt_Day
+	</select>
+
+	<select id="getAirportFlow2DataList" resultType="HomePageData"
+		parameterType="HomePageQuery">
+		select Lcl_Dpt_Day date, SUM(Tal_Nbr) zsr
+		from z_airdata a where
+		a.Flt_Rte_Cd in (select Flt_Rte_Cd from (select * from z_airdata
+		<include refid="checkAirportFlowData2" />
+		GROUP BY Flt_Rte_Cd) as t) AND Lcl_Dpt_Day&gt;=#{startTime} AND
+		Lcl_Dpt_Day&lt;=#{endTime}
+		group by Lcl_Dpt_Day
+	</select>
+
+	<select id="getAirportKzlDataList" resultType="HomePageData"
+		parameterType="HomePageQuery">
+		select SUM(Pgs_Per_Cls)/SUM(Tal_Nbr_Set) kzl,Flt_Nbr flyNum
+		from
+		z_airdata
+		<include refid="checkAirportKzlData" />
+		group by Flt_Nbr order by kzl ASC limit 10
+	</select>
+
+	<select id="getAirportZglDataList" resultType="HomePageData"
+		parameterType="HomePageQuery">
+		select SUM(Set_Ktr_Ine)/count(id) zgl ,Flt_Nbr flyNum
+		from z_airdata a
+		where a.Flt_Rte_Cd in (select Flt_Rte_Cd from (select * from z_airdata
+		<include refid="checkAirportKzlData" />
+		GROUP BY Flt_Rte_Cd) as t) AND Lcl_Dpt_Day=#{date}
+		group by Flt_Nbr
+		order by zgl ASC limit 10
+	</select>
+
+	<select id="getAirportZsrDataList" resultType="HomePageData"
+		parameterType="HomePageQuery">
+		select SUM(Tal_Nbr) zsr,Flt_Nbr flyNum
+		from z_airdata a where
+		a.Flt_Rte_Cd in (select Flt_Rte_Cd from (select * from z_airdata
+		<include refid="checkAirportKzlData" />
+		GROUP BY Flt_Rte_Cd) as t) AND Lcl_Dpt_Day=#{date}
+		group by Flt_Nbr
+		order by zsr ASC limit 10
+	</select>
+
+	<select id="getAirportOnLineDataList" resultType="HomePageData"
+		parameterType="HomePageQuery">
+		select air_line flt_ret_cd,flt_nbr flyNum,state state
+		from airlineCompany
+		<include refid="checkAirportOnLineData" />
+	</select>
+
+	<select id="getSelectAirLineData" resultType="HomePageData"
+		parameterType="HomePageQuery">
+		select flt_nbr flyNum,air_line flt_ret_cd from airlineCompany
+		<include refid="checkSelectAirLineData" />
+		group by flt_nbr,flt_ret_cd
+	</select>
+
+	<select id="getCityNameByCode" resultType="String"
+		parameterType="HomePageQuery">
+		select city
+		from z_airport_city
+		where airportNum like
+		CONCAT('%','${szm}','%' )
+	</select>
+
+	<select id="getNewDate" resultType="String" parameterType="HomePageQuery">
+		select Lcl_Dpt_Day
+		from z_airdata
+		<include refid="checknull" />
+		order by Lcl_Dpt_Day DESC limit 1
+	</select>
+
+	<select id="getFltNum" resultType="String" parameterType="HomePageQuery">
+		select
+		Flt_Nbr
+		from z_airdata
+		where Flt_Rte_Cd like CONCAT('%','${airPort}','%'
+		) and Lcl_Dpt_Day=#{date} group by Flt_Nbr
+	</select>
+	
+	<select id="getAllAirLineData" resultType="AllAirLineFltDetailData" parameterType="AllAirLineQuery">
+		select DISTINCT(flt_nbr) flyNbr,airCrft_Typ jixing,dpt_AirPt_Cd dpt_AirPt_Cd,arrv_Airpt_Cd arrv_Airpt_Cd,lcl_Dpt_Tm goTime,lcl_Arrv_Tm arrTime,days banQi,dpt_AirPt_Cd_itia dpt_Itia,arrv_AirPt_Cd_itia arrv_Itia from eachflightinfo
+		<include refid="checkAirDa" />
+	</select>
+	<select id="getNewLineDate" resultType="String" >
+		select get_tim from eachflightinfo order by get_tim desc limit 1
+	</select>
+
+	<select id="getZairdataList" resultType="Z_Airdata"
+		parameterType="HomePageQuery">
+		select id as id,
+		Lcl_Dpt_Day as lcl_Dpt_Day,
+		Dpt_AirPt_Cd as dpt_AirPt_Cd,
+		Arrv_Airpt_Cd as arrv_Airpt_Cd,
+		Flt_Nbr as flt_Nbr,
+		Cpy_Nm as cpy_Nm,
+		Lcl_Dpt_Tm as lcl_Dpt_Tm,
+		Lcl_Arrv_Tm as lcl_Arrv_Tm,
+		Flt_Rte_Cd as flt_Rte_Cd,
+		Tal_Nbr_Set as tal_Nbr_Set,
+		Pgs_Per_Cls as pgs_Per_Cls,
+		Grp_Nbr as grp_Nbr,
+		Ech_Cls_Grp as ech_Cls_Grp,
+		Grp_Fng_Rte as grp_Fng_Per,
+		Tal_Nbr as totalNumber,
+		Set_Ktr_Ine as Set_Ktr_Ine,
+		Grp_Ine as grp_Ine,
+		Grp_Ppt as grp_Ppt,
+		Egs_Lod_Fts as egs_Lod_Fts,
+		avg_Dct as avg_Dct,
+		Idd_Dct as idd_Dct,
+		Grp_Dct as grp_Dct,
+		Two_Tak_Ppt as two_Tak_Ppt,
+		Ful_Pce_Ppt as ful_Pce_Ppt,
+		Nne_Dnt_Ppt as nne_Dnt_Ppt,
+		Eht_Five_Dnt_Ppt as eht_Five_Dnt_Ppt,
+		Eht_Dnt_Ppt as eht_Dnt_Ppt,
+		Sen_Five_Dnt_Ppt as sen_Five_Dnt_Ppt,
+		Sen_Dnt_Ppt as sen_Dnt_Ppt,
+		Six_Five_Dnt_Ppt as six_Five_Dnt_Ppt,
+		Six_Dnt_Ppt as six_Dnt_Ppt,
+		Fve_Fve_Dnt_Ppt as fve_Fve_Dnt_Ppt,
+		Fve_Dnt_Ppt as fve_Dnt_Ppt,
+		Fur_Fve_Dnt_Ppt as fur_Fve_Dnt_Ppt,
+		Fur_Dnt_Ppt as fur_Dnt_Ppt,
+		Thr_Fve_Dnt_Ppt as thr_Fve_Dnt_Ppt,
+		Thr_Dnt_Ppt as thr_Dnt_Ppt,
+		Two_Fve_Dnt_Ppt as two_Fve_Dnt_Ppt,
+		Two_Dnt_Ppt as two_Dnt_Ppt,
+		Sal_Tak_Ppt as sal_Tak_Ppt,
+		R_Tak_Ppt as r_Tak_Ppt,
+		U_Tak_Ppt as u_Tak_Ppt,
+		I_Tak_Ppt as i_Tak_Ppt,
+		Z_Tak_Ppt as z_Tak_Ppt,
+		E_Tak_Ppt as e_Tak_Ppt,
+		A_Tak_Ppt as a_Tak_Ppt,
+		O_Tak_Ppt as o_Tak_Ppt,
+		S_Tak_Ppt as s_Tak_Ppt,
+		H_Tak_Ppt as h_Tak_Ppt,
+		X_Tak_Ppt as x_Tak_Ppt,
+		Children as children,
+		yBFare as yBFare,
+		sailingDistance as sailingDistance,
+		Dta_Sce as dta_Sce,
+		Dta_Dte as dta_Dte,
+		company_id as company
+		from z_airdata
+		where Flt_Rte_Cd like CONCAT('%','${airPort}','%' ) and Lcl_Dpt_Day=#{date}
+	</select>
+	<select id="getKPIZAirdataList" resultType="Z_Airdata"
+		parameterType="HomePageQuery">
+		select id as id,
+		Lcl_Dpt_Day as lcl_Dpt_Day,
+		Dpt_AirPt_Cd as dpt_AirPt_Cd,
+		Arrv_Airpt_Cd as arrv_Airpt_Cd,
+		Flt_Nbr as flt_Nbr,
+		Cpy_Nm as cpy_Nm,
+		Lcl_Dpt_Tm as lcl_Dpt_Tm,
+		Lcl_Arrv_Tm as lcl_Arrv_Tm,
+		Flt_Rte_Cd as flt_Rte_Cd,
+		Tal_Nbr_Set as tal_Nbr_Set,
+		Pgs_Per_Cls as pgs_Per_Cls,
+		Grp_Nbr as grp_Nbr,
+		Ech_Cls_Grp as ech_Cls_Grp,
+		Grp_Fng_Rte as grp_Fng_Per,
+		Tal_Nbr as totalNumber,
+		Set_Ktr_Ine as Set_Ktr_Ine,
+		Grp_Ine as grp_Ine,
+		Grp_Ppt as grp_Ppt,
+		Egs_Lod_Fts as egs_Lod_Fts,
+		avg_Dct as avg_Dct,
+		Idd_Dct as idd_Dct,
+		Grp_Dct as grp_Dct,
+		Two_Tak_Ppt as two_Tak_Ppt,
+		Ful_Pce_Ppt as ful_Pce_Ppt,
+		Nne_Dnt_Ppt as nne_Dnt_Ppt,
+		Eht_Five_Dnt_Ppt as eht_Five_Dnt_Ppt,
+		Eht_Dnt_Ppt as eht_Dnt_Ppt,
+		Sen_Five_Dnt_Ppt as sen_Five_Dnt_Ppt,
+		Sen_Dnt_Ppt as sen_Dnt_Ppt,
+		Six_Five_Dnt_Ppt as six_Five_Dnt_Ppt,
+		Six_Dnt_Ppt as six_Dnt_Ppt,
+		Fve_Fve_Dnt_Ppt as fve_Fve_Dnt_Ppt,
+		Fve_Dnt_Ppt as fve_Dnt_Ppt,
+		Fur_Fve_Dnt_Ppt as fur_Fve_Dnt_Ppt,
+		Fur_Dnt_Ppt as fur_Dnt_Ppt,
+		Thr_Fve_Dnt_Ppt as thr_Fve_Dnt_Ppt,
+		Thr_Dnt_Ppt as thr_Dnt_Ppt,
+		Two_Fve_Dnt_Ppt as two_Fve_Dnt_Ppt,
+		Two_Dnt_Ppt as two_Dnt_Ppt,
+		Sal_Tak_Ppt as sal_Tak_Ppt,
+		R_Tak_Ppt as r_Tak_Ppt,
+		U_Tak_Ppt as u_Tak_Ppt,
+		I_Tak_Ppt as i_Tak_Ppt,
+		Z_Tak_Ppt as z_Tak_Ppt,
+		E_Tak_Ppt as e_Tak_Ppt,
+		A_Tak_Ppt as a_Tak_Ppt,
+		O_Tak_Ppt as o_Tak_Ppt,
+		S_Tak_Ppt as s_Tak_Ppt,
+		H_Tak_Ppt as h_Tak_Ppt,
+		X_Tak_Ppt as x_Tak_Ppt,
+		Children as children,
+		yBFare as yBFare,
+		sailingDistance as sailingDistance,
+		Dta_Sce as dta_Sce,
+		Dta_Dte as dta_Dte,
+		company_id as company
+		from z_airdata
+		<include refid="checkAPIAirData" />
+		ORDER BY Flt_Nbr,Lcl_Dpt_Day ASC
+	</select>
+
+<select id="getKPIZAirdataListNew" resultType="Z_Airdata"
+		parameterType="HomePageQuery">
+		select id as id,
+		Lcl_Dpt_Day as lcl_Dpt_Day,
+		Dpt_AirPt_Cd as dpt_AirPt_Cd,
+		Arrv_Airpt_Cd as arrv_Airpt_Cd,
+		Flt_Nbr as flt_Nbr,
+		Cpy_Nm as cpy_Nm,
+		Lcl_Dpt_Tm as lcl_Dpt_Tm,
+		Lcl_Arrv_Tm as lcl_Arrv_Tm,
+		Flt_Rte_Cd as flt_Rte_Cd,
+		Tal_Nbr_Set as tal_Nbr_Set,
+		Pgs_Per_Cls as pgs_Per_Cls,
+		Grp_Nbr as grp_Nbr,
+		Ech_Cls_Grp as ech_Cls_Grp,
+		Grp_Fng_Rte as grp_Fng_Per,
+		Tal_Nbr as totalNumber,
+		Set_Ktr_Ine as Set_Ktr_Ine,
+		Grp_Ine as grp_Ine,
+		Grp_Ppt as grp_Ppt,
+		Egs_Lod_Fts as egs_Lod_Fts,
+		avg_Dct as avg_Dct,
+		Idd_Dct as idd_Dct,
+		Grp_Dct as grp_Dct,
+		Two_Tak_Ppt as two_Tak_Ppt,
+		Ful_Pce_Ppt as ful_Pce_Ppt,
+		Nne_Dnt_Ppt as nne_Dnt_Ppt,
+		Eht_Five_Dnt_Ppt as eht_Five_Dnt_Ppt,
+		Eht_Dnt_Ppt as eht_Dnt_Ppt,
+		Sen_Five_Dnt_Ppt as sen_Five_Dnt_Ppt,
+		Sen_Dnt_Ppt as sen_Dnt_Ppt,
+		Six_Five_Dnt_Ppt as six_Five_Dnt_Ppt,
+		Six_Dnt_Ppt as six_Dnt_Ppt,
+		Fve_Fve_Dnt_Ppt as fve_Fve_Dnt_Ppt,
+		Fve_Dnt_Ppt as fve_Dnt_Ppt,
+		Fur_Fve_Dnt_Ppt as fur_Fve_Dnt_Ppt,
+		Fur_Dnt_Ppt as fur_Dnt_Ppt,
+		Thr_Fve_Dnt_Ppt as thr_Fve_Dnt_Ppt,
+		Thr_Dnt_Ppt as thr_Dnt_Ppt,
+		Two_Fve_Dnt_Ppt as two_Fve_Dnt_Ppt,
+		Two_Dnt_Ppt as two_Dnt_Ppt,
+		Sal_Tak_Ppt as sal_Tak_Ppt,
+		R_Tak_Ppt as r_Tak_Ppt,
+		U_Tak_Ppt as u_Tak_Ppt,
+		I_Tak_Ppt as i_Tak_Ppt,
+		Z_Tak_Ppt as z_Tak_Ppt,
+		E_Tak_Ppt as e_Tak_Ppt,
+		A_Tak_Ppt as a_Tak_Ppt,
+		O_Tak_Ppt as o_Tak_Ppt,
+		S_Tak_Ppt as s_Tak_Ppt,
+		H_Tak_Ppt as h_Tak_Ppt,
+		X_Tak_Ppt as x_Tak_Ppt,
+		Children as children,
+		yBFare as yBFare,
+		sailingDistance as sailingDistance,
+		Dta_Sce as dta_Sce,
+		Dta_Dte as dta_Dte,
+		company_id as company,
+		(SELECT Apt_Cha_Nm FROM airportmappingcode b WHERE b.IATA=a.Dpt_AirPt_Cd) dpt_Cha_Nm,
+		(SELECT Apt_Cha_Nm FROM airportmappingcode b WHERE a.Arrv_Airpt_Cd=b.IATA) arrv_Cha_Nm
+		from z_airdata a
+		<include refid="checkAPIAirDataNew" />
+		ORDER BY Flt_Nbr,Lcl_Dpt_Day ASC
+	</select>
+
+	<select id="getCityCoordinateList" resultType="CityCoordinate">
+		select id as id,city_name as cityName,city_coordinate as
+		cityCoordinatee
+		from t_city_coordinate
+	</select>
+	
+	<select id="getTimeData" resultType="Z_Airdata" parameterType="HavingDataQuery">
+		select  
+		id as id,
+		Lcl_Dpt_Day as lcl_Dpt_Day,
+		Dpt_AirPt_Cd as dpt_AirPt_Cd,
+		Arrv_Airpt_Cd as arrv_Airpt_Cd,
+		Flt_Nbr as flt_Nbr,
+		Cpy_Nm as cpy_Nm,
+		Lcl_Dpt_Tm as lcl_Dpt_Tm,
+		Lcl_Arrv_Tm as lcl_Arrv_Tm,
+		Flt_Rte_Cd as flt_Rte_Cd,
+		Tal_Nbr_Set as tal_Nbr_Set,
+		count_Set as count_Set,
+		Pgs_Per_Cls as pgs_Per_Cls,
+		Grp_Nbr as grp_Nbr,
+		Ech_Cls_Grp as ech_Cls_Grp,
+		Grp_Fng_Rte as grp_Fng_Per,
+		Tal_Nbr as totalNumber,
+		Set_Ktr_Ine as Set_Ktr_Ine,
+		Grp_Ine as grp_Ine,
+		Grp_Ppt as grp_Ppt,
+		Egs_Lod_Fts as egs_Lod_Fts,
+		avg_Dct as avg_Dct,
+		Idd_Dct as idd_Dct,
+		Grp_Dct as grp_Dct,
+		Two_Tak_Ppt as two_Tak_Ppt,
+		Ful_Pce_Ppt as ful_Pce_Ppt,
+		Nne_Dnt_Ppt as nne_Dnt_Ppt,
+		Eht_Five_Dnt_Ppt as eht_Five_Dnt_Ppt,
+		Eht_Dnt_Ppt as eht_Dnt_Ppt,
+		Sen_Five_Dnt_Ppt as sen_Five_Dnt_Ppt,
+		Sen_Dnt_Ppt as sen_Dnt_Ppt,
+		Six_Five_Dnt_Ppt as six_Five_Dnt_Ppt,
+		Six_Dnt_Ppt as six_Dnt_Ppt,
+		Fve_Fve_Dnt_Ppt as fve_Fve_Dnt_Ppt,
+		Fve_Dnt_Ppt as fve_Dnt_Ppt,
+		Fur_Fve_Dnt_Ppt as fur_Fve_Dnt_Ppt,
+		Fur_Dnt_Ppt as fur_Dnt_Ppt,
+		Thr_Fve_Dnt_Ppt as thr_Fve_Dnt_Ppt,
+		Thr_Dnt_Ppt as thr_Dnt_Ppt,
+		Two_Fve_Dnt_Ppt as two_Fve_Dnt_Ppt,
+		Two_Dnt_Ppt as two_Dnt_Ppt,
+		Sal_Tak_Ppt as sal_Tak_Ppt,
+		R_Tak_Ppt as r_Tak_Ppt,
+		U_Tak_Ppt as u_Tak_Ppt,
+		I_Tak_Ppt as i_Tak_Ppt,
+		Z_Tak_Ppt as z_Tak_Ppt,
+		E_Tak_Ppt as e_Tak_Ppt,
+		A_Tak_Ppt as a_Tak_Ppt,
+		O_Tak_Ppt as o_Tak_Ppt,
+		S_Tak_Ppt as s_Tak_Ppt,
+		H_Tak_Ppt as h_Tak_Ppt,
+		X_Tak_Ppt as x_Tak_Ppt,
+		Children as children,
+		yBFare as yBFare,
+		sailingDistance as sailingDistance,
+		Dta_Dte as dta_Dte,
+		company_id as company,
+		allData as allData,
+		comeAndGo as comeAndGo
+		from z_airdata 
+		<include refid="checkDataTime" />
+		 ORDER BY Lcl_Dpt_Day DESC
+	</select>
+	<sql id="checkDataTime">
+		<where>
+			<if test="startTime!=null">
+				AND Lcl_Dpt_Day&gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND Lcl_Dpt_Day&lt;=#{endTime}
+			</if>
+			<if test="lineFlag==1">
+				<if test="isIncludeRdf!=null and isIncludeRdf!=''">
+					<if test="isIncludePas!=null and isIncludePas!=''">
+						<if test="isGoAndBack!=null">
+							AND ((Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and Arrv_Airpt_Cd=#{Arrv_Airpt_Cd})
+							OR (Dpt_AirPt_Cd=#{Arrv_Airpt_Cd} and Arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+						</if>	
+						<if test="isGoAndBack==null">
+							AND (Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and Arrv_Airpt_Cd=#{Arrv_Airpt_Cd})
+						</if>	
+					</if>
+					<if test="isIncludePas==null or isIncludePas==''">
+						<if test="isGoAndBack!=null">
+							AND ((Flt_Rte_Cd like CONCAT('%',#{flt_ectq},'%' )) OR (Flt_Rte_Cd like CONCAT('%',#{flt_ecth},'%' )))
+							AND ((Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and Arrv_Airpt_Cd=#{Arrv_Airpt_Cd})
+							OR (Dpt_AirPt_Cd=#{Arrv_Airpt_Cd} and Arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+						</if>	
+						<if test="isGoAndBack==null">
+							AND ((Flt_Rte_Cd like CONCAT('%',#{flt_ectq},'%' )) OR (Flt_Rte_Cd like CONCAT('%',#{flt_ecth},'%' )))
+							AND (Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and Arrv_Airpt_Cd=#{Arrv_Airpt_Cd})
+						</if>	
+					</if>
+				</if>
+				<if test="isIncludeRdf==null or isIncludeRdf==''">
+					<if test="isIncludePas!=null and isIncludePas!=''">
+						<if test="isGoAndBack!=null">
+							AND ((Flt_Rte_Cd not like CONCAT('%',#{flt_ectq},'%' )) and (Flt_Rte_Cd not like CONCAT('%',#{flt_ecth},'%' )))
+							AND ((Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and Arrv_Airpt_Cd=#{Arrv_Airpt_Cd})
+							OR (Dpt_AirPt_Cd=#{Arrv_Airpt_Cd} and Arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+						</if>	
+						<if test="isGoAndBack==null">
+							AND ((Flt_Rte_Cd not like CONCAT('%',#{flt_ectq},'%' )) and (Flt_Rte_Cd not like CONCAT('%',#{flt_ecth},'%' )))
+							AND (Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and Arrv_Airpt_Cd=#{Arrv_Airpt_Cd})
+						</if>	
+					</if>
+					<if test="isIncludePas==null or isIncludePas==''">
+						AND 1=2;	
+					</if>
+				</if>
+			</if>
+			<if test="lineFlag==2">
+				<if test="pas_stp!=null">
+					<if test="isGoAndBack!=null">
+						AND (Flt_Rte_Cd = #{flt_ectq} or Flt_Rte_Cd = #{flt_ecth})
+						AND ((Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and Arrv_Airpt_Cd=#{pas_stp})
+						OR (Dpt_AirPt_Cd=#{pas_stp} and Arrv_Airpt_Cd=#{Arrv_Airpt_Cd})
+						OR (Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and Arrv_Airpt_Cd=#{Arrv_Airpt_Cd})
+						OR (Dpt_AirPt_Cd=#{pas_stp} and Arrv_Airpt_Cd=#{dpt_AirPt_Cd}) 
+						OR (Dpt_AirPt_Cd=#{Arrv_Airpt_Cd} and Arrv_Airpt_Cd=#{pas_stp}) 
+						OR (Dpt_AirPt_Cd=#{Arrv_Airpt_Cd} and Arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+					</if>	
+					<if test="isGoAndBack==null">
+						AND (Flt_Rte_Cd = #{flt_ectq} or Flt_Rte_Cd = #{flt_ecth})
+						AND ((Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and Arrv_Airpt_Cd=#{pas_stp})
+						OR (Dpt_AirPt_Cd=#{pas_stp} and Arrv_Airpt_Cd=#{Arrv_Airpt_Cd})
+						OR (Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and Arrv_Airpt_Cd=#{Arrv_Airpt_Cd}))
+					</if>	
+				</if>	
+				<if test="pas_stp==null">
+					<if test="isGoAndBack!=null">
+						AND (Flt_Rte_Cd = #{flt_ectq} or Flt_Rte_Cd = #{flt_ecth})
+						AND ((Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and Arrv_Airpt_Cd=#{Arrv_Airpt_Cd})
+						OR (Dpt_AirPt_Cd=#{Arrv_Airpt_Cd} and Arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+					</if>	
+					<if test="isGoAndBack==null">
+						AND (Flt_Rte_Cd = #{flt_ectq} or Flt_Rte_Cd = #{flt_ecth})
+						AND (Dpt_AirPt_Cd=#{dpt_AirPt_Cd} and Arrv_Airpt_Cd=#{Arrv_Airpt_Cd})
+					</if>	
+				</if>
+			</if>
+			<if test="fltNbr!=null and fltNbr!=''">
+				AND (Flt_Nbr = #{fltNbrq} OR Flt_Nbr = #{fltNbrh})
+			</if>
+			<if test="isIncludeExceptionData==null or isIncludeExceptionData==''">
+				AND (count_Set>0 and Lcl_Dpt_Tm!='' and Lcl_Arrv_Tm!='' and Lcl_Dpt_Tm is not null and Lcl_Arrv_Tm is not null)
+			</if>
+		</where>
+	</sql>
+	<sql id="checkAcdition1">
+		<where>
+			<if test="date!=null">
+				AND Lcl_Dpt_Day=#{date}
+			</if>
+			<if test="airPort!=null">
+				AND (Dpt_AirPt_Cd=#{airPort} or Arrv_Airpt_Cd=#{airPort})
+			</if>
+			<if test="airPort==null">
+				AND 1=2
+			</if>
+		</where>
+	</sql>
+	<sql id="checkAcdition2">
+		<where>
+			<if test="date!=null">
+				AND Lcl_Dpt_Day=#{date}
+			</if>
+			<if test="airPort!=null">
+				AND (Dpt_AirPt_Cd=#{airPort} or Arrv_Airpt_Cd=#{airPort})
+			</if>
+			<if test="airPort==null">
+				AND 1=2
+			</if>
+		</where>
+	</sql>
+	<sql id="checkAcdition3">
+		<where>
+			<if test="date!=null">
+				AND Lcl_Dpt_Day=#{date}
+			</if>
+			<if test="airPort!=null">
+				AND Arrv_Airpt_Cd=#{airPort}
+			</if>
+			<if test="airPort==null">
+				AND 1=2
+			</if>
+		</where>
+	</sql>
+	<sql id="checkAcdition4">
+		<where>
+			<if test="date!=null">
+				AND Lcl_Dpt_Day=#{date}
+			</if>
+			<if test="airPort!=null">
+				AND Dpt_AirPt_Cd=#{airPort}
+			</if>
+			<if test="airPort==null">
+				AND 1=2
+			</if>
+		</where>
+	</sql>
+	<sql id="checkAcdition5">
+		<where>
+			<if test="date!=null">
+				AND Lcl_Dpt_Day=#{date}
+			</if>
+			<if test="airPort!=null">
+				AND Flt_Rte_Cd like CONCAT('%',#{airPort},'%' )
+			</if>
+		</where>
+	</sql>
+	<sql id="checkAirportFlowData">
+		<where>
+			<if test="startTime!=null">
+				AND Lcl_Dpt_Day&gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND Lcl_Dpt_Day&lt;=#{endTime}
+			</if>
+			<if test="airPort!=null">
+				AND (Dpt_AirPt_Cd=#{airPort} or Arrv_Airpt_Cd=#{airPort})
+			</if>
+			<if test="airPort==null">
+				AND 1=2
+			</if>
+		</where>
+	</sql>
+	<sql id="checkAPIAirDataNew">
+		<where>
+			<if test="fltRoutes != null">
+				AND Flt_Rte_Cd in 
+				<foreach collection="fltRoutes" item="flt" index="index"
+					open="(" separator="," close=")">#{flt}</foreach>
+			</if>
+			<if test="startTime!=null">
+				AND Lcl_Dpt_Day&gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND Lcl_Dpt_Day&lt;=#{endTime}
+			</if>
+			and Flt_Nbr in
+			<foreach collection="flightRange" item="item" index="index"
+					open="(" separator="," close=")">#{item}</foreach>
+		</where>
+	</sql>
+	<sql id="checkAPIAirData">
+		<where>
+			<if test="startTime!=null">
+				AND Lcl_Dpt_Day&gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND Lcl_Dpt_Day&lt;=#{endTime}
+			</if>
+		</where>
+	</sql>
+	<sql id="checkAirportFlowData2">
+		<where>
+			<if test="startTime!=null">
+				AND Lcl_Dpt_Day&gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND Lcl_Dpt_Day&lt;=#{endTime}
+			</if>
+			<if test="airPort!=null">
+				AND (Dpt_AirPt_Cd=#{airPort} or Arrv_Airpt_Cd=#{airPort})
+			</if>
+			<if test="airPort==null">
+				AND 1=2
+			</if>
+		</where>
+	</sql>
+	<sql id="checkAirportKzlData">
+		<where>
+			<if test="date!=null">
+				AND Lcl_Dpt_Day=#{date}
+			</if>
+			<if test="airPort!=null">
+				AND (Dpt_AirPt_Cd=#{airPort} or Arrv_Airpt_Cd=#{airPort})
+			</if>
+			<if test="airPort==null">
+				AND 1=2
+			</if>
+		</where>
+	</sql>
+	<sql id="checkAirportOnLineData">
+		<where>
+			<if test="airPort!=null">
+				AND air_line LIKE CONCAT('%','${airPort}','%' ) 
+				AND  itia = #{airPort}
+			</if>
+			<if test="airPort==null">
+				AND 1=2
+			</if>
+
+		</where>
+	</sql>
+	<sql id="checkSelectAirLineData">
+		<where>
+			<if test="airPort!=null">
+				AND air_line LIKE CONCAT('%','${airPort}','%' )
+			</if>
+			<if test="airPort==null">
+				AND 1=2
+			</if>
+			<if test="companyId!=null">
+				AND company = #{companyId}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="checknull">
+		<where>
+			<if test="fltRoutes!=null">
+				And Flt_Rte_Cd in
+				<foreach collection="fltRoutes" item="flt" index="index"
+					open="(" separator="," close=")">#{flt}</foreach>
+			</if>
+			<if test="airPort==null">
+				AND Flt_Rte_Cd like CONCAT('%',#{airPort,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="flightRange!=null">
+				AND
+				Flt_Nbr in
+				<foreach collection="flightRange" item="item" index="index"
+					open="(" separator="," close=")">#{item}</foreach>
+			</if>
+		</where>
+	</sql>
+	<select id="selectFlightCount" resultType="Integer">
+		select count(DISTINCT Flt_Nbr) from z_airdata
+		<include refid="selectFocusData" />
+		GROUP BY Lcl_Dpt_Day
+	</select>
+	<select id="selectFocusData" resultType="EvenPort">
+		SELECT COUNT(DISTINCT Flt_Nbr) tme_Cla_Moh,SUM(Pgs_Per_Cls) tal_count,
+		SUM(Tal_Nbr) tal_Ine,AVG(Egs_Lod_Fts)lod_For
+		FROM z_airdata
+		<include refid="selectFocusData" />
+	</select>
+	<sql id="selectFocusData">
+		<where>
+			Lcl_Dpt_Day BETWEEN #{startTime,jdbcType=VARCHAR} AND
+			#{endTime,jdbcType=VARCHAR}
+			AND
+			<if test="flightRange==null">
+				<if test="dataRange=='all'">
+					Flt_Rte_Cd LIKE
+					CONCAT('%',#{airPort,jdbcType=VARCHAR},'%')
+				</if>
+				<if test="dataRange=='pass'">
+					((Dpt_AirPt_Cd =#{airPort,jdbcType=VARCHAR} OR
+					Arrv_Airpt_Cd =#{airPort,jdbcType=VARCHAR}) OR
+					(SUBSTRING(Flt_Rte_Cd,4,3)=#{airPort,jdbcType=VARCHAR} and length(Flt_Rte_Cd)=9 AND
+					(Dpt_AirPt_Cd !=#{airPort,jdbcType=VARCHAR} AND Arrv_Airpt_Cd
+					!=#{airPort,jdbcType=VARCHAR})))
+				</if>
+				<if test="dataRange=='thrown'">
+					((Dpt_AirPt_Cd =#{airPort,jdbcType=VARCHAR} OR
+					Arrv_Airpt_Cd =#{airPort,jdbcType=VARCHAR}) OR ((Flt_Rte_Cd LIKE
+					CONCAT('%',#{airPort,jdbcType=VARCHAR}) OR Flt_Rte_Cd LIKE
+					CONCAT(#{airPort,jdbcType=VARCHAR},'%')) AND (Dpt_AirPt_Cd
+					!=#{airPort,jdbcType=VARCHAR} AND Arrv_Airpt_Cd
+					!=#{airPort,jdbcType=VARCHAR})))
+					
+				</if>
+				<if test="dataRange=='' or dataRange==null">
+					(Dpt_AirPt_Cd =#{airPort,jdbcType=VARCHAR} OR
+					Arrv_Airpt_Cd =#{airPort,jdbcType=VARCHAR})
+				</if>
+			</if>
+			<if test="flightRange != null">
+				<if test="dataRange=='all'">
+					Flt_Rte_Cd LIKE CONCAT('%',#{airPort,jdbcType=VARCHAR},'%') AND
+					Flt_Nbr in
+					<foreach collection="flightRange" item="item" index="index"
+						open="(" separator="," close=")">#{item}</foreach>
+				</if>
+				<if test="dataRange=='pass'">
+					((Dpt_AirPt_Cd =#{airPort,jdbcType=VARCHAR} OR Arrv_Airpt_Cd
+					=#{airPort,jdbcType=VARCHAR}) OR
+					(SUBSTRING(Flt_Rte_Cd,4,3)=#{airPort,jdbcType=VARCHAR} and length(Flt_Rte_Cd)=9 AND
+					(Dpt_AirPt_Cd !=#{airPort,jdbcType=VARCHAR} AND Arrv_Airpt_Cd
+					!=#{airPort,jdbcType=VARCHAR})))
+					AND Flt_Nbr in
+					<foreach collection="flightRange" item="item" index="index"
+						open="(" separator="," close=")">#{item}</foreach>
+				</if>
+				<if test="dataRange=='thrown'">
+					((Dpt_AirPt_Cd =#{airPort,jdbcType=VARCHAR} OR Arrv_Airpt_Cd
+					=#{airPort,jdbcType=VARCHAR}) OR ((Flt_Rte_Cd LIKE
+					CONCAT('%',#{airPort,jdbcType=VARCHAR}) OR Flt_Rte_Cd LIKE
+					CONCAT(#{airPort,jdbcType=VARCHAR},'%')) AND (Dpt_AirPt_Cd
+					!=#{airPort,jdbcType=VARCHAR} AND Arrv_Airpt_Cd
+					!=#{airPort,jdbcType=VARCHAR})))
+					AND Flt_Nbr in
+					<foreach collection="flightRange" item="item" index="index"
+						open="(" separator="," close=")">#{item}</foreach>
+				</if>
+				<if test="dataRange=='' or dataRange==null">
+					(Dpt_AirPt_Cd =#{airPort,jdbcType=VARCHAR} OR Arrv_Airpt_Cd
+					=#{airPort,jdbcType=VARCHAR})
+					AND Flt_Nbr in
+					<foreach collection="flightRange" item="item" index="index"
+						open="(" separator="," close=")">#{item}</foreach>
+				</if>
+			</if>
+		</where>
+	</sql>
+	<select id="selectTravellerIN" resultType="Integer">
+		SELECT SUM(Pgs_Per_Cls) FROM z_airdata
+		<include refid="selectTravellerIN" />
+		<if test="flightRange!=null">
+			AND Flt_Nbr in
+			<foreach collection="flightRange" item="item" index="index"
+				open="(" separator="," close=")">#{item}</foreach>
+		</if>
+	</select>
+	<select id="selectTravellerOUT" resultType="Integer">
+		SELECT SUM(Pgs_Per_Cls) FROM z_airdata
+		<include refid="selectTravellerOUT" />
+		<if test="flightRange!=null">
+			AND Flt_Nbr in
+			<foreach collection="flightRange" item="item" index="index"
+				open="(" separator="," close=")">#{item}</foreach>
+		</if>
+	</select>
+	<sql id="selectTravellerIN">
+		<where>
+			Lcl_Dpt_Day BETWEEN #{startTime,jdbcType=VARCHAR} AND
+			#{endTime,jdbcType=VARCHAR} AND Arrv_Airpt_Cd =
+			#{airPort,jdbcType=VARCHAR}
+		</where>
+	</sql>
+	<sql id="selectTravellerOUT">
+		<where>
+			Lcl_Dpt_Day BETWEEN #{startTime,jdbcType=VARCHAR} AND
+			#{endTime,jdbcType=VARCHAR} AND Dpt_AirPt_Cd =
+			#{airPort,jdbcType=VARCHAR}
+		</where>
+	</sql>
+	<sql id="checkAirDa">
+		<where>
+			<if test="airport!=null and airport!=''">
+				AND (dpt_AirPt_Cd_itia = #{airport} OR arrv_Airpt_Cd_itia = #{airport})
+			</if>
+			<if test="hangSi!=null and hangSi!=''">
+				AND flt_nbr like CONCAT(#{hangSi},'%')
+			</if>
+			<if test="newTime!=null and newTime!=''">
+				AND  get_tim = #{newTime} 
+			</if>
+		</where>
+	</sql>
+	<select id="findFilterParamAirPort" statementType="STATEMENT" resultType="AirInfoData">
+		${sql}
+	</select>
+	
+</mapper> 

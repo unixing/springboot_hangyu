@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.AirlineDynameicMapper">
+	<select id="getGetAirline_dynameic_list_j" resultType="Yesterday_ZD"
+		parameterType="string">
+		select * from yesterday_zd where arrv_Airpt_Cd_itia = #{0} and air_date = #{1}
+		 and length(actual_q) &lt; 10 and length(actual_c) &lt; 10 and length(zd_rate) &lt; 10
+	</select>
+	<select id="getGetAirline_dynameic_list_c" resultType="Yesterday_ZD"
+		parameterType="string">
+		select * from yesterday_zd where dpt_AirPt_Cd_itia = #{0} and air_date = #{1}
+		 and length(actual_q) &lt; 10 and length(actual_c) &lt; 10 and length(zd_rate) &lt; 10
+	</select>
+	<select id="getGetAirline_dynameic_list_out" resultType="Yesterday_ZD"
+		parameterType="SortQuery">
+		select * from yesterday_zd where dpt_AirPt_Cd_itia = #{itia,jdbcType=VARCHAR} and air_date = #{date}
+		and length(actual_q) &lt; 10 and length(actual_c) &lt; 10 and length(zd_rate) &lt; 10 
+		 order by ${field}
+		${sortWay}
+	</select>
+	<select id="getGetAirline_dynameic_list_in" resultType="Yesterday_ZD"
+		parameterType="SortQuery">
+		select * from yesterday_zd where arrv_Airpt_Cd_itia = #{itia,jdbcType=VARCHAR} and air_date = #{date} 
+		 and length(actual_q) &lt; 10 and length(actual_c) &lt; 10 and length(zd_rate) &lt; 10
+		order by ${field}
+		${sortWay}
+	</select>
+	<select id="getGetAirline_dynameic_list_month" parameterType="SortQuery"
+		resultType="Yesterday_ZD">
+		select * from yesterday_zd where
+		(dpt_AirPt_Cd_itia = #{itia,jdbcType=VARCHAR}
+		or
+		arrv_Airpt_Cd_itia = #{itia,jdbcType=VARCHAR})
+		and  year(air_date) = #{year,jdbcType=VARCHAR}
+		and month(air_date) = #{month,jdbcType=VARCHAR}
+		and length(actual_q) &lt; 10 
+		and length(actual_c) &lt; 10 
+		and length(zd_rate) &lt; 10
+	</select>
+	<select id="getGetAirline_dynameic_list_day" parameterType="string"
+		resultType="Yesterday_ZD">
+		SELECT d.air_date,c.Dpt_AirPt_Cd dpt_AirPt_Cd,c.Arrv_Airpt_Cd arrv_Airpt_Cd,d.flt_nbr,c.Flt_Rte_Cd remark,d.zd_rate FROM 
+		(select a.* from z_airdata a WHERE a.Lcl_Dpt_Day&gt;=#{startDate} AND a.Lcl_Dpt_Day&lt;=#{endDate} AND a.Flt_Rte_Cd like CONCAT('%',#{itia},'%' )) c,
+		(SELECT air_date,flt_nbr,dpt_AirPt_Cd_itia,arrv_Airpt_Cd_itia,zd_rate FROM yesterday_zd b 
+		WHERE 
+		air_date&gt;=#{startDate} 
+		AND air_date&lt;=#{endDate} 
+		AND itia = #{itia}
+		and length(actual_q) &lt; 10 
+		and length(actual_c) &lt; 10 
+		and length(zd_rate) &lt; 10 
+		AND state='到达'
+		) d
+		WHERE c.Lcl_Dpt_Day=d.air_date AND c.Flt_Nbr=d.flt_nbr AND d.dpt_AirPt_Cd_itia =c.Dpt_AirPt_Cd AND d.arrv_Airpt_Cd_itia =c.Arrv_Airpt_Cd ORDER BY d.flt_nbr,d.air_date asc;
+	</select>
+	<update id="airline_dynameic_save" parameterType="string">
+		update
+		yesterday_zd set remark = #{1} where id = #{0}
+	</update>
+	<select id="getAirportIthad" resultType="string">
+		select ROUND(AVG(zd_rate),2) from yesterday_zd where itia=#{airPort,jdbcType=VARCHAR} 
+		and air_date between #{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
+		and state='到达' and zd_rate LIKE CONCAT('%','.','%') order by flt_nbr
+	</select>
+	<select id="getNewestDate" resultType="String" parameterType="String">
+		SELECT air_date FROM yesterday_zd
+		where 
+		<if test="inout == null or inout ==''">
+			(arrv_Airpt_Cd_itia = #{city,jdbcType=VARCHAR} or dpt_AirPt_Cd_itia = #{city,jdbcType=VARCHAR})
+		</if>
+		 <if test="inout == 'in'">
+		 arrv_Airpt_Cd_itia = #{city,jdbcType=VARCHAR}
+		 </if>
+		 <if test="inout == 'out'">
+		 dpt_AirPt_Cd_itia = #{city,jdbcType=VARCHAR}
+		 </if>
+		 and length(actual_q) &lt; 10 
+		and length(actual_c) &lt; 10 
+		and length(zd_rate) &lt; 10
+		 ORDER BY air_date DESC LIMIT 1
+	</select>
+	<select id="getDateList" resultType="String" parameterType="String">
+		SELECT DISTINCT air_date FROM yesterday_zd WHERE
+		<if test="inout == 'in'">
+		 	arrv_Airpt_Cd_itia = #{cityiata,jdbcType=VARCHAR}
+		 </if>
+		 <if test="inout == 'out'">
+		 	dpt_AirPt_Cd_itia = #{cityiata,jdbcType=VARCHAR}
+		 </if>
+		AND
+		 year(air_date) = #{year,jdbcType=VARCHAR}
+		 and month(air_date) = #{month,jdbcType=VARCHAR}
+		 and length(actual_q) &lt; 10 
+		and length(actual_c) &lt; 10 
+		and length(zd_rate) &lt; 10
+		 order by air_date ASC
+	</select>
+	<select id="getMonthList" resultType="String" parameterType="String">
+		SELECT DISTINCT DATE_FORMAT(air_date,'%Y-%m') FROM yesterday_zd WHERE
+		 (
+		 arrv_Airpt_Cd_itia = #{city,jdbcType=VARCHAR}
+		 or
+		 dpt_AirPt_Cd_itia = #{city,jdbcType=VARCHAR}
+		 )
+		AND
+		 DATE_FORMAT(air_date,'%Y') = #{year,jdbcType=VARCHAR}
+		 and length(actual_q) &lt; 10 
+		and length(actual_c) &lt; 10 
+		and length(zd_rate) &lt; 10
+		 order by air_date ASC
+	</select>
+</mapper> 

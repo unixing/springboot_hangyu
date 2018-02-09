@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.crm.mapper.DivideSeasonMapper">
+	<resultMap type="org.ldd.ssm.crm.domain.DivideSeason" id="BaseResultMap">
+		<result property="divideId" column="Divide_Id" jdbcType="INTEGER" />
+		<result property="divideMonth" column="Divide_Month" jdbcType="VARCHAR" />
+		<result property="dptAirptCd" column="Dpt_AirPt_Cd" jdbcType="VARCHAR" />
+		<result property="arrvAirptCd" column="Arrv_AirPt_Cd" jdbcType="VARCHAR" />
+		<result property="fltNbr" column="Flt_Nbr" jdbcType="VARCHAR" />
+		<result property="fltRteCd" column="Flt_Rte_Cd" jdbcType="VARCHAR" />
+		<result property="days" column="Days" jdbcType="INTEGER" />
+		<result property="yoyTrans" column="Yoy_Trans" jdbcType="DECIMAL" />
+		<result property="qoqTrans" column="Qoq_Trans" jdbcType="DECIMAL" />
+		<result property="currTrans" column="Curr_Trans" jdbcType="DECIMAL" />
+		<result property="avgGoCust" column="Avg_Go_Cust" jdbcType="INTEGER" />
+		<result property="avgReturnCust" column="Avg_Return_Cust"
+			jdbcType="INTEGER" />
+		<result property="toForwardOffset" column="To_Forward_Offset"
+			jdbcType="DECIMAL" />
+		<result property="toReverseOffset" column="To_Reverse_Offset"
+			jdbcType="DECIMAL" />
+		<result property="backForwardOffset" column="Back_Forward_Offset"
+			jdbcType="DECIMAL" />
+		<result property="backReverseOffset" column="Back_Reverse_Offset"
+			jdbcType="DECIMAL" />
+		<result property="description" column="Description" jdbcType="VARCHAR" />
+		<result property="refFlt" column="Ref_Flt" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		Divide_Id,Divide_Month,Dpt_AirPt_Cd,Arrv_AirPt_Cd,Flt_Nbr,Flt_Rte_Cd,
+		Days,Yoy_Trans,Qoq_Trans,Curr_Trans,Avg_Go_Cust,Avg_Return_Cust,To_Forward_Offset,To_Reverse_Offset,Back_Forward_Offset,Back_Reverse_Offset,Description,Ref_Flt
+	</sql>
+	<insert id="add" parameterType="DivideSeason">
+		<selectKey resultType="int" keyProperty="divideId">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into t_divide_season
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="divideId>0">
+				Divide_Id,
+			</if>
+			<if test="divideMonth !=null and divideMonth !=''">
+				Divide_Month,
+			</if>
+			<if test="dptAirptCd !=null and dptAirptCd !=''">
+				Dpt_Airpt_Cd,
+			</if>
+			<if test="arrvAirptCd !=null and arrvAirptCd != ''">
+				Arrv_Airpt_Cd,
+			</if>
+			<if test="fltNbr != null and fltNbr != ''">
+				Flt_Nbr,
+			</if>
+			<if test="fltRteCd != null and fltRteCd !=''">
+				Flt_Rte_Cd,
+			</if>
+			<if test="days >0">
+				Days,
+			</if>
+			<if test="yoyTrans >0">
+				Yoy_Trans,
+			</if>
+			<if test="qoqTrans>0">
+				Qoq_Trans,
+			</if>
+			<if test="currTrans>0">
+				Curr_Trans,
+			</if>
+			<if test="avgGoCust>0">
+				Avg_Go_Cust,
+			</if>
+			<if test="avgReturnCust>0">
+				Avg_Return_Cust,
+			</if>
+			<if test="toForwardOffset>0">
+				To_Forward_Offset,
+			</if>
+			<if test="toReverseOffset>0">
+				To_Reverse_Offset,
+			</if>
+			<if test="backForwardOffset>0">
+				Back_Forward_Offset,
+			</if>
+			<if test="backReverseOffset>0">
+				Back_Reverse_Offset,
+			</if>
+			<if test="description !=null and description != ''">
+				Description,
+			</if>
+			<if test="refFlt !=null and refFlt != ''">
+				Ref_Flt
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="divideId>0">
+				#{divideId,jdbcType=INTEGER},
+			</if>
+			<if test="divideMonth !=null and divideMonth !=''">
+				#{divideMonth,jdbcType=VARCHAR},
+			</if>
+			<if test="dptAirptCd !=null and dptAirptCd !=''">
+				#{dptAirptCd,jdbcType=VARCHAR},
+			</if>
+			<if test="arrvAirptCd !=null and arrvAirptCd != ''">
+				#{arrvAirptCd,jdbcType=VARCHAR},
+			</if>
+			<if test="fltNbr != null and fltNbr != ''">
+				#{fltNbr,jdbcType=VARCHAR},
+			</if>
+			<if test="fltRteCd != null and fltRteCd !=''">
+				#{fltRteCd,jdbcType=VARCHAR},
+			</if>
+			<if test="days >0">
+				#{days,jdbcType=INTEGER},
+			</if>
+			<if test="yoyTrans >0">
+				#{yoyTrans,jdbcType=DECIMAL},
+			</if>
+			<if test="qoqTrans>0">
+				#{qoqTrans,jdbcType=DECIMAL},
+			</if>
+			<if test="currTrans>0">
+				#{currTrans,jdbcType=DECIMAL},
+			</if>
+			<if test="avgGoCust>0">
+				#{avgGoCust,jdbcType=INTEGER},
+			</if>
+			<if test="avgReturnCust>0">
+				#{avgReturnCust,jdbcType=INTEGER},
+			</if>
+			<if test="toForwardOffset>0">
+				#{toForwardOffset,jdbcType=DECIMAL},
+			</if>
+			<if test="toReverseOffset>0">
+				#{toReverseOffset,jdbcType=DECIMAL},
+			</if>
+			<if test="backForwardOffset>0">
+				#{backForwardOffset,jdbcType=DECIMAL},
+			</if>
+			<if test="backReverseOffset>0">
+				#{backReverseOffset,jdbcType=DECIMAL},
+			</if>
+			<if test="description !=null and description != ''">
+				#{description,jdbcType=VARCHAR}
+			</if>
+			<if test="refFlt !=null and refFlt != ''">
+				#{refFlt,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="DivideSeason">
+		update t_divide_season
+		<set>
+			<if test="divideMonth !=null and divideMonth !=''">
+				Divide_Month = #{divideMonth,jdbcType=VARCHAR},
+			</if>
+			<if test="dptAirptCd !=null and dptAirptCd !=''">
+				Dpt_AirPt_Cd = #{dptAirptCd,jdbcType=VARCHAR},
+			</if>
+			<if test="arrvAirptCd !=null and arrvAirptCd != ''">
+				Arrv_AirPt_Cd = #{arrvAirptCd,jdbcType=VARCHAR},
+			</if>
+			<if test="fltNbr != null and fltNbr != ''">
+				Flt_Nbr = #{fltNbr,jdbcType=VARCHAR},
+			</if>
+			<if test="fltRteCd != null and fltRteCd !=''">
+				Flt_Rte_Cd = #{fltRteCd,jdbcType=VARCHAR},
+			</if>
+			<if test="days >0">
+				Days = #{days,jdbcType=INTEGER},
+			</if>
+			<if test="yoyTrans >0">
+				Yoy_Trans = #{yoyTrans,jdbcType=DECIMAL},
+			</if>
+			<if test="qoqTrans>0">
+				Qoq_Trans = #{qoqTrans,jdbcType=DECIMAL},
+			</if>
+			<if test="currTrans>0">
+				Curr_Trans = #{currTrans,jdbcType=DECIMAL},
+			</if>
+			<if test="avgGoCust>0">
+				Avg_Go_Cust = #{avgGoCust,jdbcType=INTEGER},
+			</if>
+			<if test="avgReturnCust>0">
+				Avg_Return_Cust = #{avgReturnCust,jdbcType=INTEGER},
+			</if>
+			<if test="toForwardOffset>0">
+				To_Forward_Offset = #{toForwardOffset,jdbcType=DECIMAL},
+			</if>
+			<if test="toReverseOffset>0">
+				To_Reverse_Offset = #{toReverseOffset,jdbcType=DECIMAL},
+			</if>
+			<if test="backForwardOffset>0">
+				Back_Forward_Offset =
+				#{backForwardOffset,jdbcType=DECIMAL},
+			</if>
+			<if test="backReverseOffset>0">
+				Back_Reverse_Offset =
+				#{backReverseOffset,jdbcType=DECIMAL},
+			</if>
+			<if test="description !=null and description != ''">
+				Description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="refFlt !=null and refFlt != ''">
+				Ref_Flt = #{refFlt,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where Divide_Id = #{divideId,jdbcType=INTEGER}
+	</update>
+	<select id="list" parameterType="DOWQuery" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_divide_season
+		where Flt_nbr = #{flt_nbr,jdbcType=VARCHAR}
+		<if test="lcl_Dpt_Day !=null and lcl_Dpt_Day !=''">
+			and Divide_Month = #{lcl_Dpt_Day,jdbcType=VARCHAR}
+		</if>
+		<if test="dpt_AirPt_Cd !=null and dpt_AirPt_Cd !=''">
+			and Dpt_AirPt_Cd = #{dpt_AirPt_Cd,jdbcType=VARCHAR}
+		</if>
+		<if test="arrv_Airpt_Cd !=null and arrv_Airpt_Cd !=''">
+			and Arrv_Airpt_Cd = #{arrv_Airpt_Cd,jdbcType=VARCHAR}
+		</if>
+		<if test="flt_Rte_Cd != null and flt_Rte_Cd !=''">
+			and Flt_Rte_Cd = #{flt_Rte_Cd,jdbcType=VARCHAR}
+		</if>
+		order by Divide_Month
+	</select>
+
+	<select id="list2" parameterType="DOWQuery" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_divide_season
+		<where>
+			<if test="flt_nbr!=null and flt_nbr!=''">
+				Flt_nbr = #{flt_nbr,jdbcType=VARCHAR}
+			</if>
+			<if test="lcl_Dpt_Day !=null and lcl_Dpt_Day !=''">
+				and Divide_Month = #{lcl_Dpt_Day,jdbcType=VARCHAR}
+			</if>
+			<if test="dpt_AirPt_Cd !=null and dpt_AirPt_Cd !=''">
+				and Dpt_AirPt_Cd = #{dpt_AirPt_Cd,jdbcType=VARCHAR}
+			</if>
+			<if test="arrv_Airpt_Cd !=null and arrv_Airpt_Cd !=''">
+				and Arrv_Airpt_Cd = #{arrv_Airpt_Cd,jdbcType=VARCHAR}
+			</if>
+			<if test="flt_Rte_Cd != null and flt_Rte_Cd !=''">
+				and Flt_Rte_Cd = #{flt_Rte_Cd,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by Divide_Month
+	</select>
+	<select id="load" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_divide_season
+		where
+		<if test="flt_nbr != null and flt_nbr !=''">
+			Flt_Nbr = #{flt_nbr,jdbcType=VARCHAR}
+		</if>
+		<if test="flt_nbr == null">
+			Flt_Nbr is null
+		</if>
+		<if test="lcl_Dpt_Day !=null and lcl_Dpt_Day !=''">
+			and Divide_Month = #{lcl_Dpt_Day,jdbcType=VARCHAR}
+		</if>
+		<if test="dpt_AirPt_Cd !=null and dpt_AirPt_Cd !=''">
+			and Dpt_AirPt_Cd = #{dpt_AirPt_Cd,jdbcType=VARCHAR}
+		</if>
+		<if test="arrv_Airpt_Cd !=null and arrv_Airpt_Cd !=''">
+			and Arrv_Airpt_Cd = #{arrv_Airpt_Cd,jdbcType=VARCHAR}
+		</if>
+		<if test="flt_Rte_Cd != null and flt_Rte_Cd !=''">
+			and Flt_Rte_Cd = #{flt_Rte_Cd,jdbcType=VARCHAR}
+		</if>
+		limit 1
+	</select>
+	<select id="load2" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_divide_season
+		where
+		<if test="flt_nbr != null and flt_nbr !=''">
+			Flt_Nbr = #{flt_nbr,jdbcType=VARCHAR}
+		</if>
+		<if test="flt_nbr == null">
+			Flt_Nbr is null
+		</if>
+		<if test="lcl_Dpt_Day !=null and lcl_Dpt_Day !=''">
+			and Divide_Month = #{lcl_Dpt_Day,jdbcType=VARCHAR}
+		</if>
+		<if test="dpt_AirPt_Cd !=null and dpt_AirPt_Cd !=''">
+			and Dpt_AirPt_Cd = #{dpt_AirPt_Cd,jdbcType=VARCHAR}
+		</if>
+		<if test="arrv_Airpt_Cd !=null and arrv_Airpt_Cd !=''">
+			and Arrv_Airpt_Cd = #{arrv_Airpt_Cd,jdbcType=VARCHAR}
+		</if>
+		<if test="flt_Rte_Cd != null and flt_Rte_Cd !=''">
+			and Flt_Rte_Cd = #{flt_Rte_Cd,jdbcType=VARCHAR}
+		</if>
+		limit 1
+	</select>
+</mapper>

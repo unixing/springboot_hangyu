@@ -1,0 +1,35 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.crm.mapper.ResourceNewMapper">
+	<resultMap type="org.ldd.ssm.crm.domain.Resource" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="menu_id" property="menuId" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,name,url,menu_id
+	</sql>
+	<!-- <insert id="save" parameterType="Resource" useGeneratedKeys="true"> 
+		insert into t_resource_new(name,url) values (#{name},#{url}) </insert> -->
+	<insert id="save" parameterType="Resource" useGeneratedKeys="true">
+		insert into t_resource_new(name,url,menu_id) values (#{name},#{url},#{menuId})
+	</insert>
+	<update id="update" parameterType="Resource">
+		UPDATE t_resource_new
+		SET name=#{name},url=#{url} WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="long">
+		DELETE FROM t_resource_new
+		WHERE id=#{id}
+	</delete>
+	<select id="getAllResourceUrls" resultType="String">
+		select url from t_resource_new
+	</select>
+</mapper>
+
+
+
+
+

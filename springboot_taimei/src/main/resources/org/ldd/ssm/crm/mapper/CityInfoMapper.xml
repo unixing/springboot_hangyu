@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.CityInfoMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.CityInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="cityname" property="cityname" jdbcType="VARCHAR" />
+		<result column="economy" property="economy" jdbcType="BIGINT" />
+		<result column="population" property="population" jdbcType="INTEGER" />
+		<result column="percapita" property="percapita" jdbcType="DECIMAL" />
+		<result column="structure" property="structure" jdbcType="VARCHAR" />
+		<result column="traffic" property="traffic" jdbcType="VARCHAR" />
+		<result column="area" property="area" jdbcType="DECIMAL" />
+		<result column="popedom" property="popedom" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, cityname, economy, population, percapita, structure, traffic, area,
+		popedom
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from t_cityinfo
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from t_cityinfo
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.CityInfo">
+		insert into t_cityinfo (id, cityname, economy,
+		population, percapita, structure,
+		traffic, area, popedom
+		)
+		values (#{id,jdbcType=INTEGER}, #{cityname,jdbcType=VARCHAR},
+		#{economy,jdbcType=BIGINT},
+		#{population,jdbcType=INTEGER}, #{percapita,jdbcType=DECIMAL}, #{structure,jdbcType=VARCHAR},
+		#{traffic,jdbcType=VARCHAR}, #{area,jdbcType=DECIMAL},
+		#{popedom,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.CityInfo">
+		insert into t_cityinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="cityname != null">
+				cityname,
+			</if>
+			<if test="economy != null">
+				economy,
+			</if>
+			<if test="population != null">
+				population,
+			</if>
+			<if test="percapita != null">
+				percapita,
+			</if>
+			<if test="structure != null">
+				structure,
+			</if>
+			<if test="traffic != null">
+				traffic,
+			</if>
+			<if test="area != null">
+				area,
+			</if>
+			<if test="popedom != null">
+				popedom,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="cityname != null">
+				#{cityname,jdbcType=VARCHAR},
+			</if>
+			<if test="economy != null">
+				#{economy,jdbcType=BIGINT},
+			</if>
+			<if test="population != null">
+				#{population,jdbcType=INTEGER},
+			</if>
+			<if test="percapita != null">
+				#{percapita,jdbcType=DECIMAL},
+			</if>
+			<if test="structure != null">
+				#{structure,jdbcType=VARCHAR},
+			</if>
+			<if test="traffic != null">
+				#{traffic,jdbcType=VARCHAR},
+			</if>
+			<if test="area != null">
+				#{area,jdbcType=DECIMAL},
+			</if>
+			<if test="popedom != null">
+				#{popedom,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.CityInfo">
+		update t_cityinfo
+		<set>
+			<if test="cityname != null">
+				cityname = #{cityname,jdbcType=VARCHAR},
+			</if>
+			<if test="economy != null">
+				economy = #{economy,jdbcType=BIGINT},
+			</if>
+			<if test="population != null">
+				population = #{population,jdbcType=INTEGER},
+			</if>
+			<if test="percapita != null">
+				percapita = #{percapita,jdbcType=DECIMAL},
+			</if>
+			<if test="structure != null">
+				structure = #{structure,jdbcType=VARCHAR},
+			</if>
+			<if test="traffic != null">
+				traffic = #{traffic,jdbcType=VARCHAR},
+			</if>
+			<if test="area != null">
+				area = #{area,jdbcType=DECIMAL},
+			</if>
+			<if test="popedom != null">
+				popedom = #{popedom,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.CityInfo">
+		update t_cityinfo
+		set cityname = #{cityname,jdbcType=VARCHAR},
+		economy = #{economy,jdbcType=BIGINT},
+		population = #{population,jdbcType=INTEGER},
+		percapita = #{percapita,jdbcType=DECIMAL},
+		structure = #{structure,jdbcType=VARCHAR},
+		traffic = #{traffic,jdbcType=VARCHAR},
+		area = #{area,jdbcType=DECIMAL},
+		popedom = #{popedom,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectByName" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_cityinfo
+		where 1=1
+		<if test="name !=null and name != ''">
+			and cityname like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+</mapper>

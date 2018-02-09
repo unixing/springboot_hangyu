@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.CompanyMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.Company">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="Cpy_Nm" property="cpyNm" jdbcType="VARCHAR" />
+		<result column="Cpy_Ads" property="cpyAds" jdbcType="VARCHAR" />
+		<result column="Cpy_Pho" property="cpyPho" jdbcType="VARCHAR" />
+		<result column="Cpy_Eml" property="cpyEml" jdbcType="VARCHAR" />
+		<result column="Cpy_Ino" property="cpyIno" jdbcType="VARCHAR" />
+		<result column="Cpy_Itia" property="cpyItia" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, Cpy_Nm, Cpy_Ads, Cpy_Pho, Cpy_Eml, Cpy_Ino,Cpy_Itia
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from company
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from company
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.Company">
+		insert into company (id, Cpy_Nm, Cpy_Ads,
+		Cpy_Pho, Cpy_Eml, Cpy_Ino,Cpy_Itia
+		)
+		values (#{id,jdbcType=BIGINT}, #{cpyNm,jdbcType=VARCHAR},
+		#{cpyAds,jdbcType=VARCHAR},
+		#{cpyPho,jdbcType=VARCHAR}, #{cpyEml,jdbcType=VARCHAR}, #{cpyIno,jdbcType=VARCHAR},
+		#{cpyItia,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.Company">
+		insert into company
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="cpyNm != null">
+				Cpy_Nm,
+			</if>
+			<if test="cpyAds != null">
+				Cpy_Ads,
+			</if>
+			<if test="cpyPho != null">
+				Cpy_Pho,
+			</if>
+			<if test="cpyEml != null">
+				Cpy_Eml,
+			</if>
+			<if test="cpyIno != null">
+				Cpy_Ino,
+			</if>
+			<if test="cpyItia != null">
+				Cpy_Itia,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="cpyNm != null">
+				#{cpyNm,jdbcType=VARCHAR},
+			</if>
+			<if test="cpyAds != null">
+				#{cpyAds,jdbcType=VARCHAR},
+			</if>
+			<if test="cpyPho != null">
+				#{cpyPho,jdbcType=VARCHAR},
+			</if>
+			<if test="cpyEml != null">
+				#{cpyEml,jdbcType=VARCHAR},
+			</if>
+			<if test="cpyIno != null">
+				#{cpyIno,jdbcType=VARCHAR},
+			</if>
+			<if test="cpyItia != null">
+				#{cpyItia,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.Company">
+		update company
+		<set>
+			<if test="cpyNm != null">
+				Cpy_Nm = #{cpyNm,jdbcType=VARCHAR},
+			</if>
+			<if test="cpyAds != null">
+				Cpy_Ads = #{cpyAds,jdbcType=VARCHAR},
+			</if>
+			<if test="cpyPho != null">
+				Cpy_Pho = #{cpyPho,jdbcType=VARCHAR},
+			</if>
+			<if test="cpyEml != null">
+				Cpy_Eml = #{cpyEml,jdbcType=VARCHAR},
+			</if>
+			<if test="cpyIno != null">
+				Cpy_Ino = #{cpyIno,jdbcType=VARCHAR},
+			</if>
+			<if test="cpyItia != null">
+				Cpy_Itia = #{cpyItia,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.Company">
+		update company
+		set Cpy_Nm = #{cpyNm,jdbcType=VARCHAR},
+		Cpy_Ads = #{cpyAds,jdbcType=VARCHAR},
+		Cpy_Pho = #{cpyPho,jdbcType=VARCHAR},
+		Cpy_Eml = #{cpyEml,jdbcType=VARCHAR},
+		Cpy_Ino = #{cpyIno,jdbcType=VARCHAR},
+		Cpy_Itia = #{cpyItia,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from company
+		<where>
+			<if test="cpyNm != null and cpyNm != ''">
+				Cpy_Nm like CONCAT('%',#{cpyNm,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="empId !=null and empId>0">
+				and id in
+				(
+				select DISTINCT Dat_Sre_Cpy_id
+				from datasupplier
+				<where>
+					<if test="empId != null and empId >0">
+						employee_id = #{empId,jdbcType=BIGINT}
+					</if>
+				</where>
+				)
+			</if>
+		</where>
+	</select>
+	<sql id="Data_Column_List">
+		DISTINCT(id), Cpy_Nm, Cpy_Ads, Cpy_Pho, Cpy_Eml, Cpy_Ino,Cpy_Itia
+	</sql>
+	<select id="selectCompanyByEmployeeId" resultMap="BaseResultMap">
+		select
+		<include refid="Data_Column_List" />
+		from company
+		<if test="employeeId!=null and employeeId>0">
+			where id in
+			(
+			select
+			DISTINCT(Dat_Sre_Cpy_id)
+			from datasupplier
+			where employee_id = #{employeeId,jdbcType=BIGINT}
+			)
+		</if>
+	</select>
+	<select id="nextId" resultType="java.lang.Long">
+		SELECT auto_increment FROM information_schema.`TABLES` WHERE
+		TABLE_SCHEMA='springmvc' AND TABLE_NAME='company';
+	</select>
+</mapper>

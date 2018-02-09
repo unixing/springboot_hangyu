@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.AirportFlightMapper">
+	<!-- 获得该机场的位置 -->                                                         
+	<select id="getAirportLocation" parameterType="java.lang.String" resultType="org.ldd.ssm.crm.domain.AirportLocation">
+		select airln_Cd_Name airlnCd,city_coordinate_j cityCoordinateJ,city_coordinate_w cityCoordinateW
+		from airportinfonewthree where iATA=#{iATA} 
+	</select>
+	<!-- 该机场飞往的其他机场的位置集合 -->
+	<select id="getAirportLocations" parameterType="java.lang.String" resultType="org.ldd.ssm.crm.domain.AirportLocation">
+		select airln_Cd airlnCd,city_coordinate_j cityCoordinateJ,city_coordinate_w cityCoordinateW ,iATA
+		from airportinfonewthree where  iATA!=#{iATA} 
+	</select>
+
+</mapper> 

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.MeasureResultMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.MeasureResult" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="apply_measure_id" property="applyMeasureId" jdbcType="BIGINT" />
+    <result column="Flt_Rte_Cd" property="fltRteCd" jdbcType="VARCHAR" />
+    <result column="Dpt_Airpt_Cd" property="dptAirptCd" jdbcType="VARCHAR" />
+    <result column="Arrv_Airpt_Cd" property="arrvAirptCd" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="flight_per_month" property="flightPerMonth" jdbcType="VARCHAR" />
+    <result column="avg_sites" property="avgSites" jdbcType="VARCHAR" />
+    <result column="avg_vol" property="avgVol" jdbcType="VARCHAR" />
+    <result column="plf" property="plf" jdbcType="VARCHAR" />
+    <result column="avg_income" property="avgIncome" jdbcType="VARCHAR" />
+    <result column="Km_income" property="kmIncome" jdbcType="VARCHAR" />
+    <result column="avg_discount" property="avgDiscount" jdbcType="VARCHAR" />
+    <result column="measure_time" property="measureTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, apply_measure_id, Flt_Rte_Cd, Dpt_Airpt_Cd, Arrv_Airpt_Cd, start_time, end_time, 
+    flight_per_month, avg_sites, avg_vol, plf, avg_income, Km_income, avg_discount, measure_time
+  </sql>
+  
+  	<!-- 我的测算结果时间 根据申请id查询 -->
+	 <select id="getMyMeasureTime" resultType="java.lang.String" parameterType="java.lang.Long" >
+   		select measure_time from measure_result where apply_measure_id=#{applyMeasureId,jdbcType=BIGINT} order by measure_time desc limit 1
+  	</select>
+	<!-- 我的测算结果 根据申请id查询 -->
+	<select id="findMeasureResult" resultType="org.ldd.ssm.crm.domain.MeasureResult" parameterType="org.ldd.ssm.crm.domain.MeasureResult" >
+   		select  CONCAT(Dpt_Airpt_Cd,"-",Arrv_Airpt_Cd) leg,flight_per_month flightPerMonth,avg_sites avgSites,
+ 				CONCAT(avg_vol,"(",IFNULL(avg_group,0),"/",IFNULL(avg_vol,0)-IFNULL(avg_group,0),")") avgVol,plf, 
+ 					CONCAT(IFNULL(cast(avg_income*100 as decimal(20,2)),0),"(",IFNULL(cast(grp_Income*100 as decimal(20,2)),0),"/",IFNULL(cast(idd_Income*100 as decimal(20,2)),0),")") avgIncome,
+				Km_income kmIncome, CONCAT(IFNULL(avg_discount,0),"(",IFNULL(group_Discount,0),"/",IFNULL(idd_discount,0),")") avgDiscount
+   		from measure_result
+		where apply_measure_id=#{applyMeasureId,jdbcType=BIGINT}
+  	</select>
+	<!-- 最新测算时间和申请id -->
+  	<select id="getNewestMeasureResult" resultType="org.ldd.ssm.crm.domain.MeasureResult" parameterType="org.ldd.ssm.crm.domain.MeasureResult" >
+   		select measure_time measureTime,apply_measure_id applyMeasureId from measure_result 
+   		where <![CDATA[measure_time>#{measureTime}]]> and Flt_Rte_Cd=#{fltRteCd} 
+   		ORDER BY measure_time desc limit 1
+  	</select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from measure_result
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from measure_result
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.crm.domain.MeasureResult" >
+    insert into measure_result (id, apply_measure_id, Flt_Rte_Cd, 
+      Dpt_Airpt_Cd, Arrv_Airpt_Cd, start_time, 
+      end_time, flight_per_month, avg_sites, 
+      avg_vol, plf, avg_income, 
+      Km_income, avg_discount, measure_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{applyMeasureId,jdbcType=BIGINT}, #{fltRteCd,jdbcType=VARCHAR}, 
+      #{dptAirptCd,jdbcType=VARCHAR}, #{arrvAirptCd,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{flightPerMonth,jdbcType=VARCHAR}, #{avgSites,jdbcType=VARCHAR}, 
+      #{avgVol,jdbcType=VARCHAR}, #{plf,jdbcType=VARCHAR}, #{avgIncome,jdbcType=VARCHAR}, 
+      #{kmIncome,jdbcType=VARCHAR}, #{avgDiscount,jdbcType=VARCHAR}, #{measureTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.MeasureResult" >
+    insert into measure_result
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="applyMeasureId != null" >
+        apply_measure_id,
+      </if>
+      <if test="fltRteCd != null" >
+        Flt_Rte_Cd,
+      </if>
+      <if test="dptAirptCd != null" >
+        Dpt_Airpt_Cd,
+      </if>
+      <if test="arrvAirptCd != null" >
+        Arrv_Airpt_Cd,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="flightPerMonth != null" >
+        flight_per_month,
+      </if>
+      <if test="avgSites != null" >
+        avg_sites,
+      </if>
+      <if test="avgVol != null" >
+        avg_vol,
+      </if>
+      <if test="plf != null" >
+        plf,
+      </if>
+      <if test="avgIncome != null" >
+        avg_income,
+      </if>
+      <if test="kmIncome != null" >
+        Km_income,
+      </if>
+      <if test="avgDiscount != null" >
+        avg_discount,
+      </if>
+      <if test="measureTime != null" >
+        measure_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="applyMeasureId != null" >
+        #{applyMeasureId,jdbcType=BIGINT},
+      </if>
+      <if test="fltRteCd != null" >
+        #{fltRteCd,jdbcType=VARCHAR},
+      </if>
+      <if test="dptAirptCd != null" >
+        #{dptAirptCd,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvAirptCd != null" >
+        #{arrvAirptCd,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="flightPerMonth != null" >
+        #{flightPerMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="avgSites != null" >
+        #{avgSites,jdbcType=VARCHAR},
+      </if>
+      <if test="avgVol != null" >
+        #{avgVol,jdbcType=VARCHAR},
+      </if>
+      <if test="plf != null" >
+        #{plf,jdbcType=VARCHAR},
+      </if>
+      <if test="avgIncome != null" >
+        #{avgIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="kmIncome != null" >
+        #{kmIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="avgDiscount != null" >
+        #{avgDiscount,jdbcType=VARCHAR},
+      </if>
+      <if test="measureTime != null" >
+        #{measureTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.MeasureResult" >
+    update measure_result
+    <set >
+      <if test="applyMeasureId != null" >
+        apply_measure_id = #{applyMeasureId,jdbcType=BIGINT},
+      </if>
+      <if test="fltRteCd != null" >
+        Flt_Rte_Cd = #{fltRteCd,jdbcType=VARCHAR},
+      </if>
+      <if test="dptAirptCd != null" >
+        Dpt_Airpt_Cd = #{dptAirptCd,jdbcType=VARCHAR},
+      </if>
+      <if test="arrvAirptCd != null" >
+        Arrv_Airpt_Cd = #{arrvAirptCd,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="flightPerMonth != null" >
+        flight_per_month = #{flightPerMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="avgSites != null" >
+        avg_sites = #{avgSites,jdbcType=VARCHAR},
+      </if>
+      <if test="avgVol != null" >
+        avg_vol = #{avgVol,jdbcType=VARCHAR},
+      </if>
+      <if test="plf != null" >
+        plf = #{plf,jdbcType=VARCHAR},
+      </if>
+      <if test="avgIncome != null" >
+        avg_income = #{avgIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="kmIncome != null" >
+        Km_income = #{kmIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="avgDiscount != null" >
+        avg_discount = #{avgDiscount,jdbcType=VARCHAR},
+      </if>
+      <if test="measureTime != null" >
+        measure_time = #{measureTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.MeasureResult" >
+    update measure_result
+    set apply_measure_id = #{applyMeasureId,jdbcType=BIGINT},
+      Flt_Rte_Cd = #{fltRteCd,jdbcType=VARCHAR},
+      Dpt_Airpt_Cd = #{dptAirptCd,jdbcType=VARCHAR},
+      Arrv_Airpt_Cd = #{arrvAirptCd,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      flight_per_month = #{flightPerMonth,jdbcType=VARCHAR},
+      avg_sites = #{avgSites,jdbcType=VARCHAR},
+      avg_vol = #{avgVol,jdbcType=VARCHAR},
+      plf = #{plf,jdbcType=VARCHAR},
+      avg_income = #{avgIncome,jdbcType=VARCHAR},
+      Km_income = #{kmIncome,jdbcType=VARCHAR},
+      avg_discount = #{avgDiscount,jdbcType=VARCHAR},
+      measure_time = #{measureTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

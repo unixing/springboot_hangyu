@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.FormulaUtilMapper">
+	<select id="getTotalTime" resultType="SalesReport"
+		parameterType="FormulaUtilQuery">
+		select Lcl_Dpt_Day date,
+		Dpt_AirPt_Cd dpt_AirPt_Cd,
+		Arrv_Airpt_Cd
+		arrv_Airpt_Cd,
+		Lcl_Dpt_Tm lcl_Dpt_Tm,
+		Lcl_Arrv_Tm lcl_Arrv_Tm
+		from
+		z_airdata
+		<include refid="zfsj" />
+	</select>
+
+	<select id="getHourPrice" resultType="DailyParameters"
+		parameterType="FormulaUtilQuery">
+		select hour_price,agence_price
+		from t_dailyparameters
+		<include refid="ishourPrice" />
+	</select>
+	<select id="getHourPriceList" resultType="DailyParameters"
+		parameterType="FormulaUtilQuery">
+		select
+		id,
+		start_time,
+		end_time,
+		fly_site_min,
+		fly_site,
+		hour_price,
+		agence_price/100 as agence_price,
+		role_id
+		from t_dailyparameters where role_id =#{roleId}
+	</select>
+	<sql id="ishourPrice">
+		<where>
+			<if test="lcl_Dpt_Day!=null">
+				AND end_time &gt;= #{lcl_Dpt_Day} AND start_time &lt;= #{lcl_Dpt_Day}
+			</if>
+			<if test="roleId!=null">
+				AND role_id=#{roleId}
+			</if>
+			<if test="site_num!=null">
+				<if test="site_num!=0">
+					AND fly_site &gt;= #{site_num} order by fly_site desc limit 1
+				</if>
+			</if>
+			<if test="lcl_Dpt_Day==null">
+				AND 1=2
+			</if>
+			<if test="roleId==null">
+				AND 1=2
+			</if>
+			<if test="site_num==null">
+				AND 1=2
+			</if>
+		</where>
+	</sql>
+	<sql id="zfsj">
+		<where>
+			<if test="startTime!=null">
+				AND Lcl_Dpt_Day&gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND Lcl_Dpt_Day&lt;=#{endTime}
+			</if>
+			<if test="lcl_Dpt_Day!=null">
+				AND Lcl_Dpt_Day=#{lcl_Dpt_Day}
+			</if>
+			<if test="pas_stp==null">
+				<if test="isIncludePasDpt!=null">
+					<if test="dpt_AirPt_Cd!=null">
+						<if test="arrv_Airpt_Cd!=null">
+							AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND
+							arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd}
+							AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+						</if>
+					</if>
+				</if>
+			</if>
+			<if test="pas_stp==null">
+				<if test="isIncludePasDpt==null">
+					AND (Flt_Rte_Cd =
+					concat(#{dpt_AirPt_Cd},#{arrv_Airpt_Cd}) or Flt_Rte_Cd =
+					concat(#{arrv_Airpt_Cd},#{dpt_AirPt_Cd}))
+				</if>
+			</if>
+			<if test="pas_stp!=null">
+				<if test="dpt_AirPt_Cd!=null">
+					<if test="arrv_Airpt_Cd!=null">
+						AND (Flt_Rte_Cd =
+						concat(#{dpt_AirPt_Cd},concat(#{pas_stp},#{arrv_Airpt_Cd})) or
+						Flt_Rte_Cd =
+						concat(#{arrv_Airpt_Cd},concat(#{pas_stp},#{dpt_AirPt_Cd})))
+					</if>
+				</if>
+			</if>
+			<if test="goNum!=null">
+				AND( Flt_Nbr=#{goNum} or Flt_Nbr=#{huiNum})
+			</if>
+		</where>
+	</sql>
+
+</mapper> 

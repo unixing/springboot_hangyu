@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.SaleDptInfoMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.SaleDptInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="dpt_name" property="dptName" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="linkman" property="linkman" jdbcType="VARCHAR" />
+		<result column="contact_way" property="contactWay" jdbcType="VARCHAR" />
+		<result column="whether_local_base" property="whetherLocalBase"
+			jdbcType="VARCHAR" />
+		<result column="map_display" property="mapDisplay" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, dpt_name, address, linkman, contact_way, whether_local_base,
+		map_display
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from t_saledptinfo
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from t_saledptinfo
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.SaleDptInfo">
+		insert into t_saledptinfo (id, dpt_name, address,
+		linkman, contact_way, whether_local_base,
+		map_display)
+		values (#{id,jdbcType=INTEGER}, #{dptName,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR},
+		#{linkman,jdbcType=VARCHAR}, #{contactWay,jdbcType=VARCHAR}, #{whetherLocalBase,jdbcType=VARCHAR},
+		#{mapDisplay,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.SaleDptInfo">
+		insert into t_saledptinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="dptName != null">
+				dpt_name,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="linkman != null">
+				linkman,
+			</if>
+			<if test="contactWay != null">
+				contact_way,
+			</if>
+			<if test="whetherLocalBase != null">
+				whether_local_base,
+			</if>
+			<if test="mapDisplay != null">
+				map_display,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="dptName != null">
+				#{dptName,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="linkman != null">
+				#{linkman,jdbcType=VARCHAR},
+			</if>
+			<if test="contactWay != null">
+				#{contactWay,jdbcType=VARCHAR},
+			</if>
+			<if test="whetherLocalBase != null">
+				#{whetherLocalBase,jdbcType=VARCHAR},
+			</if>
+			<if test="mapDisplay != null">
+				#{mapDisplay,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.SaleDptInfo">
+		update t_saledptinfo
+		<set>
+			<if test="dptName != null">
+				dpt_name = #{dptName,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="linkman != null">
+				linkman = #{linkman,jdbcType=VARCHAR},
+			</if>
+			<if test="contactWay != null">
+				contact_way = #{contactWay,jdbcType=VARCHAR},
+			</if>
+			<if test="whetherLocalBase != null">
+				whether_local_base = #{whetherLocalBase,jdbcType=VARCHAR},
+			</if>
+			<if test="mapDisplay != null">
+				map_display = #{mapDisplay,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.SaleDptInfo">
+		update t_saledptinfo
+		set dpt_name = #{dptName,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		linkman = #{linkman,jdbcType=VARCHAR},
+		contact_way = #{contactWay,jdbcType=VARCHAR},
+		whether_local_base = #{whetherLocalBase,jdbcType=VARCHAR},
+		map_display = #{mapDisplay,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectByName" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_saledptinfo
+		where 1=1
+		<if test="name !=null and name != ''">
+			and dpt_name like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+</mapper>

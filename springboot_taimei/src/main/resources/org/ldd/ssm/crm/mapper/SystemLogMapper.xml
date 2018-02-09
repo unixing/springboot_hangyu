@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace : 独立的命名空间，可以使Mapper接口的地址（把dao包改为mapper） 例如： 接口地址为cn.itsource.crm.mapper.SystemLogMapper 
+	命名空间为cn.itsource.crm.mapper.SystemLogMapper（和接口地址相同） 结果：可以不用写Mapper实现，由Spring代理实现 -->
+<mapper namespace="org.ldd.ssm.crm.mapper.SystemLogMapper">
+
+	<select id="get" parameterType="long" resultType="SystemLog">
+		select * from
+		t_systemlog where id = #{id}
+	</select>
+
+	<select id="list" resultType="SystemLog">
+		select * from t_systemlog
+	</select>
+
+	<insert id="save" parameterType="SystemLog" useGeneratedKeys="true">
+		insert into t_systemlog(opUser_id,opTime,opIp,function)
+		values(#{opUser.id},#{opTime},#{opIp},#{function})
+
+	</insert>
+
+	<sql id="querySql">
+		<where>
+			<if test="searchKey!=null and searchKey!=''">
+				opUser_id like conCat('%',#{searchKey},'%')
+			</if>
+			<!-- <if test="inputTimeStart!=null"> -->
+			<!-- and inputTime>=#{inputTimeStart} -->
+			<!-- </if> -->
+			<!-- <if test="inputTimeEnd!=null"> -->
+			<!-- and inputTime&lt;=#{inputTimeEnd} -->
+			<!-- </if> -->
+		</where>
+	</sql>
+	<resultMap type="SystemLog" id="SystemId">
+		<id column="id" property="id" />
+		<result column="opTime" property="opTime" />
+		<result column="opIp" property="opIp" />
+		<result column="function" property="function" />
+		<association property="opUser" javaType="Employee">
+			<result column="eName" property="username" />
+		</association>
+	</resultMap>
+
+	<!-- 高级查询和分页 -->
+	<select id="query" parameterType="SystemLogQuery" resultMap="SystemId">
+		select s.*,e.username eName from t_systemlog s join t_employee e
+		on(s.opUser_id = e.id)
+		<include refid="querySql" />
+		<if test="page!=null and rows!=null">
+			limit #{beginIndex},#{rows}
+		</if>
+	</select>
+
+	<select id="count" parameterType="SystemLogQuery" resultType="long">
+		select count(id) from t_systemlog
+		<include refid="querySql" />
+	</select>
+
+
+
+
+	<update id="update" parameterType="SystemLog">
+	</update>
+
+</mapper> 

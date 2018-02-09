@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- dao的sql语句执行方法的映射文件 -->
+<!-- 命名空间必须和dao接口类的全限定类名一致 -->
+<mapper namespace="org.ldd.ssm.crm.mapper.SystemDictionaryItemMapper">
+	<!-- id的值必须和dao接口类里面的方法名一致 -->
+	<select id="getItem" resultType="SystemDictionaryItem"
+		parameterType="long">
+		select * from t_systemdictionaryitem where parent_id=#{id};
+	</select>
+	<!-- id的值必须和dao接口类里面的方法名一致 -->
+	<insert id="save" parameterType="SystemDictionaryItem"
+		useGeneratedKeys="true">
+		INSERT INTO
+		t_systemdictionaryitem(name,sn,intro,parent_id)values(#{name},#{sn},#{intro},#{parent})
+	</insert>
+	<update id="update" parameterType="SystemDictionaryItem">
+		update t_systemdictionaryitem
+		set sn=#{sn},name=#{name},parent_id=#{parent_id},intro=#{intro} where
+		id=#{id}
+	</update>
+	<delete id="delete" parameterType="long">
+		delete from
+		t_systemdictionaryitem where id = #{id}
+	</delete>
+	<!-- 高级分页 -->
+	<sql id="page">
+		<where>
+			<if test="name!=null">
+				AND name Like conCat('%',#{name},'%')
+			</if>
+			<if test="sn!=null">
+				AND sn Like conCat('%',#{sn},'%')
+			</if>
+			<if test="id!=null">
+				AND parent_id=#{id}
+			</if>
+		</where>
+	</sql>
+	<select id="queryTotal" resultType="int" parameterType="SystemDictionaryItemQuery">
+		SELECT count(*) FROM t_systemdictionaryitem
+		<include refid="page" />
+
+	</select>
+	<select id="query" resultType="SystemDictionaryItem"
+		parameterType="SystemDictionaryItemQuery">
+		SELECT * FROM t_systemdictionaryitem
+		<include refid="page" />
+		<if test="currentPage!=null and pageSize !=null">
+			limit #{beginIndex},#{pageSize}
+		</if>
+	</select>
+
+
+</mapper>

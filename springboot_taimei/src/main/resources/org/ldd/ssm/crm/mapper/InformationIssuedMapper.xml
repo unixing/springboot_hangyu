@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.InformationIssuedMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.InformationIssued" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="Lcl_Dpt_Day" property="lclDptDay" jdbcType="VARCHAR" />
+    <result column="log_inf" property="logInf" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, Lcl_Dpt_Day, log_inf,type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from informationIssued
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from informationIssued
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.crm.domain.InformationIssued" >
+    insert into informationIssued (id, Lcl_Dpt_Day, log_inf,type
+      )
+    values (#{id,jdbcType=BIGINT}, #{lclDptDay,jdbcType=VARCHAR}, #{logInf,jdbcType=VARCHAR},#{type,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.InformationIssued" >
+    insert into informationIssued
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lclDptDay != null" >
+        Lcl_Dpt_Day,
+      </if>
+      <if test="logInf != null" >
+        log_inf,
+      </if>
+      <if test="type >0" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="lclDptDay != null" >
+        #{lclDptDay,jdbcType=VARCHAR},
+      </if>
+      <if test="logInf != null" >
+        #{logInf,jdbcType=VARCHAR},
+      </if>
+      <if test="type > 0" >
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.InformationIssued" >
+    update informationIssued
+    <set >
+      <if test="lclDptDay != null" >
+        Lcl_Dpt_Day = #{lclDptDay,jdbcType=VARCHAR},
+      </if>
+      <if test="logInf != null" >
+        log_inf = #{logInf,jdbcType=VARCHAR},
+      </if>
+      <if test="type > 0" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.InformationIssued" >
+    update informationIssued
+    set Lcl_Dpt_Day = #{lclDptDay,jdbcType=VARCHAR},
+      log_inf = #{logInf,jdbcType=VARCHAR},type = #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getPageList" resultType="java.lang.String">
+  	SELECT DISTINCT Lcl_Dpt_Day FROM informationIssued order by Lcl_Dpt_Day DESC limit #{startIndex,jdbcType=INTEGER},#{pageNo,jdbcType=INTEGER};
+  </select>
+  <select id="getVersionInformation" resultMap="BaseResultMap">
+  	select log_inf,type from informationIssued where Lcl_Dpt_Day = #{lclDptDay,jdbcType=VARCHAR}
+  </select>
+  <select id="getPageCount" resultType="Integer">
+  	SELECT COUNT(DISTINCT Lcl_Dpt_Day) FROM informationIssued
+  </select>
+  <update id="updateDataType" parameterType="java.lang.String">
+  	update informationIssued
+  	set type = 0 where Lcl_Dpt_Day = #{lclDptDay,jdbcType=VARCHAR}
+  </update>
+  <select id="isHasNewVersionInfo" resultType="java.lang.Integer">
+  	select count(id) from informationIssued where type =1;
+  </select>
+</mapper>

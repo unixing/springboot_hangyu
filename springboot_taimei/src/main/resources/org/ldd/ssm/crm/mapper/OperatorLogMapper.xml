@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.OperatorLogMapper">
+	<!-- 高级查询加分页 -->
+	<select id="getOperatorLogList" resultType="OperatorLog"
+		parameterType="OperatorLogQuery">
+		select id id, opUser_id userId,opUser_name userName,opTime opTime,opIp
+		opIp,method_code methodCode,
+		method_name methodName,op_result
+		opResult,log_type logType,log_rank logRank,params params,serverIP serverIP
+		from t_log
+		<include refid="isCheckNull" />
+		ORDER BY opTime desc
+		<if test="limit!=null and offset!=null">
+			limit #{offset},#{limit}
+		</if>
+	</select>
+
+	<select id="getTotalCount" resultType="int" parameterType="OperatorLogQuery">
+		select count(*)
+		from t_log
+		<include refid="isCheckNull" />
+	</select>
+	<insert id="saveOperatorLog" parameterType="OperatorLog">
+		insert into
+		t_log(opUser_id,opUser_name,opTime,opIp,method_code,method_name,op_result,log_type,log_rank,params,serverIP)
+		values(#{userId},#{userName},#{opTime},#{opIp},#{methodCode},#{methodName},#{opResult},#{logType},#{logRank},#{params},#{serverIP})
+	</insert>
+	
+	<delete id="deleteOperatorLog" parameterType="String">
+		delete from t_log where id &lt; #{minId}
+	</delete>
+	
+	<select id="getMinLog" resultType="String">
+		select min(id) from t_log order by id desc limit 10000
+	</select>
+	
+	<delete id="deleteAllOperatorLog">
+		delete from t_log;
+	</delete>
+	<sql id="isCheckNull">
+		<where>
+			<if test="logtype!=null">
+				AND log_type=#{logtype}
+			</if>
+			<if test="opIp!=null">
+				AND opIp=#{opIp}
+			</if>
+			<if test="startDate!=null">
+				AND opTime &gt;=#{startDate}
+			</if>
+			<if test="endDate!=null">
+				AND opTime &lt;=#{endDate}
+			</if>
+			<if test="logrank!=null">
+				AND log_rank=#{logrank}
+			</if>
+			<if test="opresult!=null">
+				AND op_result=#{opresult}
+			</if>
+			<if test="opName!=null">
+				AND opUser_name=#{opName}
+			</if>
+		</where>
+	</sql>
+</mapper> 

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.EmailValidStrMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.EmailValidStr" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="valid_str" property="validStr" jdbcType="VARCHAR" />
+    <result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, valid_str, employee_id, create_time,email
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_email_valid_str
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_email_valid_str
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.crm.domain.EmailValidStr" >
+    insert into t_email_valid_str (id, valid_str, employee_id, 
+      create_time,email)
+    values (#{id,jdbcType=INTEGER}, #{validStr,jdbcType=VARCHAR}, #{employeeId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=BIGINT},#{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.EmailValidStr" >
+    insert into t_email_valid_str
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="validStr != null" >
+        valid_str,
+      </if>
+      <if test="employeeId != null" >
+        employee_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="validStr != null" >
+        #{validStr,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.EmailValidStr" >
+    update t_email_valid_str
+    <set >
+      <if test="validStr != null" >
+        valid_str = #{validStr,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        employee_id = #{employeeId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="email != null">
+      	email = #{email,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.EmailValidStr" >
+    update t_email_valid_str
+    set valid_str = #{validStr,jdbcType=VARCHAR},
+      employee_id = #{employeeId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      email = #{email,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByEmployeeId" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from t_email_valid_str
+  	<where>
+  		<if test="employeeId !=null and employeeId >0">
+  			employee_id = #{employeeId,jdbcType=BIGINT}
+  		</if>
+  	</where>
+  </select>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.BasicalDetailMapper">
+
+	<select id="getAirportDetailInfoByCode" resultType="AirportDetailInfo" parameterType="String">
+		select * from airportinfonewthree where iATA = #{code}
+	</select>
+	
+	<select id="getOurBoatDetailInfoByCode" resultType="OurBoatDetailInfo" parameterType="String">
+		select * from aircompenyinfothree where iata = #{0} and airln_cd = #{1}
+	</select>
+	
+	<select id="getCityDetailInfoByCode" resultType="CityDetailInfo" parameterType="String">
+		select * from cityinfothree  where airport = #{code}
+	</select>
+	
+	<select id="getGoodsByCodeAndYear" resultType="ThroughPut">
+		select this_number this_goods,last_number last_goods,ranking goods_ranking,to_compare goods_compare
+			from GoodsThroughput  where 
+			iata = #{0} and this_year = #{1}
+	</select>
+	
+	<select id="getPassengerByCodeAndYear" resultType="ThroughPut">
+		select this_number this_passenger,last_number last_passenger,ranking passenger_ranking,to_compare passenger_compare
+			from PassengerThroughput  where 
+			iata = #{0} and this_year = #{1}
+	</select>
+	
+	<select id="getFlightsByCodeAndYear" resultType="ThroughPut">
+		select this_number this_flights,last_number last_flights,ranking flights_ranking,to_compare flights_compare
+			from TakeOffAndLandingFlights  where 
+			iata = #{0} and this_year = #{1}
+	</select>
+	
+	
+	<select id="getGoodsMaxYearByCode" resultType="String" parameterType="String">
+		select MAX(this_year) from GoodsThroughput  where iata = #{code}
+	</select>
+	<select id="getPassengerMaxYearByCode" resultType="String" parameterType="String">
+		select MAX(this_year) from PassengerThroughput  where iata = #{code}
+	</select>
+	<select id="getFlightsMaxYearByCode" resultType="String" parameterType="String">
+		select MAX(this_year) from TakeOffAndLandingFlights  where iata = #{code}
+	</select>
+	
+	
+	<select id="getAirportJosnDatas" resultType="AirportJosnData">
+		select airln_Cd airportName, iATA code,airlin_Elh_Name pinyin,airlin_Spe_Spl py,city city,ICAO citycode from airportinfonewthree
+	</select>
+	
+	<select id="getShippingDatas" resultType="ShippingData">
+		select airln_cd name,iata iT from aircompenyinfothree
+	</select>
+	
+	<select id="getCityDatas" resultType="CityData" >
+		select cityName name,airport code, airportPinyin py from cityinfothree 
+	</select>
+</mapper>

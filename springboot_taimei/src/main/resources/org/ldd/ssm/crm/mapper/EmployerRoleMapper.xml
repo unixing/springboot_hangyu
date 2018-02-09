@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.EmployerRoleMapper">
+	<select id="getEmployerAirportList" resultType="String" parameterType="java.lang.Long">
+		select itia
+		from company_airportinfonew
+		where company_id = #{companyId}
+	</select>
+	<select id="getEmployerRole" resultType="MenuNew" parameterType="java.lang.Long">
+		SELECT * FROM t_menu_new WHERE id in (SELECT menu_id FROM role_menu_new WHERE role_id=(SELECT role_id FROM t_employee_role WHERE employee_id=#{empId})) 
+	</select>
+	<select id="getMenuAllList" resultType="MenuNew" >
+		select c.id id,c.name name,c.icon icon,c.url url from t_menu_new c 
+	</select>
+</mapper> 

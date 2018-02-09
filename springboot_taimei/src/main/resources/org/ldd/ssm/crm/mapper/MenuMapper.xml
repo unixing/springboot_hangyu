@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- dao的sql语句执行方法的映射文件 -->
+<!-- 命名空间必须和dao接口类的全限定类名一致 -->
+<mapper namespace="org.ldd.ssm.crm.mapper.MenuMapper">
+	<!-- id的值必须和dao接口类里面的方法名一致 -->
+	<!-- 查询所有 -->
+	<select id="getAll" resultType="Menu">
+		SELECT * FROM t_menu
+	</select>
+	<!-- id的值必须和dao接口类里面的方法名一致 -->
+	<!-- 查询 -->
+	<select id="get" resultType="Menu" parameterType="long">
+		SELECT * FROM
+		t_menu where id = #{id}
+	</select>
+	<!-- 保存 -->
+	<insert id="save" parameterType="Menu" useGeneratedKeys="true">
+		INSERT
+		INTO
+		t_menu(sn,name,icon,url,intro,parent_id)values(#{sn},#{name},#{icon},#{url},#{intro},#{parent.id})
+	</insert>
+	<!-- 更新 -->
+	<update id="update" parameterType="Menu">
+		UPDATE t_menu SET
+		sn=#{sn},name=#{name},icon=#{icon},url=#{url},parent_id=#{parent.id}
+		where id=#{id}
+	</update>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="long">
+		delete from t_menu where
+		id=#{id}
+	</delete>
+	<resultMap type="Menu" id="childer">
+		<id column="did" property="id" />
+		<result column="dsn" property="sn" />
+		<result column="dname" property="name" />
+		<result column="dicon" property="icon" />
+		<result column="durl" property="url" />
+		<result column="dintro" property="intro" />
+		<collection property="parent" ofType="Menu">
+			<id column="id" property="id" />
+			<result column="name" property="name" />
+			<result column="sn" property="sn" />
+			<result column="icon" property="icon" />
+			<result column="url" property="url" />
+			<result column="intro" property="intro" />
+		</collection>
+	</resultMap>
+	<resultMap type="Menu" id="BaseResultMap">
+		<id column="id" property="id" />
+		<result column="sn" property="sn" />
+		<result column="name" property="name" />
+		<result column="icon" property="icon" />
+		<result column="url" property="url" />
+		<result column="intro" property="intro" />
+		<result column="parent_id" property="parentId" jdbcType="BIGINT" />
+	</resultMap>
+	<!-- 查询子菜单 ,通过父类菜单的id -->
+	<select id="getChilder" resultMap="BaseResultMap">
+		<!-- select u.*,t.id did,t.name dname,t.sn tsn,t.icon ticon,t.url turl,t.intro 
+			tintro from t_menu u join (select * from t_menu where parent_id is null) 
+			t on u.parent_id = t.id; -->
+		select *
+		from t_menu u
+		<where>
+			<if test="id != null and id >0">
+				u.parent_id = #{id,jdbcType=BIGINT}
+			</if>
+		</where>
+	</select>
+	<!-- 查询父菜单 -->
+	<select id="getParent" resultType="Menu">
+		select * from t_menu where
+		parent_id is null
+	</select>
+
+	<select id="selectMenuByRole" resultMap="BaseResultMap">
+		select
+		b.id,b.sn,b.name,b.icon,b.url,b.intro,b.parent_id
+		from role_menu a,t_menu b
+		where a.menu_id = b.id
+		<if test="roleId !=null and roleId >0">
+			and role_id = #{roleId,jdbcType=BIGINT}
+		</if>
+	</select>
+</mapper>

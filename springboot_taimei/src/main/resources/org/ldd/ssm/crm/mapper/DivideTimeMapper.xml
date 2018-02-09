@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.crm.mapper.DivideTimeMapper">
+	<resultMap type="org.ldd.ssm.crm.domain.DivideTime" id="BaseResultMap">
+		<result property="divideId" column="Divide_Id" jdbcType="INTEGER" />
+		<result property="seasonId" column="Season_Id" jdbcType="INTEGER" />
+		<result property="fltDirect" column="Flt_Direct" jdbcType="VARCHAR" />
+		<result property="startDate" column="Start_Date" jdbcType="VARCHAR" />
+		<result property="endDate" column="End_Date" jdbcType="VARCHAR" />
+		<result property="refSaleStartDate" column="Ref_Sale_Start_Date"
+			jdbcType="VARCHAR" />
+		<result property="refSaleEndDate" column="Ref_Sale_End_Date"
+			jdbcType="VARCHAR" />
+		<result property="nature" column="Nature" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		Divide_Id,Season_Id,Flt_Direct,Start_Date,End_Date,Ref_Sale_Start_Date,Ref_Sale_End_Date,Nature
+	</sql>
+	<insert id="add" parameterType="DivideTime">
+		insert into t_divide_time
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="divideId>0">
+				Divide_Id,
+			</if>
+			<if test="seasonId>0">
+				Season_Id,
+			</if>
+			<if test="fltDirect !=null and fltDirect !=''">
+				Flt_Direct,
+			</if>
+			<if test="startDate !=null and startDate !=''">
+				Start_Date,
+			</if>
+			<if test="endDate !=null and endDate !=''">
+				End_Date,
+			</if>
+			<if test="refSaleStartDate !=null and refSaleStartDate !=''">
+				Ref_Sale_Start_Date,
+			</if>
+			<if test="refSaleEndDate !=null and refSaleEndDate !=''">
+				Ref_Sale_End_Date,
+			</if>
+			<if test="nature !=null and nature !=''">
+				Nature
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="divideId>0">
+				#{divideId,jdbcType=INTEGER},
+			</if>
+			<if test="seasonId>0">
+				#{seasonId,jdbcType=INTEGER},
+			</if>
+			<if test="fltDirect !=null and fltDirect !=''">
+				#{fltDirect,jdbcType=VARCHAR},
+			</if>
+			<if test="startDate !=null and startDate !=''">
+				#{startDate,jdbcType=VARCHAR},
+			</if>
+			<if test="endDate !=null and endDate !=''">
+				#{endDate,jdbcType=VARCHAR},
+			</if>
+			<if test="refSaleStartDate !=null and refSaleStartDate !=''">
+				#{refSaleStartDate,jdbcType=VARCHAR},
+			</if>
+			<if test="refSaleEndDate !=null and refSaleEndDate !=''">
+				#{refSaleEndDate,jdbcType=VARCHAR},
+			</if>
+			<if test="nature !=null and nature !=''">
+				#{nature,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</insert>
+	<select id="list" resultMap="BaseResultMap">
+		select
+		Divide_Id,Start_Date,End_Date,Ref_Sale_Start_Date,Ref_Sale_End_Date,Nature
+		from
+		t_divide_time
+		where 1=1
+		<if test="seasonId>0">
+			and Season_Id = #{seasonId,jdbcType=INTEGER}
+		</if>
+		<if test="fltDirect !=null and fltDirect !=''">
+			and Flt_Direct = #{fltDirect,jdbcType=VARCHAR}
+		</if>
+		order by Start_Date,End_Date
+	</select>
+	<delete id="deleteBySeasonId">
+		delete from t_divide_time
+		<where>
+			<if test="seasonId>0">
+				and Season_Id = #{seasonId,jdbcType=INTEGER}
+			</if>
+			<if test="fltDirect !=null and fltDirect !=''">
+				and Flt_Direct = #{fltDirect,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+</mapper>

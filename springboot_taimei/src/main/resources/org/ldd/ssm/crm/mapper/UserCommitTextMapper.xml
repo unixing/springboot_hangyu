@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.UserCommitTextMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.UserCommitText" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_commit_info_id" property="userCommitInfoId" jdbcType="BIGINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="user_text" property="userText" jdbcType="VARCHAR" />
+    <result column="user_update_date" property="userUpdateDate" jdbcType="DATE" />
+    <result column="admin_text" property="adminText" jdbcType="VARCHAR" />
+    <result column="admin_update_date" property="adminUpdateDate" jdbcType="DATE" />
+    <result column="user_uuid" property="userUuid" jdbcType="VARCHAR" />
+    <result column="admin_uuid" property="adminUuid" jdbcType="VARCHAR" />
+    <result column="employee_admin_id" property="employeeAdminId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_commit_info_id, phone, user_text, user_update_date, admin_text, admin_update_date, 
+    user_uuid, admin_uuid, employee_admin_id
+  </sql>
+  <!-- 插入 -->
+  <insert id="insert" parameterType="org.ldd.ssm.crm.query.UserCommit" >
+    insert into userCommitText (user_commit_info_id, phone, 
+      user_text, user_update_date,user_uuid)
+    values (#{userCommitInfoId,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, 
+      #{userText,jdbcType=VARCHAR}, #{userUpdateDate,jdbcType=DATE},
+      #{userUuid,jdbcType=VARCHAR})
+  </insert>
+  
+  <!-- 根据userCommitInfoId获得详情 -->
+ <resultMap id="UserCommitMap" type="org.ldd.ssm.crm.query.UserCommit">
+   	<id column="id" property="id" jdbcType="BIGINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="userText" property="userText" jdbcType="VARCHAR" />
+    <result column="userUuid" property="userUuid" jdbcType="VARCHAR" />
+    <result column="adminUuid" property="adminUuid" jdbcType="VARCHAR" />
+    <result column="userUpdateDateFormat" property="userUpdateDateFormat" jdbcType="DATE" />
+     <result column="adminUpdateDateFormat" property="adminUpdateDateFormat" jdbcType="DATE" />
+     <collection property="userImgsList"  ofType="org.ldd.ssm.crm.domain.UserCommitBlob"  
+         select="selectUserImage" column="{uuidUser =userUuid}"   >  
+     </collection>  
+     <collection property="adminImgsList"  ofType="org.ldd.ssm.crm.domain.UserCommitBlob"  
+         select="selectAdminImage" column="{uuidAdmin=adminUuid }"   >  
+     </collection>
+
+  </resultMap> 
+	<select id="selectUserImage" parameterType="java.util.HashMap" resultType="org.ldd.ssm.crm.domain.UserCommitBlob"  >  
+     	select  blob_img blobImg from userCommitBlob
+     	where uuid=#{uuidUser}
+	</select> 
+	
+	<select id="selectAdminImage" parameterType="java.util.HashMap" resultType="org.ldd.ssm.crm.domain.UserCommitBlob"  >  
+     	select blob_img blobImg from  userCommitBlob
+     	where uuid=#{uuidAdmin}
+	</select>  
+  <select id="findUserCommitDetail" resultMap="UserCommitMap" parameterType="java.lang.Long">
+  	select a.id,a.phone,a.user_update_date userUpdateDateFormat,a.admin_update_date adminUpdateDateFormat,a.user_text userText,a.admin_text adminText,
+  	IF(a.user_uuid='',null,a.user_uuid) userUuid,IF(a.admin_uuid='',null,a.admin_uuid) adminUuid
+  		from userCommitText a
+		where a.user_commit_info_id=#{userCommitInfoId}
+  </select>
+  
+  
+  
+  <insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.UserCommitText" >
+    insert into userCommitText
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userCommitInfoId != null" >
+        user_commit_info_id,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="userText != null" >
+        user_text,
+      </if>
+      <if test="userUpdateDate != null" >
+        user_update_date,
+      </if>
+      <if test="adminText != null" >
+        admin_text,
+      </if>
+      <if test="adminUpdateDate != null" >
+        admin_update_date,
+      </if>
+      <if test="userUuid != null" >
+        user_uuid,
+      </if>
+      <if test="adminUuid != null" >
+        admin_uuid,
+      </if>
+      <if test="employeeAdminId != null" >
+        employee_admin_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userCommitInfoId != null" >
+        #{userCommitInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="userText != null" >
+        #{userText,jdbcType=VARCHAR},
+      </if>
+      <if test="userUpdateDate != null" >
+        #{userUpdateDate,jdbcType=DATE},
+      </if>
+      <if test="adminText != null" >
+        #{adminText,jdbcType=VARCHAR},
+      </if>
+      <if test="adminUpdateDate != null" >
+        #{adminUpdateDate,jdbcType=DATE},
+      </if>
+      <if test="userUuid != null" >
+        #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="adminUuid != null" >
+        #{adminUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeAdminId != null" >
+        #{employeeAdminId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.UserCommitText" >
+    update userCommitText
+    <set >
+      <if test="userCommitInfoId != null" >
+        user_commit_info_id = #{userCommitInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="userText != null" >
+        user_text = #{userText,jdbcType=VARCHAR},
+      </if>
+      <if test="userUpdateDate != null" >
+        user_update_date = #{userUpdateDate,jdbcType=DATE},
+      </if>
+      <if test="adminText != null" >
+        admin_text = #{adminText,jdbcType=VARCHAR},
+      </if>
+      <if test="adminUpdateDate != null" >
+        admin_update_date = #{adminUpdateDate,jdbcType=DATE},
+      </if>
+      <if test="userUuid != null" >
+        user_uuid = #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="adminUuid != null" >
+        admin_uuid = #{adminUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeAdminId != null" >
+        employee_admin_id = #{employeeAdminId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.UserCommitText" >
+    update userCommitText
+    set user_commit_info_id = #{userCommitInfoId,jdbcType=BIGINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      user_text = #{userText,jdbcType=VARCHAR},
+      user_update_date = #{userUpdateDate,jdbcType=DATE},
+      admin_text = #{adminText,jdbcType=VARCHAR},
+      admin_update_date = #{adminUpdateDate,jdbcType=DATE},
+      user_uuid = #{userUuid,jdbcType=VARCHAR},
+      admin_uuid = #{adminUuid,jdbcType=VARCHAR},
+      employee_admin_id = #{employeeAdminId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

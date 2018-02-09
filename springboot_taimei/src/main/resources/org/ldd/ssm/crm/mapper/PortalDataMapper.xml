@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.crm.mapper.PortalDataMapper">
+	<select id="getNewDate" resultType="String">
+		select
+		Lcl_Dpt_Day
+		from
+		${airport}
+		order by id desc
+		limit 0,1
+	</select>
+	<select id="getPortalDataList" resultType="Z_Airdata"
+		parameterType="HomePageQuery">
+		select id as id,
+		Lcl_Dpt_Day as lcl_Dpt_Day,
+		Dpt_AirPt_Cd as dpt_AirPt_Cd,
+		Arrv_Airpt_Cd as arrv_Airpt_Cd,
+		Flt_Nbr as flt_Nbr,
+		Cpy_Nm as cpy_Nm,
+		Lcl_Dpt_Tm as lcl_Dpt_Tm,
+		Lcl_Arrv_Tm as lcl_Arrv_Tm,
+		Flt_Rte_Cd as flt_Rte_Cd,
+		Tal_Nbr_Set as tal_Nbr_Set,
+		Pgs_Per_Cls as pgs_Per_Cls,
+		Grp_Nbr as grp_Nbr,
+		Ech_Cls_Grp as ech_Cls_Grp,
+		Grp_Fng_Rte as grp_Fng_Per,
+		Tal_Nbr as totalNumber,
+		Set_Ktr_Ine as Set_Ktr_Ine,
+		Grp_Ine as grp_Ine,
+		Grp_Ppt as grp_Ppt,
+		Egs_Lod_Fts as egs_Lod_Fts,
+		avg_Dct as avg_Dct,
+		Idd_Dct as idd_Dct,
+		Grp_Dct as grp_Dct,
+		Two_Tak_Ppt as two_Tak_Ppt,
+		Ful_Pce_Ppt as ful_Pce_Ppt,
+		Nne_Dnt_Ppt as nne_Dnt_Ppt,
+		Eht_Five_Dnt_Ppt as eht_Five_Dnt_Ppt,
+		Eht_Dnt_Ppt as eht_Dnt_Ppt,
+		Sen_Five_Dnt_Ppt as sen_Five_Dnt_Ppt,
+		Sen_Dnt_Ppt as sen_Dnt_Ppt,
+		Six_Five_Dnt_Ppt as six_Five_Dnt_Ppt,
+		Six_Dnt_Ppt as six_Dnt_Ppt,
+		Fve_Fve_Dnt_Ppt as fve_Fve_Dnt_Ppt,
+		Fve_Dnt_Ppt as fve_Dnt_Ppt,
+		Fur_Fve_Dnt_Ppt as fur_Fve_Dnt_Ppt,
+		Fur_Dnt_Ppt as fur_Dnt_Ppt,
+		Thr_Fve_Dnt_Ppt as thr_Fve_Dnt_Ppt,
+		Thr_Dnt_Ppt as thr_Dnt_Ppt,
+		Two_Fve_Dnt_Ppt as two_Fve_Dnt_Ppt,
+		Two_Dnt_Ppt as two_Dnt_Ppt,
+		Sal_Tak_Ppt as sal_Tak_Ppt,
+		R_Tak_Ppt as r_Tak_Ppt,
+		U_Tak_Ppt as u_Tak_Ppt,
+		I_Tak_Ppt as i_Tak_Ppt,
+		Z_Tak_Ppt as z_Tak_Ppt,
+		E_Tak_Ppt as e_Tak_Ppt,
+		A_Tak_Ppt as a_Tak_Ppt,
+		O_Tak_Ppt as o_Tak_Ppt,
+		S_Tak_Ppt as s_Tak_Ppt,
+		H_Tak_Ppt as h_Tak_Ppt,
+		X_Tak_Ppt as x_Tak_Ppt,
+		Children as children,
+		yBFare as yBFare,
+		sailingDistance as sailingDistance,
+		Dta_Sce as dta_Sce,
+		Dta_Dte as dta_Dte,
+		company_id as company
+		from z_airdata
+		<where>
+			<if test="startTime!=null">
+				AND Lcl_Dpt_Day&gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND Lcl_Dpt_Day&lt;=#{endTime}
+			</if>
+			<if test="airPort!=null">
+				AND Flt_Rte_Cd like CONCAT('%',#{airPort},'%' )
+			</if>
+		</where>
+		ORDER BY Flt_Nbr,Lcl_Dpt_Day ASC
+	</select>
+</mapper>

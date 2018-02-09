@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.AirInfoDataMapper">
+	<select id="getAirInfoDataList" resultType="AirInfoData">
+	select count(DISTINCT(replace(c.airline,d.iata,''))) onlineFlyNum,d.* from  (select
+		a.airln_Cd airInfoName,
+		a.iATA iata,
+		a.iCAO icao,
+		a.city city,
+		b.city_coordinate_j city_coordinate_w ,
+		b.city_coordinate_w city_coordinate_j,
+		a.runwayArticleNumber pdNum,
+  		a.airfieldLvl flyLevel,
+		a.modelCanHandle modelCanHandle,
+		a.air_ele airportBG,
+		a.domestic glFlyNum,
+		a.international gjFlyNum,
+		a.isRewardPolicy isRewardPolicy,
+		a.airpotCls airpotCls,
+		a.port port,
+		a.specialAirport specialAirport,
+		a.coordinateAirport coordinateAirport,
+	 	(select passengerThroughput from flowofsubsidiary where airportinfonewthree_id=a.id ORDER BY year desc limit 1) flyPerson,
+		(select year from flowofsubsidiary where airportinfonewthree_id=a.id ORDER BY year desc limit 1) lkjzDate,
+		(select SUBSTRING(max(date),1,10) from airline_ch) hxjzDate
+		from  airportinfonewthree a
+		LEFT JOIN airportinfonewthree b on a.iATA=b.iATA) d
+ 		left join airline_ch c on (LEFT(c.airline,3)=d.iata or RIGHT(c.airline,3)=d.iata) and 	c.state='0'
+		GROUP BY d.iata
+	</select>
+	<select id="getAirInfoDataListNew" resultType="AirInfoData">
+	select d.* from  (select
+		a.airln_Cd airInfoName,
+		a.iATA iata,
+		a.iCAO icao,
+		a.city city,
+		b.city_coordinate_j city_coordinate_w ,
+		b.city_coordinate_w city_coordinate_j,
+		a.runwayArticleNumber pdNum,
+  		a.airfieldLvl flyLevel,
+		a.modelCanHandle modelCanHandle,
+		a.air_ele airportBG,
+		a.domestic glFlyNum,
+		a.international gjFlyNum,
+		a.isRewardPolicy isRewardPolicy,
+		a.airpotCls airpotCls,
+		a.port port,
+		a.specialAirport specialAirport,
+		a.coordinateAirport coordinateAirport,
+	 	(select passengerThroughput from flowofsubsidiary where airportinfonewthree_id=a.id ORDER BY year desc limit 1) flyPerson,
+		(select year from flowofsubsidiary where airportinfonewthree_id=a.id ORDER BY year desc limit 1) lkjzDate
+		from  airportinfonewthree a
+		LEFT JOIN airportinfonewthree b on a.iATA=b.iATA) d
+		GROUP BY d.iata
+	</select>
+	<select id="getAirInfoDataListByOtherContory" resultType="AirInfoData">
+		select
+			City airInfoName,
+			MLongitude city_coordinate_j,
+			MLatitude city_coordinate_w
+		from AmericaAirport
+	</select>
+</mapper> 

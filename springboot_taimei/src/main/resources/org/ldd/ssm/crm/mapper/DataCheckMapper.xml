@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.DataCheckMapper">
+	<!-- 添删改 -->
+	<select id="getDataCheck" parameterType="DateCheckQuery"
+		resultType="Z_Airdata">
+		select *,Tal_Nbr as totalNumber from z_airdata
+		<include refid="page" />
+		<if test="limit!=null and offset!=null">
+			limit #{offset},#{limit}
+		</if>
+	</select>
+	<select id="getTotal" parameterType="DateCheckQuery" resultType="int">
+		select count(id) from z_airdata
+		<include refid="page" />
+	</select>
+	<sql id="page">
+		<where>
+			<if
+				test="startDate!=null and startDate!=''and endDate!=null and endDate!=''">
+				AND Lcl_Dpt_Day between #{startDate} and #{endDate}
+			</if>
+			<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+				AND Dpt_AirPt_Cd =#{ dpt_AirPt_Cd}
+			</if>
+			<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+				AND Arrv_Airpt_Cd =#{ arrv_Airpt_Cd}
+			</if>
+			<if test="flt_Nbr!=null and flt_Nbr!=''">
+				AND Flt_Nbr =#{ flt_Nbr }
+			</if>
+			<if test="cpy_Nm!=null and cpy_Nm!=''">
+				AND Cpy_Nm=#{cpy_Nm}
+			</if>
+			<if test="flt_Rte_Cd!=null and flt_Rte_Cd!=''">
+				AND Flt_Rte_Cd =#{ flt_Rte_Cd }
+			</if>
+			<if test="tal_Nbr_Set!=null and tal_Nbr_Set!=''">
+				AND Tal_Nbr_Set =#{ tal_Nbr_Set }
+			</if>
+			<if test="pgs_Per_Cls!=null and pgs_Per_Cls!=''">
+				AND Pgs_Per_Cls =#{ pgs_Per_Cls }
+			</if>
+			<if test="grp_Nbr!=null and grp_Nbr!=''">
+				AND Grp_Nbr =#{ grp_Nbr }
+			</if>
+			<if test="ech_Cls_Grp!=null and ech_Cls_Grp!=''">
+				AND Ech_Cls_Grp =#{ ech_Cls_Grp }
+			</if>
+			<if test="tal_Nbr!=null and tal_Nbr!=''">
+				AND Tal_Nbr =#{ tal_Nbr }
+			</if>
+			<if test="set_Ktr_Ine!=null and set_Ktr_Ine!=''">
+				AND Set_Ktr_Ine =#{ set_Ktr_Ine }
+			</if>
+			<if test="two_Tak_Ppt!=null and two_Tak_Ppt!=''">
+				AND Two_Tak_Ppt =#{ two_Tak_Ppt }
+			</if>
+			<if test="ful_Pce_Ppt!=null and ful_Pce_Ppt!=''">
+				AND Ful_Pce_Ppt =#{ ful_Pce_Ppt }
+			</if>
+			<if test="nne_Dnt_Ppt!=null and nne_Dnt_Ppt!=''">
+				AND Nne_Dnt_Ppt =#{ nne_Dnt_Ppt }
+			</if>
+			<if test="eht_Five_Dnt_Ppt!=null and eht_Five_Dnt_Ppt!=''">
+				AND Eht_Five_Dnt_Ppt =#{ eht_Five_Dnt_Ppt }
+			</if>
+			<if test="eht_Dnt_Ppt!=null and eht_Dnt_Ppt!=''">
+				AND Eht_Dnt_Ppt =#{ eht_Dnt_Ppt }
+			</if>
+			<if test="sen_Five_Dnt_Ppt!=null and sen_Five_Dnt_Ppt!=''">
+				AND Sen_Five_Dnt_Ppt =#{ sen_Five_Dnt_Ppt }
+			</if>
+			<if test="sen_Dnt_Ppt!=null and sen_Dnt_Ppt!=''">
+				AND Sen_Dnt_Ppt =#{ sen_Dnt_Ppt }
+			</if>
+			<if test="six_Five_Dnt_Ppt!=null and six_Five_Dnt_Ppt!=''">
+				AND Six_Five_Dnt_Ppt =#{ six_Five_Dnt_Ppt }
+			</if>
+			<if test="six_Dnt_Ppt!=null and six_Dnt_Ppt!=''">
+				AND Six_Dnt_Ppt =#{ six_Dnt_Ppt }
+			</if>
+			<if test="fve_Fve_Dnt_Ppt!=null and fve_Fve_Dnt_Ppt!=''">
+				AND Fve_Fve_Dnt_Ppt =#{ fve_Fve_Dnt_Ppt }
+			</if>
+			<if test="fve_Dnt_Ppt!=null and fve_Dnt_Ppt!=''">
+				AND Fve_Dnt_Ppt =#{ fve_Dnt_Ppt }
+			</if>
+			<if test="fur_Fve_Dnt_Ppt!=null and fur_Fve_Dnt_Ppt!=''">
+				AND Fur_Fve_Dnt_Ppt =#{ fur_Fve_Dnt_Ppt }
+			</if>
+			<if test="fur_Dnt_Ppt!=null and fur_Dnt_Ppt!=''">
+				AND Fur_Dnt_Ppt =#{ fur_Dnt_Ppt }
+			</if>
+			<if test="sal_Tak_Ppt!=null and sal_Tak_Ppt!=''">
+				AND Sal_Tak_Ppt =#{ sal_Tak_Ppt }
+			</if>
+			<if test="r_Tak_Ppt!=null and r_Tak_Ppt!=''">
+				AND R_Tak_Ppt =#{ r_Tak_Ppt }
+			</if>
+			<if test="u_Tak_Ppt!=null and u_Tak_Ppt!=''">
+				AND U_Tak_Ppt =#{ u_Tak_Ppt }
+			</if>
+			<if test="i_Tak_Ppt!=null and i_Tak_Ppt!=''">
+				AND I_Tak_Ppt =#{ i_Tak_Ppt }
+			</if>
+			<if test="z_Tak_Ppt!=null and z_Tak_Ppt!=''">
+				AND Z_Tak_Ppt =#{ z_Tak_Ppt }
+			</if>
+			<if test="e_Tak_Ppt!=null and e_Tak_Ppt!=''">
+				AND E_Tak_Ppt =#{ e_Tak_Ppt }
+			</if>
+			<if test="a_Tak_Ppt!=null and a_Tak_Ppt!=''">
+				AND A_Tak_Ppt =#{ a_Tak_Ppt }
+			</if>
+			<if test="o_Tak_Ppt!=null and o_Tak_Ppt!=''">
+				AND O_Tak_Ppt =#{ o_Tak_Ppt }
+			</if>
+			<if test="s_Tak_Ppt!=null and s_Tak_Ppt!=''">
+				AND S_Tak_Ppt =#{ s_Tak_Ppt }
+			</if>
+			<if test="h_Tak_Ppt!=null and h_Tak_Ppt!=''">
+				AND H_Tak_Ppt =#{ h_Tak_Ppt }
+			</if>
+			<if test="x_Tak_Ppt!=null and x_Tak_Ppt!=''">
+				AND X_Tak_Ppt =#{ x_Tak_Ppt }
+			</if>
+			<if test="children!=null and children!=''">
+				AND Children =#{ children }
+			</if>
+			<if test="dta_Sce!=null and dta_Sce!=''">
+				AND Dta_Sce =#{ dta_Sce }
+			</if>
+		</where>
+	</sql>
+</mapper> 

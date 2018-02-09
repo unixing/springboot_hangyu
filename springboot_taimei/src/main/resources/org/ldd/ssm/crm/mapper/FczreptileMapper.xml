@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.FczreptileMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.Fczreptile">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="itia" property="itia" jdbcType="VARCHAR" />
+		<result column="Ete_Air_Qty" property="eteAirQty" jdbcType="VARCHAR" />
+		<result column="Ithad" property="ithad" jdbcType="VARCHAR" />
+		<result column="Ofg_Iad" property="ofgIad" jdbcType="VARCHAR" />
+		<result column="Dys_Win_Two" property="dysWinTwo" jdbcType="VARCHAR" />
+		<result column="Dys_Win_Two_Four" property="dysWinTwoFour"
+			jdbcType="VARCHAR" />
+		<result column="Avg_Dys_Win" property="avgDysWin" jdbcType="VARCHAR" />
+		<result column="month" property="month" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, itia, Ete_Air_Qty, Ithad, Ofg_Iad, Dys_Win_Two, Dys_Win_Two_Four,
+		Avg_Dys_Win,
+		month
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from fczreptile
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from fczreptile
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.Fczreptile">
+		insert into fczreptile (id, itia, Ete_Air_Qty,
+		Ithad, Ofg_Iad, Dys_Win_Two,
+		Dys_Win_Two_Four, Avg_Dys_Win, month
+		)
+		values (#{id,jdbcType=BIGINT}, #{itia,jdbcType=VARCHAR},
+		#{eteAirQty,jdbcType=VARCHAR},
+		#{ithad,jdbcType=VARCHAR}, #{ofgIad,jdbcType=VARCHAR}, #{dysWinTwo,jdbcType=VARCHAR},
+		#{dysWinTwoFour,jdbcType=VARCHAR}, #{avgDysWin,jdbcType=VARCHAR},
+		#{month,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.Fczreptile">
+		insert into fczreptile
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="itia != null">
+				itia,
+			</if>
+			<if test="eteAirQty != null">
+				Ete_Air_Qty,
+			</if>
+			<if test="ithad != null">
+				Ithad,
+			</if>
+			<if test="ofgIad != null">
+				Ofg_Iad,
+			</if>
+			<if test="dysWinTwo != null">
+				Dys_Win_Two,
+			</if>
+			<if test="dysWinTwoFour != null">
+				Dys_Win_Two_Four,
+			</if>
+			<if test="avgDysWin != null">
+				Avg_Dys_Win,
+			</if>
+			<if test="month != null">
+				month,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="itia != null">
+				#{itia,jdbcType=VARCHAR},
+			</if>
+			<if test="eteAirQty != null">
+				#{eteAirQty,jdbcType=VARCHAR},
+			</if>
+			<if test="ithad != null">
+				#{ithad,jdbcType=VARCHAR},
+			</if>
+			<if test="ofgIad != null">
+				#{ofgIad,jdbcType=VARCHAR},
+			</if>
+			<if test="dysWinTwo != null">
+				#{dysWinTwo,jdbcType=VARCHAR},
+			</if>
+			<if test="dysWinTwoFour != null">
+				#{dysWinTwoFour,jdbcType=VARCHAR},
+			</if>
+			<if test="avgDysWin != null">
+				#{avgDysWin,jdbcType=VARCHAR},
+			</if>
+			<if test="month != null">
+				#{month,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.Fczreptile">
+		update fczreptile
+		<set>
+			<if test="itia != null">
+				itia = #{itia,jdbcType=VARCHAR},
+			</if>
+			<if test="eteAirQty != null">
+				Ete_Air_Qty = #{eteAirQty,jdbcType=VARCHAR},
+			</if>
+			<if test="ithad != null">
+				Ithad = #{ithad,jdbcType=VARCHAR},
+			</if>
+			<if test="ofgIad != null">
+				Ofg_Iad = #{ofgIad,jdbcType=VARCHAR},
+			</if>
+			<if test="dysWinTwo != null">
+				Dys_Win_Two = #{dysWinTwo,jdbcType=VARCHAR},
+			</if>
+			<if test="dysWinTwoFour != null">
+				Dys_Win_Two_Four = #{dysWinTwoFour,jdbcType=VARCHAR},
+			</if>
+			<if test="avgDysWin != null">
+				Avg_Dys_Win = #{avgDysWin,jdbcType=VARCHAR},
+			</if>
+			<if test="month != null">
+				month = #{month,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.Fczreptile">
+		update fczreptile
+		set itia = #{itia,jdbcType=VARCHAR},
+		Ete_Air_Qty = #{eteAirQty,jdbcType=VARCHAR},
+		Ithad = #{ithad,jdbcType=VARCHAR},
+		Ofg_Iad = #{ofgIad,jdbcType=VARCHAR},
+		Dys_Win_Two = #{dysWinTwo,jdbcType=VARCHAR},
+		Dys_Win_Two_Four = #{dysWinTwoFour,jdbcType=VARCHAR},
+		Avg_Dys_Win = #{avgDysWin,jdbcType=VARCHAR},
+		month = #{month,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="getAirportIthad" resultType="String">
+		SELECT CONCAT(Ithad,'(',CONCAT(`month`,')')) FROM fczreptile where itia =#{airPort,jdbcType=VARCHAR} ORDER
+		BY `month` DESC LIMIT 0,1
+	</select>
+</mapper>

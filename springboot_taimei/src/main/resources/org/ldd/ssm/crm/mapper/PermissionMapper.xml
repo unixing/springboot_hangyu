@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- dao的sql语句执行方法的映射文件 -->
+<!-- 命名空间必须和dao接口类的全限定类名一致 -->
+<mapper namespace="org.ldd.ssm.crm.mapper.PermissionMapper">
+	<!-- 根据权限查出所有的资源 -->
+	<select id="userByAllresource" parameterType="long" resultType="Permission">
+		select DISTINCT emp.username,p.name,p.id,p.resource
+		from t_permission p
+		left join t_role_t_permission rp
+		on(rp.permission_id=p.id)
+		left join t_role r on(r.id=rp.role_id)
+		left
+		join t_employee_t_role er on(er.role_id=r.id)
+		left join t_employee emp
+		on(emp.id=er.employee_id)
+		where emp.id=#{id};
+	</select>
+	<!-- 根据资源名查询资源 -->
+	<select id="getPermissionByResource" parameterType="string"
+		resultType="Permission">
+		SELECT * FROM t_permission WHERE resource = #{resource}
+	</select>
+	<!-- id的值必须和dao接口类里面的方法名一致 -->
+	<select id="get" resultType="Permission" parameterType="long">
+		SELECT *
+		FROM t_permission WHERE ID=#{ID}
+	</select>
+	<!-- id的值必须和dao接口类里面的方法名一致 -->
+	<insert id="save" parameterType="Permission">
+		insert into t_permission
+		(name,resource)values(#{name},#{resource})
+	</insert>
+	<delete id="delete" parameterType="long">
+		delete from t_permission where
+		id=#{id}
+	</delete>
+	<update id="update" parameterType="Permission">
+		update t_permission set
+		name=#{name},resource=#{resource} where id=#{id}
+	</update>
+	<select id="getAll" resultType="Permission">
+		select * from t_permission
+	</select>
+	<sql id="page">
+		<where>
+			<if test="name!=null">
+				AND name Like conCat('%',#{name},'%')
+			</if>
+			<if test="resource!=null">
+				AND resource Like conCat('%',#{resource},'%')
+			</if>
+		</where>
+	</sql>
+	<!-- 高级查询加分页 -->
+	<select id="query" resultType="Permission" parameterType="PermissionQuery">
+		SELECT * FROM t_permission
+		<include refid="page" />
+		<if test="currentPage!=null and pageSize !=null">
+			limit #{beginIndex},#{pageSize}
+		</if>
+	</select>
+	<select id="queryTotal" resultType="int" parameterType="SystemDictionaryItemQuery">
+		SELECT count(*) FROM t_permission
+		<include refid="page" />
+	</select>
+	<!-- //自动建表 -->
+</mapper>

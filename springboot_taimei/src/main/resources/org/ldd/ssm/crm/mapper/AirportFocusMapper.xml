@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.AirportFocusMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.AirportFocus">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="time_demension" property="timeDemension"
+			jdbcType="VARCHAR" />
+		<result column="flight_range" property="flightRange" jdbcType="VARCHAR" />
+		<result column="data_range" property="dataRange" jdbcType="VARCHAR" />
+		<result column="focus_target" property="focusTarget" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, time_demension, flight_range, data_range, focus_target, remark
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from airport_focus
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from airport_focus
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.AirportFocus">
+		insert into airport_focus (id, time_demension, flight_range,
+		data_range, focus_target, remark
+		)
+		values (#{id,jdbcType=BIGINT}, #{timeDemension,jdbcType=VARCHAR},
+		#{flightRange,jdbcType=VARCHAR},
+		#{dataRange,jdbcType=VARCHAR}, #{focusTarget,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.AirportFocus">
+		insert into airport_focus
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="timeDemension != null">
+				time_demension,
+			</if>
+			<if test="flightRange != null">
+				flight_range,
+			</if>
+			<if test="dataRange != null">
+				data_range,
+			</if>
+			<if test="focusTarget != null">
+				focus_target,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="timeDemension != null">
+				#{timeDemension,jdbcType=VARCHAR},
+			</if>
+			<if test="flightRange != null">
+				#{flightRange,jdbcType=VARCHAR},
+			</if>
+			<if test="dataRange != null">
+				#{dataRange,jdbcType=VARCHAR},
+			</if>
+			<if test="focusTarget != null">
+				#{focusTarget,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.AirportFocus">
+		update airport_focus
+		<set>
+			<if test="timeDemension != null">
+				time_demension = #{timeDemension,jdbcType=VARCHAR},
+			</if>
+			<if test="flightRange != null">
+				flight_range = #{flightRange,jdbcType=VARCHAR},
+			</if>
+			<if test="dataRange != null">
+				data_range = #{dataRange,jdbcType=VARCHAR},
+			</if>
+			<if test="focusTarget != null">
+				focus_target = #{focusTarget,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.AirportFocus">
+		update airport_focus
+		set time_demension = #{timeDemension,jdbcType=VARCHAR},
+		flight_range = #{flightRange,jdbcType=VARCHAR},
+		data_range = #{dataRange,jdbcType=VARCHAR},
+		focus_target = #{focusTarget,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>

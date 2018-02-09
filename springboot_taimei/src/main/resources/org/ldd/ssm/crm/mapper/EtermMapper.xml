@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.ETermMapper">
+	<insert id="addeTerm" useGeneratedKeys="true" keyProperty="id"
+		parameterType="Instructions">
+		insert into
+		eterm_account(Isc_Tem,Etm_Usr,Etm_Psw,Etm_Pot,Etm_IP,Off_ID,Off_Pwd,Acc_Lvl,Is_Four,employee_id,si,scope,state,date)
+		values(#{Isc_Tem},#{Etm_Usr},#{Etm_Psw},#{Etm_Pot},#{Etm_IP},#{Off_ID},#{Off_Pwd},#{Acc_Lvl},#{Is_Four},#{employee_id},#{si},#{scope},#{state},#{date})
+	</insert>
+	<insert id="addeTermAuto" parameterType="Instructions">
+		insert into
+		automaticmanual(Aic_Mal,Aic_Tie,eterm_account_id)values(#{aic_Mal},#{aic_Tie},#{id})
+	</insert>
+	<insert id="addeTermCt" parameterType="Conflictresolution">
+		insert into
+		conflictresolution(Cct_Ron,Dte_Aic_Rrt,eterm_account_id)
+		values(#{Cct_Ron},#{Dte_Aic_Rrt},#{id})
+	</insert>
+	<insert id="addETermFlt_Rte_Cd" parameterType="AddFltNbr"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into instructions
+		(Isc_Ist,air_line,eterm_account_id)values(#{flt_Nbr},#{air_line},#{eterm_account_id})
+	</insert>
+	<insert id="addFlt_One" parameterType="AddFltNbr">
+		insert into airpt
+		(Dpt_Arrv,instructions_id)values(#{flt_one},#{id})
+	</insert>
+	<insert id="addFlt_two" parameterType="AddFltNbr">
+		insert into airpt
+		(Dpt_Arrv,instructions_id)values(#{flt_two},#{id})
+	</insert>
+	<insert id="addFlt_three" parameterType="AddFltNbr">
+		insert into airpt
+		(Dpt_Arrv,instructions_id)values(#{flt_three},#{id})
+	</insert>
+	<select id="getFindEtermByUserId" resultType="Instructions"
+		parameterType="long">
+		SELECT e.id id,e.state state,si,
+		Isc_Tem,Etm_Usr,Etm_Psw,Etm_Pot,Etm_IP,Off_ID,Off_Pwd,Acc_Lvl,Is_Four,Aic_Mal,Aic_Tie,Cct_Ron,Dte_Aic_Rrt,scope,date
+		FROM eterm_account e
+		JOIN automaticmanual a on e.id = a.eterm_account_id
+		JOIN conflictresolution conf on e.id = conf.eterm_account_id
+		where
+		employee_id = #{id} 
+	</select>
+	<select id="getFindAirlineByEtermId" resultType="AddFltNbr"
+		parameterType="long">
+		select Isc_Ist flt_Nbr,air_line
+		air_line,eterm_account_id from instructions where eterm_account_id =
+		#{id} and 
+		stateKey = 0
+	</select>
+	<select id="getFindUserByEtermId" parameterType="string"
+		resultType="string">
+		select employee_id from eterm_account where id = #{id}
+	</select>
+	<delete id="etermAirInfo_delete" parameterType="string">
+		delete
+		ins,air
+		from
+		instructions ins,
+		airpt air
+		where
+		ins.id=air.instructions_id
+		and ins.eterm_account_id = #{id}
+	</delete>
+	<delete id="etermAuto_delete" parameterType="string">
+		delete from
+		automaticmanual where eterm_account_id = #{id}
+	</delete>
+	<delete id="etermConf_delete" parameterType="string">
+		delete from
+		conflictresolution where eterm_account_id = #{id}
+	</delete>
+	<delete id="eterm_delete" parameterType="string">
+		delete from
+		eterm_account where id = #{id}
+	</delete>
+	<select id="getFindInstrByEterm_id" parameterType="string"
+		resultType="Instructions">
+		SELECT e.id id,e.state state,si,
+		Isc_Tem,Etm_Usr,Etm_Psw,Etm_Pot,Etm_IP,Off_ID,Off_Pwd,Acc_Lvl,Is_Four,Aic_Mal,Aic_Tie,Cct_Ron,Dte_Aic_Rrt,scope,date
+		FROM eterm_account e
+		JOIN automaticmanual a on e.id = a.eterm_account_id
+		JOIN conflictresolution conf on e.id = conf.eterm_account_id
+		where e.id =
+		#{id}
+	</select>
+	<update id="updateEtermState" parameterType="instructions">
+		update eterm_account set state=#{state} where id = #{id}
+	</update>
+	<select id="getIATAAll" resultType="Instructions" parameterType="Instructions">
+		select DISTINCT d.IATA Isc_Ist,e.id id, e.Isc_Tem Isc_Tem,e.Etm_Usr
+		Etm_Usr,e.Etm_Psw Etm_Psw,e.Etm_Pot Etm_Pot,e.Etm_IP Etm_IP,e.Off_ID
+		Off_ID,e.Off_Pwd Off_Pwd,e.Acc_Lvl Acc_Lvl,e.Is_Four
+		Is_Four,e.employee_id employee_id
+		from airportmappingcode
+		d,eterm_account e where e.id = #{id};
+	</select>
+	<select id="getAll" resultType="Instructions" parameterType="Instructions">
+		select i.Isc_Ist Isc_Ist,i.air_line air_line,e.id id,e.employee_id
+		employee_id,e.Isc_Tem Isc_Tem,e.Etm_Usr Etm_Usr,e.Etm_Psw
+		Etm_Psw,e.Etm_Pot Etm_Pot,e.Etm_IP Etm_IP,e.Off_ID Off_ID,e.Off_Pwd
+		Off_Pwd,e.Acc_Lvl Acc_Lvl,e.Is_Four Is_Four,com.Cpy_Itia itia
+		from
+		instructions i
+		join eterm_account e on i.eterm_account_id = e.id
+		join company com on e.Isc_Tem = com.Cpy_Nm
+		where e.id = #{id}
+	</select>
+	<select id="getAirPt" resultType="AirLineObject" parameterType="AirLineQuery">
+		select Dpt_Arrv from airpt a join instructions i on a.instructions_id=
+		i.id where i.Isc_Ist = #{Flt_Nbr}
+	</select>
+	<update id="UpdateEtermState" parameterType="Instructions">
+		update eterm_account
+		set state = #{state} , date = #{date} where id = #{id}
+	</update>
+	<select id="getEtermsByName" resultType="Instructions">
+		select * from eterm_account where Etm_Usr=#{etermName,jdbcType=VARCHAR} and Isc_Tem = #{companyName,jdbcType=VARCHAR}
+	</select>
+</mapper> 

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.crm.mapper.CabinSeatSetMapper">
+	<resultMap type="org.ldd.ssm.crm.domain.CabinSeatSet" id="BaseResultMap">
+		<result property="id" column="id" jdbcType="INTEGER" />
+		<result property="time_Id" column="time_Id" jdbcType="INTEGER" />
+		<result property="grp_Prc" column="Grp_Prc" jdbcType="DECIMAL" />
+		<result property="two_Tak_Ppt" column="Two_Tak_Ppt" jdbcType="INTEGER" />
+		<result property="ful_Pce_Ppt" column="Ful_Pce_Ppt" jdbcType="INTEGER" />
+		<result property="nne_Dnt_Ppt" column="Nne_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="eht_Five_Dnt_Ppt" column="Eht_Five_Dnt_Ppt"
+			jdbcType="INTEGER" />
+		<result property="eht_Dnt_Ppt" column="Eht_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="sen_Five_Dnt_Ppt" column="Sen_Five_Dnt_Ppt"
+			jdbcType="INTEGER" />
+		<result property="sen_Dnt_Ppt" column="Sen_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="six_Dnt_Ppt" column="Six_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="fve_Dnt_Ppt" column="Fve_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="fur_Fve_Dnt_Ppt" column="Fur_Fve_Dnt_Ppt"
+			jdbcType="INTEGER" />
+		<result property="fur_Dnt_Ppt" column="Fur_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="thr_Dnt_Ppt" column="Thr_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="two_Dnt_Ppt" column="Two_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="grp_Nbr" column="Grp_Nbr" jdbcType="INTEGER" />
+		<result property="flt_Nbr" column="Flt_Nbr" jdbcType="VARCHAR" />
+		<result property="flt_Rte_Cd" column="Flt_Rte_Cd" jdbcType="VARCHAR" />
+		<result property="flt_Direct" column="Flt_Direct" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,Time_Id,Grp_Prc,Two_Tak_Ppt,Ful_Pce_Ppt,Nne_Dnt_Ppt,Eht_Five_Dnt_Ppt,
+		Eht_Five_Dnt_Ppt,Eht_Dnt_Ppt,Sen_Five_Dnt_Ppt,Sen_Dnt_Ppt,Six_Dnt_Ppt,
+		Fve_Dnt_Ppt,Fur_Fve_Dnt_Ppt,Fur_Dnt_Ppt,Thr_Dnt_Ppt,Two_Dnt_Ppt,Grp_Nbr,Flt_Rte_Cd,Flt_Nbr,Flt_Direct
+	</sql>
+	<insert id="add" parameterType="CabinSeatSet">
+		insert into t_cabinseatset
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id>0">
+				id,
+			</if>
+			<if test="time_Id>0">
+				Time_Id,
+			</if>
+			<if test="grp_Prc>0">
+				Grp_Prc,
+			</if>
+			<if test="two_Tak_Ppt >0">
+				Two_Tak_Ppt,
+			</if>
+			<if test="ful_Pce_Ppt >0">
+				Ful_Pce_Ppt,
+			</if>
+			<if test="nne_Dnt_Ppt >0">
+				Nne_Dnt_Ppt,
+			</if>
+			<if test="eht_Five_Dnt_Ppt>0">
+				Eht_Five_Dnt_Ppt,
+			</if>
+			<if test="eht_Dnt_Ppt>0">
+				Eht_Dnt_Ppt,
+			</if>
+			<if test="sen_Five_Dnt_Ppt>0">
+				Sen_Five_Dnt_Ppt,
+			</if>
+			<if test="sen_Dnt_Ppt>0">
+				Sen_Dnt_Ppt,
+			</if>
+			<if test="six_Dnt_Ppt>0">
+				Six_Dnt_Ppt,
+			</if>
+			<if test="fve_Dnt_Ppt>0">
+				Fve_Dnt_Ppt,
+			</if>
+			<if test="fur_Fve_Dnt_Ppt>0">
+				Fur_Fve_Dnt_Ppt,
+			</if>
+			<if test="fur_Dnt_Ppt>0">
+				Fur_Dnt_Ppt,
+			</if>
+			<if test="thr_Dnt_Ppt>0">
+				Thr_Dnt_Ppt,
+			</if>
+			<if test="two_Dnt_Ppt>0">
+				Two_Dnt_Ppt,
+			</if>
+			<if test="grp_Nbr>0">
+				Grp_Nbr,
+			</if>
+			<if test="flt_Nbr!=null">
+				Flt_Nbr,
+			</if>
+			<if test="flt_Rte_Cd!=null">
+				Flt_Rte_Cd,
+			</if>
+			<if test="flt_Direct!=null">
+				Flt_Direct
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id>0">
+				#{id},
+			</if>
+			<if test="time_Id>0">
+				#{time_Id},
+			</if>
+			<if test="grp_Prc>0">
+				#{grp_Prc},
+			</if>
+			<if test="two_Tak_Ppt >0">
+				#{two_Tak_Ppt},
+			</if>
+			<if test="ful_Pce_Ppt >0">
+				#{ful_Pce_Ppt},
+			</if>
+			<if test="nne_Dnt_Ppt >0">
+				#{nne_Dnt_Ppt},
+			</if>
+			<if test="eht_Five_Dnt_Ppt>0">
+				#{eht_Five_Dnt_Ppt},
+			</if>
+			<if test="eht_Dnt_Ppt>0">
+				#{eht_Dnt_Ppt},
+			</if>
+			<if test="sen_Five_Dnt_Ppt>0">
+				#{sen_Five_Dnt_Ppt},
+			</if>
+			<if test="sen_Dnt_Ppt>0">
+				#{sen_Dnt_Ppt},
+			</if>
+			<if test="six_Dnt_Ppt>0">
+				#{six_Dnt_Ppt},
+			</if>
+			<if test="fve_Dnt_Ppt>0">
+				#{fve_Dnt_Ppt},
+			</if>
+			<if test="fur_Fve_Dnt_Ppt>0">
+				#{fur_Fve_Dnt_Ppt},
+			</if>
+			<if test="fur_Dnt_Ppt>0">
+				#{fur_Dnt_Ppt},
+			</if>
+			<if test="thr_Dnt_Ppt>0">
+				#{thr_Dnt_Ppt},
+			</if>
+			<if test="two_Dnt_Ppt>0">
+				#{two_Dnt_Ppt},
+			</if>
+			<if test="grp_Nbr>0">
+				#{grp_Nbr},
+			</if>
+			<if test="flt_Nbr!=null">
+				#{flt_Nbr},
+			</if>
+			<if test="flt_Rte_Cd!=null">
+				#{flt_Rte_Cd},
+			</if>
+			<if test="flt_Direct!=null">
+				#{flt_Direct}
+			</if>
+		</trim>
+	</insert>
+
+	<update id="update" parameterType="CabinSeatSet">
+		update t_cabinseatset
+		<set>
+			<if test="time_Id>0">
+				Time_Id = #{time_Id},
+			</if>
+			<if test="grp_Prc>0">
+				Grp_Prc = #{grp_Prc},
+			</if>
+			<if test="two_Tak_Ppt >0">
+				Two_Tak_Ppt = #{two_Tak_Ppt},
+			</if>
+			<if test="ful_Pce_Ppt >0">
+				Ful_Pce_Ppt = #{ful_Pce_Ppt},
+			</if>
+			<if test="nne_Dnt_Ppt >0">
+				Nne_Dnt_Ppt = #{nne_Dnt_Ppt},
+			</if>
+			<if test="eht_Five_Dnt_Ppt>0">
+				Eht_Five_Dnt_Ppt = #{eht_Five_Dnt_Ppt},
+			</if>
+			<if test="eht_Dnt_Ppt>0">
+				Eht_Dnt_Ppt = #{eht_Dnt_Ppt},
+			</if>
+			<if test="sen_Five_Dnt_Ppt>0">
+				Sen_Five_Dnt_Ppt = #{sen_Five_Dnt_Ppt},
+			</if>
+			<if test="sen_Dnt_Ppt>0">
+				Sen_Dnt_Ppt = #{sen_Dnt_Ppt},
+			</if>
+			<if test="six_Dnt_Ppt>0">
+				Six_Dnt_Ppt = #{six_Dnt_Ppt},
+			</if>
+			<if test="fve_Dnt_Ppt>0">
+				Fve_Dnt_Ppt = #{fve_Dnt_Ppt},
+			</if>
+			<if test="fur_Fve_Dnt_Ppt>0">
+				Fur_Fve_Dnt_Ppt = #{fur_Fve_Dnt_Ppt},
+			</if>
+			<if test="fur_Dnt_Ppt>0">
+				Fur_Dnt_Ppt = #{fur_Dnt_Ppt},
+			</if>
+			<if test="thr_Dnt_Ppt>0">
+				Thr_Dnt_Ppt = #{thr_Dnt_Ppt},
+			</if>
+			<if test="two_Dnt_Ppt>0">
+				Two_Dnt_Ppt = #{two_Dnt_Ppt},
+			</if>
+			<if test="grp_Nbr>0">
+				Grp_Nbr = #{grp_Nbr},
+			</if>
+			<if test="flt_Nbr!=null">
+				Flt_Nbr = #{flt_Nbr},
+			</if>
+			<if test="flt_Rte_Cd!=null">
+				Flt_Rte_Cd = #{flt_Rte_Cd},
+			</if>
+			<if test="flt_Direct!=null">
+				Flt_Direct = #{flt_Direct}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<select id="load" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from
+		t_cabinseatset
+		<where>
+			<if test="timeId !=null and timeId >0">
+				Time_Id = #{timeId,jdbcType=INTEGER}
+			</if>
+			<if test="fltDct !=null and fltDct != ''">
+				and Flt_Direct = #{fltDct,jdbcType=VARCHAR}
+			</if>
+			<if test="flt_nbr != null and flt_nbr != ''">
+				and Flt_Nbr = #{flt_nbr,jdbcType=VARCHAR}
+			</if>
+			<if test="flt_Rte_Cd != null and flt_Rte_Cd !=''">
+				and Flt_Rte_Cd = #{flt_Rte_Cd,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<select id="list" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from
+		t_cabinseatset
+		<where>
+			<if test="seasonId >0">
+				Time_Id = #{seasonId,jdbcType=INTEGER}
+			</if>
+			<if test="toFltNbr !=null and toFltNbr !=''">
+				and (Flt_Nbr = #{toFltNbr,jdbcType=VARCHAR} or Flt_Nbr
+				=#{backFltNbr,jdbcType=VARCHAR})
+			</if>
+		</where>
+	</select>
+
+	<select id="deleteCabinSeatSet">
+		delete from
+		t_cabinseatset
+		<where>
+			<if test="seasonId >0">
+				Time_Id = #{seasonId,jdbcType=INTEGER}
+			</if>
+			<if test="toFltNbr !=null and toFltNbr !=''">
+				and (Flt_Nbr = #{toFltNbr,jdbcType=VARCHAR} or Flt_Nbr
+				=#{backFltNbr,jdbcType=VARCHAR})
+			</if>
+		</where>
+	</select>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_cabinseatset
+	</select>
+</mapper>

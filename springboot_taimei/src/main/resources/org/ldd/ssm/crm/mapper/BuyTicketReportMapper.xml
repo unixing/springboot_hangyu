@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.BuyTicketReportMapper">
+	<select id="getHuangduan" resultType="GustStrate" parameterType="BuyTicketReportQuery">
+		SELECT DISTINCT Dpt_AirPt_Cd, Arrv_Airpt_Cd from z_airdata
+		<include refid="isCheckFltNum" />
+	</select>
+	<select id="getAirLine" resultType="String" parameterType="BuyTicketReportQuery">
+		SELECT DISTINCT Flt_Rte_Cd from z_airdata 
+		<include refid="isCheckFltNum" />
+	</select>
+	<select id="getAirLineByFlyNbrs" resultType="String" parameterType="List">
+		SELECT DISTINCT Flt_Rte_Cd from z_airdata 
+		where Flt_Nbr in 
+		<foreach item="list" index="index" collection="list" open="(" separator="," close=")">  
+  			#{list}  
+ 		</foreach>  
+	</select>
+	<select id="getIshavingData" resultType="String" parameterType="BuyTicketReportQuery">
+		SELECT DISTINCT Flt_Nbr from guestrate 
+		<include refid="isCheckdata" />
+	</select>
+	<sql id="isCheckFltNum">
+		<where>
+			<if test="flt_nbr_Count!=null">
+				AND Flt_Nbr=#{flt_nbr_Count}
+			</if>
+			<if test="startTime!=null">
+				AND Lcl_Dpt_Day &gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND Lcl_Dpt_Day &lt;=#{endTime}
+			</if>
+		</where>
+	</sql>
+	<sql id="isCheckdata">
+		<where>
+			<if test="startTime!=null">
+				AND On_Gut_Dte &gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND On_Gut_Dte &lt;=#{endTime}
+			</if>
+			<if test="flt_nbr_Count!=null">
+				AND Flt_Nbr=#{flt_nbr_Count}
+			</if>
+		</where>
+	</sql>
+	<select id="getGutDteData" resultType="GustStrate"
+		parameterType="BuyTicketReportQuery">
+		SELECT DISTINCT On_Gut_Dte from guestrate
+		<include refid="isCheckNullNew" />
+		ORDER BY On_Gut_Dte ASC
+	</select>
+	<select id="getNewDate" resultType="String" parameterType="BuyTicketReportQuery">
+		SELECT On_Gut_Dte from guestrate
+		<include refid="isCheckBNewDate"/>
+		ORDER BY On_Gut_Dte DESC limit 1
+	</select>
+	<select id="getfltEctByFlyNum" resultType="String"
+		parameterType="BuyTicketReportQuery">
+		SELECT air_line from airlineCompany
+		<include refid="byflyNum" />
+	</select>
+	<select id="getGustStrateDataNew2" resultType="GustStrate"
+		parameterType="BuyTicketReportQuery">
+		SELECT On_Gut_Dte,SUM(Gut_Rae)/count(id)
+		Gut_Rae,Dpt_AirPt_Cd,Arrv_Airpt_Cd,Flt_Nbr,Dta_Sce,SUM(sold)/count(id)
+		persons,datediff(On_Gut_Dte,Dta_Sce) a from guestrate
+		<include refid="isCheckNull2" />
+		group by a,On_Gut_Dte
+	</select>
+	<select id="getGustStrateDataNew" resultType="GustStrate"
+		parameterType="BuyTicketReportQuery">
+		SELECT
+		On_Gut_Dte,Gut_Rae,Dpt_AirPt_Cd,Arrv_Airpt_Cd,Flt_Nbr,count_Set,Dta_Sce,sold
+		persons from guestrate
+		<include refid="isCheckNullNew" />
+	</select>
+	<sql id="isCheckNullNew">
+		<where>
+			<if test="flt_nbr_Count!=null and flt_nbr_Counth!=null">
+				AND (Flt_Nbr = #{flt_nbr_Count} or Flt_Nbr = #{flt_nbr_Counth})
+			</if>
+			<if test="pst_cd!=null">
+				<if test="Dpt_AirPt_Cd!=null and Arrv_Airpt_Cd!=null">
+					AND (
+						(Dpt_AirPt_Cd=#{Dpt_AirPt_Cd} AND Arrv_Airpt_Cd=#{Arrv_Airpt_Cd}) 
+						or (Dpt_AirPt_Cd=#{Dpt_AirPt_Cd} AND Arrv_Airpt_Cd=#{pst_cd})
+						or (Dpt_AirPt_Cd=#{pst_cd} AND Arrv_Airpt_Cd=#{Arrv_Airpt_Cd})
+						or (Dpt_AirPt_Cd=#{Arrv_Airpt_Cd} AND Arrv_Airpt_Cd=#{Dpt_AirPt_Cd})
+						or (Dpt_AirPt_Cd=#{Arrv_Airpt_Cd} AND Arrv_Airpt_Cd=#{pst_cd})
+						or (Dpt_AirPt_Cd=#{pst_cd} AND Arrv_Airpt_Cd=#{Dpt_AirPt_Cd})
+					)
+				</if>
+			</if>
+			<if test="pst_cd==null">
+				<if test="Dpt_AirPt_Cd!=null and Arrv_Airpt_Cd!=null">
+					AND (
+						(Dpt_AirPt_Cd=#{Dpt_AirPt_Cd} AND Arrv_Airpt_Cd=#{Arrv_Airpt_Cd}) 
+						or (Dpt_AirPt_Cd=#{Arrv_Airpt_Cd} AND Arrv_Airpt_Cd=#{Dpt_AirPt_Cd})
+					)
+				</if>
+			</if>
+			<if test="startTime!=null">
+				AND On_Gut_Dte &gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND On_Gut_Dte &lt;=#{endTime}
+			</if>
+		</where>
+	</sql>
+	<sql id="isCheckNull">
+		<where>
+			<if test="flt_nbr_Count!=null">
+				AND (Flt_Nbr = #{flt_nbr_Count})
+			</if>
+			<if test="Dpt_AirPt_Cd!=null">
+				AND Dpt_AirPt_Cd=#{Dpt_AirPt_Cd}
+			</if>
+			<if test="Arrv_Airpt_Cd!=null">
+				AND Arrv_Airpt_Cd=#{Arrv_Airpt_Cd}
+			</if>
+			<if test="startTime!=null">
+				AND On_Gut_Dte &gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND On_Gut_Dte &lt;=#{endTime}
+			</if>
+		</where>
+	</sql>
+	<sql id="isCheckBNewDate">
+		<where>
+			<if test="flt_nbr_Count!=null">
+				AND ( Flt_Nbr=#{flt_nbr_Count} or Flt_Nbr=#{flt_nbr_Counth})
+			</if>
+			<if test="Dpt_AirPt_Cd!=null">
+				<if test="Arrv_Airpt_Cd!=null">
+					<if test="pst_cd!=null">
+						AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{Dpt_AirPt_Cd} AND arrv_Airpt_Cd=#{pst_cd}) or (dpt_AirPt_Cd=#{pst_cd} AND arrv_Airpt_Cd=#{arrv_Airpt_Cd}))	
+					</if>	
+				</if>	
+			</if>
+		</where>
+	</sql>
+	<sql id="isCheckNull2">
+		<where>
+			<if test="flt_nbr_Count!=null">
+				AND (Flt_Nbr = #{flt_nbr_Count})
+			</if>
+			<if test="Dpt_AirPt_Cd!=null">
+				<if test="Arrv_Airpt_Cd!=null">
+					<if test="pst_cd!=null">
+						AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND
+						arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{Dpt_AirPt_Cd}
+						AND arrv_Airpt_Cd=#{pst_cd}) or (dpt_AirPt_Cd=#{pst_cd} AND
+						arrv_Airpt_Cd=#{arrv_Airpt_Cd}))
+					</if>
+				</if>
+			</if>
+			<if test="startTime!=null">
+				AND On_Gut_Dte &gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND On_Gut_Dte &lt;=#{endTime}
+			</if>
+		</where>
+	</sql>
+	<sql id="byflyNum">
+		<where>
+			<if test="flt_nbr_Count!=null">
+				AND flt_nbr=#{flt_nbr_Count}
+			</if>
+			<if test="companyId!=null">
+				AND company=#{companyId}
+			</if>
+		</where>
+	</sql>
+
+</mapper> 

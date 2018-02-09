@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.SourceDistriMapper">
+	<select id="getSourceDistriData" resultType="Traveler"
+		parameterType="SourceDistriDataQuery">
+		select tra.Pax_Id_Nbr,air.Dpt_AirPt_Cd Bk_Ofc_Cd,air.Arrv_Airpt_Cd Rsp_Ofc_Cd 
+		from airinfo air  join traveler tra on air.id = tra.eachflightinfo_id
+		<include refid="isCheckNull2"/> 
+	</select>
+	<select id="getIdcardmapperprovince" resultType="CityID">
+		select
+		distinct province city,left(number,2) number from idcardmappercity
+	</select>
+	<select id="getHavingDataFlyNbrList" resultType="String">
+		SELECT DISTINCT Flt_nbr from airinfo a ,traveler t WHERE a.id = t.eachflightinfo_id
+	</select>
+	<select id="getIdcardmappercity" resultType="CityID">
+		select
+		distinct county, city,left(number,6) number,city_x,city_y from idcardmappercity
+	</select>
+	<select id="getSourceDistriDataByF" resultType="Traveler"
+		parameterType="SourceDistriDataQuery">
+		select tra.Pax_Id_Nbr,air.Dpt_AirPt_Cd
+		Bk_Ofc_Cd,air.Arrv_Airpt_Cd Rsp_Ofc_Cd from airinfo air join traveler
+		tra on air.id = tra.eachflightinfo_id
+		where
+		air.Lcl_Dpt_Day between #{lcl_Dpt_Tm} and #{lcl_Arrv_Tm}
+		and air.Dpt_AirPt_Cd = #{dpt_AirPt_Cd} and air.Arrv_Airpt_Cd =
+		#{arrv_Airpt_Cd} and left(tra.Pax_Id_Nbr,2) = #{name}
+	</select>
+	<select id="getIdcardmapperProvinceByF" resultType="CityID"
+		parameterType="string">
+		select distinct province city,left(number,2) number from
+		idcardmappercity where province =#{city}
+	</select>
+	<select id="getIdcardmapperCityByF" resultType="CityID"
+		parameterType="string">
+		select distinct city,left(number,4) number from
+		idcardmappercity where left(number,2) =#{city}
+	</select>
+	<select id="getFltNbrList" resultType="String" parameterType="SourceDistriDataQuery">
+		select distinct Flt_nbr from z_airdata 
+		<include refid="isCheckNull"/> 
+	</select>
+	<select id="getCustomerNewDate" resultType="String" parameterType="SourceDistriDataQuery">
+		select air.Lcl_Dpt_Day 
+		from airinfo air  join traveler tra on air.id = tra.eachflightinfo_id
+		<include refid="isCheckNull2"/> 
+		order by air.Lcl_Dpt_Day desc limit 1
+	</select>
+	<sql id="isCheckNull2">
+		<where>
+			<if test="flt_nbr!=null and flt_nbr!=''">
+				and (air.Flt_nbr=#{flt_nbr} or air.Flt_nbr=#{name})
+			</if>
+			<if test="pas_stp==null or pas_stp==''">
+				<if test="isIncludeRdf!=null and isIncludeRdf!=''">
+					<if test="isIncludePas!=null and isIncludePas!=''">
+						<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+							<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+								AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd} AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+							</if>
+						</if>
+					</if>
+				</if>
+				<if test="isIncludeRdf!=null and isIncludeRdf!=''">
+					<if test="isIncludePas==null or isIncludePas==''">
+						<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+							<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+								AND ((Flt_Rte_Cd like CONCAT('%',concat(#{arrv_Airpt_Cd},#{dpt_AirPt_Cd}),'%' )) OR (Flt_Rte_Cd like CONCAT('%',concat(#{dpt_AirPt_Cd},#{arrv_Airpt_Cd}),'%' )))
+								AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND
+								arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd}
+								AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+							</if>
+						</if>
+					</if>
+				</if>
+				<if test="isIncludeRdf==null or isIncludeRdf==''">
+					<if test="isIncludePas==null or isIncludePas==''">
+						<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+							<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+								AND 1=2
+							</if>
+						</if>
+					</if>
+				</if>
+				<if test="isIncludeRdf==null or isIncludeRdf==''">
+					<if test="isIncludePas!=null and isIncludePas!=''">
+						<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+							<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+								AND ((Flt_Rte_Cd not like CONCAT('%',concat(#{arrv_Airpt_Cd},#{dpt_AirPt_Cd}),'%' )) and (Flt_Rte_Cd not like CONCAT('%',concat(#{dpt_AirPt_Cd},#{arrv_Airpt_Cd}),'%' )))
+								AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND
+								arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd}
+								AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+							</if>
+						</if>
+					</if>
+				</if>
+			</if>
+			<if test="pas_stp!=null and pas_stp!=''">
+				<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+					<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+						AND (Flt_Rte_Cd =concat(#{dpt_AirPt_Cd},concat(#{pas_stp},#{arrv_Airpt_Cd})) or Flt_Rte_Cd = concat(#{arrv_Airpt_Cd},concat(#{pas_stp},#{dpt_AirPt_Cd})))
+					</if>
+				</if>
+			</if>
+			<if test="lcl_Dpt_Tm!=null">
+				<if test="lcl_Arrv_Tm!=null">
+					AND air.Lcl_Dpt_Day between #{lcl_Dpt_Tm} and #{lcl_Arrv_Tm}
+				</if>
+			</if>
+			<if test="airlines!=null">
+					AND air.Flt_Rte_Cd  in 
+					 <foreach collection="airlines" item="item" index="index"
+            			open="(" close=")" separator=",">
+			            #{item}
+			        </foreach>
+			</if>
+		</where>
+	</sql>
+	<sql id="isCheckNull">
+		<where>
+  		<if test="pas_stp==null or pas_stp==''">
+				<if test="isIncludeRdf!=null and isIncludeRdf!=''">
+					<if test="isIncludePas!=null and isIncludePas!=''">
+						<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+							<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+								AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd} AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+							</if>
+						</if>
+					</if>
+				</if>
+				<if test="isIncludeRdf!=null and isIncludeRdf!=''">
+					<if test="isIncludePas==null or isIncludePas==''">   
+						<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+							<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+								AND ((Flt_Rte_Cd like CONCAT('%',concat(#{arrv_Airpt_Cd},#{dpt_AirPt_Cd}),'%' )) OR (Flt_Rte_Cd like CONCAT('%',concat(#{dpt_AirPt_Cd},#{arrv_Airpt_Cd}),'%' )))
+								AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND
+								arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd}
+								AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+							</if>
+						</if>
+					</if>
+				</if>
+				<if test="isIncludeRdf==null or isIncludeRdf==''">
+					<if test="isIncludePas==null or isIncludePas==''">
+						<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+							<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+								AND 1=2
+							</if>
+						</if>
+					</if>
+				</if>
+				<if test="isIncludeRdf==null or isIncludeRdf==''">
+					<if test="isIncludePas!=null and isIncludePas!=''">
+						<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+							<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+								AND ((Flt_Rte_Cd not like CONCAT('%',concat(#{arrv_Airpt_Cd},#{dpt_AirPt_Cd}),'%' )) and (Flt_Rte_Cd not like CONCAT('%',concat(#{dpt_AirPt_Cd},#{arrv_Airpt_Cd}),'%' )))
+								AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND
+								arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd}
+								AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+							</if>
+						</if>
+					</if>
+				</if>
+			</if>
+			<if test="pas_stp!=null and pas_stp!=''">
+				<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+					<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+						AND (Flt_Rte_Cd =concat(#{dpt_AirPt_Cd},concat(#{pas_stp},#{arrv_Airpt_Cd})) or Flt_Rte_Cd = concat(#{arrv_Airpt_Cd},concat(#{pas_stp},#{dpt_AirPt_Cd})))
+					</if>
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAllFltNbrList" resultType="java.lang.String"
+		parameterType="SourceDistriDataQuery">
+	    select air_line flt_ret_cd
+		from airlineCompany
+		<where>
+			<if test="_parameter!=null and _parameter!=''">
+				AND air_line LIKE CONCAT('%',#{_parameter},'%' ) 
+				AND  itia = #{_parameter}
+			</if>
+			<if test="_parameter==null and _parameter!=''">
+				AND 1=2
+			</if>
+		</where>
+	</select>
+</mapper> 

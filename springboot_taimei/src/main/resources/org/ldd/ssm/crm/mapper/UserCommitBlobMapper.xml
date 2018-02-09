@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.UserCommitBlobMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.UserCommitBlob" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="org.ldd.ssm.crm.domain.UserCommitBlob" extends="BaseResultMap" >
+    <result column="blob_img" property="blobImg" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uuid
+  </sql>
+  <sql id="Blob_Column_List" >
+    blob_img
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from userCommitBlob
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from userCommitBlob
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+ <!-- 添加 -->
+  <insert id="insert" parameterType="org.ldd.ssm.crm.query.UserCommit" >
+    insert into userCommitBlob (uuid, blob_img
+      )
+    values
+    <foreach collection="userImgs" item="item" index="index" separator="," >  
+        (#{userUuid},#{item})  
+    </foreach>  
+  </insert>
+  
+  
+  <insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.UserCommitBlob" >
+    insert into userCommitBlob
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="blobImg != null" >
+        blob_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="blobImg != null" >
+        #{blobImg,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.UserCommitBlob" >
+    update userCommitBlob
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="blobImg != null" >
+        blob_img = #{blobImg,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.ldd.ssm.crm.domain.UserCommitBlob" >
+    update userCommitBlob
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      blob_img = #{blobImg,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.UserCommitBlob" >
+    update userCommitBlob
+    set uuid = #{uuid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

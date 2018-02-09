@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.AirLineForecastMapper">
+	<select id="getAirLineForecast" resultType="AirLineForecast"
+		parameterType="AirLineForecastQuery">
+		select *
+		from z_airlineforecast
+		<include refid="isCheckNull" />
+	</select>
+	<select id="getAirLineForecastDetailList" resultType="AirLineForecastDetail"
+		parameterType="AirLineForecast">
+		select *
+		from t_airlineforecastdetail
+		<include refid="isHaveSun" />
+	</select>
+	<insert id="saveAirLineForecastDetail" parameterType="AirLineForecastDetail">
+		insert into
+		t_airlineforecastdetail(airLineForecastId,hangduan,hangju,y_price,qie_team_price,f_flag,y_flag,b_flag,h_flag,k_flag,l_flag,m_flag,q_flag,x_flag,u_flag,e_flag,z_flag,t_flag,v_flag,g_flag,o_flag,s_flag,qp_flag,qt_flag,dta_Sce,Dta_Dte)
+		values(#{airLineForecastId},#{hangduan},#{hangju},#{y_price},#{qie_team_price},#{f_flag},#{y_flag},#{b_flag},#{h_flag},#{k_flag},#{l_flag},#{m_flag},#{q_flag},#{x_flag},#{u_flag},#{e_flag},#{z_flag},#{t_flag},#{v_flag},#{g_flag},#{o_flag},#{s_flag},#{qp_flag},#{qt_flag},#{dta_Sce},#{Dta_Dte})
+	</insert>
+	<update id="updateAirLineForecastDetail" parameterType="AirLineForecastDetail">
+		update
+		t_airlineforecastdetail set
+		hangju=#{hangju},y_price=#{y_price},qie_team_price=#{qie_team_price},f_flag=#{f_flag},
+		y_flag=#{y_flag},b_flag=#{b_flag},h_flag=#{h_flag},k_flag=#{k_flag},l_flag=#{l_flag}
+		,
+		m_flag=#{m_flag},q_flag=#{q_flag},x_flag=#{x_flag},u_flag=#{u_flag},e_flag=#{e_flag}
+		,
+		z_flag=#{z_flag},t_flag=#{t_flag},v_flag=#{v_flag},g_flag=#{g_flag},o_flag=#{o_flag}
+		,
+		s_flag=#{s_flag},qp_flag=#{qp_flag},qt_flag=#{qt_flag}
+		where id=#{id}
+	</update>
+	<insert id="saveAirLineForecast" parameterType="AirLineForecast">
+		insert into
+		z_airlineforecast(startDate,endDate,dpt_AirPt_Cd,arrv_Airpt_Cd,pas_stp,fly_time,fly_price,fly_type,fly_site,fly_banqi,bp_time,bark,dta_Sce,Dta_Dte,daili_price,fly_banci)
+		values(#{startDate},#{endDate},#{dpt_AirPt_Cd},#{arrv_Airpt_Cd},#{pas_stp},#{fly_time},#{fly_price},#{fly_type},#{fly_site},#{fly_banqi},#{bp_time},#{bark},#{dta_Sce},#{Dta_Dte},#{daili_price},#{fly_banci})
+	</insert>
+	<update id="updateAirLineForecast" parameterType="AirLineForecast">
+		update
+		z_airlineforecast set
+		fly_time=#{fly_time},fly_price=#{fly_price},fly_type=#{fly_type},fly_site=#{fly_site},
+		fly_banqi=#{fly_banqi},bp_time=#{bp_time},bark=#{bark},daili_price=#{daili_price},fly_banci=#{fly_banci}
+		where id=#{id}
+	</update>
+
+	<sql id="isCheckNull">
+		<where>
+			<if test="startDate!=null">
+				AND startDate=#{startDate}
+			</if>
+			<if test="endDate!=null">
+				AND endDate=#{endDate}
+			</if>
+			<if test="dpt_AirPt_Cd!=null">
+				AND dpt_AirPt_Cd=#{dpt_AirPt_Cd}
+			</if>
+			<if test="arrv_Airpt_Cd!=null">
+				AND arrv_Airpt_Cd=#{arrv_Airpt_Cd}
+			</if>
+			<if test="pas_stp==null">
+				AND pas_stp is null
+			</if>
+			<if test="pas_stp!=null">
+				AND Pas_Stp=#{pas_stp}
+			</if>
+
+			<if test="dta_Sce!=null">
+				AND Dta_Sce = #{dta_Sce}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="isHaveSun">
+		<where>
+			<if test="id!=null">
+				AND airLineForecastId=#{id}
+			</if>
+		</where>
+	</sql>
+</mapper> 

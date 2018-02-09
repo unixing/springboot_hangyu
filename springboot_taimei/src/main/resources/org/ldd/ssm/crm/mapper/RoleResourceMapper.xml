@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.RoleResourceMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.RoleResource">
+		<result column="role_id" property="roleId" jdbcType="BIGINT" />
+		<result column="resource_id" property="resourceId" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		role_id,resource_id
+	</sql>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.RoleResource">
+		insert into role_resource (role_id, resource_id)
+		values (#{roleId,jdbcType=BIGINT}, #{resourceId,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.RoleResource">
+		insert into role_resource
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="roleId != null">
+				role_id,
+			</if>
+			<if test="resourceId != null">
+				resource_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="roleId != null">
+				#{roleId,jdbcType=BIGINT},
+			</if>
+			<if test="resourceId != null">
+				#{resourceId,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<delete id="deleteByRole">
+		delete from role_resource
+		where 1=1
+		<if test="roleId !=null and roleId >0">
+			and role_id = #{roleId,jdbcType=BIGINT}
+		</if>
+	</delete>
+	<resultMap type="org.ldd.ssm.crm.domain.Resource" id="ResourceResultMap">
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="menu_id" property="menuId" jdbcType="BIGINT" />
+	</resultMap>
+	<select id="selectByRole" resultMap="ResourceResultMap">
+		select
+		b.id,b.name,b.url,b.menu_id
+		from role_resource a,t_resource b
+		where a.resource_id = b.id
+		<if test="roleId !=null and roleId >0">
+			and role_id = #{roleId,jdbcType=BIGINT}
+		</if>
+	</select>
+</mapper>

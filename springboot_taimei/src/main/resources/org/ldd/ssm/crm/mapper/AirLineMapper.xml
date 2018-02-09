@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.AirLineMapper">
+
+	<!-- 统计月数据 -->
+	<select id="getData" resultType="Z_Airdata" parameterType="DOWQuery">
+		select
+		SUM(Two_Tak_Ppt)/count(id) two_Tak_Ppt,
+		SUM(Ful_Pce_Ppt)/count(id) ful_Pce_Ppt,
+		SUM(Nne_Dnt_Ppt)/count(id) nne_Dnt_Ppt,
+		SUM(Tal_Nbr_Set)/count(id)
+		tal_Nbr_Set,
+		SUM(Eht_Five_Dnt_Ppt)/count(id) eht_Five_Dnt_Ppt,
+		SUM(Eht_Dnt_Ppt)/count(id) eht_Dnt_Ppt,
+		SUM(Sen_Five_Dnt_Ppt)/count(id) sen_Five_Dnt_Ppt,
+		SUM(Sen_Dnt_Ppt)/count(id) sen_Dnt_Ppt,
+		SUM(Six_Five_Dnt_Ppt)/count(id) six_Five_Dnt_Ppt,
+		SUM(Six_Dnt_Ppt)/count(id) six_Dnt_Ppt,
+		SUM(Fve_Fve_Dnt_Ppt)/count(id)
+		fve_Fve_Dnt_Ppt,
+		SUM(Fve_Dnt_Ppt)/count(id) fve_Dnt_Ppt,
+		SUM(Fur_Fve_Dnt_Ppt)/count(id) fur_Fve_Dnt_Ppt,
+		SUM(Fur_Dnt_Ppt)/count(id) fur_Dnt_Ppt,
+		SUM(Thr_Fve_Dnt_Ppt)/count(id)
+		thr_Fve_Dnt_Ppt,
+		SUM(Thr_Dnt_Ppt)/count(id) thr_Dnt_Ppt,
+		SUM(Two_Fve_Dnt_Ppt)/count(id) two_Fve_Dnt_Ppt,
+		SUM(Two_Dnt_Ppt)/count(id) two_Dnt_Ppt,
+		SUM(Sal_Tak_Ppt)/count(id)
+		sal_Tak_Ppt,
+		SUM(Pgs_Per_Cls)/count(id) pgs_Per_Cls,
+		(SUM(Pgs_Per_Cls)-SUM(Grp_Nbr))/count(id) grp_Fng_Per,
+		(SUM(Tal_Nbr)-SUM(Grp_Ine))/COUNT(id) idd_Dct,
+		SUM(yBFare)/COUNT(id)
+		yBFare,<!--修改YB运价求平均 -->
+		SUM(Grp_Ine)/COUNT(id) grp_ine,
+		SUM(avg_Dct)/COUNT(id) avg_Dct
+		from
+		z_airdata
+		<include refid="Flt_Nbr" />
+	</select>
+	<select id="getgrp_Data" resultType="Z_Airdata" parameterType="DOWQuery">
+		select SUM(Grp_Nbr)/count(Grp_Nbr) grp_Nbr,
+		SUM(Grp_Ine)/count(Grp_Ine) grp_ine
+		from z_airdata
+		<include refid="Flt_Nbr" />
+		and Grp_Nbr > 0
+	</select>
+	<select id="getNewDate" resultType="Date" parameterType="AirLineQueryNew">
+		select Lcl_Dpt_Day
+		from z_airdata 
+		<include refid="getNewDateQuery"/>	
+		ORDER BY Lcl_Dpt_Day DESC LIMIT 1 ;
+	</select>
+	<!-- 统计月数据 -->
+	<select id="getDataNew" resultType="Z_Airdata" parameterType="DOWQuery">
+		select
+		Dpt_AirPt_Cd dpt_AirPt_Cd,
+		Arrv_Airpt_Cd arrv_Airpt_Cd,
+		month(Lcl_Dpt_Day) month,
+		SUM(Two_Tak_Ppt)/count(id)
+		two_Tak_Ppt,
+		SUM(Ful_Pce_Ppt)/count(id) ful_Pce_Ppt,
+		SUM(Nne_Dnt_Ppt)/count(id) nne_Dnt_Ppt,
+		SUM(Tal_Nbr_Set)/count(id)
+		tal_Nbr_Set,
+		SUM(Eht_Five_Dnt_Ppt)/count(id) eht_Five_Dnt_Ppt,
+		SUM(Eht_Dnt_Ppt)/count(id) eht_Dnt_Ppt,
+		SUM(Sen_Five_Dnt_Ppt)/count(id) sen_Five_Dnt_Ppt,
+		SUM(Sen_Dnt_Ppt)/count(id) sen_Dnt_Ppt,
+		SUM(Six_Five_Dnt_Ppt)/count(id) six_Five_Dnt_Ppt,
+		SUM(Six_Dnt_Ppt)/count(id) six_Dnt_Ppt,
+		SUM(Fve_Fve_Dnt_Ppt)/count(id)
+		fve_Fve_Dnt_Ppt,
+		SUM(Fve_Dnt_Ppt)/count(id) fve_Dnt_Ppt,
+		SUM(Fur_Fve_Dnt_Ppt)/count(id) fur_Fve_Dnt_Ppt,
+		SUM(Fur_Dnt_Ppt)/count(id) fur_Dnt_Ppt,
+		SUM(Thr_Fve_Dnt_Ppt)/count(id)
+		thr_Fve_Dnt_Ppt,
+		SUM(Thr_Dnt_Ppt)/count(id) thr_Dnt_Ppt,
+		SUM(Two_Fve_Dnt_Ppt)/count(id) two_Fve_Dnt_Ppt,
+		SUM(Two_Dnt_Ppt)/count(id) two_Dnt_Ppt,
+		SUM(Sal_Tak_Ppt)/count(id)
+		sal_Tak_Ppt,
+		SUM(Pgs_Per_Cls)/count(id) pgs_Per_Cls,
+		(SUM(Pgs_Per_Cls)-SUM(Grp_Nbr))/count(id) grp_Fng_Per,
+		(SUM(Tal_Nbr)-SUM(Grp_Ine))/COUNT(id) idd_Dct,
+		SUM(yBFare)/COUNT(id)
+		yBFare,<!--修改YB运价求平均 -->
+		SUM(Grp_Ine)/COUNT(id) grp_ine,
+		SUM(avg_Dct)/COUNT(id) avg_Dct
+		from
+		z_airdata
+		<include refid="Flt_NbrNew" />
+		GROUP BY DATE_FORMAT(Lcl_Dpt_Day,'%m-%Y'),Dpt_AirPt_Cd,Arrv_Airpt_Cd
+	</select>
+	<select id="getgrp_DataNew" resultType="Z_Airdata"
+		parameterType="DOWQuery">
+		select
+		Dpt_AirPt_Cd dpt_AirPt_Cd,
+		Arrv_Airpt_Cd arrv_Airpt_Cd,
+		month(Lcl_Dpt_Day) month, SUM(Grp_Nbr)/count(Grp_Nbr)
+		grp_Nbr, SUM(Grp_Ine)/count(Grp_Ine) grp_ine
+		from z_airdata
+		<include refid="Flt_NbrNew" />
+		and Grp_Nbr > 0
+		GROUP BY
+		DATE_FORMAT(Lcl_Dpt_Day,'%m-%Y'),Dpt_AirPt_Cd,Arrv_Airpt_Cd
+	</select>
+	<select id="getFlt_Nbr" resultType="String" parameterType="DOWQuery">
+		select distinct Flt_Nbr
+		from z_airdata
+		<where>
+			<if test="lcl_Dpt_Day!=null and lcl_Dpt_Day!=''">
+				AND year(Lcl_Dpt_Day)=#{lcl_Dpt_Day}
+			</if>
+			<if test="flt_Rte_Cd!=null and flt_Rte_Cd!=''">
+				AND Flt_Rte_Cd=#{flt_Rte_Cd}
+			</if>
+		</where>
+		ORDER BY Flt_Nbr
+	</select>
+	<select id="getMonthFltNum" resultType="String" parameterType="DOWQuery">
+		select distinct Flt_Nbr
+		from z_airdata
+		<include refid="monthFltQuery" />
+		ORDER BY Flt_Nbr
+	</select>
+	<!-- 统计月数据 -->
+	<select id="getTimeCount" resultType="TimeQuery" parameterType="DOWQuery">
+		select
+		SUM(Lcl_Arrv_Tm-Lcl_Dpt_Tm)/1000/3600 allTime,count(id) bc
+		from z_airdata
+		<include refid="isCheckNull2" />
+	</select>
+	<select id="getTimeCountData" resultType="TimeCount"
+		parameterType="DOWQuery">
+		select *
+		from timecount
+		<include refid="isCheckNull" />
+	</select>
+	<select id="getDateAndCost" resultType="IncomeCountTime"
+		parameterType="DOWQuery">
+		select *
+		from incomecounttime
+		<include refid="isCheckNull" />
+	</select>
+	<sql id="isCheckNull2">
+		<where>
+			<if test="lcl_Dpt_Day!=null">
+				AND year(Lcl_Dpt_Day)=#{lcl_Dpt_Day}
+			</if>
+			<if test="pas_stp==null">
+				<if test="dpt_AirPt_Cd!=null">
+					<if test="arrv_Airpt_Cd!=null">
+						AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND
+						arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd}
+						AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+					</if>
+				</if>
+			</if>
+			<if test="pas_stp!=null">
+				<if test="dpt_AirPt_Cd!=null">
+					<if test="arrv_Airpt_Cd!=null">
+						AND (Flt_Rte_Cd =
+						concat(#{dpt_AirPt_Cd},concat(#{pas_stp},#{arrv_Airpt_Cd})) or
+						Flt_Rte_Cd =
+						concat(#{arrv_Airpt_Cd},concat(#{pas_stp},#{dpt_AirPt_Cd})))
+					</if>
+				</if>
+			</if>
+			<if test="flt_nbr!=null">
+				AND (Flt_Nbr=#{goNum} or Flt_Nbr=#{arrNum})
+			</if>
+			<if test="dta_Sce!=null">
+				AND Dta_Sce = #{dta_Sce}
+			</if>
+			<if test="cpy_Nm!=null">
+				AND Cpy_Nm=#{cpy_Nm}
+			</if>
+		</where>
+	</sql>
+	
+	
+	<sql id="getNewDateQuery">
+		<where>
+			<if test="pas_stp==null">
+				<if test="isIncludePas!=null">
+					<if test="dpt_AirPt_Cd!=null">
+						<if test="arrv_Airpt_Cd!=null">
+							AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd} AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+						</if>
+					</if>
+				</if>
+				<if test="isIncludePas==null">
+					<if test="dpt_AirPt_Cd!=null">
+						<if test="arrv_Airpt_Cd!=null">
+							AND ((Flt_Rte_Cd like CONCAT('%',concat(#{arrv_Airpt_Cd},#{dpt_AirPt_Cd}),'%' )) OR (Flt_Rte_Cd like CONCAT('%',concat(#{dpt_AirPt_Cd},#{arrv_Airpt_Cd}),'%' )))
+							AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND
+							arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd}
+							AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+						</if>
+					</if>
+				</if>
+			</if>
+			<if test="pas_stp!=null">
+				<if test="dpt_AirPt_Cd!=null">
+					<if test="arrv_Airpt_Cd!=null">
+						AND (Flt_Rte_Cd = concat(#{dpt_AirPt_Cd},concat(#{pas_stp},#{arrv_Airpt_Cd})) or Flt_Rte_Cd = concat(#{arrv_Airpt_Cd},concat(#{pas_stp},#{dpt_AirPt_Cd})))
+					</if>
+				</if>
+			</if>
+			<if test="flt_nbr!=null">
+				AND( Flt_Nbr=#{goNum} or Flt_Nbr=#{huiNum})
+			</if>
+			<if test="hangsi!=null">
+				AND Cpy_Nm = #{hangsi}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="isCheckNull">
+		<where>
+			<if test="lcl_Dpt_Day!=null">
+				AND Lcl_Dpt_Day=#{lcl_Dpt_Day}
+			</if>
+			<if test="dpt_AirPt_Cd!=null">
+				AND Dpt_AirPt_Cd=#{dpt_AirPt_Cd}
+			</if>
+			<if test="arrv_Airpt_Cd!=null">
+				AND Arrv_Airpt_Cd=#{arrv_Airpt_Cd}
+			</if>
+			<if test="pas_stp==null">
+				AND Pas_Stp is null
+			</if>
+			<if test="pas_stp!=null">
+				AND Pas_Stp=#{pas_stp}
+			</if>
+			<if test="cpy_Nm==null">
+				AND cpy_Nm is null
+			</if>
+			<if test="cpy_Nm!=null">
+				AND Cpy_Nm=#{cpy_Nm}
+			</if>
+			<if test="dta_Sce!=null">
+				AND Dta_Sce = #{dta_Sce}
+			</if>
+			<if test="flt_nbr!=null">
+				AND Flt_Nbr=#{flt_nbr}
+			</if>
+		</where>
+	</sql>
+	<sql id="Flt_Nbr">
+		<where>
+			<if test="lcl_Dpt_Day!=null and lcl_Dpt_Day!=''">
+				AND year(Lcl_Dpt_Day)=#{lcl_Dpt_Day}
+			</if>
+			<if test="month!=null and month!=''">
+				AND month(Lcl_Dpt_Day)=#{month}
+			</if>
+			<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+				AND Dpt_AirPt_Cd=#{dpt_AirPt_Cd}
+			</if>
+			<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+				AND Arrv_Airpt_Cd=#{arrv_Airpt_Cd}
+			</if>
+			<if test="flt_Rte_Cd!=null and flt_Rte_Cd!=''">
+				AND Flt_Rte_Cd=#{flt_Rte_Cd}
+			</if>
+			<if test="cpy_Nm!=null and cpy_Nm!=''">
+				AND Cpy_Nm = #{cpy_Nm}
+			</if>
+			<if test="flt_nbr!=null and flt_nbr!=''">
+				AND Flt_Nbr = #{flt_nbr}
+			</if>
+		</where>
+	</sql>
+	<sql id="Flt_NbrNew">
+		<where>
+			<if test="lcl_Dpt_Day!=null and lcl_Dpt_Day!=''">
+				AND year(Lcl_Dpt_Day)=#{lcl_Dpt_Day}
+			</if>
+			<if test="pas_stp==null">
+				<if test="dpt_AirPt_Cd!=null">
+					<if test="arrv_Airpt_Cd!=null">
+						AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND
+						arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd}
+						AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+					</if>
+				</if>
+			</if>
+			<if test="pas_stp!=null">
+				<if test="dpt_AirPt_Cd!=null">
+					<if test="arrv_Airpt_Cd!=null">
+						AND (Flt_Rte_Cd =
+						concat(#{dpt_AirPt_Cd},concat(#{pas_stp},#{arrv_Airpt_Cd})) or
+						Flt_Rte_Cd =
+						concat(#{arrv_Airpt_Cd},concat(#{pas_stp},#{dpt_AirPt_Cd})))
+					</if>
+				</if>
+			</if>
+			<if test="dta_Sce!=null and dta_Sce!=''">
+				AND Dta_Sce = #{dta_Sce}
+			</if>
+			<if test="cpy_Nm!=null and cpy_Nm!=''">
+				AND Cpy_Nm = #{cpy_Nm}
+			</if>
+			<if test="flt_nbr!=null and flt_nbr!=''">
+				AND (Flt_Nbr = #{goNum} or Flt_Nbr = #{arrNum})
+			</if>
+		</where>
+	</sql>
+	<sql id="monthFltQuery">
+		<where>
+			<if test="lcl_Dpt_Day!=null and lcl_Dpt_Day!=''">
+				AND Date_Format(Lcl_Dpt_Day,'%Y-%m')=#{lcl_Dpt_Day}
+			</if>
+			<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+				AND Dpt_AirPt_Cd=#{dpt_AirPt_Cd}
+			</if>
+			<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+				AND Arrv_Airpt_Cd=#{arrv_Airpt_Cd}
+			</if>
+			<if test="flt_Rte_Cd!=null and flt_Rte_Cd!=''">
+				AND Flt_Rte_Cd=#{flt_Rte_Cd}
+			</if>
+			<if test="dta_Sce!=null and dta_Sce!=''">
+				AND Dta_Sce = #{dta_Sce}
+			</if>
+		</where>
+	</sql>
+	<insert id="save" parameterType="TimeCount">
+		insert into
+		timecount(Lcl_Dpt_Day,Tim_Cout,Dpt_AirPt_Cd,Arrv_Airpt_Cd,Pas_Stp,Cpy_Nm,Flt_Nbr,Dta_Sce)
+		values(#{lcl_dpt_day},#{tim_cout},#{dpt_airpt_cd},#{arrv_airpt_cd},#{pas_stp},#{cpy_nm},#{flt_nbr},#{dta_sce})
+	</insert>
+	<update id="updata" parameterType="TimeCount">
+		update timecount set
+		Lcl_Dpt_Day=#{lcl_dpt_day},Tim_Cout=#{tim_cout},Dpt_AirPt_Cd=#{dpt_airpt_cd},Arrv_Airpt_Cd=#{arrv_airpt_cd},
+		Pas_Stp=#{pas_stp},Cpy_Nm=#{cpy_nm},Flt_Nbr=#{flt_nbr},Dta_Sce=#{dta_sce}
+		where id=#{id}
+	</update>
+	<insert id="saveParameter" parameterType="IncomeCountTime">
+		insert into
+		incomecounttime(
+		Lcl_Dpt_Day,
+		Tim_Cout,
+		Tim_Cot,
+		Agy_Rte,
+		Dpt_AirPt_Cd,
+		Arrv_Airpt_Cd,
+		Pas_Stp,
+		Cpy_Nm,
+		Flt_Nbr,
+		Dta_Sce)
+		values
+		(#{lcl_Dpt_Day},
+		#{tim_Cout},
+		#{tim_Cot},
+		#{agy_Rte},
+		#{dpt_AirPt_Cd},
+		#{arrv_Airpt_Cd},
+		#{pas_stp},
+		#{cpy_Nm},
+		#{flt_nbr},
+		#{dta_Sce})
+	</insert>
+	<update id="updataParameter" parameterType="IncomeCountTime">
+		update
+		incomecounttime
+		set
+		Lcl_Dpt_Day=#{lcl_Dpt_Day},
+		Tim_Cout=#{tim_Cout},
+		Tim_Cot=#{tim_Cot},
+		Agy_Rte=#{agy_Rte},
+		Dpt_AirPt_Cd=#{dpt_AirPt_Cd},
+		Arrv_Airpt_Cd=#{arrv_Airpt_Cd},
+		Pas_Stp=#{pas_stp},
+		Cpy_Nm=#{cpy_Nm},
+		Flt_Nbr=#{flt_nbr},
+		Dta_Sce=#{dta_Sce}
+		where id=#{id}
+	</update>
+	<select id="getCountClz" parameterType="DOWQuery" resultType="Integer">
+		select count(DISTINCT Flt_Nbr)
+		from z_airdata
+		<include refid="Flt_Nbr" />
+		GROUP BY Lcl_Dpt_Day
+	</select>
+	<sql id="monthQuery">
+		<where>
+			<if test="lcl_Dpt_Day!=null and lcl_Dpt_Day!=''">
+				AND DATE_FORMAT(Lcl_Dpt_Day,'%Y-%m')=#{lcl_Dpt_Day}
+			</if>
+			<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+				AND Dpt_AirPt_Cd=#{dpt_AirPt_Cd}
+			</if>
+			<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+				AND Arrv_Airpt_Cd=#{arrv_Airpt_Cd}
+			</if>
+			<if test="flt_nbr!=null and flt_nbr!=''">
+				AND Flt_Nbr = #{flt_nbr}
+			</if>
+			<if test="flt_Rte_Cd!=null and flt_Rte_Cd!=''">
+				AND Flt_Rte_Cd=#{flt_Rte_Cd}
+			</if>
+			<if test="dta_Sce!=null and dta_Sce!=''">
+				AND Dta_Sce = #{dta_Sce,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id,Lcl_Dpt_Day,Dpt_AirPt_Cd,Arrv_Airpt_Cd,Flt_Nbr,Cpy_Nm,Flt_Rte_Cd,Tal_Nbr_Set,Pgs_Per_Cls,
+		Grp_Nbr,Ech_Cls_Grp,Grp_Fng_Rte,Tal_Nbr,Set_Ktr_Ine,Grp_Ine,Grp_Ppt,Egs_Lod_Fts,avg_Dct,Idd_Dct,
+		Grp_Dct,Two_Tak_Ppt,Ful_Pce_Ppt,Nne_Dnt_Ppt,Eht_Five_Dnt_Ppt,Eht_Dnt_Ppt,Sen_Five_Dnt_Ppt,
+		Sen_Dnt_Ppt,Six_Five_Dnt_Ppt,Six_Dnt_Ppt,Fve_Fve_Dnt_Ppt,Fve_Dnt_Ppt,Fur_Fve_Dnt_Ppt,Fur_Dnt_Ppt,
+		Thr_Fve_Dnt_Ppt,Thr_Dnt_Ppt,Two_Fve_Dnt_Ppt,Two_Dnt_Ppt,Sal_Tak_Ppt,R_Tak_Ppt,U_Tak_Ppt,I_Tak_Ppt,
+		Z_Tak_Ppt,E_Tak_Ppt,A_Tak_Ppt,O_Tak_Ppt,S_Tak_Ppt,H_Tak_Ppt,X_Tak_Ppt,Children,Dta_Sce,Dta_Dte
+	</sql>
+	<resultMap type="org.ldd.ssm.crm.domain.Z_Airdata" id="BaseResultMap">
+		<result property="id" column="id" jdbcType="BIGINT" />
+		<result property="lcl_Dpt_Day" column="Lcl_Dpt_Day" jdbcType="TIMESTAMP" />
+		<result property="dpt_AirPt_Cd" column="Dpt_AirPt_Cd" jdbcType="VARCHAR" />
+		<result property="arrv_Airpt_Cd" column="Arrv_Airpt_Cd"
+			jdbcType="VARCHAR" />
+		<result property="flt_Nbr" column="Flt_Nbr" jdbcType="VARCHAR" />
+		<result property="cpy_Nm" column="Cpy_Nm" jdbcType="VARCHAR" />
+		<result property="flt_Rte_Cd" column="Flt_Rte_Cd" jdbcType="VARCHAR" />
+		<result property="tal_Nbr_Set" column="Tal_Nbr_Set" jdbcType="INTEGER" />
+		<result property="pgs_Per_Cls" column="Pgs_Per_Cls" jdbcType="INTEGER" />
+		<result property="grp_Nbr" column="Grp_Nbr" jdbcType="INTEGER" />
+		<result property="ech_Cls_Grp" column="Ech_Cls_Grp" jdbcType="INTEGER" />
+		<result property="grp_Fng_Rte" column="Grp_Fng_Rte" jdbcType="DECIMAL" />
+		<result property="totalNumber" column="Tal_Nbr" jdbcType="DECIMAL" />
+		<result property="set_Ktr_Ine" column="Set_Ktr_Ine" jdbcType="DECIMAL" />
+		<result property="grp_Ine" column="Grp_Ine" jdbcType="DECIMAL" />
+		<result property="grp_Ppt" column="Grp_Ppt" jdbcType="DECIMAL" />
+		<result property="egs_Lod_Fts" column="Egs_Lod_Fts" jdbcType="DECIMAL" />
+		<result property="avg_Dct" column="avg_Dct" jdbcType="DECIMAL" />
+		<result property="idd_Dct" column="Idd_Dct" jdbcType="DECIMAL" />
+		<result property="grp_Dct" column="Grp_Dct" jdbcType="DECIMAL" />
+		<result property="two_Tak_Ppt" column="Two_Tak_Ppt" jdbcType="INTEGER" />
+		<result property="ful_Pce_Ppt" column="Ful_Pce_Ppt" jdbcType="INTEGER" />
+		<result property="nne_Dnt_Ppt" column="Nne_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="eht_Five_Dnt_Ppt" column="Eht_Five_Dnt_Ppt"
+			jdbcType="INTEGER" />
+		<result property="eht_Dnt_Ppt" column="Eht_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="sen_Five_Dnt_Ppt" column="Sen_Five_Dnt_Ppt"
+			jdbcType="INTEGER" />
+		<result property="sen_Dnt_Ppt" column="Sen_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="six_Five_Dnt_Ppt" column="Six_Five_Dnt_Ppt"
+			jdbcType="INTEGER" />
+		<result property="six_Dnt_Ppt" column="Six_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="fve_Fve_Dnt_Ppt" column="Fve_Fve_Dnt_Ppt"
+			jdbcType="INTEGER" />
+		<result property="fve_Dnt_Ppt" column="Fve_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="fur_Fve_Dnt_Ppt" column="Fur_Fve_Dnt_Ppt"
+			jdbcType="INTEGER" />
+		<result property="fur_Dnt_Ppt" column="Fur_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="thr_Fve_Dnt_Ppt" column="Thr_Fve_Dnt_Ppt"
+			jdbcType="INTEGER" />
+		<result property="thr_Dnt_Ppt" column="Thr_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="two_Fve_Dnt_Ppt" column="Two_Fve_Dnt_Ppt"
+			jdbcType="INTEGER" />
+		<result property="two_Dnt_Ppt" column="Two_Dnt_Ppt" jdbcType="INTEGER" />
+		<result property="sal_Tak_Ppt" column="Sal_Tak_Ppt" jdbcType="INTEGER" />
+		<result property="r_Tak_Ppt" column="R_Tak_Ppt" jdbcType="INTEGER" />
+		<result property="u_Tak_Ppt" column="U_Tak_Ppt" jdbcType="INTEGER" />
+		<result property="i_Tak_Ppt" column="I_Tak_Ppt" jdbcType="INTEGER" />
+		<result property="z_Tak_Ppt" column="Z_Tak_Ppt" jdbcType="INTEGER" />
+		<result property="e_Tak_Ppt" column="E_Tak_Ppt" jdbcType="INTEGER" />
+		<result property="a_Tak_Ppt" column="A_Tak_Ppt" jdbcType="INTEGER" />
+		<result property="o_Tak_Ppt" column="O_Tak_Ppt" jdbcType="INTEGER" />
+		<result property="s_Tak_Ppt" column="S_Tak_Ppt" jdbcType="INTEGER" />
+		<result property="h_Tak_Ppt" column="H_Tak_Ppt" jdbcType="INTEGER" />
+		<result property="x_Tak_Ppt" column="X_Tak_Ppt" jdbcType="INTEGER" />
+		<result property="children" column="Children" jdbcType="INTEGER" />
+		<result property="dta_Sce" column="Dta_Sce" jdbcType="VARCHAR" />
+		<result property="dta_Dte" column="Dta_Dte" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="getMonthData" resultMap="BaseResultMap">
+		select
+		Lcl_Dpt_Day,Pgs_Per_Cls
+		from z_airdata
+		<include refid="monthQuery" />
+		GROUP BY Lcl_Dpt_Day
+	</select>
+	<select id="getMonthData2" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from z_airdata
+		<include refid="monthQuery" />
+	</select>
+	<select id="getMonthPlanParam" resultMap="BaseResultMap">
+		select
+		count(id) Two_Tak_Ppt,
+		ROUND(AVG(Pgs_Per_Cls/Tal_Nbr_Set),4)*100
+		Grp_Fng_Rte,
+		ROUND(AVG(Idd_Dct),2) Idd_Dct,
+		CEIL(AVG(Pgs_Per_Cls-Grp_Nbr)) Ech_Cls_Grp,
+		ROUND(AVG(Grp_Dct),2)
+		Grp_Dct,
+		CEIL(AVG(Grp_Nbr)) Grp_Nbr ,
+		ROUND(AVG(yBFare),2) yBFare<!--修改YB运价求平均 -->
+		from z_airdata
+		where 1=1
+		<if test="startDate !=null and startDate !=''">
+			and Lcl_Dpt_Day &gt;= #{startDate,jdbcType=VARCHAR}
+		</if>
+		<if test="endDate !=null and endDate !=''">
+			and Lcl_Dpt_Day &lt;= #{endDate,jdbcType=VARCHAR}
+		</if>
+		<if test="query.dpt_AirPt_Cd !=null and query.dpt_AirPt_Cd !=''">
+			and Dpt_AirPt_Cd = #{query.dpt_AirPt_Cd,jdbcType=VARCHAR}
+		</if>
+		<if test="query.arrv_Airpt_Cd !=null and query.arrv_Airpt_Cd !=''">
+			and Arrv_Airpt_Cd =
+			#{query.arrv_Airpt_Cd,jdbcType=VARCHAR}
+		</if>
+		<if test="query.flt_nbr != null and query.flt_nbr != ''">
+			and Flt_Nbr = #{query.flt_nbr,jdbcType=VARCHAR}
+		</if>
+		<if test="query.flt_Rte_Cd != null and query.flt_Rte_Cd !=''">
+			and Flt_Rte_Cd = #{query.flt_Rte_Cd,jdbcType=VARCHAR}
+		</if>
+		limit 1
+	</select>
+
+	<sql id="Base_List">
+		Pgs_Per_Cls,Grp_Nbr,Ech_Cls_Grp,Grp_Fng_Rte,Tal_Nbr,Grp_Ine,yBFare
+	</sql>
+	<resultMap type="org.ldd.ssm.crm.domain.AirData" id="BaseMap">
+		<result property="pgs_Per_Cls" column="Pgs_Per_Cls" jdbcType="DOUBLE" />
+		<result property="grp_Nbr" column="Grp_Nbr" jdbcType="DOUBLE" />
+		<result property="ech_Cls_Grp" column="Ech_Cls_Grp" jdbcType="INTEGER" />
+		<result property="grp_Fng_Rte" column="Grp_Fng_Rte" jdbcType="DOUBLE" />
+		<result property="totalNumber" column="Tal_Nbr" jdbcType="INTEGER" />
+		<result property="grp_Ine" column="Grp_Ine" jdbcType="DOUBLE" />
+		<result property="yBFare" column="yBFare" jdbcType="INTEGER" />
+	</resultMap>
+	<select id="getCabinSeatSetData" resultMap="BaseMap">
+		select
+		count(id) Ech_Cls_Grp,
+		ROUND(AVG(Pgs_Per_Cls),2) Pgs_Per_Cls,
+		ROUND(AVG(Grp_Nbr),2) Grp_Nbr,
+		AVG(Tal_Nbr) Tal_Nbr,
+		AVG(Grp_Ine)
+		Grp_Ine,
+		ROUND(AVG(Pgs_Per_Cls/Tal_Nbr_Set),4)*100 Grp_Fng_Rte,
+		yBFare
+		from z_airdata
+		where 1=1
+		<if test="lcl_Dpt_Day !=null and lcl_Dpt_Day !=''">
+			and Date_Format(Lcl_Dpt_Day,'%Y-%m') =
+			#{lcl_Dpt_Day,jdbcType=VARCHAR}
+		</if>
+		<if test="dpt_AirPt_Cd !=null and dpt_AirPt_Cd !=''">
+			and Dpt_AirPt_Cd = #{dpt_AirPt_Cd,jdbcType=VARCHAR}
+		</if>
+		<if test="arrv_Airpt_Cd !=null and arrv_Airpt_Cd !=''">
+			and Arrv_Airpt_Cd = #{arrv_Airpt_Cd,jdbcType=VARCHAR}
+		</if>
+		<if test="flt_nbr != null and flt_nbr != ''">
+			and Flt_Nbr = #{flt_nbr,jdbcType=VARCHAR}
+		</if>
+		<if test="flt_Rte_Cd != null and flt_Rte_Cd !=''">
+			and Flt_Rte_Cd = #{flt_Rte_Cd,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="getCabinSeatSetData2" resultMap="BaseResultMap">
+		select
+		Pgs_Per_Cls,
+		Grp_Nbr,
+		Tal_Nbr,
+		Grp_Ine,
+		Pgs_Per_Cls,
+		Tal_Nbr_Set,
+		yBFare
+		from z_airdata
+		<where>
+			<if test="lcl_Dpt_Day !=null and lcl_Dpt_Day !=''">
+				and Date_Format(Lcl_Dpt_Day,'%Y-%m') =
+				#{lcl_Dpt_Day,jdbcType=VARCHAR}
+			</if>
+			<if test="dpt_AirPt_Cd !=null and dpt_AirPt_Cd !=''">
+				and Dpt_AirPt_Cd = #{dpt_AirPt_Cd,jdbcType=VARCHAR}
+			</if>
+			<if test="arrv_Airpt_Cd !=null and arrv_Airpt_Cd !=''">
+				and Arrv_Airpt_Cd = #{arrv_Airpt_Cd,jdbcType=VARCHAR}
+			</if>
+			<if test="flt_nbr != null and flt_nbr != ''">
+				and Flt_Nbr = #{flt_nbr,jdbcType=VARCHAR}
+			</if>
+			<if test="flt_Rte_Cd != null and flt_Rte_Cd !=''">
+				and Flt_Rte_Cd = #{flt_Rte_Cd,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="getSiteCount" resultType="java.lang.Integer">
+		select
+		ifnull(AVG(Tal_Nbr_Set),0)
+		from z_airdata
+		<where>
+			<if test="lcl_Dpt_Day !=null and lcl_Dpt_Day !=''">
+				and Date_Format(Lcl_Dpt_Day,'%Y-%m') =
+				#{lcl_Dpt_Day,jdbcType=VARCHAR}
+			</if>
+			<if test="dpt_AirPt_Cd !=null and dpt_AirPt_Cd !=''">
+				and Dpt_AirPt_Cd = #{dpt_AirPt_Cd,jdbcType=VARCHAR}
+			</if>
+			<if test="arrv_Airpt_Cd !=null and arrv_Airpt_Cd !=''">
+				and Arrv_Airpt_Cd = #{arrv_Airpt_Cd,jdbcType=VARCHAR}
+			</if>
+			<if test="flt_nbr != null and flt_nbr != ''">
+				and Flt_Nbr = #{flt_nbr,jdbcType=VARCHAR}
+			</if>
+			<if test="flt_Rte_Cd != null and flt_Rte_Cd !=''">
+				and Flt_Rte_Cd = #{flt_Rte_Cd,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<select id="getCheckPara" parameterType="DOWQuery" resultType="DOWQuery">
+		select Cty_Cha_Nm china_Name ,IATA air_itia from airportmappingcode
+		where Cty_Cha_Nm = #{dpt_AirPt_Cd} or Cty_Cha_Nm = #{arrv_Airpt_Cd} or
+		Cty_Cha_Nm = #{pas_stp}
+	</select>
+	<select id="getAll_Para_Data" parameterType="AirLineQuery"
+		resultType="Z_Airdata">
+		select id as id,
+		Lcl_Dpt_Day as lcl_Dpt_Day,
+		Dpt_AirPt_Cd as dpt_AirPt_Cd,
+		Arrv_Airpt_Cd as arrv_Airpt_Cd,
+		Flt_Nbr as flt_Nbr,
+		Cpy_Nm as cpy_Nm,
+		Lcl_Dpt_Tm as lcl_Dpt_Tm,
+		Lcl_Arrv_Tm as lcl_Arrv_Tm,
+		Flt_Rte_Cd as flt_Rte_Cd,
+		Tal_Nbr_Set as tal_Nbr_Set,
+		count_Set as count_Set,
+		Pgs_Per_Cls as pgs_Per_Cls,
+		Grp_Nbr as grp_Nbr,
+		Ech_Cls_Grp as ech_Cls_Grp,
+		Grp_Fng_Rte as grp_Fng_Per,
+		Egs_Lod_Fts as egs_Lod_Fts,
+		Tal_Nbr as totalNumber,
+		Set_Ktr_Ine as Set_Ktr_Ine,
+		Grp_Ine as grp_Ine,
+		Grp_Ppt as grp_Ppt,
+		Egs_Lod_Fts as egs_Lod_Fts,
+		avg_Dct as avg_Dct,
+		Idd_Dct as idd_Dct,
+		Grp_Dct as grp_Dct,
+		Two_Tak_Ppt as two_Tak_Ppt,
+		Ful_Pce_Ppt as ful_Pce_Ppt,
+		Nne_Dnt_Ppt as nne_Dnt_Ppt,
+		Eht_Five_Dnt_Ppt as eht_Five_Dnt_Ppt,
+		Eht_Dnt_Ppt as eht_Dnt_Ppt,
+		Sen_Five_Dnt_Ppt as sen_Five_Dnt_Ppt,
+		Sen_Dnt_Ppt as sen_Dnt_Ppt,
+		Six_Five_Dnt_Ppt as six_Five_Dnt_Ppt,
+		Six_Dnt_Ppt as six_Dnt_Ppt,
+		Fve_Fve_Dnt_Ppt as fve_Fve_Dnt_Ppt,
+		Fve_Dnt_Ppt as fve_Dnt_Ppt,
+		Fur_Fve_Dnt_Ppt as fur_Fve_Dnt_Ppt,
+		Fur_Dnt_Ppt as fur_Dnt_Ppt,
+		Thr_Fve_Dnt_Ppt as thr_Fve_Dnt_Ppt,
+		Thr_Dnt_Ppt as thr_Dnt_Ppt,
+		Two_Fve_Dnt_Ppt as two_Fve_Dnt_Ppt,
+		Two_Dnt_Ppt as two_Dnt_Ppt,
+		Sal_Tak_Ppt as sal_Tak_Ppt,
+		R_Tak_Ppt as r_Tak_Ppt,
+		U_Tak_Ppt as u_Tak_Ppt,
+		I_Tak_Ppt as i_Tak_Ppt,
+		Z_Tak_Ppt as z_Tak_Ppt,
+		E_Tak_Ppt as e_Tak_Ppt,
+		A_Tak_Ppt as a_Tak_Ppt,
+		O_Tak_Ppt as o_Tak_Ppt,
+		S_Tak_Ppt as s_Tak_Ppt,
+		H_Tak_Ppt as h_Tak_Ppt,
+		X_Tak_Ppt as x_Tak_Ppt,
+		Children as children,
+		yBFare as yBFare,
+		sailingDistance as sailingDistance,
+		Dta_Dte as dta_Dte,
+		company_id as company
+		from z_airdata where Date_Format(Lcl_Dpt_Day,'%Y') = #{lcl_Dpt_Day} and
+		(Flt_Rte_Cd = #{airline1} or Flt_Rte_Cd = #{airline2})
+	</select>
+	<select id="getYearSalesReportNew" resultType="Z_Airdata"
+		parameterType="SalesReportQuery">
+		select id as id,
+		Lcl_Dpt_Day as lcl_Dpt_Day,
+		Dpt_AirPt_Cd as dpt_AirPt_Cd,
+		Arrv_Airpt_Cd as arrv_Airpt_Cd,
+		Flt_Nbr as flt_Nbr,
+		Cpy_Nm as cpy_Nm,
+		Lcl_Dpt_Tm as lcl_Dpt_Tm,
+		Lcl_Arrv_Tm as lcl_Arrv_Tm,
+		Flt_Rte_Cd as flt_Rte_Cd,
+		Tal_Nbr_Set as tal_Nbr_Set,
+		count_Set as count_Set,
+		Pgs_Per_Cls as pgs_Per_Cls,
+		Grp_Nbr as grp_Nbr,
+		Ech_Cls_Grp as ech_Cls_Grp,
+		Grp_Fng_Rte as grp_Fng_Per,
+		Tal_Nbr as totalNumber,
+		Set_Ktr_Ine as Set_Ktr_Ine,
+		Grp_Ine as grp_Ine,
+		Grp_Ppt as grp_Ppt,
+		Egs_Lod_Fts as egs_Lod_Fts,
+		avg_Dct as avg_Dct,
+		Idd_Dct as idd_Dct,
+		Grp_Dct as grp_Dct,
+		Two_Tak_Ppt as two_Tak_Ppt,
+		Ful_Pce_Ppt as ful_Pce_Ppt,
+		Nne_Dnt_Ppt as nne_Dnt_Ppt,
+		Eht_Five_Dnt_Ppt as eht_Five_Dnt_Ppt,
+		Eht_Dnt_Ppt as eht_Dnt_Ppt,
+		Sen_Five_Dnt_Ppt as sen_Five_Dnt_Ppt,
+		Sen_Dnt_Ppt as sen_Dnt_Ppt,
+		Six_Five_Dnt_Ppt as six_Five_Dnt_Ppt,
+		Six_Dnt_Ppt as six_Dnt_Ppt,
+		Fve_Fve_Dnt_Ppt as fve_Fve_Dnt_Ppt,
+		Fve_Dnt_Ppt as fve_Dnt_Ppt,
+		Fur_Fve_Dnt_Ppt as fur_Fve_Dnt_Ppt,
+		Fur_Dnt_Ppt as fur_Dnt_Ppt,
+		Thr_Fve_Dnt_Ppt as thr_Fve_Dnt_Ppt,
+		Thr_Dnt_Ppt as thr_Dnt_Ppt,
+		Two_Fve_Dnt_Ppt as two_Fve_Dnt_Ppt,
+		Two_Dnt_Ppt as two_Dnt_Ppt,
+		Sal_Tak_Ppt as sal_Tak_Ppt,
+		R_Tak_Ppt as r_Tak_Ppt,
+		U_Tak_Ppt as u_Tak_Ppt,
+		I_Tak_Ppt as i_Tak_Ppt,
+		Z_Tak_Ppt as z_Tak_Ppt,
+		E_Tak_Ppt as e_Tak_Ppt,
+		A_Tak_Ppt as a_Tak_Ppt,
+		O_Tak_Ppt as o_Tak_Ppt,
+		S_Tak_Ppt as s_Tak_Ppt,
+		H_Tak_Ppt as h_Tak_Ppt,
+		X_Tak_Ppt as x_Tak_Ppt,
+		Children as children,
+		yBFare as yBFare,
+		sailingDistance as sailingDistance,
+		Dta_Dte as dta_Dte,
+		company_id as company
+		from z_airdata
+		<include refid="yearCheckNew" />
+	</select>
+	<select id="getZAirDataList" resultType="Z_Airdata"
+		parameterType="AirLineQueryNew">
+		select id as id,
+		Lcl_Dpt_Day as lcl_Dpt_Day,
+		Dpt_AirPt_Cd as dpt_AirPt_Cd,
+		Arrv_Airpt_Cd as arrv_Airpt_Cd,
+		Flt_Nbr as flt_Nbr,
+		Cpy_Nm as cpy_Nm,
+		Lcl_Dpt_Tm as lcl_Dpt_Tm,
+		Lcl_Arrv_Tm as lcl_Arrv_Tm,
+		Flt_Rte_Cd as flt_Rte_Cd,
+		Tal_Nbr_Set as tal_Nbr_Set,
+		count_Set as count_Set,
+		Pgs_Per_Cls as pgs_Per_Cls,
+		Grp_Nbr as grp_Nbr,
+		Ech_Cls_Grp as ech_Cls_Grp,
+		Grp_Fng_Rte as grp_Fng_Per,
+		Tal_Nbr as totalNumber,
+		Set_Ktr_Ine as Set_Ktr_Ine,
+		Grp_Ine as grp_Ine,
+		Grp_Ppt as grp_Ppt,
+		Egs_Lod_Fts as egs_Lod_Fts,
+		avg_Dct as avg_Dct,
+		Idd_Dct as idd_Dct,
+		Grp_Dct as grp_Dct,
+		Two_Tak_Ppt as two_Tak_Ppt,
+		Ful_Pce_Ppt as ful_Pce_Ppt,
+		Nne_Dnt_Ppt as nne_Dnt_Ppt,
+		Eht_Five_Dnt_Ppt as eht_Five_Dnt_Ppt,
+		Eht_Dnt_Ppt as eht_Dnt_Ppt,
+		Sen_Five_Dnt_Ppt as sen_Five_Dnt_Ppt,
+		Sen_Dnt_Ppt as sen_Dnt_Ppt,
+		Six_Five_Dnt_Ppt as six_Five_Dnt_Ppt,
+		Six_Dnt_Ppt as six_Dnt_Ppt,
+		Fve_Fve_Dnt_Ppt as fve_Fve_Dnt_Ppt,
+		Fve_Dnt_Ppt as fve_Dnt_Ppt,
+		Fur_Fve_Dnt_Ppt as fur_Fve_Dnt_Ppt,
+		Fur_Dnt_Ppt as fur_Dnt_Ppt,
+		Thr_Fve_Dnt_Ppt as thr_Fve_Dnt_Ppt,
+		Thr_Dnt_Ppt as thr_Dnt_Ppt,
+		Two_Fve_Dnt_Ppt as two_Fve_Dnt_Ppt,
+		Two_Dnt_Ppt as two_Dnt_Ppt,
+		Sal_Tak_Ppt as sal_Tak_Ppt,
+		R_Tak_Ppt as r_Tak_Ppt,
+		U_Tak_Ppt as u_Tak_Ppt,
+		I_Tak_Ppt as i_Tak_Ppt,
+		Z_Tak_Ppt as z_Tak_Ppt,
+		E_Tak_Ppt as e_Tak_Ppt,
+		A_Tak_Ppt as a_Tak_Ppt,
+		O_Tak_Ppt as o_Tak_Ppt,
+		S_Tak_Ppt as s_Tak_Ppt,
+		H_Tak_Ppt as h_Tak_Ppt,
+		X_Tak_Ppt as x_Tak_Ppt,
+		Children as children,
+		yBFare as yBFare,
+		sailingDistance as sailingDistance,
+		Dta_Dte as dta_Dte,
+		company_id as company,
+		allData as allData,
+		comeAndGo as comeAndGo
+		from z_airdata
+		<include refid="zAirDataCheck" />
+	</select>
+
+	<sql id="zAirDataCheck">
+		<where>
+			<if test="startTime!=null">
+				AND Lcl_Dpt_Day&gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND Lcl_Dpt_Day&lt;=#{endTime}
+			</if>
+			<if test="pas_stp==null or pas_stp==''">
+				<if test="isIncludeRdf!=null and isIncludeRdf!=''">
+					<if test="isIncludePas!=null and isIncludePas!=''">
+						<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+							<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+								AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd} AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+							</if>
+						</if>
+					</if>
+				</if>
+				<if test="isIncludeRdf!=null and isIncludeRdf!=''">
+					<if test="isIncludePas==null or isIncludePas==''">
+						<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+							<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+								AND ((Flt_Rte_Cd like CONCAT('%',concat(#{arrv_Airpt_Cd},#{dpt_AirPt_Cd}),'%' )) OR (Flt_Rte_Cd like CONCAT('%',concat(#{dpt_AirPt_Cd},#{arrv_Airpt_Cd}),'%' )))
+								AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND
+								arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd}
+								AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+							</if>
+						</if>
+					</if>
+				</if>
+				<if test="isIncludeRdf==null or isIncludeRdf==''">
+					<if test="isIncludePas==null or isIncludePas==''">
+						<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+							<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+								AND 1=2
+							</if>
+						</if>
+					</if>
+				</if>
+				<if test="isIncludeRdf==null or isIncludeRdf==''">
+					<if test="isIncludePas!=null and isIncludePas!=''">
+						<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+							<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+								AND ((Flt_Rte_Cd not like CONCAT('%',concat(#{arrv_Airpt_Cd},#{dpt_AirPt_Cd}),'%' )) and (Flt_Rte_Cd not like CONCAT('%',concat(#{dpt_AirPt_Cd},#{arrv_Airpt_Cd}),'%' )))
+								AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND
+								arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd}
+								AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+							</if>
+						</if>
+					</if>
+				</if>
+			</if>
+			
+			<if test="pas_stp!=null and pas_stp!=''">
+				<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+					<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+						AND (Flt_Rte_Cd =concat(#{dpt_AirPt_Cd},concat(#{pas_stp},#{arrv_Airpt_Cd})) or Flt_Rte_Cd = concat(#{arrv_Airpt_Cd},concat(#{pas_stp},#{dpt_AirPt_Cd})))
+					</if>
+				</if>
+			</if>
+			<if test="flt_nbr!=null">
+				AND( Flt_Nbr=#{goNum} or Flt_Nbr=#{huiNum})
+			</if>
+			<if test="hangsi!=null">
+				AND Cpy_Nm = #{hangsi}
+			</if>
+		</where>
+	</sql>
+	<sql id="yearCheckNew">
+		<where>
+			<if test="startTime!=null">
+				AND Lcl_Dpt_Day&gt;=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				AND Lcl_Dpt_Day&lt;=#{endTime}
+			</if>
+			<if test="pas_stp==null">
+				<if test="dpt_AirPt_Cd!=null">
+					<if test="arrv_Airpt_Cd!=null">
+						AND ((dpt_AirPt_Cd=#{dpt_AirPt_Cd} AND
+						arrv_Airpt_Cd=#{arrv_Airpt_Cd}) OR (dpt_AirPt_Cd=#{arrv_Airpt_Cd}
+						AND arrv_Airpt_Cd=#{dpt_AirPt_Cd}))
+					</if>
+				</if>
+			</if>
+			<if test="pas_stp!=null">
+				<if test="dpt_AirPt_Cd!=null">
+					<if test="arrv_Airpt_Cd!=null">
+						AND (Flt_Rte_Cd =
+						concat(#{dpt_AirPt_Cd},concat(#{pas_stp},#{arrv_Airpt_Cd})) or
+						Flt_Rte_Cd =
+						concat(#{arrv_Airpt_Cd},concat(#{pas_stp},#{dpt_AirPt_Cd})))
+					</if>
+				</if>
+			</if>
+			<if test="flt_nbr_Count!=null">
+				AND( Flt_Nbr=#{goNum} or Flt_Nbr=#{huiNum})
+			</if>
+			<if test="hangsi!=null and hangsi!=''">
+				AND Cpy_Nm = #{hangsi}
+			</if>
+		</where>
+	</sql>
+	<select id="getCurrtSeasonFltData" resultType="Z_Airdata">
+		SELECT DISTINCT Flt_Nbr,Flt_Rte_Cd FROM ${itia}
+		WHERE Lcl_Dpt_Day &gt;=#{startDate} AND Lcl_Dpt_Day &lt;=#{endDate} AND Flt_Rte_Cd like concat('%',#{itia},'%') ORDER BY Flt_Nbr
+	</select>
+</mapper> 

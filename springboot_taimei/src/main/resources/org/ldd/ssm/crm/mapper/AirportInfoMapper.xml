@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.AirportInfoMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.AirportInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="airport_name" property="airportName" jdbcType="VARCHAR" />
+		<result column="runway_length" property="runwayLength"
+			jdbcType="INTEGER" />
+		<result column="runway_width" property="runwayWidth" jdbcType="INTEGER" />
+		<result column="airport_level" property="airportLevel"
+			jdbcType="VARCHAR" />
+		<result column="fire_rating" property="fireRating" jdbcType="VARCHAR" />
+		<result column="can_stop_type" property="canStopType" jdbcType="VARCHAR" />
+		<result column="airport_type" property="airportType" jdbcType="VARCHAR" />
+		<result column="climatic_changes" property="climaticChanges"
+			jdbcType="VARCHAR" />
+		<result column="clearance_condition" property="clearanceCondition"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, airport_name, runway_length, runway_width, airport_level,
+		fire_rating, can_stop_type,
+		airport_type, climatic_changes, clearance_condition
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from t_airportinfo
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from t_airportinfo
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.AirportInfo">
+		insert into t_airportinfo (id, airport_name, runway_length,
+		runway_width, airport_level, fire_rating,
+		can_stop_type, airport_type, climatic_changes,
+		clearance_condition)
+		values (#{id,jdbcType=INTEGER}, #{airportName,jdbcType=VARCHAR},
+		#{runwayLength,jdbcType=INTEGER},
+		#{runwayWidth,jdbcType=INTEGER}, #{airportLevel,jdbcType=VARCHAR}, #{fireRating,jdbcType=VARCHAR},
+		#{canStopType,jdbcType=VARCHAR}, #{airportType,jdbcType=VARCHAR},
+		#{climaticChanges,jdbcType=VARCHAR},
+		#{clearanceCondition,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.AirportInfo">
+		insert into t_airportinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="airportName != null">
+				airport_name,
+			</if>
+			<if test="runwayLength != null">
+				runway_length,
+			</if>
+			<if test="runwayWidth != null">
+				runway_width,
+			</if>
+			<if test="airportLevel != null">
+				airport_level,
+			</if>
+			<if test="fireRating != null">
+				fire_rating,
+			</if>
+			<if test="canStopType != null">
+				can_stop_type,
+			</if>
+			<if test="airportType != null">
+				airport_type,
+			</if>
+			<if test="climaticChanges != null">
+				climatic_changes,
+			</if>
+			<if test="clearanceCondition != null">
+				clearance_condition,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="airportName != null">
+				#{airportName,jdbcType=VARCHAR},
+			</if>
+			<if test="runwayLength != null">
+				#{runwayLength,jdbcType=INTEGER},
+			</if>
+			<if test="runwayWidth != null">
+				#{runwayWidth,jdbcType=INTEGER},
+			</if>
+			<if test="airportLevel != null">
+				#{airportLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="fireRating != null">
+				#{fireRating,jdbcType=VARCHAR},
+			</if>
+			<if test="canStopType != null">
+				#{canStopType,jdbcType=VARCHAR},
+			</if>
+			<if test="airportType != null">
+				#{airportType,jdbcType=VARCHAR},
+			</if>
+			<if test="climaticChanges != null">
+				#{climaticChanges,jdbcType=VARCHAR},
+			</if>
+			<if test="clearanceCondition != null">
+				#{clearanceCondition,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.AirportInfo">
+		update t_airportinfo
+		<set>
+			<if test="airportName != null">
+				airport_name = #{airportName,jdbcType=VARCHAR},
+			</if>
+			<if test="runwayLength != null">
+				runway_length = #{runwayLength,jdbcType=INTEGER},
+			</if>
+			<if test="runwayWidth != null">
+				runway_width = #{runwayWidth,jdbcType=INTEGER},
+			</if>
+			<if test="airportLevel != null">
+				airport_level = #{airportLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="fireRating != null">
+				fire_rating = #{fireRating,jdbcType=VARCHAR},
+			</if>
+			<if test="canStopType != null">
+				can_stop_type = #{canStopType,jdbcType=VARCHAR},
+			</if>
+			<if test="airportType != null">
+				airport_type = #{airportType,jdbcType=VARCHAR},
+			</if>
+			<if test="climaticChanges != null">
+				climatic_changes = #{climaticChanges,jdbcType=VARCHAR},
+			</if>
+			<if test="clearanceCondition != null">
+				clearance_condition = #{clearanceCondition,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.AirportInfo">
+		update t_airportinfo
+		set airport_name = #{airportName,jdbcType=VARCHAR},
+		runway_length = #{runwayLength,jdbcType=INTEGER},
+		runway_width = #{runwayWidth,jdbcType=INTEGER},
+		airport_level = #{airportLevel,jdbcType=VARCHAR},
+		fire_rating = #{fireRating,jdbcType=VARCHAR},
+		can_stop_type = #{canStopType,jdbcType=VARCHAR},
+		airport_type = #{airportType,jdbcType=VARCHAR},
+		climatic_changes = #{climaticChanges,jdbcType=VARCHAR},
+		clearance_condition = #{clearanceCondition,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectByName" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_airportinfo
+		where 1=1
+		<if test="name !=null and name != ''">
+			and airport_name like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+</mapper>

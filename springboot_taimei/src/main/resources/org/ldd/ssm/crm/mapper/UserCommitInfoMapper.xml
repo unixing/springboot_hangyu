@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.UserCommitInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.UserCommitInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="text_date" property="textDate" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, text_date, title, state, employee_id
+  </sql>
+  <!-- 插入 -->
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="org.ldd.ssm.crm.domain.UserCommitInfo" >
+    insert into userCommitInfo (text_date, title, 
+      state, employee_id)
+    values (#{textDate,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{employeeId,jdbcType=BIGINT})
+  </insert>
+  <!-- 查询列表 -->
+  <select id="findUserCommitInfo" parameterType="java.lang.Long" resultType="org.ldd.ssm.crm.query.UserCommit">
+  	SELECT a.id userCommitInfoId,a.text_date textDateFormat,a.title title,
+	case a.state 
+  		when 0 then '待处理'
+  		when 1 then '已回复'
+  		when 2 then '已解决'
+	end as state ,a.state stateCode from userCommitInfo a 
+  	where employee_id=#{employeeId}
+  </select>
+  
+  <update id="updateState" parameterType="org.ldd.ssm.crm.domain.UserCommitInfo" >
+    update userCommitInfo
+    <set >
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.UserCommitInfo" >
+    update userCommitInfo
+    <set >
+      <if test="textDate != null" >
+        text_date = #{textDate,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="employeeId != null" >
+        employee_id = #{employeeId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.UserCommitInfo" >
+    update userCommitInfo
+    set text_date = #{textDate,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      employee_id = #{employeeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

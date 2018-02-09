@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.crm.mapper.FlightInfoMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.FlightInfo">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="Flt_Rte_Cd" jdbcType="VARCHAR" property="fltRteCd" />
+		<result column="Flt_Nbr" jdbcType="VARCHAR" property="fltNbr" />
+		<result column="itia" jdbcType="VARCHAR" property="itia" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, Flt_Rte_Cd, Flt_Nbr, itia, status
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_flightinfo
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from t_flightinfo
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.FlightInfo">
+		insert into t_flightinfo (id, Flt_Rte_Cd, Flt_Nbr,
+		itia, status)
+		values (#{id,jdbcType=INTEGER}, #{fltRteCd,jdbcType=VARCHAR},
+		#{fltNbr,jdbcType=VARCHAR},
+		#{itia,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.FlightInfo">
+		insert into t_flightinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="fltRteCd != null">
+				Flt_Rte_Cd,
+			</if>
+			<if test="fltNbr != null">
+				Flt_Nbr,
+			</if>
+			<if test="itia != null">
+				itia,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="fltRteCd != null">
+				#{fltRteCd,jdbcType=VARCHAR},
+			</if>
+			<if test="fltNbr != null">
+				#{fltNbr,jdbcType=VARCHAR},
+			</if>
+			<if test="itia != null">
+				#{itia,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.FlightInfo">
+		update t_flightinfo
+		<set>
+			<if test="fltRteCd != null">
+				Flt_Rte_Cd = #{fltRteCd,jdbcType=VARCHAR},
+			</if>
+			<if test="fltNbr != null">
+				Flt_Nbr = #{fltNbr,jdbcType=VARCHAR},
+			</if>
+			<if test="itia != null">
+				itia = #{itia,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.FlightInfo">
+		update t_flightinfo
+		set Flt_Rte_Cd = #{fltRteCd,jdbcType=VARCHAR},
+		Flt_Nbr = #{fltNbr,jdbcType=VARCHAR},
+		itia = #{itia,jdbcType=VARCHAR},
+		status = #{status,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<resultMap id="ListResultMap" type="org.ldd.ssm.crm.domain.FlightInfo">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="Flt_Rte_Cd" jdbcType="VARCHAR" property="fltRteCd" />
+		<result column="Flt_Nbr" jdbcType="VARCHAR" property="fltNbr" />
+		<result column="itia" jdbcType="VARCHAR" property="itia" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="Cpy_Nm" jdbcType="VARCHAR" property="airport" />
+	</resultMap>
+	<sql id="List_Column_List">
+		a.id, a.Flt_Rte_Cd, a.Flt_Nbr, a.itia, a.status,b.Cpy_Nm
+	</sql>
+	<select id="selectAll" resultMap="ListResultMap">
+		select
+		<include refid="List_Column_List" />
+		from t_flightinfo a,company b
+		<where>
+			b.Cpy_Itia = a.itia
+			<if test="itia!=null and itia!=''">
+				and a.itia = #{itia,jdbcType=VARCHAR}
+			</if>
+			<if test="status!=null and status>0">
+				and status = #{status,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+	<update id="groundOrGoAround">
+		update t_flightinfo
+		<set>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="getFltNum" resultType="String">
+		select distinct Flt_Nbr
+		from ${itia}
+		<where>
+			<if test="dpt_AirPt_Cd!=null and dpt_AirPt_Cd!=''">
+				AND Dpt_AirPt_Cd=#{dpt_AirPt_Cd}
+			</if>
+			<if test="arrv_Airpt_Cd!=null and arrv_Airpt_Cd!=''">
+				AND Arrv_Airpt_Cd=#{arrv_Airpt_Cd}
+			</if>
+			<if test="flt_Rte_Cd!=null and flt_Rte_Cd!=''">
+				AND Flt_Rte_Cd=#{flt_Rte_Cd}
+			</if>
+		</where>
+		ORDER BY Flt_Nbr
+	</select>
+</mapper>

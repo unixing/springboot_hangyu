@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.crm.mapper.SalePlanDataMapper">
+	<resultMap type="org.ldd.ssm.crm.domain.MonthSalePlan" id="BaseResultMap">
+		<result property="id" column="id" jdbcType="INTEGER" />
+		<result property="timeId" column="Time_Id" jdbcType="INTEGER" />
+		<result property="fltNbr" column="Flt_Nbr" jdbcType="VARCHAR" />
+		<result property="agreement" column="Agreement" jdbcType="VARCHAR" />
+		<result property="fITNbr" column="FIT_Nbr" jdbcType="INTEGER" />
+		<result property="allFold" column="All_Fold" jdbcType="DECIMAL" />
+		<result property="lowestSale" column="Lowest_Sale" jdbcType="DECIMAL" />
+		<result property="groupNbr" column="Group_Nbr" jdbcType="INTEGER" />
+		<result property="fITSaleCycle" column="FIT_Sale_Cycle"
+			jdbcType="INTEGER" />
+		<result property="discountReturn" column="Discount_Return"
+			jdbcType="DECIMAL" />
+		<result property="groupSaleCycle" column="Group_Sale_Cycle"
+			jdbcType="INTEGER" />
+		<result property="estPosiNbr" column="Est_Posi_Nbr" jdbcType="INTEGER" />
+		<result property="estDisposePlan" column="Est_Dispose_Plan"
+			jdbcType="VARCHAR" />
+		<result property="frequency" column="Frequency" jdbcType="INTEGER" />
+		<result property="status" column="Status" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,Time_Id,Flt_Nbr,Agreement,FIT_Nbr,All_Fold,Lowest_Sale,Group_Nbr,FIT_Sale_Cycle,Discount_Return,Group_Sale_Cycle,Est_Posi_Nbr,Est_Dispose_Plan,Frequency,Status
+	</sql>
+	<insert id="add" parameterType="MonthSalePlan">
+		insert into t_monthsaleplan
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id>0">
+				id,
+			</if>
+			<if test="timeId>0">
+				Time_Id,
+			</if>
+			<if test="fltNbr!=null and fltNbr!=''">
+				Flt_Nbr,
+			</if>
+			<if test="agreement!=null and agreement!=''">
+				Agreement,
+			</if>
+			<if test="fITNbr >0">
+				FIT_Nbr,
+			</if>
+			<if test="allFold >0">
+				All_Fold,
+			</if>
+			<if test="lowestSale >0">
+				Lowest_Sale,
+			</if>
+			<if test="groupNbr>0">
+				Group_Nbr,
+			</if>
+			<if test="fITSaleCycle>0">
+				FIT_Sale_Cycle,
+			</if>
+			<if test="discountReturn>0">
+				Discount_Return,
+			</if>
+			<if test="groupSaleCycle>0">
+				Group_Sale_Cycle,
+			</if>
+			<if test="estPosiNbr>0">
+				Est_Posi_Nbr,
+			</if>
+			<if test="estDisposePlan!=null and estDisposePlan !=''">
+				Est_Dispose_Plan,
+			</if>
+			<if test="frequency>0">
+				Frequency,
+			</if>
+			<if test="status>0">
+				Status
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id>0">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="timeId>0">
+				#{timeId,jdbcType=INTEGER},
+			</if>
+			<if test="fltNbr!=null and fltNbr!=''">
+				#{fltNbr,jdbcType=VARCHAR},
+			</if>
+			<if test="agreement!=null and agreement!=''">
+				#{agreement,jdbcType=VARCHAR},
+			</if>
+			<if test="fITNbr >0">
+				#{fITNbr,jdbcType=INTEGER},
+			</if>
+			<if test="allFold >0">
+				#{allFold,jdbcType=DECIMAL},
+			</if>
+			<if test="lowestSale >0">
+				#{lowestSale,jdbcType=DECIMAL},
+			</if>
+			<if test="groupNbr>0">
+				#{groupNbr,jdbcType=INTEGER},
+			</if>
+			<if test="fITSaleCycle>0">
+				#{fITSaleCycle,jdbcType=INTEGER},
+			</if>
+			<if test="discountReturn>0">
+				#{discountReturn,jdbcType=DECIMAL},
+			</if>
+			<if test="groupSaleCycle>0">
+				#{groupSaleCycle,jdbcType=INTEGER},
+			</if>
+			<if test="estPosiNbr>0">
+				#{estPosiNbr,jdbcType=INTEGER},
+			</if>
+			<if test="estDisposePlan != null and estDisposePlan != ''">
+				#{estDisposePlan,jdbcType=VARCHAR},
+			</if>
+			<if test="frequency>0">
+				#{frequency,jdbcType=INTEGER},
+			</if>
+			<if test="status>0">
+				#{status,jdbcType=INTEGER}
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="MonthSalePlan">
+		update t_monthsaleplan
+		<set>
+			<if test="timeId>0">
+				Time_Id = #{timeId,jdbcType=INTEGER},
+			</if>
+			<if test="fltNbr!=null and fltNbr!=''">
+				Flt_Nbr = #{fltNbr,jdbcType=VARCHAR},
+			</if>
+			<if test="agreement!=null and agreement!=''">
+				Agreement = #{agreement,jdbcType=VARCHAR},
+			</if>
+			<if test="fITNbr >0">
+				FIT_Nbr = #{fITNbr,jdbcType=INTEGER},
+			</if>
+			<if test="allFold >0">
+				All_Fold = #{allFold,jdbcType=DECIMAL},
+			</if>
+			<if test="lowestSale >0">
+				Lowest_Sale = #{lowestSale,jdbcType=DECIMAL},
+			</if>
+			<if test="groupNbr>0">
+				Group_Nbr = #{groupNbr,jdbcType=INTEGER},
+			</if>
+			<if test="fITSaleCycle>0">
+				FIT_Sale_Cycle = #{fITSaleCycle,jdbcType=INTEGER},
+			</if>
+			<if test="discountReturn>0">
+				Discount_Return = #{discountReturn,jdbcType=DECIMAL},
+			</if>
+			<if test="groupSaleCycle>0">
+				Group_Sale_Cycle = #{groupSaleCycle,jdbcType=INTEGER},
+			</if>
+			<if test="estPosiNbr>0">
+				Est_Posi_Nbr = #{estPosiNbr,jdbcType=INTEGER},
+			</if>
+			<if test="estDisposePlan != null and estDisposePlan != ''">
+				Est_Dispose_Plan = #{estDisposePlan,jdbcType=VARCHAR},
+			</if>
+			<if test="frequency>0">
+				Frequency = #{frequency,jdbcType=INTEGER},
+			</if>
+			<if test="status>0">
+				Status = #{status,jdbcType=INTEGER}
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="load" resultMap="BaseResultMap">
+		select
+		c.Season_Id Time_Id,
+		SUM(Frequency) Frequency,
+		AVG(FIT_Nbr) FIT_Nbr,
+		AVG(FIT_Nbr*All_Fold*${yb}/100+Group_Nbr*Discount_Return*${yb}/100)
+		All_Fold,
+		AVG(Group_Nbr*Discount_Return*${yb}/100) Discount_Return,
+		AVG(Group_Nbr) Group_Nbr
+		from t_monthsaleplan a,t_divide_season b,t_divide_time c
+		where b.Divide_Id = c.Season_Id and c.Divide_Id = a.Time_Id
+		<if test="flt_Rte_Cd!=null and flt_Rte_Cd!=''">
+			AND c.Flt_Direct=#{flt_Rte_Cd}
+		</if>
+		AND b.Divide_Id = #{seasonId}
+		AND a.Flt_Nbr = #{flt_nbr}
+	</select>
+
+	<select id="selectByTimeId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_monthsaleplan
+		where Time_Id = #{timeId,jdbcType=INTEGER}
+		<if test="flt_nbr !=null and flt_nbr!=''">
+			and Flt_Nbr = #{flt_nbr,jdbcType=VARCHAR}
+		</if>
+		order by id limit 1
+	</select>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_monthsaleplan
+	</select>
+
+	<delete id="deleteSalePlan">
+		delete
+		from t_monthsaleplan
+		<where>
+			<if test="timeId>0">
+				Time_Id = #{timeId,jdbcType=INTEGER}
+			</if>
+			<if test="toFltNbr !=null and toFltNbr != ''">
+				and (Flt_Nbr = #{toFltNbr,jdbcType=VARCHAR} or Flt_Nbr =
+				#{backFltNbr,jdbcType=VARCHAR})
+			</if>
+		</where>
+	</delete>
+</mapper>

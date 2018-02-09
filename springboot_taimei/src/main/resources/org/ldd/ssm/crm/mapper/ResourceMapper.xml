@@ -1,0 +1,73 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ldd.ssm.crm.mapper.ResourceMapper">
+	<resultMap type="org.ldd.ssm.crm.domain.Resource" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="menu_id" property="menuId" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,name,url,menu_id
+	</sql>
+	<!-- <insert id="save" parameterType="Resource" useGeneratedKeys="true"> 
+		insert into t_resource(name,url) values (#{name},#{url}) </insert> -->
+	<insert id="save" parameterType="Resource" useGeneratedKeys="true">
+		insert into t_resource
+		<set>
+			name = #{name},url = #{url},menu_id = #{menuId}
+		</set>
+		on duplicate key update name = #{name}
+	</insert>
+	<update id="update" parameterType="Resource">
+		UPDATE t_resource
+		SET name=#{name},url=#{url} WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="long">
+		DELETE FROM t_resource
+		WHERE id=#{id}
+	</delete>
+	<select id="get" resultMap="BaseResultMap" parameterType="long">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM t_resource WHERE id = #{id}
+	</select>
+	<select id="list" resultMap="BaseResultMap" parameterType="long">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM t_resource
+	</select>
+	<select id="getResourceByUsername" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_resource
+		where 1=1
+		<if test="username != null and username != ''">
+			and name = #{username,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_resource
+	</select>
+	<select id="load" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_resource
+		where url = #{resourceUrl,jdbcType=VARCHAR}
+		limit 1
+	</select>
+	<select id="selectResourceByMenuId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_resource
+		where menu_id = #{menuId,jdbcType}
+	</select>
+</mapper>
+
+
+
+
+

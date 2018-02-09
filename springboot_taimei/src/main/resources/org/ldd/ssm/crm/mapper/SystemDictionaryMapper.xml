@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- dao的sql语句执行方法的映射文件 -->
+<!-- 命名空间必须和dao接口类的全限定类名一致 -->
+<mapper namespace="org.ldd.ssm.crm.mapper.SystemDictionaryMapper">
+	<!-- id的值必须和dao接口类里面的方法名一致 -->
+	<select id="get" resultType="SystemDictionary" parameterType="long">
+	</select>
+	<!-- id的值必须和dao接口类里面的方法名一致 -->
+	<insert id="save" parameterType="SystemDictionary"
+		useGeneratedKeys="true">
+		INSERT INTO t_systemdictionary(sn,name,intro)values(#{sn},#{name},#{intro})
+	</insert>
+	<delete id="delete" parameterType="long">
+		delete from t_systemdictionary where id=#{id}
+	</delete>
+	<update id="update" parameterType="SystemDictionary">
+		update t_systemdictionary set sn=#{sn},name=#{name},intro=#{intro} where
+		id=#{id}
+	</update>
+	<select id="getAll" resultType="SystemDictionary">
+		SELECT * FROM t_systemdictionary
+	</select>
+	<sql id="page">
+		<where>
+			<if test="name!=null">
+				AND name Like conCat('%',#{name},'%')
+			</if>
+			<if test="sn!=null">
+				AND sn Like conCat('%',#{sn},'%')
+			</if>
+			<if test="state!=-1">
+				AND state = #{state}
+			</if>
+		</where>
+	</sql>
+	<select id="queryTotal" resultType="int" parameterType="SystemDictionaryQuery">
+		SELECT count(*) FROM t_systemdictionary
+		<include refid="page" />
+
+	</select>
+	<select id="query" resultType="SystemDictionary" parameterType="SystemDictionaryQuery">
+		SELECT * FROM t_systemdictionary
+		<include refid="page" />
+		<if test="currentPage!=null and pageSize !=null">
+			limit #{beginIndex},#{pageSize}
+		</if>
+	</select>
+</mapper>

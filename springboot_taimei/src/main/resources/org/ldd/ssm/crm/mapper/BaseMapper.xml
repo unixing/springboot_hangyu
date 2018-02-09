@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.BaseMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.Base">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="base_name" property="baseName" jdbcType="VARCHAR" />
+		<result column="plane_stop_position" property="planeStopPosition"
+			jdbcType="VARCHAR" />
+		<result column="cityname" property="cityname" jdbcType="VARCHAR" />
+		<result column="plane_count" property="planeCount" jdbcType="INTEGER" />
+		<result column="plane_type" property="planeType" jdbcType="VARCHAR" />
+		<result column="flying_routes" property="flyingRoutes"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, base_name, plane_stop_position, cityname, plane_count, plane_type,
+		flying_routes
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from t_base
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from t_base
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.Base">
+		insert into t_base (id, base_name, plane_stop_position,
+		cityname, plane_count, plane_type,
+		flying_routes)
+		values (#{id,jdbcType=INTEGER}, #{baseName,jdbcType=VARCHAR},
+		#{planeStopPosition,jdbcType=VARCHAR},
+		#{cityname,jdbcType=VARCHAR}, #{planeCount,jdbcType=INTEGER}, #{planeType,jdbcType=VARCHAR},
+		#{flyingRoutes,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.Base">
+		insert into t_base
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="baseName != null">
+				base_name,
+			</if>
+			<if test="planeStopPosition != null">
+				plane_stop_position,
+			</if>
+			<if test="cityname != null">
+				cityname,
+			</if>
+			<if test="planeCount != null">
+				plane_count,
+			</if>
+			<if test="planeType != null">
+				plane_type,
+			</if>
+			<if test="flyingRoutes != null">
+				flying_routes,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="baseName != null">
+				#{baseName,jdbcType=VARCHAR},
+			</if>
+			<if test="planeStopPosition != null">
+				#{planeStopPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="cityname != null">
+				#{cityname,jdbcType=VARCHAR},
+			</if>
+			<if test="planeCount != null">
+				#{planeCount,jdbcType=INTEGER},
+			</if>
+			<if test="planeType != null">
+				#{planeType,jdbcType=VARCHAR},
+			</if>
+			<if test="flyingRoutes != null">
+				#{flyingRoutes,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.Base">
+		update t_base
+		<set>
+			<if test="baseName != null">
+				base_name = #{baseName,jdbcType=VARCHAR},
+			</if>
+			<if test="planeStopPosition != null">
+				plane_stop_position = #{planeStopPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="cityname != null">
+				cityname = #{cityname,jdbcType=VARCHAR},
+			</if>
+			<if test="planeCount != null">
+				plane_count = #{planeCount,jdbcType=INTEGER},
+			</if>
+			<if test="planeType != null">
+				plane_type = #{planeType,jdbcType=VARCHAR},
+			</if>
+			<if test="flyingRoutes != null">
+				flying_routes = #{flyingRoutes,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.Base">
+		update t_base
+		set base_name = #{baseName,jdbcType=VARCHAR},
+		plane_stop_position = #{planeStopPosition,jdbcType=VARCHAR},
+		cityname = #{cityname,jdbcType=VARCHAR},
+		plane_count = #{planeCount,jdbcType=INTEGER},
+		plane_type = #{planeType,jdbcType=VARCHAR},
+		flying_routes = #{flyingRoutes,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectByName" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_base
+		where 1=1
+		<if test="name !=null and name != ''">
+			and base_name = CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+</mapper>

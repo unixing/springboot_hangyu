@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.FlightRouteMapper">
+	<resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.FlightRoute">
+		<result column="route_id" property="routeId" jdbcType="INTEGER" />
+		<result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+		<result column="flt_nbr" property="fltNbr" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		a.route_id,a.employee_id,a.flt_nbr
+	</sql>
+	<insert id="insert" parameterType="org.ldd.ssm.crm.domain.FlightRoute">
+		insert into t_flightroute (route_id, employee_id, flt_nbr
+		)
+		values (#{routeId,jdbcType=INTEGER}, #{employeeId,jdbcType=BIGINT},
+		#{fltNbr,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.FlightRoute">
+		insert into t_flightroute
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="routeId != null">
+				route_id,
+			</if>
+			<if test="employeeId != null">
+				employee_id,
+			</if>
+			<if test="fltNbr != null">
+				flt_nbr,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="routeId != null">
+				#{routeId,jdbcType=INTEGER},
+			</if>
+			<if test="employeeId != null">
+				#{employeeId,jdbcType=BIGINT},
+			</if>
+			<if test="fltNbr != null">
+				#{fltNbr,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="selectByEmployee" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_flightroute a,t_flightinfo b
+		<where>
+			a.route_id = b.id
+			<if test="employeeId!=null and employeeId>0">
+				and employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+			<if test="itia!=null and itia != ''">
+				and b.itia = #{itia,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<delete id="deleteByEmployeeId">
+		delete from t_flightroute
+		<where>
+			<if test="employeeId!=null and employeeId>0">
+				employee_id = #{employeeId,jdbcType=BIGINT}
+				and route_id in
+				(
+				select id from t_flightinfo
+				<where>
+					<if test="itia!=null and itia != ''">
+						itia = #{itia,jdbcType=VARCHAR}
+					</if>
+				</where>
+				)
+			</if>
+			<if test="employeeId==null or employeeId==0">
+				route_id in
+				(
+				select id from t_flightinfo
+				<where>
+					<if test="itia!=null and itia != ''">
+						itia = #{itia,jdbcType=VARCHAR}
+					</if>
+				</where>
+				)
+			</if>
+		</where>
+	</delete>
+	<select id="selectFlightNbrCount" resultType="Integer">
+		select
+		count(a.route_id)
+		from t_flightroute a,t_flightinfo b
+		<where>
+			a.route_id = b.id
+			<if test="employeeId!=null and employeeId>0">
+				and employee_id = #{employeeId,jdbcType=BIGINT}
+			</if>
+			<if test="itia!=null and itia != ''">
+				and b.itia = #{itia,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+</mapper>

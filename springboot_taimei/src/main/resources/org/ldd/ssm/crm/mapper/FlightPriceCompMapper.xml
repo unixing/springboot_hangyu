@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.FlightPriceCompMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.FlightPriceComp" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="compare_date" property="compareDate" jdbcType="VARCHAR" />
+    <result column="current_price" property="currentPrice" jdbcType="VARCHAR" />
+    <result column="TKTIncome_id" property="tktincomeId" jdbcType="BIGINT" />
+  </resultMap>
+  
+  <delete id="deleteByTktId" parameterType="java.lang.Long" >
+    delete from flight_price_comp
+    where TKTIncome_id = #{tktincomeId,jdbcType=BIGINT}
+  </delete>
+  
+  <delete id="batchDeleteByTktId" parameterType="java.util.List">
+    delete from flight_price_comp
+     where TKTIncome_id in 
+     <foreach collection="list" index="index" item="item" open="(" separator="," close=")">    
+          #{item.id}    
+     </foreach> 
+  </delete>
+  
+  <select id="findFlightPriceComp" parameterType="java.lang.Long" resultType="org.ldd.ssm.crm.domain.FlightPriceComp">
+  select  compare_date compareDate, current_price currentPrice,TKTIncome_id tktincomeId
+      from flight_price_comp
+  where   TKTIncome_id = #{tktincomeId,jdbcType=BIGINT} ORDER BY compare_date
+  </select>
+  
+   <insert id="batchInsert" parameterType="org.ldd.ssm.crm.query.FlightSaleData" >
+	   insert into flight_price_comp (compare_date, current_price, 
+	     TKTIncome_id)
+	   values
+      <foreach collection="currerntFlightPriceList" item="item" index="index" separator="," >  
+     (#{item.search_date,jdbcType=VARCHAR},#{item.lowest_price,jdbcType=VARCHAR}, 
+      #{tktincomeId,jdbcType=BIGINT})
+   </foreach>  
+  </insert>
+   
+  <update id="updatePrice" parameterType="org.ldd.ssm.crm.domain.FlightPriceComp" >
+    update flight_price_comp
+    <set >
+      <if test="currentPrice != null" >
+        current_price = #{currentPrice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TKTIncome_id = #{tktincomeId,jdbcType=BIGINT} and  compare_date = #{compareDate,jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="deleteHistory" parameterType="java.lang.String">
+  delete from flight_price_comp where <![CDATA[compare_date<#{_parameter}]]>
+  </delete>
+  
+  <select id="findFlightPriceMaxDate" resultType="org.ldd.ssm.crm.query.FlightPriceCompDto">
+    select MAX(a.compare_date) compareDate,b.flt_nbr fltNbr,b.Dpt_Airpt_Cd dptAirptCd,b.Arrv_Airpt_Cd  arrvAirptCd,a.TKTIncome_id tktincomeId from flight_price_comp  a
+	LEFT JOIN TKTIncome b on a.TKTIncome_id=b.id
+	group by a.TKTIncome_id 
+  </select>
+  
+   <insert id="batchInsertNewest" parameterType="org.ldd.ssm.crm.query.FlightPriceCompDto" >
+	   insert into flight_price_comp (compare_date, current_price, 
+	     TKTIncome_id)
+	   values
+      <foreach collection="currentFlightPriceList" item="item" index="index" separator="," >  
+     (#{item.search_date,jdbcType=VARCHAR},#{item.lowest_price,jdbcType=VARCHAR}, 
+      #{tktincomeId,jdbcType=BIGINT})
+   </foreach>  
+  </insert>
+   <select id="findEmptyWatch" resultType="org.ldd.ssm.crm.domain.GuestrateFlpj">
+	select  b.id id,b.Flt_nbr fltNbr,b.Dpt_AirPt_Cd dptAirptCd,b.Arrv_Airpt_Cd arrvAirptCd 
+	from TKTIncome b 
+	where id not in 
+	(select DISTINCT(TKTIncome_id) tktid from  flight_price_comp  
+	UNION
+	 select DISTINCT(TKTIncome_id) tktid from  watch_flight WHERE state=0)
+
+ </select>
+</mapper>

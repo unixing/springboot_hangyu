@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.XcAirFareComItemMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.domain.XcAirFareComItem" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="source_local" property="sourceLocal" jdbcType="VARCHAR" />
+    <result column="source_local_3code" property="sourceLocal3code" jdbcType="VARCHAR" />
+    <result column="source_airport_3code" property="sourceAirport3code" jdbcType="VARCHAR" />
+    <result column="source_airport" property="sourceAirport" jdbcType="VARCHAR" />
+    <result column="source_depart" property="sourceDepart" jdbcType="VARCHAR" />
+    <result column="stopover_local" property="stopoverLocal" jdbcType="VARCHAR" />
+    <result column="stopover_arrive" property="stopoverArrive" jdbcType="VARCHAR" />
+    <result column="stopover_depart" property="stopoverDepart" jdbcType="VARCHAR" />
+    <result column="destination_local" property="destinationLocal" jdbcType="VARCHAR" />
+    <result column="destination_local_3code" property="destinationLocal3code" jdbcType="VARCHAR" />
+    <result column="destination_airport" property="destinationAirport" jdbcType="VARCHAR" />
+    <result column="destination_airport_3code" property="destinationAirport3code" jdbcType="VARCHAR" />
+    <result column="destination_arrive" property="destinationArrive" jdbcType="VARCHAR" />
+    <result column="search_date" property="searchDate" jdbcType="VARCHAR" />
+    <result column="airline_name" property="airlineName" jdbcType="VARCHAR" />
+    <result column="flight_no" property="flightNo" jdbcType="VARCHAR" />
+    <result column="aircraft_code" property="aircraftCode" jdbcType="VARCHAR" />
+    <result column="ontime_percents" property="ontimePercents" jdbcType="VARCHAR" />
+    <result column="full_price" property="fullPrice" jdbcType="VARCHAR" />
+    <result column="lowest_price" property="lowestPrice" jdbcType="VARCHAR" />
+    <result column="crawler_time" property="crawlerTime" jdbcType="VARCHAR" />
+    <result column="crawler_ip" property="crawlerIp" jdbcType="VARCHAR" />
+    <result column="crawler_address" property="crawlerAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, source_local, source_local_3code, source_airport_3code, source_airport, source_depart, 
+    stopover_local, stopover_arrive, stopover_depart, destination_local, destination_local_3code, 
+    destination_airport, destination_airport_3code, destination_arrive, search_date, 
+    airline_name, flight_no, aircraft_code, ontime_percents, full_price, lowest_price, 
+    crawler_time, crawler_ip, crawler_address
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from XcAirFareComItem
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from XcAirFareComItem
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.ldd.ssm.crm.domain.XcAirFareComItem" >
+    insert into XcAirFareComItem (id, source_local, source_local_3code, 
+      source_airport_3code, source_airport, source_depart, 
+      stopover_local, stopover_arrive, stopover_depart, 
+      destination_local, destination_local_3code, 
+      destination_airport, destination_airport_3code, 
+      destination_arrive, search_date, airline_name, 
+      flight_no, aircraft_code, ontime_percents, 
+      full_price, lowest_price, crawler_time, 
+      crawler_ip, crawler_address)
+    values (#{id,jdbcType=BIGINT}, #{sourceLocal,jdbcType=VARCHAR}, #{sourceLocal3code,jdbcType=VARCHAR}, 
+      #{sourceAirport3code,jdbcType=VARCHAR}, #{sourceAirport,jdbcType=VARCHAR}, #{sourceDepart,jdbcType=VARCHAR}, 
+      #{stopoverLocal,jdbcType=VARCHAR}, #{stopoverArrive,jdbcType=VARCHAR}, #{stopoverDepart,jdbcType=VARCHAR}, 
+      #{destinationLocal,jdbcType=VARCHAR}, #{destinationLocal3code,jdbcType=VARCHAR}, 
+      #{destinationAirport,jdbcType=VARCHAR}, #{destinationAirport3code,jdbcType=VARCHAR}, 
+      #{destinationArrive,jdbcType=VARCHAR}, #{searchDate,jdbcType=VARCHAR}, #{airlineName,jdbcType=VARCHAR}, 
+      #{flightNo,jdbcType=VARCHAR}, #{aircraftCode,jdbcType=VARCHAR}, #{ontimePercents,jdbcType=VARCHAR}, 
+      #{fullPrice,jdbcType=VARCHAR}, #{lowestPrice,jdbcType=VARCHAR}, #{crawlerTime,jdbcType=VARCHAR}, 
+      #{crawlerIp,jdbcType=VARCHAR}, #{crawlerAddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ldd.ssm.crm.domain.XcAirFareComItem" >
+    insert into XcAirFareComItem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sourceLocal != null" >
+        source_local,
+      </if>
+      <if test="sourceLocal3code != null" >
+        source_local_3code,
+      </if>
+      <if test="sourceAirport3code != null" >
+        source_airport_3code,
+      </if>
+      <if test="sourceAirport != null" >
+        source_airport,
+      </if>
+      <if test="sourceDepart != null" >
+        source_depart,
+      </if>
+      <if test="stopoverLocal != null" >
+        stopover_local,
+      </if>
+      <if test="stopoverArrive != null" >
+        stopover_arrive,
+      </if>
+      <if test="stopoverDepart != null" >
+        stopover_depart,
+      </if>
+      <if test="destinationLocal != null" >
+        destination_local,
+      </if>
+      <if test="destinationLocal3code != null" >
+        destination_local_3code,
+      </if>
+      <if test="destinationAirport != null" >
+        destination_airport,
+      </if>
+      <if test="destinationAirport3code != null" >
+        destination_airport_3code,
+      </if>
+      <if test="destinationArrive != null" >
+        destination_arrive,
+      </if>
+      <if test="searchDate != null" >
+        search_date,
+      </if>
+      <if test="airlineName != null" >
+        airline_name,
+      </if>
+      <if test="flightNo != null" >
+        flight_no,
+      </if>
+      <if test="aircraftCode != null" >
+        aircraft_code,
+      </if>
+      <if test="ontimePercents != null" >
+        ontime_percents,
+      </if>
+      <if test="fullPrice != null" >
+        full_price,
+      </if>
+      <if test="lowestPrice != null" >
+        lowest_price,
+      </if>
+      <if test="crawlerTime != null" >
+        crawler_time,
+      </if>
+      <if test="crawlerIp != null" >
+        crawler_ip,
+      </if>
+      <if test="crawlerAddress != null" >
+        crawler_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="sourceLocal != null" >
+        #{sourceLocal,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceLocal3code != null" >
+        #{sourceLocal3code,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceAirport3code != null" >
+        #{sourceAirport3code,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceAirport != null" >
+        #{sourceAirport,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceDepart != null" >
+        #{sourceDepart,jdbcType=VARCHAR},
+      </if>
+      <if test="stopoverLocal != null" >
+        #{stopoverLocal,jdbcType=VARCHAR},
+      </if>
+      <if test="stopoverArrive != null" >
+        #{stopoverArrive,jdbcType=VARCHAR},
+      </if>
+      <if test="stopoverDepart != null" >
+        #{stopoverDepart,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationLocal != null" >
+        #{destinationLocal,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationLocal3code != null" >
+        #{destinationLocal3code,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationAirport != null" >
+        #{destinationAirport,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationAirport3code != null" >
+        #{destinationAirport3code,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationArrive != null" >
+        #{destinationArrive,jdbcType=VARCHAR},
+      </if>
+      <if test="searchDate != null" >
+        #{searchDate,jdbcType=VARCHAR},
+      </if>
+      <if test="airlineName != null" >
+        #{airlineName,jdbcType=VARCHAR},
+      </if>
+      <if test="flightNo != null" >
+        #{flightNo,jdbcType=VARCHAR},
+      </if>
+      <if test="aircraftCode != null" >
+        #{aircraftCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ontimePercents != null" >
+        #{ontimePercents,jdbcType=VARCHAR},
+      </if>
+      <if test="fullPrice != null" >
+        #{fullPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="lowestPrice != null" >
+        #{lowestPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="crawlerTime != null" >
+        #{crawlerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="crawlerIp != null" >
+        #{crawlerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="crawlerAddress != null" >
+        #{crawlerAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ldd.ssm.crm.domain.XcAirFareComItem" >
+    update XcAirFareComItem
+    <set >
+      <if test="sourceLocal != null" >
+        source_local = #{sourceLocal,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceLocal3code != null" >
+        source_local_3code = #{sourceLocal3code,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceAirport3code != null" >
+        source_airport_3code = #{sourceAirport3code,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceAirport != null" >
+        source_airport = #{sourceAirport,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceDepart != null" >
+        source_depart = #{sourceDepart,jdbcType=VARCHAR},
+      </if>
+      <if test="stopoverLocal != null" >
+        stopover_local = #{stopoverLocal,jdbcType=VARCHAR},
+      </if>
+      <if test="stopoverArrive != null" >
+        stopover_arrive = #{stopoverArrive,jdbcType=VARCHAR},
+      </if>
+      <if test="stopoverDepart != null" >
+        stopover_depart = #{stopoverDepart,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationLocal != null" >
+        destination_local = #{destinationLocal,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationLocal3code != null" >
+        destination_local_3code = #{destinationLocal3code,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationAirport != null" >
+        destination_airport = #{destinationAirport,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationAirport3code != null" >
+        destination_airport_3code = #{destinationAirport3code,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationArrive != null" >
+        destination_arrive = #{destinationArrive,jdbcType=VARCHAR},
+      </if>
+      <if test="searchDate != null" >
+        search_date = #{searchDate,jdbcType=VARCHAR},
+      </if>
+      <if test="airlineName != null" >
+        airline_name = #{airlineName,jdbcType=VARCHAR},
+      </if>
+      <if test="flightNo != null" >
+        flight_no = #{flightNo,jdbcType=VARCHAR},
+      </if>
+      <if test="aircraftCode != null" >
+        aircraft_code = #{aircraftCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ontimePercents != null" >
+        ontime_percents = #{ontimePercents,jdbcType=VARCHAR},
+      </if>
+      <if test="fullPrice != null" >
+        full_price = #{fullPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="lowestPrice != null" >
+        lowest_price = #{lowestPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="crawlerTime != null" >
+        crawler_time = #{crawlerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="crawlerIp != null" >
+        crawler_ip = #{crawlerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="crawlerAddress != null" >
+        crawler_address = #{crawlerAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ldd.ssm.crm.domain.XcAirFareComItem" >
+    update XcAirFareComItem
+    set source_local = #{sourceLocal,jdbcType=VARCHAR},
+      source_local_3code = #{sourceLocal3code,jdbcType=VARCHAR},
+      source_airport_3code = #{sourceAirport3code,jdbcType=VARCHAR},
+      source_airport = #{sourceAirport,jdbcType=VARCHAR},
+      source_depart = #{sourceDepart,jdbcType=VARCHAR},
+      stopover_local = #{stopoverLocal,jdbcType=VARCHAR},
+      stopover_arrive = #{stopoverArrive,jdbcType=VARCHAR},
+      stopover_depart = #{stopoverDepart,jdbcType=VARCHAR},
+      destination_local = #{destinationLocal,jdbcType=VARCHAR},
+      destination_local_3code = #{destinationLocal3code,jdbcType=VARCHAR},
+      destination_airport = #{destinationAirport,jdbcType=VARCHAR},
+      destination_airport_3code = #{destinationAirport3code,jdbcType=VARCHAR},
+      destination_arrive = #{destinationArrive,jdbcType=VARCHAR},
+      search_date = #{searchDate,jdbcType=VARCHAR},
+      airline_name = #{airlineName,jdbcType=VARCHAR},
+      flight_no = #{flightNo,jdbcType=VARCHAR},
+      aircraft_code = #{aircraftCode,jdbcType=VARCHAR},
+      ontime_percents = #{ontimePercents,jdbcType=VARCHAR},
+      full_price = #{fullPrice,jdbcType=VARCHAR},
+      lowest_price = #{lowestPrice,jdbcType=VARCHAR},
+      crawler_time = #{crawlerTime,jdbcType=VARCHAR},
+      crawler_ip = #{crawlerIp,jdbcType=VARCHAR},
+      crawler_address = #{crawlerAddress,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

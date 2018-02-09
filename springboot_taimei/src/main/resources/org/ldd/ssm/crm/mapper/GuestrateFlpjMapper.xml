@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.GuestrateFlpjMapper" >
+  <resultMap id="BaseResultMap" type="org.ldd.ssm.crm.query.TicketMonitorResult" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="onGutDte" property="onGutDte" jdbcType="VARCHAR" />
+    <result column="leg" property="leg" jdbcType="VARCHAR" />
+    <result column="lowestPrice" property="lowestPrice" jdbcType="VARCHAR" />
+  </resultMap>
+  <!-- 近30天售票情况 -->	
+  <select id="findTicketTrends" resultType="org.ldd.ssm.crm.query.FlightPriceTrend" parameterType="org.ldd.ssm.crm.domain.GuestrateFlpj">
+		<!-- select a.On_Gut_Dte onGutDte,CONCAT(a.Dpt_AirPt_Cd,'-',a.Arrv_Airpt_Cd) leg,
+		 b.lowest_price lowestPrice 
+		 	from guestrateFlpj a 
+			LEFT JOIN XcAirFareComItem b on a.Flt_Nbr=b.flight_no and a.Dpt_AirPt_Cd=b.source_airport_3code and a.Arrv_Airpt_Cd=b.destination_airport_3code and a.On_Gut_Dte=b.search_date
+		 <![CDATA[ 
+		  where  a.Flt_Nbr=#{fltNbr} and a.Dta_Sce=#{onGutDte} and a.On_Gut_Dte>=#{onGutDte} and b.lowest_price is not null
+			]]> -->
+		 select 
+		 	search_date onGutDte,flight_no flightNum, concat(source_airport_3code,'-',destination_airport_3code) leg,
+		 	lowest_price price
+		 from XcAirFareComItem where flight_no=#{fltNbr} and 
+  </select>
+    <select id="findLegs" resultType="java.lang.String" parameterType="org.ldd.ssm.crm.domain.GuestrateFlpj">
+		select DISTINCT(CONCAT(a.Dpt_AirPt_Cd,'-',a.Arrv_Airpt_Cd)) leg
+		 	from guestrateFlpj a 
+		 where  a.Flt_Nbr=#{fltNbr} and a.Dta_Sce=#{onGutDte} 
+  </select>
+  
+   <resultMap id="CabinMap" type="org.ldd.ssm.crm.query.CabinData" >
+    <result column="dctChr" property="dctChr" jdbcType="VARCHAR" />
+    <result column="leg" property="leg" jdbcType="VARCHAR" />
+    <collection property="cabinDataList" ofType="org.ldd.ssm.crm.query.CabinData">
+		<result property="onGutDte" column="onGutDte"/>  
+		<result property="dctPgs" column="dctPgs"/>  
+    </collection>
+  </resultMap>
+  <select id="findCabin" resultMap="CabinMap" parameterType="org.ldd.ssm.crm.domain.GuestrateFlpj">
+  		 select a.On_Gut_Dte onGutDte,CONCAT(a.Dpt_AirPt_Cd,'-',a.Arrv_Airpt_Cd) leg,
+			b.Dct_Chr dctChr,b.dct_pgs dctPgs
+		 	from guestrateFlpj a 
+			 LEFT JOIN airClassCharPgs b on a.id=b.guestrateFlpj_id
+			 <![CDATA[ 
+			where  a.Flt_Nbr=#{fltNbr} and a.Dta_Sce=#{onGutDte}  and a.On_Gut_Dte>=#{onGutDte} and  b.Dct_pgs>0
+			 ]]>
+  </select>
+  
+  <!-- 昨日舱位销售数据 -->
+  <select id="findCabinYesterDay" resultMap="CabinMap" parameterType="org.ldd.ssm.crm.domain.GuestrateFlpj">
+			 select aa.onGutDte onGutDte,aa.leg leg ,aa.dctChr dctChr,IFNULL(aa.dctPgs,0)-IFNULL(bb.dctPgs,0) dctPgs from (select a.id,a.On_Gut_Dte onGutDte,CONCAT(a.Dpt_AirPt_Cd,'-',a.Arrv_Airpt_Cd) leg,
+			b.Dct_Chr dctChr,b.dct_pgs dctPgs
+		 	from guestrateFlpj a 
+			 LEFT JOIN airClassCharPgs b on a.id=b.guestrateFlpj_id			 
+			where  a.Flt_Nbr=#{fltNbr}  and a.Dta_Sce=#{dtaSce}  and a.On_Gut_Dte>#{dtaSce} and  b.Dct_pgs>0)aa
+			LEFT JOIN (
+				select a.id,a.On_Gut_Dte onGutDte,CONCAT(a.Dpt_AirPt_Cd,'-',a.Arrv_Airpt_Cd) leg,
+				b.Dct_Chr dctChr,b.dct_pgs dctPgs
+			 	from guestrateFlpj a 
+				 LEFT JOIN airClassCharPgs b on a.id=b.guestrateFlpj_id			 
+				where  a.Flt_Nbr=#{fltNbr}  and a.Dta_Sce=#{onGutDte}  and a.On_Gut_Dte>#{onGutDte} and  b.Dct_pgs>0) bb on (aa.leg=bb.leg and aa.dctChr=bb.dctChr and aa.onGutDte=bb.onGutDte)
+
+			where (IFNULL(aa.dctPgs,0)-IFNULL(bb.dctPgs,0))>0
+		
+  </select>
+  
+ 
+  
+</mapper>

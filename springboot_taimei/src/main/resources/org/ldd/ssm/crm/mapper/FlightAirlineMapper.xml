@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ldd.ssm.crm.mapper.FlightAirlineMapper">
+	<select id="getFlightAirlineData" resultType="FlightAirline" parameterType="FlightAirlineQuery">
+		SELECT f.START_POINT_TYPE startType,f.END_POINT_TYPE endType, f.DISTANCE airLineDistance, f.FLIGHT_AIRLINE_ID flightAirlineId,START_CITY stratCityName,END_CITY endCityName,substring_index(FLT_NUM, '-', 1) stratCity,substring_index(substring_index(f.FLT_NUM, '-', 2) , '-', -1) endCity,START_POINT_ID pointId,END_POINT_ID pointId2 
+		from flight_airline f 
+ 		<include refid="checkCityiCAO"></include>
+	</select>
+	<select id="getGuanXiData" resultType="FlightAirline" parameterType="String">
+		SELECT AIRWAY_POINT_ID pointId,FLIGHT_AIRLINE_ID flightAirlineId, NO indexx  
+		from flight_airline_and_point 
+		where FLIGHT_AIRLINE_ID in
+		 <foreach item="flightids" index="index" collection="list" open="(" separator="," close=")">  
+		  	#{flightids}  
+		 </foreach>  
+	</select>
+	<select id="getPointData" resultType="FlightAirline" parameterType="String">
+		SELECT AIRWAY_POINT_ID pointId,LATITUDE stratCityPoit1,LONGITUDE stratCityPoit2,AIRWAY_POINT_NAME stratCity 
+		from airway_point 
+		where AIRWAY_POINT_ID in
+		 <foreach item="pointids" index="index" collection="list" open="(" separator="," close=")">  
+		  	#{pointids}  
+		 </foreach>  
+	</select>
+	
+	<select id="getAirportData" resultType="FlightAirline" parameterType="String">
+		SELECT AIRPORT_ID pointId,LATITUDE stratCityPoit1,LONGITUDE stratCityPoit2,NAME stratCity 
+		from airport 
+		where AIRPORT_ID in
+		 <foreach item="pointids" index="index" collection="list" open="(" separator="," close=")">  
+		  	#{pointids}  
+		 </foreach>  
+	</select>
+	
+	<select id="getAllFlightAirlineData" resultType="FlightAirline" >
+		select a.AIRWAY_ID airwayId, a.AIRWAY_IDENTIFIER airwayIndentify, b.AIRWAY_SEQ airwaySEQ, c.AIRWAY_POINT_NAME airwayName,c.LATITUDE airwayLat,c.LONGITUDE airwayLong FROM airway a ,airway_segment_point b,  airway_point c where a.AIRWAY_ID = b.AIRWAY_ID and b.AIRWAY_POINT_ID = c.AIRWAY_POINT_ID ORDER BY a.AIRWAY_IDENTIFIER,b.AIRWAY_SEQ
+	</select>
+	<sql id="checkCity">
+		<where>
+		<if test="pasCity1!=null">
+			<if test="pasCity2!=null">
+				<if test="stratCity!=null">
+					<if test="endCity!=null">
+						and	((f.START_CITY like CONCAT('%',#{stratCity},'%' )  and f.END_CITY like CONCAT('%', #{pasCity1},'%' )) 
+							OR (f.START_CITY like CONCAT('%',#{pasCity1},'%' ) and f.END_CITY like CONCAT('%', #{pasCity2},'%' ))
+							OR (f.START_CITY like CONCAT('%', #{pasCity2},'%' ) and f.END_CITY like CONCAT('%', #{endCity},'%' )))
+					</if>
+				</if>
+			</if>
+			<if test="pasCity2==null">
+				<if test="stratCity!=null">
+					<if test="endCity!=null">
+						and	((f.START_CITY like CONCAT('%', #{stratCity},'%' ) and f.END_CITY like CONCAT('%', #{pasCity1},'%' )) 
+							OR (f.START_CITY like CONCAT('%', #{pasCity1},'%' ) and f.END_CITY like CONCAT('%', #{endCity},'%' )))
+					</if>
+				</if>
+			</if>
+		</if>
+		<if test="pasCity1==null">
+			<if test="pasCity2==null">
+				<if test="stratCity!=null">
+					<if test="endCity!=null">
+						and	((f.START_CITY like CONCAT('%', #{stratCity},'%' ) and f.END_CITY like CONCAT('%', #{endCity},'%' )))
+					</if>
+				</if>
+			</if>
+			<if test="pasCity2!=null">
+				<if test="stratCity!=null">
+					<if test="endCity!=null">
+						and	((f.START_CITY like CONCAT('%', #{stratCity},'%' ) and f.END_CITY like CONCAT('%', #{pasCity2},'%' )) 
+							OR (f.START_CITY like CONCAT('%', #{pasCity2},'%' ) and f.END_CITY like CONCAT('%', #{endCity},'%' )))
+					</if>
+				</if>
+			</if>
+		</if>
+		</where>
+	</sql>
+	
+		<sql id="checkCityiCAO">
+		<where>
+		<if test="pasCity1!=null">
+			<if test="pasCity2!=null">
+				<if test="stratCity!=null">
+					<if test="endCity!=null">
+						and	((substring_index(f.FLT_NUM, '-', 1)=#{stratCity} and substring_index(substring_index(f.FLT_NUM, '-', 2) , '-', -1)=#{pasCity1}) 
+							OR (substring_index(f.FLT_NUM, '-', 1)=#{pasCity1} and substring_index(substring_index(f.FLT_NUM, '-', 2) , '-', -1)=#{pasCity2})
+							OR (substring_index(f.FLT_NUM, '-', 1)=#{pasCity2} and substring_index(substring_index(f.FLT_NUM, '-', 2) , '-', -1)=#{endCity}))
+					</if>
+				</if>
+			</if>
+			<if test="pasCity2==null">
+				<if test="stratCity!=null">
+					<if test="endCity!=null">
+						and	((substring_index(f.FLT_NUM, '-', 1)=#{stratCity} and substring_index(substring_index(f.FLT_NUM, '-', 2) , '-', -1)=#{pasCity1}) 
+							OR (substring_index(f.FLT_NUM, '-', 1)=#{pasCity1} and substring_index(substring_index(f.FLT_NUM, '-', 2) , '-', -1)=#{endCity}))
+					</if>
+				</if>
+			</if>
+		</if>
+		<if test="pasCity1==null">
+			<if test="pasCity2==null">
+				<if test="stratCity!=null">
+					<if test="endCity!=null">
+						and	((substring_index(f.FLT_NUM, '-', 1)=#{stratCity} and substring_index(substring_index(f.FLT_NUM, '-', 2) , '-', -1)=#{endCity}))
+					</if>
+				</if>
+			</if>
+			<if test="pasCity2!=null">
+				<if test="stratCity!=null">
+					<if test="endCity!=null">
+						and	((substring_index(f.FLT_NUM, '-', 1)=#{stratCity} and substring_index(substring_index(f.FLT_NUM, '-', 2) , '-', -1)=#{pasCity2}) 
+							OR (substring_index(f.FLT_NUM, '-', 1)=#{pasCity2} and substring_index(substring_index(f.FLT_NUM, '-', 2) , '-', -1)=#{endCity}))
+					</if>
+				</if>
+			</if>
+		</if>
+		</where>
+	</sql>
+	<select id="translateIataToIcao" parameterType="FlightAirlineQuery" resultType="FlightAirlineQuery">
+	    select b.ICAO stratCity,(select a.ICAO from airportmappingcode a where a.IATA=#{pasCity1}) pasCity1,(select c.ICAO from airportmappingcode c where c.IATA=#{pasCity2}) pasCity2 ,(select d.ICAO from airportmappingcode d where d.IATA=#{endCity}) endCity from airportmappingcode b where b.IATA=#{stratCity}
+	</select>
+</mapper> 

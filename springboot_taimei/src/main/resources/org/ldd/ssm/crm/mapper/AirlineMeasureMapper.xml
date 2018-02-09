@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.crm.mapper.AirlineMeasureMapper" >
+<!-- 机场详情对比 -->
+ <resultMap id="AirplaneMap" type="org.ldd.ssm.crm.query.AirportInfoData">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="cityId" property="cityId" jdbcType="BIGINT" />
+    <result column="iata" property="iata" jdbcType="VARCHAR" />
+    <result column="airPortName" property="airPortName" jdbcType="VARCHAR" />
+    <result column="airfieldLvl" property="airfieldLvl" jdbcType="VARCHAR" />
+    <result column="runwayArticleNumber" property="runwayArticleNumber" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="touristResources" property="touristResources" jdbcType="VARCHAR" />
+     <association property="baseNavigationDep"   
+         select="selectBaseNavigationDep" column="iata"  >  
+     </association>
+     <association property="cityPgeNumber" 
+         select="selectcityPgeNumber" column="cityId"   >  
+     </association>
+    <collection property="throughputs"  ofType="org.ldd.ssm.crm.query.ThroughputOrGdp"  
+         select="selectThroughputs" column="id"   >  
+     </collection>  
+     <collection property="gdps"  ofType="org.ldd.ssm.crm.query.ThroughputOrGdp"  
+         select="selectGdps" column="iata"   >  
+     </collection>
+  </resultMap> 
+	<select id="selectThroughputs" parameterType="java.lang.Long" resultType="org.ldd.ssm.crm.query.ThroughputOrGdp"  >  
+     	select a.year year ,a.passengerThroughput data from flowofsubsidiary a 
+     		LEFT JOIN airportinfonewthree b on a.airportinfonewthree_id=b.id 
+      		where b.id=#{id} <![CDATA[ and a.year>=((select year(curdate()))-4) and a.year<(select year(curdate()))]]>
+      		order by a.year
+	</select> 
+	<select id="selectGdps" parameterType="java.lang.String" resultType="org.ldd.ssm.crm.query.ThroughputOrGdp"  >  
+     	select a.economicYear year,a.cityGDP data from economic_year a LEFT JOIN cityinfothree b on a.cityinfothree_id=b.id 
+     	where b.airport=#{iata} <![CDATA[ and a.economicYear>=((select year(curdate()))-4) and a.economicYear<(select year(curdate()))]]>
+     	order by a.economicYear
+	</select>  
+	<select id="selectBaseNavigationDep" parameterType="java.lang.String" resultType="java.lang.String"  >  
+     	select IFNULL(group_concat(airln_cd),'-') from aircompenyinfothree 
+     	where  find_in_set(#{iata},baseDistribution)
+	</select>  
+	<select id="selectcityPgeNumber" parameterType="java.lang.Long" resultType="java.lang.String"  >  
+     	select concat(cityPgeNumber,'(',populationYear,'年)') from population 
+     	where cityinfothree_id=#{cityId} and cityPgeNumber!='' and cityPgeNumber is not null ORDER BY populationYear desc LIMIT 1
+	</select> 
+  <select id="findAirportCompareInfo" resultMap="AirplaneMap" parameterType="java.util.List">
+  	select a.id id,b.id cityId,a.iATA iata,CONCAT(e.Apt_Cha_Nm,"机场") airPortName,a.airfieldLvl airfieldLvl,a.city city,
+  		a.runwayArticleNumber runwayArticleNumber,
+  		ifnull(CONCAT("5A: ",b.sitesEnumeration5A,",","  4A: ",b.sitesEnumeration4A),'-') touristResources
+		from airportinfonewthree a 
+		LEFT JOIN cityinfothree b on a.iATA=b.airport 
+		LEFT JOIN airportmappingcode e on e.IATA=a.IATA
+		where a.iATA in
+	    <foreach item="iATA" collection="list" open="(" separator="," close=")">
+		#{iATA}
+		</foreach>
+  </select>
+  
+  <!-- 成本测算 begin -->
+
+<!--   机场信息 begin -->
+  <resultMap id="AirportMap" type="org.ldd.ssm.crm.query.AirportInfoData">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="cityId" property="cityId" jdbcType="BIGINT" />
+    <result column="iata" property="iata" jdbcType="VARCHAR" />
+    <result column="airPortName" property="airPortName" jdbcType="VARCHAR" />
+    <result column="airfieldLvl" property="airfieldLvl" jdbcType="VARCHAR" />
+    <result column="airportType" property="airportType" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="inter" property="inter" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="areaManager" property="areaManager" jdbcType="VARCHAR" />
+    <result column="warZone" property="warZone" jdbcType="VARCHAR" />
+    <result column="airEle" property="airEle" jdbcType="VARCHAR" />
+    <result column="airpotCls" property="airpotCls" jdbcType="VARCHAR" />
+    <result column="specialAirport" property="specialAirport" jdbcType="VARCHAR" />
+    <result column="specialAirportWhy" property="specialAirportWhy" jdbcType="VARCHAR" />
+    <result column="port" property="port" jdbcType="VARCHAR" />
+    <result column="releasePunctuality" property="releasePunctuality" jdbcType="VARCHAR" />
+    <result column="fireLvl" property="fireLvl" jdbcType="VARCHAR" />
+    <result column="lightingConditions" property="lightingConditions" jdbcType="VARCHAR" />
+    <result column="allowTheTakeoffAndLanding" property="allowTheTakeoffAndLanding" jdbcType="VARCHAR" />
+    <result column="modelCanHandle" property="modelCanHandle" jdbcType="VARCHAR" />
+    <result column="airportShuttleMetro" property="airportShuttleMetro" jdbcType="VARCHAR" />
+    <result column="airportBus" property="airportBus" jdbcType="VARCHAR" />
+    <result column="distanceFromDowntown" property="distanceFromDowntown" jdbcType="VARCHAR" />
+    <result column="inTheFlight" property="inTheFlight" jdbcType="VARCHAR" />
+    <result column="international" property="international" jdbcType="VARCHAR" />
+    <result column="internationalTime" property="internationalTime" jdbcType="VARCHAR" />
+    <result column="domestic" property="domestic" jdbcType="VARCHAR" />
+    <result column="inTheFlightTime" property="inTheFlightTime" jdbcType="VARCHAR" />
+    <result column="membershipGroup" property="membershipGroup" jdbcType="VARCHAR" />
+    <result column="planePositionNumber" property="planePositionNumber" jdbcType="VARCHAR" />
+    <result column="departureTime" property="departureTime" jdbcType="VARCHAR" />
+   <collection property="runwaythedetailList"  ofType="org.ldd.ssm.crm.domain.Runwaythedetail"  
+         select="selectRunwaythedetail" column="id"   >  
+     </collection>  
+     <collection property="flowofsubsidiaryList"  ofType="org.ldd.ssm.crm.domain.Flowofsubsidiary"  
+         select="selectFlowofsubsidiary" column="id" >  
+     </collection>
+  </resultMap> 
+  <select id="findAirportInfo" parameterType="org.ldd.ssm.crm.query.LegProfitFocastQuery" resultMap="AirportMap">
+select a.id id ,CONCAT(a.airln_Cd,"机场") airPortName,a.iATA iata,a.ICAO icao,a.airfieldLvl airfieldLvl,a.airpotType airportType,
+    	CONCAT(a.province,a.city) area,a.inter inter,a.city city,a.province province ,a.area areaManager,a.warZone warZone,a.air_ele airEle ,
+  		a.airpotCls airpotCls,a.specialAirport specialAirport,a.specialAirportWhy specialAirportWhy ,a.port port ,a.releasePunctuality releasePunctuality,
+		a.fireLvl fireLvl,a.lightingConditions lightingConditions,a.allowTheTakeoffAndLanding allowTheTakeoffAndLanding,a.modelCanHandle modelCanHandle,
+		a.airportShuttleMetro airportShuttleMetro,a.airportBus airportBus,a.distanceFromDowntown distanceFromDowntown,a.inTheFlight inTheFlight,a.international international,
+		a.internationalTime internationalTime,a.domestic domestic,a.inTheFlightTime inTheFlightTime,a.membershipGroup membershipGroup,
+		a.planePositionNumber planePositionNumber,a.departureTime departureTime
+		from airportinfonewthree a 
+    	where a.iATA in 
+	    <foreach item="iATA" collection="airlineList" open="(" separator="," close=")">
+		#{iATA}
+		</foreach>
+  	</select>
+  	<select id="selectFlowofsubsidiary" parameterType="java.lang.Long" resultType="org.ldd.ssm.crm.domain.Flowofsubsidiary">
+  	    select 
+  	    c.year year,c.passengerThroughput,
+		c.goodsThroughput,c.takeOffAndLandingFlights
+		from flowofsubsidiary c where c.airportinfonewthree_id=#{id}
+  	</select>
+  	<select id="selectRunwaythedetail" parameterType="java.lang.Long" resultType="org.ldd.ssm.crm.domain.Runwaythedetail">
+  	    select 
+  	    d.runwayNumber runwayNumber,d.runwayLvl runwayLvl,d.runwayLENGTH runwayLENGTH,
+  		d.runwayWidth runwayWidth
+  		from runwaythedetail d where d.airportinfonewthree_id=#{id}
+  	</select>
+ 
+    <!-- 机场信息 end -->
+    <!-- 成本测算 end -->
+    
+   <!--  返回高级筛选里面的机型  暂时不要-->
+    <select id="getModelCanHandle" resultType="java.lang.String" parameterType="java.util.List">
+  	select modelCanHandle
+		from airportinfonewthree 
+		where modelCanHandle!='' and modelCanHandle is not null and iATA in
+	    <foreach item="iATA" collection="list" open="(" separator="," close=")">
+		#{iATA}
+		</foreach>
+   	</select>
+
+<!--   航司信息 -->
+  <resultMap id="AirCompanyMap" type="org.ldd.ssm.crm.query.AirCompanyInfoQuery">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="airlnCd" property="airlnCd" jdbcType="VARCHAR" />
+    <result column="iata" property="iata" jdbcType="VARCHAR" />
+    <result column="icao" property="icao" jdbcType="VARCHAR" />
+    <result column="establishTime" property="establishTime" jdbcType="VARCHAR" />
+    <result column="headquartersLocation" property="headquartersLocation" jdbcType="VARCHAR" />
+    <result column="baseDistribution" property="baseDistribution" jdbcType="VARCHAR" />
+	<result column="shippingCountry" property="shippingCountry" jdbcType="VARCHAR" />
+    <result column="navigationAirport" property="navigationAirport" jdbcType="VARCHAR" />
+    <result column="systemAirpot" property="systemAirpot" jdbcType="VARCHAR" />
+    <result column="airlineAlliance" property="airlineAlliance" jdbcType="VARCHAR" />
+   <collection property="planeList"  ofType="org.ldd.ssm.crm.domain.PlaneDetail"  
+         select="selectPlaneList" column="id"   >  
+     </collection>  
+  </resultMap>
+   <select id="getAircompanyInfo" parameterType="java.lang.Long" resultMap="AirCompanyMap">
+      select 
+  		id,airln_cd airlnCd,iata,icao,establishTime,headquartersLocation,baseDistribution,shippingCountry,navigationAirport,
+  		systemAirpot,airlineAlliance from aircompenyinfothree 
+ 		where id=#{id}
+  </select> 
+     <select id="selectPlaneList" parameterType="java.lang.Long" resultType="org.ldd.ssm.crm.domain.PlaneDetail">
+      select 
+  		airportType,number
+  		from planedetail
+ 		where aircompenyinfothree_id=#{id}
+  </select>
+  
+     <!-- 查看已有测算结果 -->
+    <select id="getMeasureResult" resultType="org.ldd.ssm.crm.domain.MeasureResult"  parameterType="org.ldd.ssm.crm.domain.ApplyMeasureHistory">
+       select  CONCAT(Dpt_Airpt_Cd,"-",Arrv_Airpt_Cd) leg,flight_per_month flightPerMonth,avg_sites avgSites,
+ 				CONCAT(avg_vol,"(",IFNULL(avg_group,0),"/",IFNULL(avg_vol,0)-IFNULL(avg_group,0),")") avgVol,plf, 
+ 				CONCAT(IFNULL(avg_income,0),"(",IFNULL(grp_Income,0),"/",IFNULL(avg_income,0)-IFNULL(grp_Income,0),")") avgIncome,
+				Km_income kmIncome, CONCAT(IFNULL(avg_discount,0),"(",IFNULL(group_Discount,0),"/",IFNULL(idd_discount,0),")") avgDiscount
+ 		from measure_result 
+ 		where apply_measure_id=(
+		select a.id from apply_measure_history  a
+ 		where a.Flt_Rte_Cd=#{fltRteCd} and a.start_time=#{startTime} and a.end_time=#{endTime} and a.user_id=#{userId} and a.state='2' ORDER BY a.apply_measure_time desc  limit 1)
+    </select>
+    
+	<select id="isExist" parameterType="org.ldd.ssm.crm.domain.ApplyMeasureHistory" resultType="java.lang.Integer">
+	    select count(a.id) from apply_measure_history a
+	    where a.Flt_Rte_Cd=#{fltRteCd} and a.start_time=#{startTime} and a.end_time=#{endTime} and a.user_id=#{userId} and a.state='2' 
+	</select>    
+	
+	<select id="applyIsExist" parameterType="org.ldd.ssm.crm.domain.ApplyMeasureHistory" resultType="java.lang.Integer">
+	    select count(a.id) from apply_measure_history a
+	    where a.Flt_Rte_Cd=#{fltRteCd} and a.start_time=#{startTime} and a.end_time=#{endTime} and a.user_id=#{userId} and a.state='1' 
+	</select>    
+</mapper>
