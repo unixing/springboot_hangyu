@@ -1,0 +1,154 @@
+/*鏃堕棿鎺т欢*/
+.tags {
+	background-color: #283b65;
+}
+
+.airport-controls {
+	width: 450px;
+	background-color: #0f1d37;
+	position: absolute;
+	/* left: 6px; */
+	top: 32px;
+	padding: 10px 10px 20px 0px;
+	display: none;
+	z-index: 999;
+}
+
+.airport-controls-head {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	border-bottom: 2px solid transparent;
+	width: 460px;
+	height: 26px;
+}
+
+.airport-controls-head>li {
+	display: inline-block;
+	font-size: 14px;
+	margin-right: 2px;
+	height: 22px;
+	padding: 2px 5px 2px 5px;
+	color: white;
+}
+
+.airport-controls-head>li:hover {
+	cursor: pointer;
+}
+
+.airport-controls-head>li:nth-of-type(1) {
+	margin-left: 15px;
+	border-bottom: 2px solid rgb(58, 83, 140);
+	background-color: rgb(40, 58, 99);
+}
+
+.airport-controls-hot {
+	width: 100%;
+	margin: 10px 20px 0px 17px;
+	display: block;
+}
+
+.airport-controls-hot>span {
+	margin-right: 5px;
+	font-size: 13px;
+	display: inline-block;
+	padding: 3px 4px 3px 4px;
+	color: white;
+	font-weight: 200;
+}
+
+.airport-controls-hot>span:hover {
+	background-color: #00b7ef;
+	cursor: pointer;
+}
+
+/*鍏ㄩ儴鏈哄満淇℃伅*/
+.airport-controls-cont {
+	width: 100%;
+	position: relative;
+	left: 0px;
+	top: 0px;
+}
+
+.airport-controls-cont>ul {
+	width: 100%;
+	list-style: none;
+	padding-left: 24px;
+	margin-top: 10px;
+}
+
+.airport-controls-cont>ul>li {
+	display: inline-block;
+}
+
+.airport-controls-cont>ul>li:nth-of-type(1) {
+	width: 20px;
+	height: 24px;
+	line-height: 20px;
+	vertical-align: top;
+	font-weight: 500;
+	color: white;
+}
+
+.airport-controls-cont>ul>li:nth-of-type(2) {
+	display: inline-block;
+	width: 380px;
+}
+
+.airport-controls-cont>ul>li:nth-of-type(2)>span {
+	color: white;
+	font-size: 12px;
+	padding: 2px 5px 2px 5px;
+	display: inline-block;
+}
+
+.airport-controls-cont>ul>li:nth-of-type(2)>span:hover {
+	background-color: #5bc0de;
+	cursor: pointer;
+}
+/**********************绛涢�夋牱寮�***********************/
+strong {
+	color: red;
+}
+
+.screen-controls {
+	width: 234px;
+	background-color: #0f1d37;
+	position: absolute;
+	left: 0px;
+	max-height: 144px;
+	display: none;
+	overflow: hidden;
+	z-index: 6;
+}
+
+.screen-controls-one {
+	list-style: none;
+	margin: 0px;
+	padding: 3px 2px 3px 2px;
+	color: white;
+}
+
+.screen-controls-one>li {
+	display: inline-block;
+	font-size: 12px;
+	vertical-align: middle;
+}
+
+.screen-controls-one>li:nth-of-type(1) {
+	width: 60px;
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.screen-controls-one>li:nth-of-type(2) {
+	width: 40px;
+	text-align: center;
+}
+
+.screen-controls-one>li:nth-of-type(3) {
+	width: 120px;
+	text-align: center;
+	overflow: hidden;
+}

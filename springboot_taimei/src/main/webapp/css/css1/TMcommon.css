@@ -1,0 +1,352 @@
+/*滚动条*/
+::-webkit-scrollbar-thumb{  
+   background-color: rgb(195, 195, 195);
+   height:50px;  
+   outline-offset:-2px;  
+   outline:0px solid #fff;
+   border-radius:4px;  
+}  
+ 
+/*---鼠标点击滚动条显示样式--*/  
+::-webkit-scrollbar-thumb:hover{
+    background-color: rgb(205, 205, 205);
+    cursor: pointer;
+}
+ 
+/*---滚动条大小--*/  
+::-webkit-scrollbar{  
+   width:6px;
+   height:8px;  
+}  
+ 
+/*---滚动框背景样式--*/  
+::-webkit-scrollbar-track-piece{  
+   background-color:rgba(153, 153, 153, 0.1);  
+   border-radius:0;  
+}
+
+/*图标库*/
+@font-face {
+    font-family: 'iconfont';  /* project id 129360 */
+    src: url('//at.alicdn.com/t/font_129360_ccv80hx6hvmo0f6r.eot');
+    src: url('//at.alicdn.com/t/font_129360_ccv80hx6hvmo0f6r.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_129360_ccv80hx6hvmo0f6r.woff') format('woff'),
+    url('//at.alicdn.com/t/font_129360_ccv80hx6hvmo0f6r.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_129360_ccv80hx6hvmo0f6r.svg#iconfont') format('svg');
+  }
+  
+  i{
+      font-family:'iconfont';
+  }
+  
+
+/*无数据缺失提示*/
+.TMnodata{
+	display:none;
+	position:absolute;
+    font-size: 12px;
+    color:#d7522f;
+    width:150px;
+    height: 46px;
+    line-height: 46px;
+    background-color: #19315e;
+    text-align: center;
+    z-index:2;
+}
+.TMlackdata{
+	display:none;
+	position:fixed;
+	top:6%;
+	left:40%;
+    font-size: 12px;
+    color:#d7522f;
+    width:360px;
+    height: 30px;
+    background-color: #13233d;
+    text-align: center;
+    line-height: 30px;
+    z-index: 99;
+}
+.TMnodata span,.TMlackdata span{
+	display:inline-block;
+	margin-right:5px;
+	font-family:icon;
+	font-size:14px;
+}
+
+.TMnodata-div{
+	/* cursor:not-allowed !important; */
+	color:#4f6587;
+	background-color:rgb(16,37,76);
+}
+.TMnodata-div .element-tag{
+	color:#4f6587;
+}
+
+
+.SD-hd-null{
+	text-align:center;
+	overflow:hidden;
+	white-space: nowrap;
+	display:none;
+	position:fixed;
+	width:260px;
+	height:100px;
+	top:36%;
+	left:44%;
+	font-size:25px;
+	background-color:rgba(0,0,0,0.3);
+	border:1px solid rgba(153,194,255,0.9);
+	border-radius:10px;
+	z-index:16;
+}
+.SD-hd-null p{
+	color:#fff;
+	margin:30px 0 0 25px;
+}
+
+
+/*异常数据提示*/
+.abnormalData_prompt{
+	position:absolute;
+	top: 9%;
+	left: 40%;
+    border-radius: 3px;
+    z-index: 99;
+    font-size: 12px;
+    color: #ce583a;
+}
+.abnormalData_prompt>span{
+	font-family:'icon';
+}
+
+/*导出按钮*/
+.btn-export-out{
+	display: inline-block;
+	position: absolute;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	right: 0;
+	border: 1px solid rgba(255,255,255,0.2);
+	text-align: center;
+	text-indent: 15px;
+	background: url(/images/platform/salesData/exporticon.png) 15px 7px no-repeat #162b49;
+	cursor: pointer;
+	border-radius : 3px;
+}
+
+
+/*返回顶部*/
+.back-to-top{
+	display:none;
+	cursor: pointer;
+	position: fixed;
+	bottom: 80px;
+	right: 5.5%;
+	width: 48px;
+	height: 48px;
+	background: url("/images/platform/salesData/back-to-topB.png") no-repeat;
+}
+.back-to-top:hover{
+	background: url("/images/platform/salesData/back-to-top.png") no-repeat;
+	z-index: 99;
+}
+
+.back-top{
+	display:none;
+	cursor: pointer;
+	position: absolute;
+	bottom: 80px;
+	right: 10%;
+	width: 48px;
+	height: 48px;
+	background: url("/images/platform/salesData/back-to-topB.png") no-repeat;
+}
+.back-top:hover{
+	background: url("/images/platform/salesData/back-to-top.png") no-repeat;
+	z-index: 99;
+}
+
+
+
+
+/*································表格/图标切换*/
+.chart-changer{
+	position: absolute;
+	display: block;
+	width: 160px !important;
+	height: 160px !important;
+	border-radius: 80px;
+	bottom: -80px;
+	right: 220px;
+	background-color: rgba(59,86,152,0.4) !important;
+    cursor: pointer;
+    z-index: 10;
+}
+.chart-changer:hover{
+	background-color: rgba(57,90,155,1) !important;	
+}
+.chart-changer>div{	
+	background-color: rgba(59,86,152,0.4) !important;
+	float: none !important;
+	height: auto !important;
+	width: auto !important;
+}
+.chart-changer span{
+	position: relative;
+	top: 30px;
+	left: 35px;
+	font-family: icon;
+	display: inline-block;
+	font-size: 30px;
+	color: #fff;
+}
+
+
+
+
+
+
+/*·································表格*/
+.TMtable-container{
+	
+	color: #fff;
+	height: 100% !important;
+	width: 80.7%;
+    background-color: rgb(19, 35, 61);
+	float: left;
+    z-index: 9;
+    transform: translate(0,2000px);
+    position: absolute;
+    left: 50px;
+}
+#TMtable .TMtable-wrap{
+	height: 100%;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+#TMtable .TMtable-wrap table{	
+	color: #fff;
+	margin: 50px 0; 
+	width: 100%;
+	table-layout: fixed;
+	border: 0;
+	border-collapse:collapse;
+	font-size: 12px;
+	text-align: center;
+}
+#TMtable .TMtable-wrap table th{
+	min-width: 80px;
+	font-weight: normal;
+}
+
+#TMtable .TMtable-wrap table tr{
+	height: 40px;
+}
+#TMtable .TMtable-wrap table thead{
+	background-color: rgba(59,86,152,0.4);
+	border: 1px solid rgba(34,55,98,1);
+}
+#TMtable .TMtable-wrap table>tbody,#TMtable .TMtable-wrap table>thead{
+	display: table-row-group;
+}
+
+#TMtable .TMtable-wrap table tbody tr:nth-child(even){
+
+	background-color: #172A47;
+
+}
+#TMtable .TMtable-wrap table tbody td{
+	min-width: 80px;
+	margin: 0px !important;
+	border: 1px solid rgba(34,55,98,1);
+	vertical-align: middle;
+	text-align: center;
+}
+#TMtable .TMtable-wrap td:hover{
+	background: inherit;
+	cursor: default;
+}
+#TMtable .TMtable-wrap .hover-color{
+	background: rgba(25,49,94,.5) !important;  
+}
+#TMtable .TMtable-wrap .sumtr{
+	background: #395a9b !important;
+}
+
+.copyThead-Area{
+	display: none;
+	width:auto;
+	top: 0px;
+    left: 50px;
+    background-color: rgb(19,35,61);
+    position: absolute;
+	
+}
+
+#copyThead{
+	margin-top: 50px;
+    border-collapse: collapse;
+    box-shadow: 0px 3px 9px rgba(0,0,0,1);
+}
+#copyThead th{
+    margin-top: 20px;
+	color: #fff;
+    background-color: rgb(34, 55, 98);
+	width: 110px;
+	height: 40px;
+	min-width: 100px;
+	font-size: 12px;
+	font-weight: normal;
+}
+@media screen and (max-width: 1700px) {
+	#copyThead th{
+		min-width: 60px;
+	}
+}
+
+
+#TMtable .offsetContainer{
+	padding: 20px 50px 100px 50px;
+}
+#TMtable .headArea{	
+	position: relative;
+	margin-top: 30px;
+	
+}
+#TMtable .headArea h1{
+	font-size: 21px;
+	display: inline-block;
+	font-weight: 300;
+}
+
+.TM-loading{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;	
+	background-color: rgba(29,44,72,.6);
+	z-index: 9999;
+}
+.TM-loading:before{
+	content:'';
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
+	background: url("/images/platform/commonImg/loading.gif") no-repeat scroll center;
+	
+}
+
+.full-layer{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.1);
+    display: none;
+    z-index:2;
+}

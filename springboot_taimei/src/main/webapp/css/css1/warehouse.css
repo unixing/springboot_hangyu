@@ -1,0 +1,57 @@
+/* 浅蓝色按钮状态 */
+
+.nice-btn-lBlue{
+    cursor:pointer;
+    transition: background .3s linear;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#62c5d8), to(#4b5cb6));
+    background: -moz-linear-gradient(top, #62c5d8, #4b5cb6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62c5d8', endColorstr='#4b5cb6');
+}
+.nice-btn-lBlue:hover{
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#7ab7ff), to(#3841b6));
+    background: -moz-linear-gradient(top, #63bdd8, #4353b6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#63bdd8', endColorstr='#4353b6');
+}
+.nice-btn-lBlue:active{
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#59b0d8), to(#2324b6));
+    background: -moz-linear-gradient(top, #59b0d8, #2324b6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#59b0d8', endColorstr='#2324b6');
+}
+
+/* 深蓝色按钮状态 */
+
+.nice-btn-dBlue{
+    cursor:pointer;
+    background-color: #5b77a9;
+    transition: background .3s linear;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#224b79), to(#263763));
+    background: -moz-linear-gradient(top, #224b79, #263763);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#224b79', endColorstr='#263763');
+}
+.nice-btn-dBlue:hover{
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#2e6279), to(#263763));
+    background: -moz-linear-gradient(top, #2e6279, #263763);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2e6279', endColorstr='#263763');
+}
+.nice-btn-dBlue:active{
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#1f4279), to(#263763));
+    background: -moz-linear-gradient(top, #1f4279, #263763);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1f4279', endColorstr='#263763');
+}
+
+/* 普通取消按钮 */
+
+.cancel-btn-ordinary{
+    cursor: pointer;
+    background-color: #13233d;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.4) inset;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+.cancel-btn-ordinary:hover{
+    background-color: #13234d;
+}
+.cancel-btn-ordinary:active{
+    background-color: #111f4d;
+}
+
+

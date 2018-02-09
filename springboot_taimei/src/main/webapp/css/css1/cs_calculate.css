@@ -1,0 +1,350 @@
+@charset "UTF-8";
+.cs_ultimately {
+  width: 900px;
+  height: auto;
+  background-color: white;
+  position: relative;
+  display: none; }
+
+.cs_tableHeadSetItem {
+  cursor: pointer; }
+
+.cs_ultimatelyClear {
+  position: absolute;
+  right: -100px;
+  top: 0px;
+  display: flex; }
+  .cs_ultimatelyClear > div {
+    font-family: icon;
+    font-size: 16px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    background-color: #4455a1;
+    cursor: pointer; }
+    .cs_ultimatelyClear > div:hover {
+      background-color: #263d6c; }
+
+.cs_ultimatelyHead {
+  display: flex; }
+  .cs_ultimatelyHead > div {
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+    color: #5d70b9;
+    background-color: #10244c;
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer; }
+    .cs_ultimatelyHead > div:hover {
+      background-color: #4455a1;
+      color: white; }
+
+.cs_ultimatelyHeadS {
+  color: white !important;
+  background-color: #4455a1 !important; }
+
+.cs_ultimatelyBody {
+  width: 100%;
+  height: 570px;
+  background-color: white;
+  position: relative;
+  overflow-y: auto; }
+  .cs_ultimatelyBody > div {
+    display: none;
+    padding: 0 10px; }
+
+.cs_ultimatelyYgT {
+  display: flex; }
+  .cs_ultimatelyYgT > div {
+    cursor: pointer;
+    padding: 5px 20px;
+    background-color: white;
+    border: 1px solid #4455a1; }
+    .cs_ultimatelyYgT > div > p:nth-child(1) {
+      font-size: 16px;
+      margin: 3px 0;
+      font-weight: 600; }
+    .cs_ultimatelyYgT > div > p:nth-child(2) {
+      font-size: 12px;
+      margin: 1px 0;
+      text-align: center; }
+
+.cs_ultimatelyYgTSet {
+  background-color: #4455a1 !important;
+  color: white; }
+  .cs_ultimatelyYgTSet > p {
+    color: white; }
+
+.cs_ultimatelyCbcs0 {
+  padding: 31px 35px; }
+  .cs_ultimatelyCbcs0 > p:nth-child(1) {
+    font-size: 16px;
+    color: black;
+    padding: 0 0 15px 0;
+    margin: 0px; }
+  .cs_ultimatelyCbcs0 > p:nth-child(3) {
+    font-size: 12px;
+    color: black;
+    padding: 0 0 30px 0;
+    margin: 10px 0 0 0;
+    float: right; }
+  .cs_ultimatelyCbcs0 > span {
+    font-size: 12px;
+    display: inline-block;
+    margin: 10px 2px 0 0px; }
+
+.cs_ultimatelySqsy {
+  width: 121px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #4455a1;
+  text-align: center;
+  line-height: 40px;
+  color: white;
+  margin: 40px auto;
+  font-size: 12px;
+  cursor: pointer; }
+
+.cs_ultimatelyBtn {
+  clear: both;
+  text-align: center;
+  line-height: 30px;
+  width: 96px;
+  height: 30px;
+  background-color: #4455a1;
+  border-radius: 5px;
+  font-size: 12px;
+  color: white;
+  float: right;
+  margin: 25px; }
+
+.cs_ultimatelyItem1 {
+  display: flex;
+  padding: 30px 0; }
+  .cs_ultimatelyItem1 > div {
+    flex: 1; }
+    .cs_ultimatelyItem1 > div > div {
+      padding: 5px 0;
+      display: flex;
+      font-size: 12px;
+      justify-content: center; }
+      .cs_ultimatelyItem1 > div > div > div:nth-child(1) {
+        width: 60px;
+        text-align: right;
+        color: #b5b5b5; }
+      .cs_ultimatelyItem1 > div > div > div:nth-child(2) {
+        text-align: left;
+        padding-left: 15px;
+        color: black;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 124px; }
+
+.cs_ultimatelyTable1 {
+  width: 100%;
+  border: 1px solid #e0e0e0; }
+  .cs_ultimatelyTable1 > thead > tr {
+    height: 45px;
+    background-color: #eaeaea; }
+    .cs_ultimatelyTable1 > thead > tr > th {
+      font-weight: normal;
+      font-size: 12px;
+      border-left: 1px solid #e0e0e0;
+      border-right: 1px solid #e0e0e0;
+      text-align: center; }
+    .cs_ultimatelyTable1 > thead > tr > th:first-of-type {
+      border-left: none; }
+    .cs_ultimatelyTable1 > thead > tr > th:last-of-type {
+      border-right: none; }
+  .cs_ultimatelyTable1 > tbody > tr {
+    height: 45px; }
+    .cs_ultimatelyTable1 > tbody > tr > td {
+      font-weight: normal;
+      font-size: 12px;
+      border-left: 1px solid #e0e0e0;
+      text-align: center;
+      border-top: 1px solid #e0e0e0; }
+    .cs_ultimatelyTable1 > tbody > tr > td:first-of-type {
+      border-left: none; }
+    .cs_ultimatelyTable1 > tbody > tr > td:last-of-type {
+      border-right: none; }
+
+/* 机场信息 */
+.cs_ultimatelyJcxxH {
+  display: flex;
+  font-size: 12px;
+  border-bottom: 1px solid #a2abd1; }
+  .cs_ultimatelyJcxxH > div {
+    flex: 1;
+    text-align: center;
+    height: 48px;
+    line-height: 48px;
+    cursor: pointer; }
+
+.cs_ultimatelyJcxxHSet {
+    color: #4455a1;
+    font-weight: 600;
+  border-bottom: 4px solid #4455a1; }
+
+.cs_ultimatelyItem1x > div > div > div:nth-child(1) {
+  flex: 1; }
+.cs_ultimatelyItem1x > div > div > div:nth-child(2) {
+  width: 142px; }
+
+.cs_zbox {
+  display: flex;
+  padding: 10px 0;
+  width: 100%; }
+  .cs_zbox > div {
+    border: 1px solid #e6e6e6;
+    flex: 1;
+    width: 100%; }
+    .cs_zbox > div > div:nth-child(1) {
+      padding: 18px 24px;
+      font-size: 12px; }
+    .cs_zbox > div > div:nth-child(2) {
+      height: 200px;
+      border-top: 1px solid #e6e6e6;
+      width: 100%; }
+  .cs_zbox > div:nth-child(1) {
+    margin: 0 5px 0 0; }
+  .cs_zbox > div:nth-child(2) {
+    margin: 0 5px 0 5px; }
+  .cs_zbox > div:nth-child(3) {
+    margin: 0 0 0 5px; }
+
+/* 航司信息 */
+.cs_ultimatelyHsxxBox {
+  border: 1px solid #e7e7e7; }
+
+.cs_ultimatelyHsxxHe {
+  border-bottom: 1px solid #e7e7e7;
+  display: flex;
+  justify-content: space-between; }
+  .cs_ultimatelyHsxxHe > div {
+    font-size: 13px;
+    padding: 15px 30px; }
+  .cs_ultimatelyHsxxHe > div:last-of-type {
+    color: #4455a1; }
+
+.cs_ultimatelyItem2 > div {
+  padding: 10px 0;
+  display: flex;
+  flex-flow: row wrap; }
+  .cs_ultimatelyItem2 > div > div {
+    border: 1px solid #f2f2f2;
+    display: flex;
+    width: 275px;
+    padding-left: 15px;
+    margin: 5px 0 0 5px; }
+    .cs_ultimatelyItem2 > div > div > div {
+      height: 50px;
+      line-height: 50px;
+      font-size: 12px;
+      text-align: center; }
+    .cs_ultimatelyItem2 > div > div > div:nth-child(1) {
+      text-align: left;
+      flex: 1; }
+    .cs_ultimatelyItem2 > div > div > div:nth-child(2) {
+      width: 35px;
+      color: #b8b8b8; }
+    .cs_ultimatelyItem2 > div > div > div:nth-child(3) {
+      width: 35px; }
+
+.cs_ultimatelyItem3 > div {
+  display: flex;
+  background-color: #fdfdfd;
+  flex-flow: row wrap; }
+  .cs_ultimatelyItem3 > div > div {
+    border: 1px solid #f2f2f2;
+    display: flex;
+    width: 408px;
+    margin: 10px;
+    background-color: white;
+    padding: 10px 5px 10px 0; }
+    .cs_ultimatelyItem3 > div > div > div:nth-child(1) {
+      font-size: 12px;
+      width: 120px;
+      padding-left: 30px; }
+    .cs_ultimatelyItem3 > div > div > div:nth-child(2) {
+      font-size: 12px;
+      width: 155px; }
+    .cs_ultimatelyItem3 > div > div > div:nth-child(3) {
+      font-size: 12px; }
+
+.cs_ultimatelyItem_bh > div:nth-child(1) {
+  margin: 0 0 10px 0; }
+.cs_ultimatelyItem_bh > div:nth-child(2) {
+  margin: 0 0 10px 0;
+  width: 72px; }
+.cs_ultimatelyItem_bh > div {
+  display: flex; }
+  .cs_ultimatelyItem_bh > div > div:nth-child(1) {
+    color: #adadad; }
+  .cs_ultimatelyItem_bh > div > div:nth-child(2) {
+    padding-left: 15px; }
+
+#reckonTip {
+  width: 100%;
+  background-color: white;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 99;
+  display: none; }
+
+.reckonTipO {
+  display: none;
+  margin: 294px auto;
+  width: 250px;
+  background-color: black;
+  padding: 15px 10px;
+  border-radius: 5px; }
+  .reckonTipO > h5 {
+    font-weight: normal;
+    font-size: 16px; }
+  .reckonTipO > span {
+    text-align: center;
+    display: inline-block;
+    color: white;
+    font-size: 12px; }
+
+.reckonTipR {
+  display: none;
+  width: 300px;
+  height: 160px;
+  background-color: white;
+  border-radius: 5px;
+  margin: 259px auto; }
+  .reckonTipR > p {
+    height: 100px;
+    line-height: 100px;
+    text-align: center; }
+  .reckonTipR > span {
+    font-family: icon;
+    font-size: 14px;
+    color: #b54a30;
+    position: absolute;
+    right: -23px;
+    top: 3px;
+    display: inline-block; }
+  .reckonTipR > div {
+    display: flex;
+    height: 50px; }
+    .reckonTipR > div > div {
+      flex: 1;
+      text-align: center;
+      background-color: #6977b4;
+      line-height: 50px;
+      color: white;
+      cursor: pointer; }
+    .reckonTipR > div div:nth-child(1) {
+      border-radius: 0 0 0 20px; }
+    .reckonTipR > div div:nth-child(2) {
+      border-radius: 0 0 20px 0; }
+
+/*# sourceMappingURL=cs_calculate.css.map */

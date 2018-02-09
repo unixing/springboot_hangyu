@@ -1,0 +1,348 @@
+@font-face {
+  font-family: 'icon';  /* project id 129360 */
+  src: url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.eot');
+  src: url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.svg#iconfont') format('svg');
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	font-family: "微软雅黑";
+}
+
+body,html {
+	height: 100%
+}
+/******上是初始化页面***************/
+.lin-historical {
+	width: 100%;
+	min-width: 1280px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.sr-box-head {
+	height: 39px;
+	position: relative;
+	z-index: 99;
+}
+
+.sr-box-head-classify>ul {
+	list-style: none;
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	border-radius: 3px 3px 0px 0px;
+	overflow: hidden;
+}
+
+.set-liset {
+	background-color: #142e45 !important;
+}
+
+.tltle-sel {
+	font-family: "icon";
+	font-size: 14px;
+	color: #6d91c1;
+	float: left;
+	/*margin: 0px 5px 0px 0px;*/
+	height: 39px;
+	text-align: center;
+	line-height: 39px;
+	width: 50px;
+	background: #3e4b90;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e4b90),
+		to(#326fab)); /*谷歌*/
+	background: -moz-linear-gradient(top, #3e4b90, #326fab);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3e4b90',
+		endColorstr='#326fab');
+}
+
+.sr-box-head-classify>ul>li:hover {
+	background: #3e4b90;
+	cursor: pointer;
+}
+
+.sr-box-head-inquire {
+	background-color: rgba(0, 0, 0, 0.6);
+	display: inline-block;
+	padding: 5px 10px 5px 10px;
+	float: right;
+	border-radius: 5px 5px 0px 0px;
+	margin-right: 3px;
+}
+
+.sr-box-head-inquire>ul {
+	list-style: none;
+	float: left;
+	margin: 2px 0px 0px;
+	padding: 0px;
+}
+
+.sr-box-head-inquire>ul>li {
+	float: left;
+	height: 25px;
+	padding: 0px;
+	margin: 0px 5px 0px 0px;
+	border-radius: 4px;
+	background-color: white;
+}
+
+.sr-box-head-inquire>ul>li>input {
+	text-align: center;
+	border: 0px;
+	outline: 0px;
+	line-height: 23px;
+	width: 105px;
+	border-radius: 4px;
+	font-size: 13px;
+	color: cadetblue;
+	height: 23px;
+	padding: 0px;
+}
+
+.sr-box-head-inquire>ul>li>span {
+	color: black;
+	font-size: 13px;
+	height: 18px;
+	line-height: 18px;
+	display: inline-block;
+	border-right: 1px solid #a3a7b2;
+	margin-top: 4px;
+	padding: 0px 5px 0px 5px;
+}
+
+.sr-inquire-set {
+	float: left;
+	font-size: 12px;
+	color: white;
+	overflow: hidden;
+	line-height: 26px;
+	margin: 0px 5px 0px 0px;
+}
+
+.sr-inquire-set>input {
+	vertical-align: middle;
+}
+/*查询按钮*/
+.sr-box-head-btn {
+	float: left;
+	width: 92px;
+	height: 29px;
+	text-align: center;
+	line-height: 29px;
+	background-color: #1e4677;
+	border-radius: 3px;
+	color: white;
+	font-size: 12px;
+	vertical-align: middle;
+	margin-left: 15px;
+}
+
+.sr-box-head-btn:hover {
+	cursor: pointer;
+}
+/*选中状态*/
+.tltle-selI {
+	width: 100px;
+	background: #3e4b90;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e4b90),
+		to(#3e4b90)); /*谷歌*/
+	background: -moz-linear-gradient(top, #3e4b90, #3e4b90);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3e4b90',
+		endColorstr='#3e4b90');
+}
+
+.tltle-selI>span {
+	font-size: 12px;
+}
+/********************************************内容区域*******************/
+.lin-historical-body {
+	
+}
+/**/
+.lin-historical-body-navigation {
+	width: 50px;
+	float: left;
+	height: 100%
+}
+
+.body-navigation-element {
+	width: 100%;
+	background-color: #2e437a;
+	font-size: 12px;
+	text-align: center;
+	color: white;
+	overflow: hidden;
+}
+
+.tag-box {
+	display: inline-block;
+}
+
+.body-navigation-element:hover {
+	background-color: #142e45;
+	cursor: pointer;
+}
+
+.element-tag {
+	font-family: 'icon';
+	font-size: 12px;
+	color: white;
+}
+/*内容图区*/
+.lin-historical-body-box {
+	float: left;
+	background-color: #13233d;
+}
+
+.lin-historical-body-box>div {
+	
+}
+
+.lin-historical-body-box-titles {
+	width: 100%;
+	overflow: hidden;
+}
+
+.lin-historical-body-box-titles>div {
+	color: white;
+	font-size: 13px;
+}
+
+.lin-historical-body-box-titles>div:nth-of-type(1) {
+	float: left;
+	margin: 25px 0px 0px 45px;
+}
+
+.lin-historical-body-box-titles>div:nth-of-type(2) {
+	float: right;
+	margin: 25px 45px 0px 0px;
+}
+/*动态内容*/
+.element-lines-box {
+	
+}
+
+.element-lines {
+	position: relative;
+	width: 100%;
+	height: 14.25%;
+}
+
+.lines-title {
+	color: white;
+	position: absolute;
+	left: 50px;
+	top: 39%;
+	font-size: 18px;
+	display: inline-block;
+	margin-top: -3px;
+}
+
+.lines-box {
+	height: 15px;
+	position: absolute;
+	top: 40%;
+	left: 160px;
+}
+
+.calibration {
+	width: 100%;
+	position: absolute;
+}
+
+.calibration>div {
+	width: 1px;
+	height: 15px;
+	float: left;
+	position: absolute;
+	background-color: #145593;
+}
+
+.gradient {
+	position: absolute;
+	width: 50%;
+	height: 15px;
+	overflow: hidden;
+}
+
+.gradient>div {
+	height: 15px;
+	background: #3484aa;
+	background: -moz-linear-gradient(left, #34729c, #925046); /*Mozilla*/
+	background: -webkit-gradient(linear, 0 50%, 100% 50%, from(#34729c),
+		to(#925046)); /*Old gradient for webkit*/
+	background: -o-linear-gradient(left, #34729c, #925046); /*Opera11*/
+	opacity: 0.8;
+}
+
+.air-taimei {
+	position: absolute;
+	font-family: "icon";
+	font-size: 13px;
+	color: white;
+	margin: 0px 0px 0px -7px;
+}
+
+.describe {
+	position: absolute;
+	right: 70px;
+	font-size: 12px;
+	color: #1a6db6;
+	top: 41%;
+}
+
+.describe>div {
+	margin-top: 5px;
+}
+/*选中日期*/
+.selected-date {
+	height: 30px !important;
+	position: relative;
+}
+
+.selected-date>p {
+	margin: 30px 0px 0px -3px;
+	color: white;
+	font-size: 12px;
+}
+
+.selected-date>p:hover {
+	cursor: pointer;
+}
+
+.selected-date>div {
+	width: 145px;
+	font-size: 12px;
+	color: white;
+	border: 1px solid #1a5fa0;
+	padding: 5px 0px 5px 0px;
+	border-radius: 3px;
+	text-align: center;
+	top: -36px;
+	position: absolute;
+}
+/**/
+.difference {
+	position: absolute;
+	top: 18px;
+	height: 6px;
+	background-color: #525a6a;
+}
+
+/*时间控件*/
+.sr-box-body-date {
+	height: 100%;
+	float: right;
+	background-color: white;
+	width: 300px;
+	border-radius: 0px 0px 5px 0px;
+}
+/*选中样式*/
+.set {
+	background-color: #13233d;
+}

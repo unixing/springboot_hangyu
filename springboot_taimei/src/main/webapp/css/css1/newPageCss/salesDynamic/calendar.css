@@ -1,0 +1,108 @@
+.calendar {
+	width: 300px;
+	background-color: white;
+	margin: 0 auto;
+}
+
+.calendar-head {
+	width: 100%;
+	height: 20px;
+}
+
+.calendar-head>div {
+	float: left;
+	height: 100%;
+	width: 14.28571428571429%;
+	font-size: 12px;
+	text-align: center;
+	line-height: 20px;
+}
+/*日历框*/
+.calendar-box {
+	width: 100%;
+	height: 250px;
+	outline: 1px solid #f5f5f5;
+}
+
+.calendar-content {
+	width: 100%;
+	height: 42px;
+}
+
+.calendar-content>div {
+	width: 14.28571428571429%;
+	float: left;
+	height: 100%;
+	outline: 1px solid #f5f5f5;
+	text-align: center;
+	line-height: 42px;
+	color: black;
+	font-family: 'Arial';
+	font-size: 12px;
+	font-weight: 600;
+    position: relative;
+}
+/*上月*/
+.last-month,.next-month {
+	background-color: #f7f4f4;
+}
+
+.choose-title {
+	height: 50px;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 14px;
+}
+
+.choose-set {
+	height: 100px;
+	width: 100px;
+	margin: 0px 0px 0px 102px;
+}
+
+.choose-set>div {
+	float: left;
+	width: 39px;
+	height: 50px;
+}
+
+.choose-set div {
+	text-align: center;
+}
+
+.choose-set>div:nth-of-type(2) {
+	width: 27px;
+	height: 40px;
+	line-height: 50px;
+	font-size: 12px;
+	text-align: right;
+}
+
+.choose-set>div:nth-of-type(3) {
+	width: 20px;
+}
+
+.choose-set>div:nth-of-type(3) {
+	float: right;
+}
+
+.choose-font-top {
+	font-family: "icon";
+	text-align: center;
+	color: #cccdcf;
+}
+
+.choose-font-bottom {
+	font-family: "icon";
+	transform: rotate(180deg);
+	text-align: center;
+	font-size: 12px;
+	color: #cccdcf;
+}
+
+.choose-time {
+	font-weight: 600;
+	font-size: 16px;
+}

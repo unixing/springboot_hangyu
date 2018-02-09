@@ -1,0 +1,268 @@
+body,html {
+	font-family: "微软雅黑";
+}
+
+.income-set>div {
+	color: white;
+	font-size: 23px;
+	float: left;
+}
+
+.information-head {
+	float: left;
+}
+
+.information-head {
+	margin: 0px 30px 0px 0px;
+}
+
+.information-head:first-of-type {
+	margin-left: 37px;
+}
+
+.information-head>p {
+	color: white;
+	margin: 10px 0px 0px 5px;
+	font-size: 12px;
+}
+
+.information-head>div {
+	color: white;
+	font-size: 18px;
+	font-style: oblique;
+	font-weight: 600;
+}
+
+.sr-box-body-date-head>h3 {
+	text-align: center;
+	color: black;
+	font-size: 17px;
+	margin: 25px 0px 20px 0px;
+}
+
+.set-years {
+	list-style: none;
+	margin: 0px auto;
+	padding: 0px;
+	overflow: hidden;
+	width: 175px;
+}
+
+.set-years>li {
+	float: left;
+}
+
+.set-years>li:nth-of-type(1) {
+	font-family: "icon";
+	font-size: 24px;
+	color: #cecece;
+	transform: rotate(90deg);
+	margin: 0px 0px 0px 30px;
+	height: 25px;
+	line-height: 25px;
+	display: inline-block;
+}
+
+.set-years>li:nth-of-type(2) {
+	font-size: 15px;
+	color: black;
+	font-weight: 600;
+	height: 25px;
+	width: 90px;
+	line-height: 25px;
+	text-align: center;
+	margin: 0px 0px 0px 0px;
+}
+
+.set-years>li:nth-of-type(3) {
+	font-family: "icon";
+	font-size: 24px;
+	color: #cecece;
+	transform: rotate(-90deg);
+	height: 25px;
+	line-height: 25px;
+	display: inline-block;
+}
+
+.set-years>li:nth-of-type(1),.set-years>li:nth-of-type(3):hover {
+	cursor: pointer;
+}
+
+/**/
+
+/**/
+#person_avg {
+	position: relative;
+}
+
+#p-number {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+#combined {
+	width: 50%;
+	height: 60%;
+	position: absolute;
+	right: 0px;
+	top: -80px;
+}
+/* #income{
+    overflow: hidden;
+} */
+#income>div:last-of-type {
+	/* border: 1px solid #8c4033 !important; */
+	border-radius: 5px !important;
+}
+/**/
+.sr-box-body-date-head>h3 {
+	text-align: center;
+	color: black;
+	font-size: 17px;
+	margin: 25px 0px 20px 0px;
+}
+
+.set-years {
+	list-style: none;
+	margin: 0px auto;
+	padding: 15px 0 0;
+	overflow: hidden;
+	width: 194px;
+}
+/*6骞�*/
+.sr-box-body-date-body {
+	padding: 20px 20px 0px 31px;
+	overflow: hidden;
+}
+
+.sr-box-body-date-body>div {
+	float: left;
+	width: 80px;
+	height: 54px;
+	text-align: center;
+	line-height: 54px;
+	font-size: 12px;
+	border: 1px solid #eee;
+}
+/*鍒囨崲鎺т欢**/
+/*寰�杩斿垏鎹�*/
+#income-set {
+	list-style: none;
+	padding: 0px;
+	overflow: hidden;
+	margin: 25px auto;
+	width: 165px;
+	font-weight: 600;
+}
+
+#income-set>li {
+	list-style: none;
+	float: left;
+	width: 55px;
+	height: 25px;
+	background-color: #e0dedf;
+	border-radius: 3px;
+	line-height: 25px;
+	text-align: center;
+	color: black;
+	cursor: pointer;
+}
+
+#income-set>li:nth-of-type(2) {
+	background-color: #5a7aa9;
+	color: white;
+}
+/**/
+.change-line {
+	width: 90%;
+	height: 45px;
+	margin: 36px auto;
+	border-radius: 5px;
+	position: relative;
+	z-index: 5;
+}
+.change-line-o2{
+	display:none !important;
+}
+.change-line2{
+	width:186px !important;
+}
+
+.change-line>div {
+	position: absolute;
+	background-color: white;
+	/* padding: 5px; */
+	width: 74px;
+}
+
+.change-line>div>p {
+	font-weight: 600;
+	font-size: 20px;
+	text-align: center;
+	margin: 0px;
+}
+
+.change-line>div>div {
+	font-size: 12px;
+	text-align: center;
+}
+
+.change-line-f {
+	top: -100%;
+	margin: 22px 0px 0px 0px;
+	left: 15px;
+}
+
+.change-line-o {
+	top: -100%;
+	/* margin: 22px 0px 0px -22px; */
+	margin: 22px -22.5px;
+	left: 45%;
+	position: relative;
+}
+.change-line-o:before,.change-line-l:before{
+    content: "\e683";
+    position: absolute;
+    font-family: 'icon';
+    color: #364a93;
+    font-size: 14px;
+    top: 8px;
+    left: -12px;
+}
+.change-line-l {
+	top: -100%;
+	margin: 22px 0px 0px 0px;
+	right: 15px;
+	position: relative;
+}
+/*鍒囨崲鎺т欢缁撴潫*/
+.sr-box-body-date-body .hasData:hover {
+	cursor: pointer;
+	background-color: #3e4b90;
+	color: white;
+}
+
+.list {
+	background: #5b77a9;
+	color: white;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#5a88ba),
+		to(#5c689a)); /*璋锋瓕*/
+	background: -moz-linear-gradient(top, #5a88ba, #5c689a);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5a88ba',
+		endColorstr='#5c689a');
+}
+
+.bc {
+	text-align: center;
+	font-weight: 400;
+}
+
+#flt_nbr_Count {
+	border: none;
+	color: cadetblue;
+}
+
+.hasData {
+	background-color: #dae3ee;
+}

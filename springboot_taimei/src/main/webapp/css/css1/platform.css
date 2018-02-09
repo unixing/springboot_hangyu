@@ -1,0 +1,2498 @@
+@charset "utf-8";
+@font-face {
+    font-family: 'icon';  /* project id 129360 */
+    src: url('//at.alicdn.com/t/font_129360_gzavwkt3xe6ogvi.eot');
+    src: url('//at.alicdn.com/t/font_129360_gzavwkt3xe6ogvi.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_129360_gzavwkt3xe6ogvi.woff') format('woff'),
+    url('//at.alicdn.com/t/font_129360_gzavwkt3xe6ogvi.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_129360_gzavwkt3xe6ogvi.svg#iconfont') format('svg');
+}
+*{
+    font-family:"Microsoft Yahei";
+}
+ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+html,body,.pla-box{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    min-width: 1280px;
+    overflow: hidden;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.BMap_cpyCtrl{
+	display:none !important;
+}
+#complete-show{
+    position: absolute;
+    z-index: 999999;
+    left: 0px;
+    top: 0px;
+}
+.cs-gstp{
+    font-size: 14px;
+    padding: 3px 5px;
+    color: white;
+    background-color: rgb(68, 85, 161);
+}
+.their-own-nLine {
+    margin: 0px;
+    padding: 0px;
+    font-size: 20px;
+    font-weight: 600;
+    display: inline-block;
+    font-style: italic;
+}
+.their-own-wLine {
+	font-weight: 600;
+}
+.their-own-wirLevel {
+	font-weight: 600;
+}
+.pla-supernatant-cont>iframe{
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+/*鼠标移入手型*/
+.pla-login-manage:nth-of-type(1)>input,.pla-login-manage:nth-of-type(2),.pla-login-box>div:nth-of-type(5):hover{
+    cursor: pointer;
+}
+.pla-login-manage:nth-of-type(2):hover{
+    color: #5863ff;
+    transition: color 0.5s linear;
+}
+/*登录背景图片*/
+.pla-login{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background:no-repeat;
+    background-size: 100%;
+}
+.pla-login{
+    overflow:hidden;
+}
+/*登录框样式*/
+.pla-login-box{
+    width: 304px;
+    height: 217px;
+    border-radius: 2px;
+    margin: 25% 0 0 65%;
+    background: black;
+    overflow: hidden;
+}
+/*提示信息的样式*/
+.pla-login-box>div:nth-of-type(1){
+    width: 275px;
+    height: 33px;
+    margin: 10px auto 0px;
+    color: #a5a5a5;
+    line-height: 33px;
+    font-size:12px;
+}
+/*登录账号*/
+.pla-login-box>div:nth-of-type(2){
+    width: 275px;
+    height: 33px;
+    margin: 5px auto 0px;
+    background: #4e4d4d;
+}
+.pla-login-box>div:nth-of-type(2)>input{
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 0px 0px 0px 20px;
+    background:#4e4d4d;
+    color: white;
+    overflow: hidden;
+}
+/*登录密码*/
+.pla-login-box>div:nth-of-type(3){
+    width: 275px;
+    height: 33px;
+    margin: 10px auto 0px;
+    background: #4e4d4d;
+}
+.pla-login-box>div:nth-of-type(3)>input{
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 0px 0px 0px 20px;
+    background:#4e4d4d;
+    color: white;
+    overflow: hidden;
+}
+/*记住/忘记密码*/
+.pla-login-box>div:nth-of-type(4){
+    width: 275px;
+    height: 38px;
+    margin: 0px auto;
+}
+.pla-login-box>div:nth-of-type(4){
+    height: 38px;
+    width: 100%;
+}
+.pla-login-manage{
+    float: left;
+    width: 50%;
+    height: 38px;
+    text-align: center;
+    font-size: 12px;
+}
+.pla-login-manage:nth-of-type(1){
+    vertical-align: top;
+    line-height: 38px;
+    color: #a5a5a5;
+}
+.pla-login-manage:nth-of-type(1)>input{
+    line-height: 38px;
+    color: #a5a5a5;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+.pla-login-manage:nth-of-type(2){
+    text-align: center;
+    color: #327db6;
+    font-size: 12px;
+    line-height: 38px;
+}
+/*覆盖默认样式*/
+input[type="radio"], input[type="checkbox"]{
+    margin: 0px;
+}
+/*登录按钮*/
+.pla-login-box>div:nth-of-type(5){
+    width: 275px;
+    height: 33px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 33px;
+    font-size: 15px;
+    background: #327db6;
+    color: #e4eef6;
+}
+.pla-box {
+	position: relative;
+}
+/*****地图容器样式******/
+#container{
+    height: 100%;
+    width:100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+/********************************************数据页面**********************************/
+/*头部盒*/
+.pla-head{
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 43px;
+    left: 35px;
+    z-index: 2;
+}
+/*标题LOGO*/
+.pla-title{
+    margin: 0px 0px 0px 40px;
+}
+.pla-title>h3{
+    margin: 0px;
+    color: black;
+    font-size: 20px;
+    letter-spacing:4px;
+    font-weight: 600;
+}
+.pla-title>p{
+    color: black;
+    font-size: 14px;
+    font-family: 'arial';
+}
+/*展开数据*/
+.pla-spread{
+    height: auto;
+}
+.pla-spread>ul{
+    list-style: none;
+    height: auto;
+    width:90px;
+    /*overflow:hidden*/
+}
+.pla-spread>ul>li{
+    display: none;
+    width: 90px;
+    height: 30px;
+    float: left;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    background-color: rgba(7,14,42,0.5);
+    color: white;
+    margin-right: 3px;
+    position: relative;
+    transition:all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+}
+.pla-spread-statistical,.pla-spread-indicate{
+    display: none;
+}
+.pla-spread>ul>li:nth-of-type(1){
+    /*left: 0px;*/
+    /*opacity: 1;*/
+    line-height:28px;
+    color:#80bee7;
+    display: block;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    font-family: 'icon';
+    margin-bottom:2px;
+}
+.pla-spread>ul>li:hover{
+    cursor: pointer;
+    background-color: rgba(63,92,124,0.8);
+    /* color: #b4d0d1; */
+}
+/*展开二级菜单*/
+/*标示图标地方*/
+
+.pla-spread-indicate{
+    width: 100px;
+    height: 12px;
+    color:  #3887be;
+    font-family: 'icon';
+    font-size: 30px;
+    position: absolute;
+    left: 0px;
+    top: 40px;
+    z-index: 20;
+    text-align: center;
+    line-height: 12px;
+    margin-top:1px;
+}
+/**/
+
+/*统计*/
+.pla-spread-statistical{
+    position: absolute;
+    left:92px;
+    top:-2px;
+    width: 150px;
+    margin-top: 2px;
+    list-style: none;
+   /*  padding: 10px 0px 0px 0px; */
+}
+.pla-spread-statistical>li{
+	width:100%;
+    float: left;
+    color:black ;
+    height: 30px;
+    background-color: rgba(7,14,42,0.5);
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    /* display: inline-block; */
+    font-size: 12px;
+}
+/* .pla-spread-statistical>li:nth-of-type(1){
+    width: 150px;
+    position: absolute;
+    left: -47px;
+}
+.pla-spread-statistical>li:nth-of-type(2){
+    width: 150px;
+    position: absolute;
+    left: 141px;
+}
+.pla-spread-statistical>li:nth-of-type(3){
+    width: 150px;
+    position: absolute;
+    left: 307px;
+} */
+
+.pla-spread-statistical>li:hover{
+    background-color:rgba(63,92,124,0.8);	
+}
+/*报表*/
+/***************************/
+/*工具栏目-账号-天气*/
+.pla-tool{
+    position: absolute;
+    right: 80px;
+    top: 43px;
+    padding: 0px;
+}
+.pla-tool-top{
+    top: -50px;
+    transition:top .3s linear
+}
+.pla-tool>div{
+    float: left;
+    height: 30px;
+    font-size: 14px;
+    color: white;
+}
+.pla-tool-name{
+    width:140px;
+    text-align: center;
+    line-height:26px;
+}
+.pla-tool-iList{
+    width: 44px;
+    position: relative;
+}
+.pla-tool-img{
+    height: 26px;
+    width: 26px;
+    margin: auto 0px;
+    position: absolute;
+    bottom: 0px;
+    top:25px;
+    left: -10px;
+    right: 0px;
+    display: inline-block;
+    overflow:hidden;
+    border-radius: 50%;
+}
+.pla-tool-img>img{
+    display: inline-block;
+    width:100%;
+    height:100%;
+}
+.pla-tool-icon{
+    font-family: 'icon';
+    position: absolute;
+    top: -15px;
+    left: 6px;
+    color: #d7532d;
+    font-size: 21px;
+    z-index: 10;
+}
+.useName-n,.set-gj{
+    height: 26px;
+    line-height:26px;
+    font-size:14px;
+    cursor: pointer;
+    text-align:center;
+}
+.useName-list{
+    /* position: absolute;
+    margin: -2px 0px 0px -14px; */
+    padding: 0;
+    list-style: none;
+    /* background: rgba(8,19,37,0.9); */
+    background: rgba(7,14,42,0.5);
+    display:none;
+}
+.useName-list>li{
+    width: 100%;
+    height:25px;
+    text-align: center;
+    margin:5px 0px 5px 0px;
+    line-height:25px;
+    cursor: pointer;
+    font-size:12px;
+}
+.se-list{
+    font-size: 12px;
+    padding: 0;
+    list-style: none;
+    background: rgba(7,14,42,0.5);
+    display:none;
+}
+.se-list>li{
+    width: 100%;
+    height:25px;
+    text-align: center;
+    margin:5px 0px 5px 0px;
+    line-height:25px;
+    cursor: pointer;
+}
+.useName-list>li:hover,.se-list>li:hover{
+    background: rgba(63,92,124,0.8);
+}
+.se-list>li a{
+	color: #fff;
+}
+.se-list>li a:hover{
+	color: #fff;
+	text-decoration: none;
+}
+.pla-tool-useName{
+    min-width: 140px;
+    position: relative;
+    /* padding-right: 10px; */
+}
+.pla-btn-national{
+	display:none;
+}
+.pla-tool-set:before,.pla-tool-useName:before{
+   content: '\e64b';
+    position: absolute;
+    right: -15px;
+    bottom: -2px;
+    color: #7fbce9;
+    font-size: 22px;
+    z-index: 10;
+    font-family: 'icon';
+}
+.pla-tool-message:before{
+    content: '\e664';
+    position: absolute;
+    top: -17px;
+    left: 241px;
+    color: rgba(19,35,61,0.6);
+    font-size: 21px;
+    z-index: 10;
+    transform: rotate(-90deg);
+    font-family: 'icon';
+}
+.pla-tool-set{
+    width: 140px;
+    position: relative;
+    /* padding:0 10px 0 20px; */
+    cursor:pointer;
+}
+.anchorBL{
+    display:none;
+}
+/********************变焦地图*************************/
+.pla-zoom{
+    width: 30px;
+    height: 60px;
+    position: absolute;
+    right: 35px;
+    top: 62%;
+    /*background-color: black;*/
+}
+.pla-zoom>div{
+    font-family: 'icon';
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #7fbce9;
+    margin-bottom: 2px;
+    transition: all linear 0.3s;
+    -webkit-transition: all linear 0.3s;
+    -moz-transition: all linear 0.3s;
+    -o-transition: all linear 0.3s;
+}
+.pla-zoom>div:hover{
+    cursor: pointer;
+    color:black;
+    background-color : #88cdec;
+   /*  background-color: rgba(255,255,255,0.5); */
+ }
+/*****************叶尾重点数据***************************/
+.pla-data{
+    width: 100%;
+    height: 100px;
+    background-color: rgba(24,41,71,0.5);
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    transition: all 1s ease-out;
+    display:flex;
+}
+.material-fact-cityBody{
+    position: relative;
+    flex: 1;
+    display: flex;
+}
+.material-keydown{
+    cursor: pointer;
+    z-index:999;
+    box-shadow:1px 2px 2px 3px rgba(0,0,0,0.5);
+}
+.material-fact{
+    padding: 0px 15px 0px 15px;
+    flex: 1;
+    position: relative;
+    left: 0px;
+}
+.material-fact>span{
+    display:inline-block;
+    font-family: 'icon';
+    color:#6799be;
+    font-size:25px;
+    margin:24px 10px 0px 0px;
+}
+.material-fact>div{
+    display:inline-block;
+    vertical-align: top;
+}
+.material-fact>div>p{
+    margin: 21px 0px 5px 5px;
+    color:white;
+    font-size: 12px;
+}
+.material-fact-datas{
+    color: white;
+    font-style: italic;
+    font-size:12px;
+}
+.material-fact-dataBig{
+    font-size: 22px;
+}
+.material-fact-icon{
+    font-family: 'icon';
+    color:#6799be;
+}
+.material-fact-cityMaterial{
+    color:#5986a7;
+    width:300px;
+    text-align: left;
+}
+.material-fact-cityTime{
+    font-size: 20px;
+    margin:15px 0px 0px 30px;
+}
+.material-fact-cityName{
+    margin:5px 0px 0px 30px;
+    font-size:15px;
+}
+/*屏蔽---设置*/
+.material-fact-install{
+    width: 85px;
+}
+.material-fact-installS{
+	font-size:18px;
+    margin-left: 0px;
+    margin-top: 20px;
+    float: left;
+    font-family: 'icon';
+    color:#5883a5;
+    cursor: pointer;
+}
+.material-fact-installF{
+	font-size:18px;
+    margin-top: 20px;
+    margin-left: 12px;
+    float: left;
+    font-family: 'icon';
+    color:#5883a5;
+    cursor: pointer;
+}
+.material-fact-installBox{
+    width: 529px;
+    background-color: #13233c;
+    position: absolute;
+    top: -193px;
+    right: 46px;
+    padding: 15px 20px 15px 0px;
+    display:none;
+}
+.indicators{
+    overflow: hidden;
+}
+.indicators>div{
+    float: left;
+}
+.indicators-title{
+    width:160px;
+    position:relative;
+    text-align: right;
+}
+.indicators-byd{
+	width:365px;
+}
+.indicators-title>span{
+    font-size: 12px;
+    color:white;
+    display:inline-block;
+    padding:5px 0px 5px 0px;
+}
+.indicators-color{
+    color: #d0533d !important;
+}
+label{
+    font-size: 12px;
+    color:white;
+    margin-right: 3px;
+    width:85px;
+    display:inline-block;
+    font-weight:normal;
+}
+label>input{
+    vertical-align: middle;
+}
+label>input[type="radio"]{
+	position: relative;
+	top:0px;
+}
+.indicators-bth{
+    overflow:hidden;
+    margin:10px 25px 0px 0px;
+    float: right;
+}
+.indicators-bth>div{
+    float: left;
+    width:71px;
+    height: 24px;
+    line-height:24px;
+    text-align:center;
+    font-size:13px;
+    color:white;
+    border-radius:3px;
+    cursor: pointer;
+}
+.indicators-bth-t{
+    background-color: #5b77a9;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#62c5d8), to(#4b5cb6));
+    background: -moz-linear-gradient(top, #62c5d8, #4b5cb6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62c5d8', endColorstr='#4b5cb6');
+}
+.indicators-bth-f{
+    margin-left:3px;
+    box-shadow:0px 1px 2px #040f1f inset;
+}
+/****************************************打开显示条关************************/
+.pla-tog{
+    width: 120px;
+    height: 80px;
+    position: absolute;
+    bottom: 20px;
+    left: -120px;
+    background-color: #0f0f0f;
+    border-radius: 0px 50px 50px 0px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s linear;
+}
+.pla-tog>div:nth-of-type(1){
+    width: 70px;
+    height: 80px;
+    float: left;
+    line-height: 80px;
+    text-align: center;
+    font-size: 15px;
+    color: white;
+}
+.pla-tog>div:nth-of-type(2){
+    width: 50px;
+    height: 80px;
+    float: left;
+    text-align: center;
+    font-size: 25px;
+    line-height: 75px;
+    font-family: 'icon';
+    color: white;
+}
+
+/*提示框样式*/
+.pla-lines{
+    /*background-color: orange;*/
+    position: relative;
+}
+.pla-lines>div{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    font-family: "Microsoft Yahei";
+    color: white;
+    font-size: 12px;
+    padding:0px 5px 0px 5px;
+    border-radius: 2px;
+}
+.pla-lines>p{
+    display: inline-block;
+    font-family: "icon";
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    right: 10px;
+    top: 3px;
+    margin: 0px;
+    cursor: pointer;
+}
+.pla-hr{
+    width: 100%;
+    height: 2px;
+    border: none;
+    background-color: #649fc8;
+    padding: 0px;
+    margin: 0px;
+}
+.pla-flight>p{
+    color: #649fc8;
+    font-size: 14px;
+    font-family: "Microsoft Yahei";
+    margin:5px 0px 5px 0px;
+}
+.pla-flight>p:hover{
+    cursor: pointer;
+    color: #2aabd2;
+}
+.pla-flight>div>div{
+    display: inline-block;
+    margin: 0px 2px 0px 2px;
+    color: white;
+}
+.pla-flight>div>div:hover{
+    color: #2aabd2;
+    cursor: pointer;
+}
+.pla-info{
+    margin-top: 15px;
+    display: none;
+}
+.pla-info>div{
+    font-family: "Microsoft Yahei";
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+    border-bottom: 2px solid transparent;
+}
+.pla-info>div>a:link {
+    text-decoration: none;
+}
+.pla-info>div>a:visited {
+    text-decoration: none;
+}
+.pla-info>div>a:hover {
+    text-decoration: none;
+    color: #2aabd2;
+}
+.pla-info>div>a:active {
+    text-decoration: none;
+    font-size: 14px;
+}
+.pla-info>div>a{
+    display: inline-block;
+    color: white;
+    text-decoration:none;
+}
+.pla-info>div:hover{
+    color: #2aabd2;
+    cursor: pointer;
+    border-bottom: 2px solid #2aabd2;
+}
+.pla-info-box{
+    width: 100%;
+    height: 30px;
+}
+/*浮层信息*/
+.pla-supernatant{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0,0,0,0);
+    transition: all 0.5s linear;
+    display: none;
+    top: 0;
+    z-index: 99999;
+}
+.pla-supernatant-cont{
+    border-radius: 6px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+	background-color: white;
+	border: none;
+	/*overflow-y: auto;*/
+	display: none;
+	opacity: 0;
+	top: 30px;
+	position: relative;
+	background-color: transparent;
+	width: 95%;
+	left: 2.5%;
+}
+.pla-supernatant-del{
+    width: 20px;
+	height: 20px;
+	font-family: 'icon';
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	font-size: 22px;
+	color: #d6552e;
+}
+.pla-supernatant-del:hover{
+    cursor: pointer;
+    color: #ed5856;
+}
+.pla-supernatant>div:hover{
+    cursor: pointer;
+}
+/*****************************************销售动态**********************************/
+/*头部样式*/
+
+/******************信息提示框（操作）*********************/
+.pla-promptBox{
+    width: 300px;
+    position: absolute;
+    z-index: 995;
+    left: 300px;
+    top: 200px;
+    max-height: 554px;
+    height: auto;
+}
+.pla-prompTip{
+    width: 300px;
+    position: relative;
+    z-index: 995;
+    max-height: 554px;
+    height: auto;
+    overflow: hidden;
+}
+._tipTile{
+    width: 300px;
+    height: 50px;
+    background-color: #45579f;
+    position: relative;
+}
+._tipTile-box{
+    display: inline-block;
+    height: 20px;
+    position: absolute;
+    margin: auto auto;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+._maxTile{
+    width: 122px;
+}
+._minTile{
+    width: 155px;
+}
+._tipTile-box>div{
+    float: left;
+	color: white;
+	font-size: 16px;
+	width: 64px;
+	overflow: hidden;
+	text-align: center;
+	height: 20px;
+}
+._tipTile-box>div:nth-of-type(2){
+    width: 12px;
+	margin: 0px 5px 0px 5px;
+}
+._tipTile-box>div {
+	float: left;
+	color: white;
+	font-size: 16px;
+}
+._tipBody{
+    width: 100%;
+	background-color: white;
+	height: auto;
+	/* max-height: 504px; */
+	max-height: 334px;
+	overflow: hidden;
+	position: relative;
+}
+._tipBodyBox{
+    position: relative;
+	width: 100%;
+	top: 0px;
+}
+._mid-t{
+    position: relative;
+    height: 71px;
+    background-color: #dfdfdf;
+    border-bottom: 1px dashed #acacac;
+}
+._mid-t:hover{
+    background-color: rgb(223,223,223);
+}
+._mid-tag{
+    position: absolute;
+    top: 21px;
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    line-height: 26px;
+    color: white;
+    background-color: #7ebbe8;
+    font-size: 14px;
+}
+._mid-box{
+    width: 170px;
+    height: 45px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin:auto auto;
+}
+._mid-city>div>div {
+	float: left;
+	font-size: 12px;
+	text-align: center;
+	white-space: nowrap;
+	margin: 0 auto;
+	width: 60px;
+}
+._mid-code{
+    width: 100%;
+    height: 50%;
+}
+._mid-code>div{
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    white-space:nowrap;
+}
+._mid-max{
+    width: 60px;
+}
+._mid-max>div:hover{
+    animation:myfirst 2s linear infinite;
+    display: block;
+}
+._mid-min{
+    width: 20%;
+}
+._mid-city>div{
+    float: left;
+	font-size: 12px;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+}
+._mid-b{
+    overflow: hidden;
+    border-bottom: 1px dashed #acacac;
+}
+._mid-b-line{
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+}
+._mid-b-line:hover{
+    background: rgb(223,223,223);
+}
+._mid-b-line-h{
+    margin-top: 15px;
+    height: 30px;
+    background: url(./images/lines.png) no-repeat;
+}
+._mid-b-line-h1{
+    height: 30px;
+    background: url(./images/lines1.png) no-repeat;
+}
+._mid-b-line-b{
+    height: 47px;
+    width: 100%;
+    position: relative;
+}
+._mid-b-line-b>div{
+    position: absolute;
+    width: 67px;
+    height: 47px;
+    overflow: hidden;
+}
+._mid-b-line-b1{
+    left: 27px;
+}
+._mid-b-line-b2{
+    left: 117px;
+}
+._mid-b-line-b3{
+    left: 217px;
+}
+._mid-b-line-tag{
+    background: url(./images/butto-b.png) no-repeat;
+    color: white;
+}
+._mid-b-line-b>div>h2{
+    margin: 9px auto 0px;
+    padding: 0px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Arial';
+    font-size: 16px;
+    font-weight: 600;
+}
+._mid-b-line-b>div>div{
+    width: 64px;
+    height: 16px;
+    overflow: hidden;
+}
+._mid-b-line-b>div>div>p{
+    margin: 1px auto 0px;
+    padding: 0px;
+    text-align: center;
+    font-size: 12px;
+    font-family: '黑体';
+    /*text-overflow: ellipsis;*/
+    white-space: nowrap;
+    display: block;
+    width: 56px;
+}
+._mid-b-line-b>div>div>p:hover{
+    animation:myfirst 2.5s linear infinite;
+}
+._mid-b-flight>div{
+    padding-left: 39px;
+    font-family:'Arial';
+    font-size: 12px;
+    height: 30px;
+    line-height: 35px;
+    font-weight: bold;
+}
+._mid-b-flight>div:hover{
+    background-color: rgb(223,223,223);
+    cursor: pointer;
+}
+.pla-prompRight{
+    position: absolute;
+    width: 180px;
+    background: white;
+    left: 311px;
+    top: 0px;
+    border-radius: 7px;
+    display: none;
+}
+.pla-prompRight-box{
+    position: relative;
+    border-radius: 5px 7px;
+    overflow: hidden;
+}
+.pla-prompRight-box>div{
+    overflow: hidden;
+}
+.pla-prompRight-box>div:hover{
+    background-color: rgb(223,223,223);
+    cursor: pointer;
+}
+._pr-set{
+    background-color: rgb(223,223,223);
+}
+.pla-prompRight-box>div:last-of-type{
+    border-radius: 0px 0px 7px 5px;
+}
+.pla-prompRight-box>div:first-of-type{
+    border-radius: 5px 7px 0px 0px;
+}
+.pla-prompRight-sj{
+    position: absolute;
+    right: -20px;
+    font-family: 'icon';
+    color:#3e4c91 ;
+    font-size: 23px;
+    left: -17px;
+    top: 5px;
+    margin: 0px;
+    padding: 0px;
+    border-right: 5px;
+    width:20px;
+}
+.pla-prompTip-des{
+    width: 122px;
+    height: 42px;
+    padding-left: 13px;
+    line-height: 42px;
+    font-size: 12px;
+    display: inline-block;
+}
+.pla-prompTip-ico{
+    height: 42px;
+    display: inline-block;
+    font-family: 'icon';
+    color: rgb(124, 158, 201);
+    vertical-align: top;
+    line-height: 42px;
+    width: 45px;
+    text-align: center;
+    background-color: #3c5396;
+}
+/*****/
+.pla-promptBox-cont-line>div:hover{
+    cursor: pointer;
+}
+.air-routes{
+    display: inline-block;
+    width: 172px;
+    height: 1px;
+    background-color: #a7c9d5;
+    position: absolute;
+    top: 16px;
+    left: 59px;
+}
+.pla-promptBox-cont-line>div{
+    overflow: hidden;
+}
+.count-lines{
+    height: 132px;
+}
+.count-flight{
+    height: 61px;
+}
+.pla-promptBox-cont-line>div>p{
+    margin: 11px 0px 0px 34px;
+    font-size: 11px;
+    color: #4d4d4d;
+}
+.count-flight>div{
+    margin: 8px 0px 0px 34px;
+    font-size: 13px;
+    font-weight: bold;
+}
+/*有经停*/
+.pla-promptBox-cont-line-Stops{
+    overflow: hidden;
+    height: 100px;
+    position: relative;
+}
+.pla-promptBox-cont-line-Stops>div{
+    float: left;
+}
+.pla-promptBox-cont-line-Stops>div{
+    margin: 5px 0px 0px 32px;
+}
+.imp-place{
+    margin: 5px 15px 0px 30px !important;
+}
+.hasStopping{
+    margin-top: 1px;
+}
+.airIcon{
+    font-family: "icon";
+    font-size: 20px;
+    color:#6da9e7 ;
+    background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#6da9e7), to(#3e4b90));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+}
+.local-three-word{
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+    width: 45px;
+}
+.three-word{
+    margin-top: 18px;
+}
+.airCity{
+    font-size: 12px;
+    color: #4d4d4d;
+    margin: 0px;
+    text-align: left;
+    overflow: hidden;
+}
+.airCity>span{
+    white-space:nowrap;
+    width: 120px;
+}
+.airCity>span:hover{
+    animation:myfirst 2s linear infinite;
+    display: block;
+}
+@keyframes myfirst{
+    0%{
+        margin-left:0%
+    }
+    100%{
+        margin-left:-100%
+    }
+}
+
+.set-name{
+    width: 54px;
+    height: 40px;
+    position: relative;
+    left: -17px;
+    top: 13px;
+    padding: 5px;
+    border-radius: 5px;
+}
+/*渐变色*/
+.set-nameNew{
+    background: #3e4b90;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e4b90),
+		to(#326fab)); /*谷歌*/
+	background: -moz-linear-gradient(top, #3e4b90, #326fab);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3e4b90',
+		endColorstr='#326fab');
+}
+.colorNew{
+    color: white;
+}
+/*三角定位*/
+.airSico{
+    display: block;
+    position: absolute;
+    font-family: "icon";
+    font-size: 15px;
+    width: 1px;
+    height: 1px;
+    left: 24px;
+    top: -13px;
+    color: transparent;
+}
+.airSicoNew{
+    color: #374784;
+}
+.set-name>div{
+    margin-left: 11px;
+}
+.set-name>p{
+    text-align: center;
+}
+/*直飞样式*/
+.pla-line{
+    width: 73px !important;
+
+}
+/*设置定位*/
+.pla-ifoPosi{
+    position: relative;
+    z-index: 10;
+}
+.pla-ifoPosi-data{
+    font-size: 15px !important;
+}
+
+.their-own{
+    position: absolute;
+    left: 900px;
+    top: 200px;
+    width: 300px;
+    background-color: white;
+    display: none;
+}
+.their-own-title{
+    height: 50px;
+	background: #3e4b90;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e4d92),
+		to(#4584c7)); /*谷歌*/
+	background: -moz-linear-gradient(top, #3e4d92, #4584c7);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3e4d92',
+		endColorstr='#4584c7');
+}
+.their-own-title>h2{
+    height: 25px;
+    line-height: 30px;
+    padding:0px 0px 0px 15px;
+    margin: 0px;
+    font-size: 16px;
+    color: white;
+}
+.their-own-title-code>div{
+    display: inline-block;
+    width: 40%;
+    font-size: 12px;
+    color: #c1c8d2;
+}
+.their-own-title-code>div:nth-of-type(1){
+    margin-left: 15px;
+}
+.their-own-body{
+    margin-top: 20px;
+}
+.their-own-body-flight-level{
+
+    height: 50px;
+}
+.their-own-body-flight-level>div{
+    float: left;
+    width: 50%;
+}
+.their-own-body-flight-level>div>p{
+    margin: 10px 0px 5px 15px;
+    padding: 0px;
+    font-size: 12px;
+}
+.their-own-body-flight-level>div>div{
+    margin: 0px 0px 0px 15px;
+    padding: 0px;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+}
+.their-own-zLine,.their-own-peos{
+    margin: 0px;
+    padding: 0px;
+    font-size: 20px;
+    font-weight: 600;
+    display:inline-block;;
+    font-style: italic;
+}
+.their-own-body-flight-level>div>div>span{
+    font-weight: normal;
+    font-size: 12px;
+}
+.their-own-body-line-size{
+    margin-top: 5px;
+}
+
+.their-own-body-line-size>div{
+    height: 20px;
+    line-height: 20px;
+    padding-left: 15px;
+    font-size: 12px;
+}
+.their-own-body-line-size>div:nth-of-type(1){
+    margin: 0px;
+}
+.their-own-body-peoples>p{
+    margin: 10px 0px 0px 15px;
+    padding: 0px;
+    font-size: 12px;
+}
+.their-own-body-peoples>div{
+    margin: 4px 0px 30px 15px;
+    padding: 0px;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+}
+.their-own-body-peoples>div>span{
+    font-weight: normal;
+    font-size: 12px;
+}
+.their-own-body-link{
+    height: 86px;
+    background: #3e4b90;
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#3e4d92), to(#4584c7));/*谷歌*/
+    background: -moz-linear-gradient(top, #3e4d92, #4584c7);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3e4d92', endColorstr='#4584c7');
+    display:flex;
+}
+.their-own-body-link>div{
+    float: left;
+    height: 100%;
+    text-align: center;
+    box-sizing:border-box;
+    color: white;
+    border-right: 0.5px solid #6777ab;
+    flex:1;
+}
+.their-own-body-link>div:hover{
+    cursor: pointer;
+}
+.their-own-body-link>div>p{
+    font-family: "icon";
+    text-align: center;
+    font-size: 18px;
+    margin: 20px 0px 10px 0px;
+}
+.their-own-body-link>div>div{
+    font-size: 14px;
+    text-align: center;
+}
+/*航班排行框*/
+.pla-ranking{
+    width: 940px;
+    height: 350px;
+    background-color: rgba(7, 19, 39, 0.8);
+    position: absolute;
+    right: 100px;
+    top: 30%;
+    display: none;
+    z-index: 57;
+}
+.pla-ranking>div{
+    float: left;
+}
+.pla-ranking-title{
+    width: 250px;
+    height: 100%;
+}
+.pla-ranking-title-head{
+    height: 60px;
+}
+.pla-ranking-title-head>h3{
+    padding: 0px;
+    float: left;
+    margin: 18px 0px 0px 32px;
+    color:white;
+    font-weight: 600;
+	font-size: 20px;
+}
+.pla-ranking-title-head>div{
+    cursor:pointer;
+    float: left;
+    margin:18px 0px 0px 15px;
+    font-size: 12px;
+    height: 20px;
+    background-color: #2b3e5e;
+    color: white;
+    line-height:20px;
+    width: 45px;
+    border-radius: 3px;
+    text-align: center;
+}
+.pla-ranking-tag{
+    background: #3e4b90;
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#3e4d92), to(#4584c7));/*谷歌*/
+    background: -moz-linear-gradient(top, #3e4d92, #4584c7);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3e4d92', endColorstr='#4584c7');
+}
+
+
+ #flight-box{
+ 	position: absolute;
+    top: 15px;
+    left: 523px;
+    height: 20px;
+    z-index: 5; 
+    width: 400px;
+ }
+ #collect-box{
+ 	position: absolute;
+    top: 15px;
+    left: 280px;
+    width: 650px;
+    /* left:350px;
+    width:510px; */
+    z-index: 5;
+    height: 20px;
+ }
+.flight-radios{
+    margin: 0px;
+    padding:0px;
+
+}
+
+.result-act:hover{
+	transition:backgroun-color 0.2s linear;
+	background-color:#5c77a6;	
+	cursor:pointer;
+}
+.result-acts{
+    background-color:#5c77a6 !important;
+}
+
+ .flight-radios>li{
+    list-style: none;
+    float:left;
+    font-size:12px;
+    color:white;
+    height:20px;
+    line-height:20px;
+    text-align:center;
+    border-radius:4px;
+    margin-right:23px;
+}
+ .flight-datarange>li{
+    list-style: none;
+    float:left;
+    font-size:12px;
+    color:white;
+    height:20px;
+    line-height:20px;
+    text-align:center;
+    border-radius:4px;
+    margin-right:23px;
+}
+.flight-last,.flight-farst{
+ 	margin: 0px;
+ 	padding:0px;
+ }
+ .flight-last{
+ 	float: right;
+ }
+.flight-farst>li,.flight-last>li{
+ 	list-style: none;
+ 	float:left;
+ 	font-size:12px;
+ 	color:white;
+ 	height:20px;
+ 	line-height:20px;
+ 	width:53px;
+ 	text-align:center;
+ 	border-radius:4px;
+ 	background-color:#304268;
+ 	margin-right: 2px;
+ }
+
+.collect-select{
+    display: none;
+}
+.labels-radios{
+    display:none;
+}
+.labels{
+    vertical-align: top;
+    width:11px;
+    margin-right: 5px;
+}
+.labels:hover{
+    cursor:pointer;
+}
+.labels:before{
+	content:'\e662';
+    font-family: 'icon';
+    font-size:10px;
+    color:white;
+    position:relative;
+    left:0px;
+    top:1px;
+}
+
+.datarange{
+    vertical-align: top;
+    width:11px;
+    margin-right: 5px;
+}
+.datarange:hover{
+    cursor:pointer;
+}
+.datarange:before{
+	content:'\e662';
+    font-family: 'icon';
+    font-size:10px;
+    color:white;
+    position:relative;
+    left:0px;
+    top:1px;
+}
+
+.labels-set:before{
+    content:'\e65f';
+    font-family: 'icon';
+    font-size:10px;
+    color: #61b986;
+    position:relative;
+    left:0px;
+    top:1px;
+}
+
+.label-set:before{
+    content:'\e65f';
+    font-family: 'icon';
+    font-size:10px;
+    color: #61b986;
+    position:relative;
+    left:0px;
+    top:1px;
+}
+ 
+.pla-ranking-title-head>div:nth-of-type(2){
+    margin:18px 0px 0px 2px;
+}
+.pla-ranking-title-nav>ul{
+    list-style: none;
+    margin: 0px 0px 0px 23px;
+    padding: 0px;
+    width: 70%;
+}
+.pla-ranking-title-nav>ul>li{
+    color: white;
+    font-size: 12px;
+    height: 30px;
+    line-height:30px;
+    padding:  0px 0px 0px 10px;
+}
+.pla-ranking-title-nav>ul>li:hover{
+    background-color: #3b5c7d;
+    transition:all 0.5s linear;
+    cursor:pointer;
+}
+.pla-ranking-box{
+    /* width: 690px;
+    height: 100%; */
+    width:690px;
+    top:5%;
+    height:95%;
+}
+.sets{
+    background-color: #3b5c7d;
+}
+.pla-ranking-shut{
+    font-family: "icon";
+    font-size: 12px;
+    background-color: #703225;
+    position: absolute;
+    right: -25px;
+    top:0px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 100%;
+    cursor: pointer;
+}
+/*航班排行按钮*/
+.pla-btn{
+    position: absolute;
+    right: 26px;
+    top: 26%;
+    width: 50px;
+    height: 100px;
+}
+.pla-btn>div{
+    width: 50px;
+    height: 50px;
+    font-family: "icon";
+    font-size: 18px;
+    line-height: 50px;
+    text-align: center;
+    color: #7fbce9;
+    font-weight: 600;
+    cursor: pointer;
+}
+.pla-btn>div:hover{
+    color: white;
+}
+/*提示*/
+.pla-btn-prompt{
+    position: absolute;
+    top: 100%;
+    right: 50px;
+    width: 100px;
+    height: 33px;
+    line-height: 33px;
+    border: 1px solid #7cbce8;
+    margin: 15px 0px 0px 0px;
+    border-radius: 5px;
+    z-index: 55;
+    text-align:center;
+    font-size: 12px;
+    color:#7cbce8;
+    display:none;
+}
+/*汇总数据*/
+.summary-head{
+    margin: 20px 0px 0px 0px;
+}
+.summary{
+    width: 100%;
+    height: 60px;
+    margin: 10px 0px 0px 0px;
+}
+.summary>p{
+    font-size: 12px;
+    margin: 0px 0px 0px 35px;
+    color: white;
+}
+.summary>div{
+    font-size: 20px;
+    margin: 3px 0px 0px 35px;
+    font-style: italic;
+    color: white;
+    font-weight: 600;
+}
+.summary>div>span{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+}
+.menu>a {
+	color: white;
+	text-decoration: none;
+}
+
+.lis {
+	background-color: gray !important;
+}
+
+.their-own-zLine,.their-own-peos {
+	margin: 0px;
+	padding: 0px;
+	font-size: 20px;
+	font-weight: 600;
+	display: inline-block;;
+	font-style: italic;
+}
+
+/*2016-12-13 修改首页样式*/
+.pla-tool-notice {
+	display: inline-block;
+	font-family: 'icon';
+	color: #327db6;
+	font-size: 22px;
+	cursor:pointer;
+}
+/*2017-3-10 添加切换按钮  By:long  */
+.air-change-btn{
+	position:absolute;
+	top:0;
+	right:0;
+	opacity:0.6;
+}
+.air-change-btn:hover{
+	opacity:1;
+	cursor:pointer;
+}
+#their-ownA .change-turnIcon{
+	position:absolute;
+	top:-18px;
+	right:-2px;
+	width:40px;
+	height:40px;
+	background:url(/images/platform/air-info.png);
+}
+.change-turnIcon1{
+	position:absolute;
+	top:0px;
+	right:-15px;
+	width:24px;
+	height:24px;
+	background:url(/images/platform/backIcon.png);
+}
+
+/* 翻页 */
+#their-ownB,#their-ownA{
+    backface-visibility:hidden;
+    transition:transform 0.3s ease-out;
+    transform-style:preserver-3d;
+}
+#their-ownB{
+	z-index:1;
+	transform:rotateY(-180deg);
+}
+#their-ownA{
+	z-index:2;
+	transform:rotateY(0deg);
+}
+
+#their-ownB .change-turnIcon{
+	position:absolute;
+	top:-18px;
+	right:-2px;
+	width:40px;
+	height:40px;
+	background:url(/images/platform/info-air.png);
+}
+
+#change-container{
+	perspective:5000px;
+	position: absolute;
+	top:0px;
+	z-index: 56;
+}
+
+
+/* 2017-3-14 long */
+.their-txt-area{
+	width:100%;
+	height:340px;
+	font-size:12px;
+}
+#their-txt-pull{
+	position:relative;
+	padding:0 10px 0 20px;
+	margin-top:-15px;
+	line-height:28px;
+	font-size:12px;
+	color:#000;
+	max-height:340px;
+	overflow:hidden;
+}
+#their-txt-pull span{
+	display:inline-block;
+	position:absolute;
+	left:60%;
+}
+#their-txt-pull span.no_data{
+	
+	position:static;
+	color:#000;
+	top:50%;
+	text-align:center;
+}
+#line-kg{
+    position: absolute;
+    bottom: 137px;
+    left: 25px;
+    z-index: 55;
+    font-size: 12px;
+    color: white;
+    z-index: 55;
+}
+#line-kg2{
+    position: absolute;
+    bottom: 137px;
+    left: 25px;
+    z-index: 55;
+    font-size: 12px;
+    color: white;
+    display: none;
+}
+.line-icon{
+    float:left;
+    padding-right:70px;
+}
+.line-icon>li{
+    margin-top:20px;
+}
+.iskg{
+    display:inline-block;
+    width:50px;
+    height:16px;
+    border-radius:8px 8px 8px 8px;
+    vertical-align: top;
+    margin-right:10px;
+    cursor:pointer;
+}
+.iskg0{
+    background-color:#57b57a;
+}
+.iskg0:before{
+    content:'ON';
+    position:absolute;
+    left:27px;
+    font-size:12px;
+    bottom: 1px;
+}
+.iskg1{
+    background-color:#566e79;
+}
+.iskg1:before{
+    content:'OFF';
+    position:absolute;
+    left:4px;
+    font-size:12px;
+    bottom:1px;
+}
+.turn-off{
+    font-family: icon;
+    font-size:14px;
+    color: white;
+    position:relative;
+    left:3px;
+    top:-1px;
+    transition:left .15s linear;
+}
+.iskgCkecked{
+    left:33px !important;
+}
+
+
+
+/* 【机场搜索】 2017-3-29  long */
+/*搜索图标  */
+.pla-search{
+	color:#7fbce9;
+	font-size:16px;
+	display:block;
+	position:fixed;
+	right:35px;
+	top:56%;
+	width:30px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	
+}
+.pla-search .search-iconarea:hover{
+    cursor: pointer;
+    color:#000;
+    background-color : #88cdec;
+}
+.pla-search .search-iconarea span.pla-search-icon{
+	font-size:20px;
+	display:inline-block;
+	font-family:'icon';	
+}
+.pla-search .searchSet{
+    color:#000;
+    background-color : #88cdec;	
+}
+/*搜索面板  */
+.pla-search-panel{
+	display:none;
+	font-size:12px;
+	position:absolute;
+	top:0px;
+	right:35px;
+	height:30px;
+	width:315px;
+	color:#fff;
+}
+.pla-search-panel-head{
+	float:left;
+	width:80px;
+	height:100%;
+	background-color:#112138;
+	cursor:pointer;
+}
+
+.pla-search-panel-head p{
+	width:100%;
+}
+.pla-search-panel-head p span.search-icon{
+	display:inline-block;
+	position:absolute;
+	left:57px;
+	font-family:icon;
+	color:#88cdec;
+	font-size:18px;
+}
+.pla-search-panel-head .slt{
+	display:none;
+	margin-top: -10px;
+	padding: 0;
+	list-style: none;
+}
+.pla-search-panel-head .slt li{
+	height:30px;
+	background-color:#112138;	
+}
+.pla-search-panel-head .slt li:hover{
+	background-color:rgb(35,53,80);
+}
+
+
+
+.pla-search-panel-body{
+	text-align:left;
+	padding-left:10px;
+	float:right;
+	width:220px;
+	height:100%;
+	background-color:#112138;
+	
+}
+.pla-search-panel-body input::-webkit-input-placeholder {
+         color: #fff;
+         font-size: 12px;
+         text-align: left;
+     }
+#pla-search-id{
+	color:#fff;
+	border:none;
+	outline:medium;
+	width:100%;
+	height:70%;
+	background-color:#112138;
+}
+.pla-btn-simulate{
+	display: none;
+}
+
+/* 【天气面板】点击在飞 */
+#their-own-body-flying{
+	color:rgba(34,50,179,1);
+	background-color:#eee;
+	cursor:pointer;
+}
+#their-own-body-flying:hover{
+	color:rgba(34,50,179,1);
+	/* text-decoration:underline; */
+}
+.pla-tool-name:hover,.airports:hover{
+	background: rgba(63,92,124,0.8);
+	cursor: pointer;
+}
+
+
+
+
+
+
+input:focus{outline:none;}
+input:required:invalid{box-shadow: none;}
+
+/*用户反馈*/
+#response-parent{
+	display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);	
+    position: fixed;
+    z-index: 1000;
+}
+.response-container{
+	color:#fff;
+    width: 950px;
+    height: 600px;
+    top: 130px;
+    left: 25%;
+    background-color: rgb(24,41,71);
+    position: fixed;
+}
+.response-container #Rsp-closer{
+	cursor: pointer;
+	display: inline-block;
+	font-size: 20px;
+	font-family: icon;
+	position: absolute;
+	right: -30px;
+	top: -30px;
+	color: rgb(215,83,51);
+}
+.response-container h2{
+    font-size: 14px;
+    font-weight: 500;
+}
+.QuiredIcon{
+    color: rgb(215,83,51);
+    font-size: 14px;
+    font-family: icon;
+}
+.response-side{
+    float: left;
+    left: 0px;
+    height: 100%;
+    width: 220px;
+    background-color: rgb(33,67,113);
+}
+.response-main{
+    float: right;
+    right: 0px;
+    height: 100%;
+    width: 730px;
+    /* overflow-y: auto; 
+    overflow: hidden;*/
+    
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.response-checked{
+    background-color: rgb(25,54,90);
+    border-left: 2px solid rgb(128,188,232);
+}
+.response-navi li{
+    cursor: pointer;
+    padding-left: 10px;
+    height: 30px;
+    line-height: 30px;
+}
+.response-navi li:hover{
+	background-color: rgb(22,41,71);
+}
+.form-container{
+    margin: 30px 40px;
+    position: relative;
+}
+
+.response-formArea{
+    margin-top: 20px;
+}
+#response-text{
+    resize:none;
+    width: 638px;
+    height: 200px;
+    border: none;
+    outline: none;
+    background-color: rgb(33,67,113);
+    padding: 10px 0 0 10px;
+    color: #fff;
+}
+#response-text::-webkit-input-placeholder {
+  color: #6c7b98;
+}
+#response-text:-moz-placeholder {
+  color: #6c7b98;
+}
+.textDescript{
+    color: #6c7b98;
+}
+.response-formArea .counterP{
+    text-align: right;
+    margin-top: 10px;
+}
+.imgAndTel{
+    margin-top: 40px;
+}
+.imgAndTel .imgArea{
+    float: left;
+    width: 50%;
+}
+.diyImgFile{
+    margin-top: 20px;
+}
+.diyImgFile li{
+    cursor: pointer;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    border: 1px solid #6c7b98;
+
+}
+.diyImgFile li span{
+    color: #6c7b98;
+    font-size: 35px;
+    position:absolute;
+    left: 12px;
+    top: 0px;
+
+}
+.diyImgFile .img-clear{
+	display: inline-block;
+	font-size: 16px;
+	font-family: icon;
+	color: #d85330;	
+	z-index: 4;
+    left: 43px;
+    top: -13px;
+	position: absolute;	
+}
+.diyImgFile li img{
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	z-index: 3;
+	top: 0;
+	position: absolute;
+}
+.diyImgFile input{
+    width: 100%;
+    height: 50px;
+    outline: none;
+    z-index: 2;
+    opacity: 0;
+}
+.imgAndTel .telArea{
+    float: right;
+    width: 48%;
+    letter-spacing: 0px;
+}
+.telArea .telNumInput{
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+    height: 30px;
+    outline: none;
+    border: none;
+    background-color: rgb(33,67,113);
+    color: #fff;
+    font-size: 14px;
+    text-indent:14px;
+}
+.buttonArea{
+    clear: both;
+    padding-top: 80px;
+    text-align: right;
+}
+.btn-blue{   
+    color:#FFF;
+    width:80px;
+    height:28px;
+    line-height:28px;   
+    border:none;
+    border-radius:5px;  
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#62c4d7), to(#4c5cb5));
+    -moz-box-shadow:1px 1px 1px #000;               /* For Firefox3.6+ */
+    -webkit-box-shadow:1px 1px 1px #000;            /* For Chrome5+, Safari5+ */
+    box-shadow:1px 1px 1px #000;      
+}
+.btn-blue:hover{
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#4c5cb5), to(#62c4d7));
+    box-shadow:none;    
+}
+.btn-gray{
+    margin-left:14px;
+    color:#ccc;
+    width:80px;
+    height:30px;
+    line-height:30px;
+    background-color:#13233d;
+    border:1px solid #000;
+    border-radius:5px;
+    -moz-box-shadow:1px 1px 1px #000 inset;               /* For Firefox3.6+ */
+    -webkit-box-shadow:1px 1px 1px #000 inset;            /* For Chrome5+, Safari5+ */
+    box-shadow:1px 1px 1px #000 inset;                    /* For Latest Opera */    
+}
+.btn-gray:hover{    
+    color:#fff;
+    box-shadow:none;
+    border:1px solid #305a9e;
+}
+
+.rp-comTip{
+	position: absolute;
+	top: 30%;
+	left: 50%;
+}
+.rp-comTip h3{
+	text-align: center;
+	font-weight: normal;
+}
+.rp-comTip p{
+	margin-top: 40px;
+	width: 260px;
+}
+
+/*------------------- 历史反馈*/
+#R-oldRsp table{
+	margin-top: 30px;
+	width: 100%;
+	font-size: 12px;
+	table-layout: fixed;
+}
+#R-oldRsp th{
+	text-align: center;
+	height: 30px;
+	color: #6c7b98;
+	font-weight: normal;
+}
+#R-oldRsp tr{
+	height: auto;
+	margin: 5px 0;
+}
+#R-oldRsp td{
+	text-align: center;
+	height: 30px;
+}
+
+#R-oldRsp .Rsp-btn{
+	display: inline-block;
+	cursor: pointer;
+	width: 90px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 6px;
+	background-color: #214172;
+}
+#R-oldRsp .Rsp-btn span{
+	font-size: 10px !important;
+	font-family: icon;
+}
+
+
+
+/*详情模块*/
+#rp-table .detailContainer{
+	position: relative;
+	text-align: left;
+	left: -40px;
+	width: 650px;
+    margin: 10px 0;
+    padding: 20px 40px;
+	background-color: rgb(17,33,58);
+}
+#rp-table .detailContainer h6{
+	margin-top: 30px;
+}
+#rp-table .detailContainer p{
+	word-break: break-all;
+	line-height: 20px;
+	margin: 10px 0;
+}
+#rp-table .detailContainer .rsp-detail-pices{
+	margin-bottom: 20px;
+	border-bottom: 1px dashed #6c7b98;
+}
+#rp-table .detailContainer .rsp-date{
+	color: #6c7b98;
+	font-size: 10px;
+}
+#rp-table .detailContainer ul.imgList{
+	margin: 15px 0;
+}
+#rp-table .detailContainer .imgList li{
+	display: inline-block;
+	margin-right: 40px;
+	height: 30px;
+	line-height: 30px;
+	color: #6c7b98;
+	text-decoration: underline;
+	cursor: pointer;
+}
+#rp-table .detailContainer .askArea{
+	text-align: center;
+	width: 200px;
+	margin: 20px 0 0 auto;
+}
+#rp-table .detailContainer .rsp-bigimg{    
+	position: fixed;
+	display: flex;
+	justify-content:center;
+	align-items:center;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 9999; 
+}
+#rp-table .detailContainer .rsp-bigimg img{	
+	display: none;    
+	max-width: 1600px;
+    max-height: 900px;
+    cursor: zoom-out;
+	display: inline-block;
+}
+
+/*  高級篩選   by：long   2017/9/27  */
+.advanced-filter-turn{
+    position: fixed;
+    top:60px;
+    left:60px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #4455a1;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    box-shadow: 0 2px 10px #000;
+    font-size: 23px;
+    cursor: pointer;
+    z-index: 57;
+    transition: all, .5S;
+}
+.af-pramas-reset{
+    display: inline-block;
+    position: absolute;
+    color: #aaa;
+    right: 20px;
+    top: 10px;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+}
+.af-pramas-reset:hover{
+    color: #fff;
+}
+.advanced-filter-box{
+    position: fixed;
+    top:70px;
+    left:85px;
+    width: 300px;
+    overflow: hidden;
+    padding-top: 10px;
+    background-color: rgba(15,29,56,.7);
+    transition: all .2s;
+    font-size: 12px;
+    box-sizing: border-box;
+    display: none;
+    z-index: 56;
+}
+.advanced-filter-box .af-header{
+    text-indent: 20px;
+    font-size: 15px;
+    color: #fff;
+}
+.advanced-filter-box h4{
+    font-size: 12px;
+    color: #fff;
+    margin: 20px 0 10px 0;
+}
+.af-body{
+    max-height:540px;
+    overflow-y: auto;    
+    padding: 0 20px;
+}
+@media screen and (max-width:1666px){
+    .af-body{
+        max-height: 320px;
+    }
+}
+
+.af-checklist-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.af-checklist-item{
+    display: inline-block;
+    width: 60px;
+    height: 26px;
+    margin: 0 0 9px 0;
+    background-color: rgba(68,85,161,.2);
+    border-radius: 3px;
+    color: #748eff;
+    text-align: center;
+    line-height: 26px;
+    cursor: pointer;
+    transition: all .2s;
+}
+.af-checklist-item:hover{
+    color: #c2cdff;
+}
+.af-checklist-item:active{
+    background-color: #4455a1;
+    color: #fff;
+}
+.af-checklist-item-check{
+    background-color: #4455a1;
+    color: #fff;
+}
+.af-checklist-item-big{
+    width: 95px;        
+}
+
+.af-input-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    color: #fff;
+    line-height: 30px;
+}
+.af-input-box-item{
+    outline: none;
+    border: none;
+    border: 0px solid rgba(68,85,161,0);
+    border-bottom: 1px solid rgba(68,85,161,.8);
+    background-color: rgba(0,0,0,0);
+    color: #fff;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    box-sizing: border-box;
+    transition: all .2s;
+}    
+.af-input-box-item:focus{    
+    border: 1px solid #4455a1;
+    box-shadow: 0px 0px 5px 0px #4455a1;    
+}
+.af-footer{
+    height: 80px;
+    line-height: 80px;
+    padding-right: 20px;
+    text-align: right;
+    color:#fff;
+}
+.af-footer .afbtn{
+    display: inline-block;
+    width: 120px;
+    height: 35px;
+    border-radius: 3px;
+    line-height: 35px;
+    text-align: center;
+    background-color: #4455a1;
+    cursor: pointer;
+}
+
+
+.homeWarning{
+    position: fixed;
+    top: 40%;
+    left: 42%;
+    width: 300px;
+    height: 200px;
+    border-radius: 8px;
+    color: #fff;
+    background-color: rgba(0,0,0,0.3);
+    border: 1px solid rgba(153,194,255,0.9);
+    box-shadow: 0 0 8px rgba(153,194,255,0.5);
+    padding: 0 10px;
+    font-size: 22px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    display: none;
+}
+.homeWarning p{
+    width: 100%;
+}
+.airportList{
+    max-height: 300px;
+    overflow-y: scroll;
+    background-color: rgba(0,0,0,.5);
+    padding: 10px 0;
+}

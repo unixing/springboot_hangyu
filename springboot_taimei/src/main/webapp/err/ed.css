@@ -1,0 +1,89 @@
+.err {
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: none;
+	background-color: rgba(0, 0, 0, 0.4);
+	top: 0px;
+	/*修改 2017-4-18 longhong*/
+	z-index:16;
+}
+
+.err_time {
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: none;
+	background-color: #13233d;
+	top: 0px;
+}
+
+.err>img {
+	display: block;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+	top: 0px;
+	margin: auto;
+	width: 20%;
+}
+
+.err_time>img {
+	display: block;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+	top: 0px;
+	margin: auto;
+	width: 20%;
+}
+
+.reportErr {
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: none;
+	background-color: rgba(0, 0, 0, 0.4);
+	top: 0px;
+	z-index: 7;
+}
+
+.reportErr>img {
+	display: block;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+	top: 0px;
+	margin: auto 35%;
+	width: 20%;
+}
+
+.muhu {
+	background-color:#12213a;
+	filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
+	-webkit-filter: blur(5px); /* Chrome, Opera */
+	-moz-filter: blur(5px);
+	-ms-filter: blur(5x);
+	filter: blur(5px);
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=5, MakeShadow=false);
+	/* IE6~IE9 */
+}
+#err-one{
+	margin: 5% 0px 0px 41%;
+    width: 215px;
+    height: 50px;
+}
+#err-two{
+	position:absolute;
+	bottom:0px;
+	width:100%;
+}
+#err-two>img{
+	width:100%;
+}

@@ -1,0 +1,224 @@
+/* 闆嗕腑搴撴牱寮� */
+html,body {
+	width: 100%;
+	height: 100%
+}
+
+.c-selectCity {
+	/*position: relative;*/
+	
+}
+
+.c-selectCityBox {
+	position: absolute;
+	left: -125px;
+	top: 24px;
+	background-color: #0f1e35;
+	padding: 11px 22px 11px 22px;
+	width: 440px;
+	/*height: 300px;*/
+	color: white;
+	font-family: "Microsoft Yahei";
+	font-size: 12px;
+	display: inline-block;
+}
+
+.c-selectHead {
+	height: 40px;
+}
+
+.c-selectHead-dis {
+	display: inline-block;
+	padding: 0px 9px 0px 9px;
+	height: 37px;
+	line-height: 37px;
+	cursor: pointer;
+}
+
+.c-selectHead-dis:hover {
+	color: #c37127;
+}
+
+.c-selectHead-tag {
+	border-bottom: 3px solid #394581;
+	background-color: #396089;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#254e7c),
+		to(#273461)); /*璋锋瓕*/
+	background: -moz-linear-gradient(top, #254e7c, #273461);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#254e7c',
+		endColorstr='#273461');
+}
+
+.c-selectBody {
+	padding: 10px 0px 3px 0px;
+}
+
+.c-selectBody-how {
+	display: inline-block;
+	padding: 2px;
+	/*background-color: red;*/
+}
+
+.c-selectBody-ord {
+	overflow: hidden;
+	width: 440px;
+}
+
+.c-selectBody-ord-ti {
+	float: left;
+	width: 10px;
+	text-align: center;
+	height: 18px;
+	line-height: 18px;
+	margin: 0px 5px 0px 0px;
+}
+
+.c-selectBody-ord-bo {
+	float: left;
+	width: 420px;
+}
+
+.c-selectBody-ord-bo>div {
+	float: left;
+	margin: 2px 3px;
+	height: 16px;
+	line-height: 16px;
+	font-size: 12px;
+	padding: 0px 2px;
+	cursor: pointer;
+}
+
+.c-selectBody-ord-bo>div:hover {
+	background-color: #254e7c;
+	transition: all 0.1s linear;
+}
+
+.c-selectBody-how:hover {
+	background-color: #254e7c;
+	transition: all 0.1s linear;
+	cursor: pointer;
+}
+
+.c-vague {
+	position: absolute;
+	left: 0px;
+	top: 24px;
+	background-color: #0f1e35;
+	width: 300px;
+	/*height: 300px;*/
+	color: white;
+	font-family: "Microsoft Yahei";
+	font-size: 12px;
+	display: inline-block;
+	max-height: 168px;
+	overflow: hidden;
+}
+
+.c-vague-clue {
+	padding: 0px 0px 0px 11px;
+	height: 24px;
+	line-height: 24px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.c-vague-opt {
+	color: #5d9de5;
+}
+
+.c-vague-cityTag {
+	font-family: 'icon';
+	color: #5d9de5;
+}
+
+.c-vague-setTag {
+	background-color: orange;
+	cursor: pointer;
+}
+
+.c-vague-setErr {
+	background-color: #db4c4c;
+}
+
+.c-vague-repeat {
+	color: red;
+}
+
+.page-fun-change {
+	font-family: 'icon';
+	text-decoration: none;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+}
+
+.page-fun-change:link {
+	text-decoration: none;
+	color: #6d91c1;
+}
+
+.page-fun-change:visited {
+	text-decoration: none;
+	color: #6d91c1;
+}
+
+.page-fun-change:hover {
+	text-decoration: none;
+	color: #6d91c1;
+}
+
+.page-fun-change:active {
+	text-decoration: none;
+	color: #6d91c1;
+}
+
+/* longhong-Add-3-9 */
+.air-weather .air-title{
+	margin-bottom:-10px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+}
+.air-weather .air-name{
+	text-align: center;
+	font-size: 18px;
+}
+#weather .ptxt{
+	position:relative;
+	line-height: 30px;
+	font-size: 14px;
+	overflow:hidden;
+}
+#weather .ptxt span{
+	display: inline-block;
+	position: absolute;
+	left: 55%;
+}
+#weather{
+	padding:25px;
+}
+@media only screen and (max-width: 1660px) {
+	.air-weather .air-title{
+	margin-top:-10px;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	}
+	.air-weather .air-name{
+		margin-bottom:0px;
+		text-align: center;
+		font-size: 16px;
+	}
+	#weather .ptxt{
+		line-height: 20px;
+		font-size: 14px;
+	}
+	#weather .ptxt span{
+		display: inline-block;
+		position: absolute;
+		left: 55%;
+	}
+	#weather{
+		padding:15px;
+	}
+}

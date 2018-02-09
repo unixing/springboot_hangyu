@@ -1,0 +1,374 @@
+@font-face {
+    font-family: 'icon';  /* project id 129360 */
+    src: url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.eot');
+    src: url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.woff') format('woff'),
+    url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.svg#iconfont') format('svg');
+}
+
+* {
+	font-family: "Microsoft Yahei";
+}
+
+body {
+	margin: 0px auto;
+	padding: 0px;
+	width: 100%;
+}
+
+.psc-sr-head {
+	margin: 0 auto;
+	width: 100%;;
+	height: 200px;
+	background-image: url("./../images/platform/dynamic/dynamicBg.jpg");
+	background-size: 100% 200px;
+	display: inline-block;
+}
+
+.psc-sr-head>h1 {
+	margin: 45px 0px 0px 0px;
+	color: white;
+	font-weight: 500;
+	text-align: center;
+}
+
+.psc-sr-head-selects {
+	width: 982px;
+	margin: 21px auto;
+}
+
+.psc-sr-head-select {
+	list-style: none;
+	margin: 0px auto;
+	padding: 0px;
+	display: inline-block;
+	height: 35px;
+	/*width: 881px;*/
+}
+
+.psc-sr-head-select>li {
+	display: inline-block;
+	margin: 0px 20px 0px 0px;
+	height: 100%;
+	border-radius: 3px;
+	background-color: white;
+	padding: 0px 5px 0px 5px;
+}
+
+.psc-sr-head-select>li>input {
+	outline: none;
+	border: none;
+	height: 100%;
+	padding: 0px;
+	vertical-align: middle;
+	width: 100px;
+	font-size: 12px;
+	text-align: center;
+}
+
+.psc-sr-head-select>li:nth-of-type(1) {
+	height: 100%;
+	position: relative;
+}
+
+.psc-sr-head-select>li:nth-of-type(1)>input {
+	outline: none;
+	border: none;
+	height: 100%;
+	padding: 0px;
+	vertical-align: middle;
+	width: 100px;
+	font-size: 12px;
+}
+
+.psc-sr-head-select>li>span:nth-of-type(1) {
+	font-size: 12px;
+	color: #adadad;
+	display: inline-block;
+	text-align: center;
+}
+
+.psc-sr-head-select>li:nth-of-type(1)>span:nth-of-type(1) {
+	font-family: 'icon';
+	font-size: 14px;
+	color: #adadad;
+	display: inline-block;
+	transform: rotate(90deg);
+	text-align: center;
+}
+/*日期范围*/
+.psc-sr-head-select>li:nth-of-type(2)>input:nth-of-type(1) {
+	border-right: 1px solid #adadad;
+}
+.psc-sr-head-select>li:nth-of-type(3)>span {
+	width: 50px;
+}
+
+.psc-sr-head-select>li:nth-of-type(3)>input {
+	text-align: left;
+}
+
+.psc-sr-head-select>li:nth-of-type(4)>input {
+	text-align: left;
+}
+/*查询*/
+.psc-sr-head-select>li:nth-of-type(5) {
+	line-height: 35px;
+	text-align: center;
+	background-color: #383c4c;
+	color: white;
+	font-size: 12px;
+	width: 100px;
+	cursor: pointer;
+}
+/***************************内容部分**************************/
+.psc-sr-body {
+	/*background-color: red;*/
+	width: 90%;
+	height: 300px;
+	margin: 0 auto;
+}
+
+.psc-sr-body-box {
+	height: 300px;
+	margin-top: 50px;
+}
+
+.psc-sr-body-box>div:nth-of-type(1) {
+	height: 100%;
+	width: 45%;
+	float: left;
+	border: 1px solid #f1f1f1;
+	border-top: 2px solid #74bbff;
+}
+
+.psc-sr-body-box>div:nth-of-type(2) {
+	height: 100%;
+	width: 45%;
+	float: right;
+	border: 1px solid #f1f1f1;
+	border-top: 2px solid #74bbff;
+}
+
+.psc-sr-body-zszRanking {
+	height: 300px;
+	margin-top: 50px;
+	width: 100%;
+	border: 1px solid #f1f1f1;
+	border-top: 2px solid #f5b959;
+}
+
+.psc-sr-body-klRanking {
+	height: 300px;
+	margin-top: 50px;
+	width: 100%;
+	border: 1px solid #f1f1f1;
+	border-top: 2px solid #74bbff;
+}
+/*时间控件*/
+.airport-controls {
+	width: 450px;
+	/*height: 150px;*/
+	background-color: rgba(0, 0, 0, 0.7);
+	position: absolute;
+	left: 0px;
+	top: 37px;
+	padding: 10px 10px 20px 0px;
+	display: none;
+}
+
+.airport-controls-head {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	border-bottom: 2px solid red;
+	width: 460px;
+	height: 26px;
+}
+
+.airport-controls-head>li {
+	display: inline-block;
+	font-size: 14px;
+	margin-right: 2px;
+	height: 22px;
+	padding: 2px 5px 2px 5px;
+	color: red;
+}
+
+.airport-controls-head>li:hover {
+	cursor: pointer;
+}
+
+.airport-controls-head>li:nth-of-type(1) {
+	margin-left: 15px;
+	border-bottom: 2px solid white;
+}
+
+.airport-controls-hot {
+	width: 100%;
+	margin: 10px 20px 0px 17px;
+	display: block;
+}
+
+.airport-controls-hot>span {
+	margin-right: 5px;
+	font-size: 13px;
+	display: inline-block;
+	padding: 3px 4px 3px 4px;
+	color: white;
+	font-weight: 200;
+}
+
+.airport-controls-hot>span:hover {
+	background-color: #00b7ef;
+	cursor: pointer;
+}
+
+/*全部机场信息*/
+.airport-controls-cont {
+	width: 100%;
+	position: relative;
+	left: 0px;
+	top: 0px;
+}
+
+.airport-controls-cont>ul {
+	width: 100%;
+	list-style: none;
+	padding-left: 24px;
+	margin-top: 10px;
+}
+
+.airport-controls-cont>ul>li {
+	display: inline-block;
+}
+
+.airport-controls-cont>ul>li:nth-of-type(1) {
+	width: 20px;
+	height: 24px;
+	line-height: 24px;
+	vertical-align: top;
+	font-weight: 500;
+	color: white;
+}
+
+.airport-controls-cont>ul>li:nth-of-type(2) {
+	display: inline-block;
+	width: 380px;
+}
+
+.airport-controls-cont>ul>li:nth-of-type(2)>span {
+	color: white;
+	font-size: 12px;
+	padding: 2px 5px 2px 5px;
+	display: inline-block;
+}
+
+.airport-controls-cont>ul>li:nth-of-type(2)>span:hover {
+	background-color: #5bc0de;
+	cursor: pointer;
+}
+/**********************筛选样式***********************/
+strong {
+	color: red;
+}
+
+.screen-controls {
+	width: 234px;
+	background-color: #5bc0de;
+	position: absolute;
+	left: 0px;
+	height: 0px;
+	overflow: hidden;
+}
+
+.screen-controls-one {
+	list-style: none;
+	margin: 0px;
+	padding: 3px 2px 3px 2px;
+}
+
+.screen-controls-one>li {
+	display: inline-block;
+	font-size: 12px;
+	vertical-align: middle;
+}
+
+.screen-controls-one>li:nth-of-type(1) {
+	width: 60px;
+	text-align: center;
+}
+
+.screen-controls-one>li:nth-of-type(2) {
+	width: 40px;
+	text-align: center;
+}
+
+.screen-controls-one>li:nth-of-type(3) {
+	width: 120px;
+	text-align: center;
+	overflow: hidden;
+}
+/********************5个图标样式************************/
+.psc-sr-icon>ul {
+	list-style: none;
+	height: 160px;
+}
+
+.psc-sr-icon>ul>li {
+	float: left;
+	height: 160px;
+	width: 20%;
+}
+
+.in {
+	margin: 30px 0px 0px 3.7%;
+}
+
+.psc-sr-icon>ul>li>p:nth-of-type(1) {
+	font-family: "icon";
+	font-size: 18px;
+	text-align: center;
+	color: #1e90ff;
+}
+
+.psc-sr-icon>ul>li>p:nth-of-type(1)>span {
+	font-size: 14px;
+	width: 48px;
+	text-align: center;
+	display: inline-block;
+	color: black;
+}
+
+.psc-sr-icon>ul>li>h4 {
+	text-align: center;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.psc-sr-icon>ul>li>h4>span {
+	font-family: "icon";
+	color: #1e90ff;
+}
+
+.psc-sr-icon>ul>li>div:nth-of-type(1) {
+	width: 60%;
+	height: 100px;
+	margin: 0 auto;
+}
+
+.psc-sr-icon>ul>li>div:nth-of-type(1)>div {
+	width: 90px;
+	height: 90px;
+	margin: 0 auto;
+	background-color: #69caff;
+	border-radius: 100%;
+	font-family: "icon";
+	font-size: 45px;
+	font-weight: 600;
+	text-align: center;
+	line-height: 90px;
+	color: white;
+	cursor: pointer;
+}

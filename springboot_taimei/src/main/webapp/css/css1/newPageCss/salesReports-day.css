@@ -1,0 +1,231 @@
+/****鏇茬嚎鍥捐〃锛堟敹鍏ヤ俊鎭級***/
+.graph-table {
+	height: 50px;
+	width: 100%;
+	position: relative;
+}
+
+/*淇℃伅妗�*/
+html,body {
+	overflow: hidden;
+}
+
+.graph-table-inf {
+	position: absolute;
+	left: 83%;
+	padding: 0px;
+	list-style: none;
+	display: inline-block;
+	min-width: 135px;
+	z-index: 1;
+	height: 193px;
+	top: 0px;
+	bottom: 0px;
+	margin: auto;
+}
+
+.graph-table-inf>li {
+	margin: 2px;
+	border-radius: 3px;
+	padding: 5px 0px 5px 5px;
+}
+.sr-box-body-date {
+	position: relative !important;
+}
+.graph-table-inf>li>div {
+	font-size: 1rem;
+	color: white;
+}
+
+.graph-table-inf-goandback {
+	border: 2px solid #ce583a !important;
+}
+
+.graph-table-inf-go {
+	border: 2px solid #63c7d7 !important;
+}
+
+.graph-table-inf-back {
+	border: 2px solid #1c73c0 !important;
+}
+
+#tip-box{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: none;
+    padding: 10px;
+    border:1px solid #797979;
+    z-index: 9999;
+    background-color: white;
+    line-height: 25px;
+}
+.status-be:before{
+    content: url('/images/yc.png');
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.status-af:after{
+    content: url('/images/qx.png');
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+/*鍥�2*/
+.graph-table-inf2 {
+	width: 55px;
+	min-width: 45px;
+	margin: 15px 0px 0px 5px;
+}
+/***********鍥句笁***********/
+.income-set {
+	margin: 27px 0px 15px 37px;
+	overflow: hidden;
+	position: relative;
+}
+
+.income-set>div {
+	color: white;
+	font-size: 23px;
+	float: left;
+}
+/*鍒囨崲*/
+#income-set {
+	float: left;
+	list-style: none;
+	padding: 0px;
+	margin: 4px 1px 1px 0px;
+	position: absolute;
+	right: 30px;
+}
+
+#income-set>li {
+	list-style: none;
+	float: left;
+	width: 55px;
+	height: 25px;
+	background-color: #2a3e63;
+	border-radius: 3px;
+	line-height: 25px;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+}
+
+#income-set>li:nth-of-type(2) {
+	background-color: #5a7aa9;
+}
+
+/*鏃ユ姤鍘熷垱鍥�**/
+.graph-table {
+	position: relative;
+}
+
+#matter {
+	position: absolute;
+	width: 60px;
+	height: 24px;
+	line-height: 24px;
+	text-align: center;
+	color: white;
+	font-size: 12px;
+	border: 1px solid #4e82bc;
+	border-radius: 5px;
+	margin: -12px 0px 0px 15px;
+	background-color: #13233d;
+	opacity: 0;
+}
+
+#graph-line {
+	
+}
+
+#flt_nbr_Count {
+	border: none;
+	color: cadetblue;
+}
+
+.choose-title {
+	height: 50px;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 14px;
+}
+
+.choose-set {
+	height: 100px;
+	width: 100px;
+	margin: 0px 0px 0px 102px;
+}
+
+.choose-set>div {
+	float: left;
+	width: 39px;
+	height: 50px;
+}
+
+.choose-set div {
+	text-align: center;
+	cursor: pointer;
+}
+
+.list {
+	background-color: #2aabd2;
+	color: white;
+}
+
+.choose-set>div:nth-of-type(2) {
+	width: 27px;
+	height: 40px;
+	line-height: 50px;
+	font-size: 12px;
+	text-align: right;
+}
+
+.choose-set>div:nth-of-type(3) {
+	width: 20px;
+}
+
+.choose-set>div:nth-of-type(3) {
+	float: right;
+}
+
+.choose-font-top {
+	font-family: "icon";
+	text-align: center;
+	color: #cccdcf;
+}
+.sr-box-body-chart{
+	display:flex;
+	flex-wrap:wrap;
+}
+.choose-font-bottom {
+	font-family: "icon";
+	transform: rotate(180deg);
+	text-align: center;
+	font-size: 12px;
+	color: #cccdcf;
+}
+.sr-box-body-chart>div{
+	width:50%;
+}
+.choose-time {
+	font-weight: 600;
+	font-size: 16px;
+}
+/*媒体查询器，兼容1600分辨率  */
+@media ( max-width : 1600px) {
+	.graph-table-inf {
+		transform: scale(0.75);
+		left: 80%;
+	}
+}
+.sr-box-body-chart{
+	padding-top:0px !important;
+}
+.table_1{
+    position: inherit !important;
+}

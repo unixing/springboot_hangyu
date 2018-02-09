@@ -1,0 +1,188 @@
+body {
+	padding: 0px;
+	margin: 0px;
+	font-family: 'microsoft yahei';
+}
+
+
+@list:#0f1e35 ;
+.alllist (@width, @height, @background-color, @color ){
+	width: @width;
+	height: @height;
+	background-color: @background-color;
+	color: @color;
+}
+
+.set-month-btn {
+	position: absolute;
+	left: 50%;
+	top: 10px;
+	color: white;
+}
+
+.set-month {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: @list;
+	z-index: 3500;
+	display: none;
+}
+
+.set-begin {
+	margin: 44px 0px 0px 0px;
+	padding: 0px;
+	width: 240px;
+	height: 100%;
+	float: left;
+}
+
+.set-title {
+	height: 20px;
+	width: 184px;
+	margin: 0 auto;
+}
+
+.set-title>div {
+	float: left;
+	color: white;
+    line-height:18px;
+}
+
+.set-title-icon {
+	width: 32px;
+	height: 100%;
+	border-radius: 4px;
+	text-align: center;
+	line-height: 20px;
+	cursor: pointer;
+}
+
+.set-title-icon:hover {
+	background-color: #357ebd;
+}
+
+.set-title-years {
+	width: 120px;
+	text-align: center;
+	height: 100%;
+	line-height: 20px;
+}
+
+.set-over {
+	margin: 44px 0px 0px 0px;
+	padding: 0px;
+	width: 240px;
+	height: 100%;
+	float: left;
+}
+
+.set-nonthList {
+	width: 184px;
+	margin: 18px auto 15px;
+}
+
+.set-nonthList>div { .alllist (25%,40px,#0f1e35,white);
+	float: left;
+	line-height: 40px;
+	text-align: center;
+	font-size: 12px;
+	font-family: 'microsoft yahei';
+	overflow: hidden;
+}
+
+.set-nonthList>div:hover {
+	border-radius: 3px;
+	background-color: #357ebd;
+	cursor: pointer;
+}
+/* 切换日月 */
+.set-month-back {
+	width: 32px;
+	height: 20px;
+	border-radius: 3px;
+	position: absolute;
+	left: 55%;
+	top: 9px;
+	background-color: #e7e7e7;
+	font-size: 12px;
+	overflow: hidden;
+	margin-left: -16px;
+	cursor: pointer;
+	z-index: 999999;
+	line-height: 20px;
+}
+
+.set-month-back>div {
+	width: 50%;
+	text-align: center;
+	line-height: 22px;
+}
+
+.go-day {
+	float: left;
+}
+
+.go-month {
+	float: right;
+}
+
+.go-set {
+	color: white;
+	background-color: #5d6ea4;
+}
+
+.nextData {
+	float: right;
+}
+
+.prevData {
+	float: left;
+}
+
+.excessive {
+	background-color: rgba(127, 188, 232, 0.2) !important;
+}
+
+.Pset {
+	background: #3e4b90;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4584c7),
+		to(#3e4d92));
+	background: -moz-linear-gradient(top, #4584c7, #3e4d92);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4584c7',
+		endColorstr='#3e4d92');
+	color: #fff;
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+.Nset {
+	background: #3e4b90;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4584c7),
+		to(#3e4d92));
+	background: -moz-linear-gradient(top, #4584c7, #3e4d92);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4584c7',
+		endColorstr='#3e4d92');
+	color: #fff;
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+.middles {
+	/*background: #89c997;*/
+	/*background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#89c997), to(#5aa16a));*/
+	/*background: -moz-linear-gradient(top, #89c997, #5aa16a);*/
+	/*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c997', endColorstr='#5aa16a');*/
+	/*color: #fff;*/
+	/*border-radius: 2px;*/
+	/*overflow: hidden;*/
+	background: #3e4b90;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4584c7),
+		to(#3e4d92));
+	background: -moz-linear-gradient(top, #4584c7, #3e4d92);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4584c7',
+		endColorstr='#3e4d92');
+	color: #fff;
+	border-radius: 2px;
+	overflow: hidden;
+}

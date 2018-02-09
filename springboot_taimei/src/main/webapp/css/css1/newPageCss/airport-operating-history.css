@@ -1,0 +1,535 @@
+@font-face {
+  font-family: 'icon';  /* project id 129360 */
+  src: url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.eot');
+  src: url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.svg#iconfont') format('svg');
+}
+body {
+	padding: 0px;
+	margin: 0px;
+	font-family: "microsoft yahei";
+	overflow: hidden;
+}
+
+body,html {
+	height: 100%
+}
+/******上是初始化页面***************/
+.lin-historical {
+	width: 100%;
+	min-width: 1280px;
+	height: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.sr-box-head {
+	height: 39px;
+	position: relative;
+	z-index: 99;
+}
+
+.tltle-sel {
+	font-family: "icon";
+	font-size: 14px;
+	color: #6d91c1;
+	float: left;
+	/*margin: 0px 5px 0px 0px;*/
+	height: 39px;
+	text-align: center;
+	line-height: 39px;
+	width: 50px;
+	background: #3e4b90;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e4b90),
+		to(#326fab)); /*谷歌*/
+	background: -moz-linear-gradient(top, #3e4b90, #326fab);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3e4b90',
+		endColorstr='#326fab');
+}
+/*选中状态*/
+.tltle-selI {
+	width: 100px;
+	background: #3e4b90;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e4b90),
+		to(#3e4b90)); /*谷歌*/
+	background: -moz-linear-gradient(top, #3e4b90, #3e4b90);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3e4b90',
+		endColorstr='#3e4b90');
+}
+
+.tltle-selI>span {
+	font-size: 12px;
+}
+
+.sr-box-head-inquire {
+	background-color: rgba(0, 0, 0, 0.6);
+	display: inline-block;
+	padding: 5px 10px 5px 10px;
+	float: right;
+	border-radius: 5px 5px 0px 0px;
+	margin-right: 3px;
+}
+
+.sr-box-head-inquire>ul {
+	list-style: none;
+	float: left;
+	margin: 2px 0px 0px;
+	padding: 0px;
+}
+
+.sr-box-head-inquire>ul>li {
+	float: left;
+	height: 25px;
+	padding: 0px;
+	margin: 0px 15px 0px 0px;
+	border-radius: 4px;
+	background-color: white;
+}
+
+.sr-box-head-inquire .mid-width{
+	text-align: center;
+	border: 0px;
+	outline: 0px;
+	line-height: 23px;
+	width: 105px;
+	border-radius: 4px;
+	font-size: 13px;
+	color: cadetblue;
+	height: 23px;
+	padding: 0px;
+}
+.sr-box-head-inquire #reservation{	
+	width: 170px;
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    border: 0px;
+    outline: 0px;
+    line-height: 23px;
+    font-size: 13px;
+    color: cadetblue;
+    height: 23px;
+    border-radius: 5px;
+}
+.sr-box-head-inquire>ul>li>span {
+	color: black;
+	font-size: 13px;
+	height: 18px;
+	line-height: 18px;
+	display: inline-block;
+	border-right: 1px solid #a3a7b2;
+	margin-top: 4px;
+	padding: 0px 5px 0px 5px;
+}
+/*查询按钮*/
+.sr-box-head-btn {
+	float: left;
+	width: 92px;
+	height: 29px;
+	text-align: center;
+	line-height: 29px;
+	background-color: #1e4677;
+	border-radius: 3px;
+	color: white;
+	font-size: 12px;
+	vertical-align: middle;
+	margin-left: 15px;
+}
+
+.sr-box-head-btn:hover {
+	cursor: pointer;
+}
+/********************************************内容区域*******************/
+.lin-historical-body {
+	overflow: hidden;
+	background-color: #13233d;
+	position: relative;
+    display: flex;
+}
+/*导航*/
+.lin-historical-body-navigation {
+	width: 50px;
+	float: left;
+	height: 100%;
+	position: relative;
+	z-index: 6;
+	background-color: #11254b;
+	cursor: pointer;
+}
+
+.lin-historical-body-navigation>div {
+	width: 100%;
+	height: 33.33%;
+	text-align: center;
+	font-size: 14px;
+	color: white;
+	border-bottom: 1px solid rgba(255,255,255,0.1)
+}
+
+.lin-historical-body-navigation>div:hover {
+	background-color: #19315e;
+}
+/*选中样式*/
+.set {
+	background-color: #395a9b !important;
+	box-shadow: 5px 5px 5px #101b31;
+}
+.set:hover {
+	background-color: #395a9b !important;
+}
+/*选中样式*/
+.set-liset {
+	background-color: #142e45;
+}
+
+.list {
+	background: #5b77a9;
+	color: white;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#5a88ba),
+		to(#5c689a)); /*谷歌*/
+	background: -moz-linear-gradient(top, #5a88ba, #5c689a);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5a88ba',
+		endColorstr='#5c689a');
+}
+
+/**/
+/*******年历******/
+.lin-historical-time {
+	width: 300px;
+	height: 100%;
+	background-color: white;
+}
+
+.sr-box-body-date-head>h3 {
+	text-align: center;
+	color: black;
+	font-size: 17px;
+	margin: 25px 0px 20px 0px;
+}
+
+.set-years {
+	list-style: none;
+	margin: 0px auto;
+	padding: 15px 0 0 0;
+	overflow: hidden;
+	width: 176px;
+}
+
+.set-years>li {
+	float: left;
+}
+
+.set-years>li:nth-of-type(1) {
+	font-family: "icon";
+	font-size: 12px;
+	width: 12px;
+	color: #cecece;
+	margin: 0px 35px 0px 0px;
+	height: 25px;
+	line-height: 25px;
+	display: inline-block;
+}
+
+.set-years>li:nth-of-type(2) {
+	font-size: 15px;
+	color: black;
+	font-weight: 600;
+	height: 25px;
+	line-height: 25px;
+	margin: 0px 35px 0px 0px;
+}
+
+.set-years>li:nth-of-type(3) {
+	font-family: "icon";
+	font-size: 12px;
+	color: #cecece;
+	height: 25px;
+	line-height: 25px;
+	display: inline-block;
+}
+
+.set-years>li:nth-of-type(1),.set-years>li:nth-of-type(3):hover {
+	cursor: pointer;
+}
+/*6年*/
+.sr-box-body-date-body {
+	padding: 20px 20px 0px 31px;
+	overflow: hidden;
+}
+
+.sr-box-body-date-body>div {
+	float: left;
+	width: 80px;
+	height: 80px;
+	text-align: center;
+	line-height: 80px;
+	font-size: 16px;
+	font-weight: 600;
+	border: 1px solid #e1e1e1;
+	/* color: #828282; */
+}
+
+.sr-box-body-date-body>div:hover {
+	border-radius: 4px;
+	cursor: pointer;
+	color: white;
+	background: #3e4b90;
+}
+/*机场天气*/
+.air-weather {
+	width: 100%;
+}
+
+.air-name {
+	width: 100%;
+	text-align: center;
+	line-height: 45px;
+	/* height: 45px; */
+}
+
+.air-weather-box {
+	width: 100%;
+}
+
+.air-weather-box>div:nth-of-type(1) {
+	font-family: "icon";
+	font-size: 140px;
+	color: #c1c0c5;
+	float: left;
+	width: 50%;
+	text-align: right;
+}
+
+.air-weather-box>div:nth-of-type(2) {
+	width: 50%;
+	float: left;
+	color: #ccc;
+}
+
+.air-weather-box>div:nth-of-type(2)>p {
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.air-weather-box>div:nth-of-type(2)>div {
+	font-size: 20px;
+	/* color: #5987b8; */
+	color: #ccc;
+}
+/*内容图区*/
+.lin-historical-body-box {
+	float: left;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	overflow-y: auto;
+    overflow-x: hidden;
+
+}
+
+.lin-historical-body-box>div {
+	float: left;
+	width: 50%;
+	height: 50%;
+}
+
+#routes,#sDepartment {
+	width: 100%;
+}
+
+/*动态添加样式*/
+.body-navigation-element {
+	width: 100%;
+	background-color: #2e437a;
+	font-size: 12px;
+	text-align: center;
+	color: white;
+	overflow: hidden;
+}
+
+.body-navigation-element:hover {
+	background-color: #142e45;
+	cursor: pointer;
+}
+
+.sr-box-head-classify>ul {
+	list-style: none;
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	border-radius: 3px 3px 0px 0px;
+	overflow: hidden;
+}
+
+.sr-box-head-classify>ul>li:hover {
+	background: #3e4b90;
+	cursor: pointer;
+}
+
+.tag-box {
+	display: inline-block;
+}
+
+.element-tag {
+	font-family: 'icon';
+	font-size: 12px;
+	color: white;
+}
+/*每组图标第一个插入标题*/
+.AmountAir,.seatIncome,.peoples,.averagePeoples,.proportion {
+	position: relative;
+	background-color: #13223c !important;
+}
+
+.AmountAir-title,.seatIncome-title,.peoples-title,.averagePeoples-title,.proportion-title
+	{
+	position: absolute;
+	top: 3%;
+	left: 3%;
+	color: white;
+}
+
+.AmountAir-title>h3,.seatIncome-title>h3,.peoples-title>h3,.averagePeoples-title>h3,.proportion-title>h3
+	{
+	margin: 0px;
+	padding: 0px;
+	font-size: 18px;
+	font-weight: normal;
+}
+
+.AmountAir-title>p,.seatIncome-title>p,.peoples-title>p,.averagePeoples-title>p,.proportion-title>p
+	{
+	margin: 0px;
+	padding: 0px;
+	font-size: 13px;
+}
+
+#scroll-bar {
+	width: 8px;
+	background-color: #7fbce9 !important;
+	height: 100px;
+	position: absolute;
+	/* top: 5px;
+    z-index: 999; */
+	right: 301px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.right-title{
+	margin:40px 0 5px 0;
+	text-align:center;
+}
+.hasData{
+	background-color: #dae3ee;
+}
+.table_1{
+	flex: 1;
+}
+.lin_historical_er{
+	padding:19px 0px 52px 0px !important;
+}
+
+
+
+.reportErr{
+	width: 97.2%;
+	right: 0;
+	z-index: 99;
+}
+
+/* 
+**********异常数据、航班
+**********龙洪
+**********2017-7
+*/
+
+.checkAArea{
+	color: #fff;	
+	background-color: rgba(0,0,0,0) !important;
+	font-size: 12px;
+}
+
+
+/* 
+**********汇总页面
+**********龙洪
+**********2017-7
+*/
+#newTotal{
+	font-size: 12px;
+	color: #fff;
+	width: 100%;
+	position: relative;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-bottom: 150px;
+}
+.totalHead{
+	width: 96%;
+	height: 100px;
+	line-height: 100px;
+	margin: 0 70px;
+}
+.totalHead .headp{
+	margin-top: 50px;
+	font-size: 22px;
+	width: 50%;
+}
+.totalHead #timeRange{
+	font-size: 16px;
+	color: #6c7b98;
+}
+.totalHead .exportExl{
+	position: absolute;
+    right: 0;
+    top: 10%;
+}
+
+#newTotal .totalBody{   
+	margin-top: 50px;
+}
+#totalTable{
+	width: 94%;
+	margin: 0 auto;	 
+}
+.totalBody thead{
+	background: #1D365E;
+    display: table-header-group;
+}
+.totalBody tr{
+	height: 40px;	
+}
+.totalBody tr.sumtr{
+	background: #395a9b !important;
+}
+.totalBody th,.totalBody td{	
+	min-width: 110px;
+	text-align: center;
+	vertical-align: middle;
+	font-weight: normal;
+    border: 1px solid rgba(33,53,95,1);
+}
+.totalBody tr:nth-child(even){
+	background-color: #172A47;	
+}
+
+.copyTableWrap{
+	width: 96.9%;
+	display: none;
+	position: fixed;
+	top: -12px;
+	padding-top: 50px;
+	background-color: rgb(19,35,61);
+}
+#copyTable{
+	margin: 0 auto;
+	box-shadow: 0px 3px 5px #000;
+}
+
+.back-to-top{
+	right: 10%;
+}

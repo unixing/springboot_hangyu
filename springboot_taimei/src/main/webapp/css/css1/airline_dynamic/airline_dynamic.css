@@ -1,0 +1,113 @@
+﻿@font-face {
+    font-family: 'icon';  /* project id 129360 */
+    src: url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.eot');
+    src: url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.woff') format('woff'),
+    url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.svg#iconfont') format('svg');
+}
+.b_color {
+	background-color: #2c3e5d;
+}
+
+.c_color {
+	background-color: #5987b8;
+}
+
+td {
+	position: relative
+}
+
+h1 {
+	color: #FFF;
+	display: inline;
+	font-weight: 400
+}
+
+.float {
+	position: relative;
+}
+
+.float-box {
+	background-color: #0f1e35;
+	border-radius: 3px 0 0 3px;
+	height: 120px;
+	left: 145px;
+	padding: 10px 10px 0;
+	position: absolute;
+	top: 20px;
+	width: 80px;
+	z-index: 888;
+}
+
+.first-column,.last-column {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	font-size: 12px;
+	color: white;
+}
+
+.ordinary-column {
+	width: 60px;
+	height: 20px;
+	line-height: 20px;
+	font-family: "微软雅黑";
+}
+
+.set-up {
+	font-family: "icon";
+	width: 20px;
+	float: right;
+	text-align: center;
+	font-size: 16px;
+}
+
+.change-set-up {
+	clear: both;
+	height: 0;
+	padding-left: 100%;
+}
+
+.last-column {
+	background-color: #0f1e35;
+	border-radius: 0 3px 3px 0;
+	padding: 10px 10px 0;
+	position: absolute;
+	top: 20px;
+	z-index: 888;
+}
+
+li {
+	list-style: none;
+}
+
+.last-column>li {
+	width: 70px;
+	height: 20px;
+	line-height: 20px;
+	font-family: "微软雅黑";
+	line-height: 20px;
+}
+
+.last-column>li>input {
+	vertical-align: middle
+}
+
+#separated>input {
+	width: 70px;
+	outline: none;
+	border: 1px solid #8f96a0;
+	border-radius: 2px;
+	display: inline-block;
+	margin: 0 auto;
+	background-color: #0f1e35;
+	text-align: center;
+	color: white;
+}
+
+.determine>div {
+	float: right;
+	display: inline-block;
+	margin-left: 10px;
+}

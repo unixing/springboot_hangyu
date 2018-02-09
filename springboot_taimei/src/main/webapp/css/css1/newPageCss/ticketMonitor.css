@@ -1,0 +1,952 @@
+/*
+ * @Author: lonhon 
+ * @Date: 2017-10-17 16:23:14 
+ * @Last Modified by: github.lonhon
+ * @Last Modified time: 2017-12-27 15:47:04
+ */
+/*滚动条*/
+::-webkit-scrollbar-thumb{  
+    background-color: 	rgba(216, 216, 216,.7);
+    height:50px;  
+    outline-offset:-2px;  
+    outline:0px solid #fff;
+    border-radius:4px;  
+ }  
+  
+ /*---鼠标点击滚动条显示样式--*/  
+ ::-webkit-scrollbar-thumb:hover{
+     background-color: 	rgba(216, 216, 216, .42);
+     cursor: pointer;
+ }
+  
+ /*---滚动条大小--*/  
+ ::-webkit-scrollbar{  
+    width:6px;
+    height:8px;  
+ }  
+  
+ /*---滚动框背景样式--*/  
+ ::-webkit-scrollbar-track-piece{  
+    background-color:rgba(153, 153, 153, 0.1);  
+    border-radius:0;  
+ }
+
+
+/* 頁面整體樣式 */
+.app{
+    font-size: 12px;
+    color: #fff;
+}
+
+/* 图标 */
+.icon{
+    font-family: "icon";
+}
+
+.hiddened{    
+    visibility: hidden;
+}
+.cur{
+    cursor: pointer;
+}
+.darkp{
+    color: #333;
+}
+.wt{
+    color: #fff;
+}
+ /**头部公共样式**/
+.sr-box-head-inquire {
+	background-color: rgba(0, 0, 0, 0.6);
+	display: inline-block;
+	padding: 5px 10px 5px 10px;
+	float: right;
+	border-radius: 3px 3px 0px 0px;
+	margin-right: 1px;
+	height: 29px;
+}
+
+.sr-box-head-inquire>div {
+	height: 25px;
+	float: left;
+	margin-right: 5px;
+}
+
+.sr-box-head-inquire>div:last-of-type {
+	margin-right: 0px
+}
+
+._set-place-duplexing {
+	width: 290px;
+	height: 100%;
+	background-color: white;
+	border-radius: 2px;
+}
+
+._set-place-duplexing>div {
+	float: left;
+}
+
+._set-time {
+	height: 25px;
+	float: left;
+	background: white;
+	border-radius: 3px;
+}
+
+._set-name-b {
+	width: 200px;
+	background: white;
+	display: inline-block;
+	position: relative;
+}
+
+._set-name-b>input {
+	width: 200px;
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+	border: 0px;
+	outline: 0px;
+	line-height: 23px;
+	font-size: 13px;
+	color: cadetblue;
+	height: 23px;
+	border-radius: 5px;
+}
+
+._set-name {
+	color: black;
+	font-size: 12px;
+	height: 18px;
+	line-height: 18px;
+	display: inline-block;
+	border-right: 1px solid #a3a7b2;
+	margin-top: 4px;
+	padding: 0px 5px 0px 5px;
+}
+
+._set-begin {
+	width: 85px;
+	background: white;
+	display: inline-block;
+	position: relative;
+}
+
+._set-begin>input {
+	width: 85px;
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+	border: 0px;
+	outline: 0px;
+	line-height: 23px;
+	font-size: 13px;
+	color: cadetblue;
+	height: 23px;
+	border-radius: 5px;
+}
+
+._set-change {
+	font-size: 12px;
+	font-family: 'icon';
+	display: inline-block;
+}
+
+._set-place,._set-time {
+	height: 25px;
+	float: left;
+	background: white;
+	border-radius: 3px;
+}
+
+._set-flight {
+	float: left;
+	height: 25px;
+	width: 165px;
+	background: white;
+}
+
+._set-list-set {
+	vertical-align: top;
+	width: 113px;
+	height: 25px;
+	display: inline-block;
+	float: right;
+}
+
+._set-list-title {
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	cursor: pointer;
+	font-size: 13px;
+	color: cadetblue;
+}
+
+._set-allList {
+	width: 100%;
+	background-color: #264c76;
+}
+
+._set-allList>div:hover {
+	background-color: #0e1c36;
+	cursor: pointer;
+}
+
+._set-allList>div {
+	width: 100%;
+	height: 25px;
+	color: white;
+	line-height: 25px;
+	font-size: 13px;
+	text-align: center;
+}
+
+._set-choose {
+	float: left;
+	font-size: 12px;
+	color: white;
+	overflow: hidden;
+	line-height: 26px;
+	margin: 0px 5px 0px 0px;
+}
+
+._set-choose>input {
+	vertical-align: middle;
+}
+._checkOp{
+	opacity:0.5;
+	color:#ccc;
+}
+._set-choose>div {
+	float: right;
+}
+
+._set-query {
+	float: left;
+	width: 92px;
+	height: 25px;
+	text-align: center;
+	line-height: 25px;
+	background-color: #1e4677;
+	border-radius: 3px;
+	color: white;
+	font-size: 12px;
+	vertical-align: middle;
+	margin-left: 15px;
+	cursor: pointer;
+}
+
+input[type="radio"],input[type="checkbox"] {
+	margin: 0px 0 0 !important;
+	margin-top: 1px \9;
+	line-height: normal;
+}
+
+.sr-box {
+	height: 100% !important;
+}
+#sr-box-head-inquire #SD-head-inquire{
+    display:inline-block;
+    font-size: 13px;
+    width:100px;
+	height:80%;
+	border:none;
+	color:cadetblue;
+    outline:none;	
+    margin-top: 2px;
+	line-height:25px;
+	text-indent: 10px;
+}
+.SD-set-list-title{
+    font-size: 13px;
+    display: inline-block;
+    color: cadetblue;
+    line-height: 25px;
+    width: 255px;
+    white-space: nowrap;
+    text-align: center;
+}
+/*查询按钮*/
+.sr-box-head-btn {
+	float: left;
+	width: 92px;
+	height: 29px;
+	text-align: center;
+	line-height: 29px;
+	background-color: #1e4677;
+	border-radius: 3px;
+	color: white;
+	font-size: 12px;
+	vertical-align: middle;
+	margin-left: 15px;
+}
+
+
+/*左侧导航*/
+.lin-historical-body-navigation{
+	background-color:#11254b;
+	position:relative;
+	box-shadow: 5px 5px 5px #101b31;
+	width: 50px;
+	float: left;
+	height: 100%;
+	z-index:1;
+}
+.lin-historical-body-navigation .body_navig{
+	height :48%;
+	cursor:pointer;
+}
+.lin-historical-body-navigation .body_navig:hover{
+	background-color: #19315e;
+}
+.lin-historical-body-navigation .current{
+	background:#395a9b;
+	position:relative;
+	z-index:1;
+	box-shadow: 5px 5px 5px #101b31;
+}
+.lin-historical-body-navigation .body_navig span{
+	position:relative;
+	top:46%;
+	font-size:14px;
+	display:inline-block;
+	transform:rotate(90deg);
+}
+
+/* 主画布容器 */
+.src-wrap{
+    position: absolute;
+    background-color: #13233d;
+    width: 97%;
+    height: 95%;
+    left: 50px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.src-container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+@media screen and (max-width: 1680px) {
+    .src-container{
+        width: 99%;
+    }
+}
+.main{
+    position: relative;
+    width: 95%;
+    padding: 50px 28px;
+}
+/* 按钮 */
+.tbtn{    
+    color: rgba(255,255,255,.5);
+    font-family: "icon";
+    font-size: 12px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    text-indent: 0;
+    border-radius:  15px;
+    background-color: rgba(57,90,150,.5);
+    box-shadow: 0px 2px 7px #000;
+    cursor: pointer;
+}
+.tbtn:hover{
+    color: #fff;
+    background-color: #224076;
+}
+.tbtn-hover{
+    color: #fff;
+    background-color: #224076;
+}
+.tbtn-checked{
+    color: #fff;
+    background-color: #395a9b;
+}
+.tbtn-checked:hover{
+    background-color: #395a9b;
+}
+.tbtn-xs{
+    margin-right: 12px;
+    width: 112px;
+}
+.tbtn-l{
+    width: 208px;
+}
+
+/* 单段导航 */
+#perlane{
+    display: inline-block;
+    margin-left: 100px;
+}
+#perlane>li{
+    margin: 0 3px;
+}
+.barchar-box{
+    width: 100%;    
+    padding: 30px 0;
+    position: relative;
+    margin-top: 20px;
+    background-color: rgba(17,30,51,1);
+    box-shadow: 5px 5px 5px rgba(0,0,0,.3);    
+}
+.barchar-box h3{
+    text-indent: 30px;
+}
+.chart-box{
+    width: 100%;
+    height: 460px;
+    margin-top: 20px;
+}
+.chart{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* 正文配件 */
+.desctxt{
+    color: #666;
+    text-align: right;
+    margin-right: 60px;
+    font-size: 10px;
+    padding-top: 10px;
+}
+
+.chart-radio{
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    z-index: 2;
+}
+.chart-radio-right{
+    right: 50px;
+    left: initial;
+}
+.ticket-radio{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    border: 1px solid #7ebbe9;
+}
+.ticket-radio:hover{
+    background-color: #7ebbe9;
+}
+.rd-checked{
+    background-color: #7ebbe9;
+}
+.chartRadio label{
+    margin: 0 !important;
+    font-weight: normal;
+}
+
+/* 提醒框 */
+
+.caretip-box{
+    width: 330px;
+    height: 260px;
+    position: absolute;
+    top: 40px;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: initial;
+    z-index: 3;
+}
+.caretip-box-inh{
+    height: 330px;
+}
+.caretip-main{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.caretip-header{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+.caretip-header p{
+    margin: 0;
+}
+.caretip-header p:first-child{
+    color: #8d8d8d;
+    text-indent: 16px;
+}
+.textbtn{
+    font-family: "icon";
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 41px;
+    color: #4353a3;
+    text-align: center;
+}
+.textbtn:after{
+    content: "";
+    position: absolute;
+    display: inline-block;
+    border-radius: 0 8px 0 0;
+    width: 0;
+    height: 41px;
+    right: 0;
+    color: rgba(255,255,255,0);
+    transition: all .3s;
+    background-color: #6d7fd7;
+    cursor: pointer;
+}
+.textbtn:hover:after{
+    content: "编辑";
+    color: rgba(255,255,255,1);
+    width: 50px;
+    font-size: 12px;
+    z-index: 2;
+}
+.textbtn-on{
+    color: rgba(255,255,255,1);
+    background-color: #6d7fd7;
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 41px;
+    text-align: center;
+    border-radius: 0 8px 0 0;
+    z-index: 2;
+}
+
+.caretip-body{
+    color: #8d8d8d;
+    height: 200px;
+    width: 90%;
+    border-top: 1px solid rgba(0,0,0,.3);            
+}
+
+.caretip-tbl{
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+}
+.caretip-tbl tr{
+    height: 50px;
+}
+.caretip-tbl tr td:first-child{
+    text-align: right;
+    width: 100px;
+    padding-right: 20px;
+}
+
+.lswitch{
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: rgba(67,84,158,1);
+}
+.lswitch-dark{
+    background-color: rgba(189,189,189,1);
+}
+.lswitch .lswitch-circle{
+    display: inline-block;
+    position: absolute;
+    left: 2px;
+    top:2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: #fff;
+    transition: all .3s;
+}
+.lswitch .lswitch-circle-c{
+    left: 15px;            
+}
+.time-hm{
+    display: inline-block;
+    color: #333;
+    width: 46px;
+    height: 22px;
+    text-indent: 7px;
+}
+.je-txt{
+    color: #333;
+    display: inline-block;
+    width: 113px;
+    height: 26px;
+    text-indent: 7px;
+}
+
+.caretip-footer{
+    width: 90%;
+    height: 70px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.caretip-btn-area{
+    position: absolute;
+    right: 20px;
+}
+.tbbtn{
+    display: inline-block;
+    height: 34px;
+    line-height: 30px;
+    width: 84px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: none;
+    color: #fff;
+}
+.tbbtn:active{
+    color: #fff;
+}
+.tbbtn-cancel{
+    background-color: rgb(154,164,204); 
+}
+.tbbtn-cancel:active{
+    background-color: rgb(154,164,170);             
+}
+.tbbtn-enter{
+    background-color: #4455a1; 
+}
+.tbbtn-enter:active{
+    background-color: #5566b1; 
+}
+
+/* 航班号管理 */
+.hbgl-box{
+    width: 400px;
+    height: 168px;
+    position: absolute;
+    top: 44px;
+    right: 12px;
+    background-color: #fff;
+    border-radius: 8px;
+    z-index: 3;
+    color: #333;
+}
+.onChange{
+    height: 200px;
+}
+.hbgl-foot{
+    height: 30px;
+    position: absolute;
+    bottom: 13px;
+    right: 50px;
+}
+.hbgl-tbl{
+    position: relative;
+    width: 90%;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    table-layout:fixed;
+    text-align: center;
+    overflow: hidden;
+}
+.hbgl-tbl tr{                 
+    height: 30px;  
+}
+.hbgl-head{
+    color: #aaa;
+    margin: 5px auto 5px auto;
+    background-color: #fff;
+}
+.hbgl-head .head-last{
+    text-align: right;
+    position: relative;
+}
+.hbgl-head .head-last span{
+    font-family: "icon";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 7px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s;
+    color: rgb(58, 79, 185);
+}
+.hbgl-head .head-last span:hover{
+    color: #aaa;
+}
+.hbgl-item{
+    margin: 0 auto 7px auto;
+    background-color: #f3f3f7;
+}
+.hbgl-item td{
+    outline: none;
+    position: relative;
+}
+.hbgl-item .iop:after{
+    position: absolute;
+    right: 50%;
+    content: "-";
+    color: blue;
+}
+.hbgl-item td:last-child{
+    font-family: icon;
+    text-align: right;
+}
+.lasttd-box{
+    position: relative;
+}
+.txt-btn{            
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+.txt-btn-change{
+    color: rgb(58, 79, 185);
+}
+.txt-btn-change:after{
+    content: "编辑";
+    display: inline-block;
+    position: absolute;
+    height: 100%;
+    width: 30px;
+    top: -30px;
+    left:0;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    transition: all .3s;
+}
+.txt-btn-change:hover:after{
+    top: 0;
+    background-color: rgb(109,127,219);
+}
+.txt-btn-del{
+    color: rgb(58, 79, 185);  
+}
+.txt-btn-del:after{
+    content: "删除";
+    display: inline-block;
+    position: absolute;
+    height: 100%;
+    width: 30px;
+    left: 30px;
+    line-height: 30px;
+    text-align: center;  
+    color: #fff;
+    transition: all .3s;
+    border-radius: 0 15px 15px 0;
+}
+.txt-btn-del:hover:after{
+    left: 0;
+    background-color: rgb(183,73,42);   
+}
+
+.hbgl-txt{
+    display: inline-block;
+    margin-left: 3px;
+    text-indent: 0;
+    width: 70px;
+    text-align: center;
+    box-sizing: border-box;
+}
+.hbgl-drop{
+    display: inline-block;
+    margin-left: 5px;
+    width: 180px;
+    letter-spacing: 6px;
+    box-sizing: border-box;
+}
+
+/* 图表内部tooltip样式 */
+.tooltip {
+    width: 200px;
+    height: 200px;
+}
+.tooltip h2{
+    color: #888;
+}
+.tooltip .tool-pertxt{
+    font-size: 16px;
+    float: right;
+}
+
+
+/* 历史查询盒子 */
+.date-picker-container{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 46px;
+    left: 0;
+    width: 980px;
+    height: 380px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 0 20px;
+    box-shadow: 0 2px 12px #000;
+    color: #000;
+    z-index: 5;
+}
+.date-picker-box-l{
+    width: 360px;
+    height: 80%;
+    border-right: 1px solid #aaa;
+    padding: 0 5px 0 1px;
+}
+.date-picker-box-s{
+    width: 260px;
+    height: 90%;
+    padding: 0 30px;
+    text-align: center;
+}
+.date-picker-box-s p{
+    padding: 160px 0 10px 0;
+    text-align: center;
+}
+ul{
+    list-style: none;
+}
+#schedule-box{
+    width: 320px;
+    margin: 0 auto;
+    padding: 10px 10px;
+    font-size: 13px;
+}
+.schedule-hd{
+    display: flex;
+    justify-content: space-between;
+    /* padding: 0 15px; */
+    padding: 0 35px 35px 35px;
+}
+.today{
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+}
+.ul-box{
+    overflow: hidden;
+}
+.ul-box > li{
+    float: left;
+    width: 14.28%;
+    text-align: center;
+    padding: 1px 0;
+}
+.other-month{
+    color: #999999;
+}
+.current-month{
+    color: #333333;
+}
+.today-style{
+    border-radius: 50%;
+    background: #58d321;
+}
+.arrow{
+    cursor: pointer;
+}
+.dayStyle{
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 35px;
+    cursor: pointer;
+}
+.current-month > .dayStyle:hover{
+    background: rgba(67,83,163,.6);
+    color: #ffffff;
+}
+.today-flag{
+    background: #4353a3;
+    color: #fff;
+}
+
+#schedule-boxb .today-flag{
+    background: #e3e3e7;
+    color: #000;
+}
+.select-gray{
+    background: #e3e3e7;
+    color: #000;
+}
+.boxshaw{
+    box-shadow: 2px 2px 15px 2px #e3e3e3;
+}
+.selected-style {
+    background: #4353a3;
+    color: #ffffff;
+}
+#h3Ele{
+    text-align: center;
+    padding: 10px;
+}
+
+.his-radio{
+    position: absolute;
+    width: 200px;
+    line-height: 30px;
+    right: 120px;
+}
+
+/* 时间选择器 */
+.time-box{
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    width: 230px;
+    height: 270px;
+    border: 1px solid #d2d2d2;
+    box-shadow: 0 2px 4px rgba(0,0,0,.12);
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 30px;
+    background-color: #fff;
+    z-index: 2;
+}
+.time-box p{
+    height: 30px;
+    text-align: center;
+}
+.time-box .time-title{
+    font-size: 16px;
+    border-bottom: 1px solid #d2d2d2;
+}
+.time-box li{
+    width: 49%;
+    height: 160px;
+    display: inline-block;
+    text-align: center;
+}
+.time-box ol{
+    padding-left: 14px;
+    height: 140px;
+    overflow-y: scroll; 
+}
+.time-box ol li{
+    height: 30px;
+    width: 100%; 
+    cursor: pointer;  
+}
+.time-box ol li:hover{
+    background: rgba(69,139,200,1);
+    color: #fff;
+}
+.time-box .time-checked{
+    background: rgba(69,139,200,1);
+    color: #fff;
+}

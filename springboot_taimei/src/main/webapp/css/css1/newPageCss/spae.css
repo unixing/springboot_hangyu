@@ -1,0 +1,307 @@
+@font-face {
+  font-family: 'icon';  /* project id 129360 */
+  src: url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.eot');
+  src: url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_qd1w4nn55c8ilik9.svg#iconfont') format('svg');
+}
+.spae_table{
+    width: 100%;
+    font-family:"Microsoft Yahei";
+    margin: 25px 0px 60px 0px;
+}
+::-webkit-scrollbar-thumb{  
+   background-color:rgb(121, 178, 223);  
+   height:50px;  
+   outline-offset:-2px;  
+   outline:2px solid #fff;  
+   -webkit-border-radius:4px;  
+}  
+ 
+/*---鼠标点击滚动条显示样式--*/  
+::-webkit-scrollbar-thumb:hover{  
+
+}  
+ 
+/*---滚动条大小--*/  
+::-webkit-scrollbar{  
+   width:8px;  
+   height:8px;  
+}  
+ 
+/*---滚动框背景样式--*/  
+::-webkit-scrollbar-track-piece{  
+   background-color:rgba(153, 153, 153, 0.1);  
+   -webkit-border-radius:0;  
+}
+.spae_table>tbody+thead{
+    display: flex;
+    width: 100%;
+}
+.spae_table tr:first-of-type{
+    box-shadow:0px 2px 9px rgba(0,0,0,0.2);;
+}
+.spae_table tr:hover{
+	background-color: rgba(25,49,94,.5) !important;
+	cursor:pointer;
+}
+.spae_table tr>th{
+    border-top: 1px solid rgba(33,53,95,0);
+    border-right: 1px solid rgba(33,53,95,0);
+    border-bottom: 1px solid rgba(33,53,95,1);
+    border-left: 0px solid rgba(33,53,95,1);
+    background: #1D365E;
+    color: white;
+    font-size:12px;
+    font-weight:normal;
+    height: 40px;
+    text-align: center;
+}
+.spae_table th{
+	min-width:33px;
+}
+.spae_table td{
+	min-width:33px;
+}
+.spae_table tr>td{
+    border-top: 0px solid rgba(33,53,95,1);
+    border-right: 1px solid rgba(33,53,95,1);
+    border-bottom: 1px solid rgba(33,53,95,1);
+    border-left: 0px solid rgba(33,53,95,1);
+    text-align: center;
+    color: white;
+    font-size:12px;
+    font-weight:normal;
+    height: 40px;
+   
+}
+.spae_table>tbody>tr:hover{
+        background-color:rgb(121, 178, 223);
+    }
+.spae_table tbody>tr:nth-child(odd){
+    background-color: #13233d;
+}
+.spae_table tbody>tr:nth-child(even){
+    background-color: #172a47;
+}
+.spae_table tr>th:first-of-type{
+    border-top: 1px solid rgba(33,53,95,0);
+    border-right: 1px solid rgba(33,53,95,0);
+    border-bottom: 1px solid rgba(33,53,95,1);
+    border-left: 1px solid rgba(33,53,95,0);
+}
+.spae_table tr>td:first-of-type{
+    border-top: 0px solid rgba(33,53,95,1);
+    border-right: 1px solid rgba(33,53,95,1);
+    border-bottom: 1px solid rgba(33,53,95,1);
+    border-left: 1px solid rgba(33,53,95,1);
+}
+.spae_sector{
+    width: 80px;
+    height:80px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    background: rgba(59,86,152,0.4);
+    
+    border-radius: 100% 0px 0px 0px;
+    cursor:pointer;
+    color: #fff;
+    z-index:15;
+}
+.spae_sector_text{
+    font-family: 'icon';
+    font-size: 28px;
+    position: absolute;
+    right: 17px;
+    top: 30px;
+}
+.spae_sector:hover{
+    background: rgba(57,90,155,1);
+}
+.spae_sector_cont{
+	top:0px;
+	left:0px;
+	flex:1;
+	z-index:15;
+	overflow:hidden;
+	padding:0 50px 0 50px;
+	z-index:14;
+	position:relative;
+	height:100%;
+    overflow: auto;
+    background-color:#13233d;
+}
+.spae_sector_cont_c{
+	display:none;
+}
+
+.exportExl{
+	margin:0px 50px 0 0;
+	float:right;
+	width:97px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	border-radius:3px;
+	border:1px solid #1e4676;
+	font-size:12px;
+	color:white;
+	cursor:pointer;
+}
+.exportExl:hover{
+	background-color:#1d365e;
+}
+.exportExl>span{
+	font-family: 'icon';
+}
+.exportItem1{
+	padding-top:50px;
+	overflow:hidden;
+}
+.exportTitle{
+	font-size:20px;
+	color:white;
+	padding:0px 0px 0px 0px;
+}
+
+/*选择航段*/
+.SD-view-t-label{
+	clear: left;
+	padding:10px 0px 20px 0px;
+	height:70px;
+}
+.SD-view-t-label ul{
+	z-index: 2;
+	position: absolute;
+}
+.SD-view-t-label ul li{
+	cursor: pointer;
+	display: block;
+	float: left;
+	margin-right: 120px;
+	width: 210px;
+	height: 60px;
+	background: #11264c;
+	opacity: 0.6;
+	box-shadow: 5px 5px 18px  #111;	
+	transition: 0.2s;
+	color: white;
+}
+.SD-view-t-label ul li:hover{
+	opacity: 1;
+	background: linear-gradient(to right, #1c436a , #3c4880);
+}
+.chooseSDLi{
+	color:#fff;
+	opacity: 1;
+	margin-top: 20px;
+}
+.SD-view-t-label ul p{
+	margin-top: 7px;
+	margin-left: 30px;
+}
+.SD-view-t-label ul p span.hd{
+	display: inline-block;
+	margin-top: 5px;
+	font-size: 16px;
+	font-weight:bold;
+	font-style: italic;
+	
+}
+
+/*表格区域*/
+.SD-view-body{
+	margin-top: 10px;
+	width: 95%;
+	height: auto;
+	position: absolute;
+	background: #1b2c4d;
+}
+
+.SD-view-body ul{
+	font-size: 12px;
+	margin: 40px 0 0 40px;
+}
+
+.SD-view-body .SD-table-sum{
+	clear: left;
+	margin-left:2%;
+	padding-top: 40px;
+	width: 94%;
+}
+.SD-set{
+    opacity: 1 !important;
+    background: linear-gradient(to right, rgb(28, 67, 106), rgb(60, 72, 128)) !important;
+    margin-top:20px !important;
+}
+.SD-nomal{
+	
+}
+.table_1{
+	background-color:#13233d;
+	height: 100%;
+	position: relative;
+	overflow-y: auto;
+    overflow-x: hidden;
+}
+._export-table {
+    color: white;
+    text-align: center;
+    line-height: 22px;
+    width: 50px;
+    float: left;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+}
+._set-gB {
+    background-color: #395a9b;
+}
+._export-table_box{
+	display: inline-block;
+    border: 1px solid #395a9b;
+    border-radius: 4px;
+    vertical-align: -3px;
+    margin-left: 50px;
+}
+.lin_historical_er{
+	margin: 0px;
+    padding: 0px;
+    overflow:hidden;
+    padding-top:19px;
+}
+.lin_historical_er>li{
+	list-style: none;
+    color: #dcdfe2;
+    font-size: 12px;
+    margin-right: 45px;
+    float: left;
+}
+.table_px0{
+	position:relative;
+}
+.table_px{
+    font-size: 12px;
+}
+.table_px>span{
+    font-family:'icon';
+    display:inline-block;
+    width:10px;
+    position: absolute;
+    top: 7px;
+    color: #999999;
+}
+._px_span{
+	cursor: pointer;
+}
+._px_span:hover{
+	outline: 1px solid #395a9b;
+}
+._px_set0>span:first-of-type{
+	color:#395a9b !important;
+}
+._px_set1>span:last-of-type{
+	color:#395a9b !important;
+}

@@ -1,0 +1,329 @@
+@font-face {
+    font-family: 'icon';  /* project id 129360 */
+    src: url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.eot');
+    src: url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.woff') format('woff'),
+    url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_b4v7u7btvnbi6bt9.svg#iconfont') format('svg');
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	font-family: "微软雅黑";
+	overflow: hidden;
+}
+
+body,html {
+	height: 100%
+}
+/******锟斤拷锟角筹拷始锟斤拷页锟斤拷***************/
+.lin-historical {
+	width: 100%;
+	min-width: 1280px;
+	height: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+	position:relative;
+}
+.lin_historical_tip{
+	position:absolute;
+	top:100px;
+	left:43%;
+    border-radius: 3px;
+    z-index: 99;
+    font-size: 12px;
+    padding: 2px 10px;
+    background-color: rgb(19,35,61);
+    color: #ce583a;
+}
+.SD-hd-null{
+    z-index: 999;
+}
+.lin_historical_tip>span{
+	font-family:'icon';
+}
+.table_1{
+    width: 100%;
+}
+.sr-box-head {
+	height: 39px;
+	position: relative;
+	z-index: 99;
+}
+
+.tltle-sel {
+	font-family: "icon";
+	font-size: 14px;
+	color: #6d91c1;
+	float: left;
+	/*margin: 0px 5px 0px 0px;*/
+	height: 39px;
+	text-align: center;
+	line-height: 39px;
+	width: 50px;
+	background: #3e4b90;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e4b90),
+		to(#326fab)); /*锟饺革拷*/
+	background: -moz-linear-gradient(top, #3e4b90, #326fab);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3e4b90',
+		endColorstr='#326fab');
+}
+/*选锟斤拷状态*/
+.tltle-selI {
+	width: 100px;
+	background: #3e4b90;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e4b90),
+		to(#3e4b90)); /*锟饺革拷*/
+	background: -moz-linear-gradient(top, #3e4b90, #3e4b90);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3e4b90',
+		endColorstr='#3e4b90');
+}
+
+.tltle-selI>span {
+	font-size: 12px;
+}
+
+.sr-box-head-inquire {
+	background-color: rgba(0, 0, 0, 0.6);
+	display: inline-block;
+	padding: 5px 10px 5px 10px;
+	float: right;
+	border-radius: 5px 5px 0px 0px;
+	margin-right: 3px;
+}
+
+.sr-box-head-inquire>ul {
+	list-style: none;
+	float: left;
+	margin: 2px 0px 0px;
+	padding: 0px;
+}
+
+.sr-box-head-inquire>ul>li {
+	float: left;
+	height: 25px;
+	padding: 0px;
+	margin: 0px 5px 0px 0px;
+	border-radius: 4px;
+	background-color: white;
+}
+
+.sr-box-head-inquire>ul>li>input {
+	text-align: center;
+	border: 0px;
+	outline: 0px;
+	line-height: 23px;
+	width: 120px; /*防止时间选择框样式错位*/
+	border-radius: 4px;
+	font-size: 13px;
+	color: cadetblue;
+	height: 23px;
+	padding: 0px;
+}
+
+.sr-box-head-inquire>ul>li>span {
+	color: black;
+	font-size: 13px;
+	height: 18px;
+	line-height: 18px;
+	display: inline-block;
+	border-right: 1px solid #a3a7b2;
+	margin-top: 4px;
+	padding: 0px 5px 0px 5px;
+}
+
+.sr-box-head-inquire>ul>li:nth-of-type(1),.sr-box-head-inquire>ul>li:nth-of-type(4)
+	{
+	border-radius: 4px 0px 0px 4px;
+	margin: 0px;
+}
+
+.sr-box-head-inquire>ul>li:nth-of-type(2),.sr-box-head-inquire>ul>li:nth-of-type(5)
+	{
+	background-color: white;
+	margin: 0px;
+	border-radius: 0px;
+	font-family: "icon";
+	line-height: 25px;
+}
+
+.sr-box-head-inquire>ul>li:nth-of-type(3),.sr-box-head-inquire>ul>li:nth-of-type(5)
+	{
+	border-radius: 0px 4px 4px 0px;
+}
+
+.sr-box-head-inquire>ul>li:nth-of-type(8)>input {
+	width: 70px
+}
+
+.sr-inquire-set {
+	float: left;
+	font-size: 12px;
+	color: white;
+	overflow: hidden;
+	line-height: 26px;
+	margin: 0px 5px 0px 0px;
+}
+._checkOp{
+	opacity:0.5;
+	color:#ccc;
+}
+.sr-inquire-set>input {
+	vertical-align: middle;
+	margin: 0px;
+}
+/*锟斤拷询锟斤拷钮*/
+.sr-box-head-btn {
+	float: left;
+	width: 92px;
+	height: 29px;
+	text-align: center;
+	line-height: 29px;
+	background-color: #1e4677;
+	border-radius: 3px;
+	color: white;
+	font-size: 12px;
+	vertical-align: middle;
+	margin-left: 15px;
+}
+
+.sr-box-head-btn:hover {
+	cursor: pointer;
+}
+/********************************************锟斤拷锟斤拷锟斤拷锟斤拷*******************/
+.lin-historical-body {
+	height: 95%;
+	overflow: hidden;
+	background-color: #13233d;
+	position: relative;
+	display:flex;
+}
+/**/
+.lin-historical-body-navigation {
+	width: 50px;
+	float: left;
+	height: 100%;
+    position:relative;
+    z-index:1;
+    box-shadow: 5px 5px 5px #101b31;
+}
+/*锟斤拷锟斤拷图锟斤拷*/
+.lin-historical-body-box {
+	float: left;
+	position: relative;
+	left: 0px;
+	top: 0px;
+	flex:1;
+}
+
+.lin-historical-body-box>div {
+	float: left;
+	width: 33.3%;
+	height: 50%;
+}
+
+/*锟斤拷态锟斤拷锟斤拷锟绞�*/
+.body-navigation-element {
+	width: 100%;
+	background-color: #11254b;
+	font-size: 12px;
+	text-align: center;
+	color: white;
+	overflow: hidden;
+}
+
+.body-navigation-element:hover {
+	background-color: #19315e;
+	cursor: pointer;
+}
+/*选锟斤拷锟斤拷式*/
+.set-liset {
+	background-color: #142e45;    
+}
+/*选锟斤拷锟斤拷式*/
+.set {
+	background-color: #395a9b;
+	position:relative;
+    z-index:3;
+    box-shadow: 5px 5px 5px #101b31;
+}
+
+.sr-box-head-classify>ul {
+	list-style: none;
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	border-radius: 3px 3px 0px 0px;
+	overflow: hidden;
+}
+
+.sr-box-head-classify>ul>li:hover {
+	background: #3e4b90;
+	cursor: pointer;
+}
+
+.tag-box {
+	display: inline-block;
+}
+
+.table_1{
+	background-color:#13233d;
+}
+.element-tag {
+	font-family: 'icon';
+	font-size: 12px;
+	color: white;
+}
+/*每锟斤拷图锟斤拷锟揭伙拷锟斤拷锟斤拷锟斤拷锟斤拷*/
+.AmountAir,.seatIncome,.peoples,.averagePeoples,.proportion {
+	position: relative;
+}
+
+.AmountAir-title,.seatIncome-title,.peoples-title,.averagePeoples-title,.proportion-title
+	{
+	position: absolute;
+	top: 3%;
+	left: 3%;
+	color: white;
+}
+
+.AmountAir-title>h3,.seatIncome-title>h3,.peoples-title>h3,.averagePeoples-title>h3,.proportion-title>h3
+	{
+	margin: 0px;
+	padding: 0px;
+	font-size: 18px;
+	font-weight: normal;
+}
+
+.AmountAir-title>p,.seatIncome-title>p,.peoples-title>p,.averagePeoples-title>p,.proportion-title>p
+	{
+	margin: 0px;
+	padding: 0px;
+	font-size: 13px;
+}
+
+/*锟斤拷锟斤拷锟斤拷*/
+#scroll-bar {
+	width: 8px;
+	background-color: #7fbce9 !important;
+	height: 100px;
+	position: absolute;
+	top: 0px;
+	right: 1px;
+	z-index: 999;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.c-selectCityBox {
+	width: 480px !important;
+}
+.table_px>span {
+    font-family: 'icon';
+    display: inline-block;
+    width: 10px;
+    position: absolute;
+    top: 4px !important;
+    color: #999999;
+}

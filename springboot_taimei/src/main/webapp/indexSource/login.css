@@ -1,0 +1,700 @@
+@font-face {
+	font-family: 'icon'; /* project id："129360" */
+	src: url('//at.alicdn.com/t/font_7zsbhgm6yso72e29.eot');
+	src: url('//at.alicdn.com/t/font_7zsbhgm6yso72e29.eot?#iefix')
+		format('embedded-opentype'),
+		url('//at.alicdn.com/t/font_7zsbhgm6yso72e29.woff') format('woff'),
+		url('//at.alicdn.com/t/font_7zsbhgm6yso72e29.ttf') format('truetype'),
+		url('//at.alicdn.com/t/font_7zsbhgm6yso72e29.svg#iconfont')
+		format('svg');
+}
+
+html,body {
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	font-family: "微软雅黑";
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.login-input {
+	width: 450px;
+	height: 310px;
+	background: rgba(0, 0, 0, 0.8);
+	left: 0px;
+	top: 0px;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	border-radius: 7px;
+}
+
+
+.login_captcha {
+	float: left;
+	font-size: 12px;
+	color: white;
+	height: 50px;
+	line-height: 50px;
+	transform: scale(0.84);
+	margin-left: 115px;
+}
+
+.login-input-change {
+	height: 50px;
+	border-radius: 7px;
+	background: #13223c;
+	box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+	position: relative;
+}
+
+.login-input-switch {
+	position: absolute;
+	right: 2px;
+	top: 4px;
+	width: 59px;
+	height: 39px;
+	background-image: url("/images/login/switch.png");
+	background-repeat: no-repeat;
+	background-position: -61px -39px;
+	transition: all 0.2s linear;
+	cursor: pointer;
+}
+
+.login-input-login {
+	font-size: 14px;
+	color: white;
+	width: 58px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	bottom: 0px;
+	margin: auto;
+	line-height: 50px;
+	height: 50px;
+}
+
+.login-input-cont {
+	height: 50px;
+}
+/*登录框*/
+.login-input-lo {
+	height: 260px;
+	width: 350px;
+	margin: 0 auto;
+}
+
+.login-input-login-err {
+	height: 50px;
+	font-size: 12px;
+	line-height: 69px;
+	color: #d7532d;
+}
+
+.login-input-login-err>span {
+	font-family: 'icon';
+	font-size: 12px;
+	margin-right: 5px;
+}
+
+.login-input-login-box {
+	margin: 0px auto;
+	height: 70px;
+	border-radius: 7px;
+	background-color: #13223c;
+	width: 350px;
+	overflow: hidden;
+}
+
+.login-input-login-box-list {
+	position: relative;
+	height: 35px;
+}
+
+.login-input-login-box-list>input {
+	display: inline-block;
+	position: absolute;
+	border: none;
+	outline: none;
+	background: transparent;
+	height: 35px;
+	width: 350px;
+	text-indent: 20px;
+	font-size: 12px;
+	color: white;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4) inset;
+}
+.login-input-login-box-list>img {
+	display: inline-block;
+	position: absolute;
+    top: 3px;
+    left: 100px;
+}
+.login-input-login-box-nus {
+	border-radius: 7px 7px 0 0;
+}
+
+.login-input-login-box-pas {
+	border-radius: 0 0 7px 7px;
+}
+
+.login-input-login-operation {
+	width: 350px;
+	margin: 0 auto;
+	height: 50px;
+}
+
+.login-operation-remember {
+	float: left;
+	height: 50px;
+	line-height: 50px;
+}
+
+.login-operation-remember>input {
+	display: none;
+}
+
+.login-operation-remember>label {
+	color: white;
+	font-family: 'icon';
+	font-size: 12px;
+	height: 18px;
+	display: inline-block;
+	line-height: 18px;
+	transform: scale(0.84);
+	cursor: pointer;
+}
+
+.login-operation-remember>span {
+	font-size: 12px;
+	color: white;
+	display: inline-block;
+	height: 18px;
+	line-height: 18px;
+	transform: scale(0.84);
+}
+
+.login-operation-forgot {
+	float: right;
+	font-size: 12px;
+	color: white;
+	height: 50px;
+	line-height: 50px;
+	transform: scale(0.84);
+}
+
+.login-operation-forgot:hover,.login_captcha:hover {
+	cursor: pointer;
+	color: #61b8d4;
+}
+
+.login-input-login-bth {
+	margin: 0 auto;
+	border-radius: 5px;
+	width: 248px;
+	height: 38px;
+	text-align: center;
+	line-height: 38px;
+	color: white;
+	cursor: pointer;
+	background-color: #5b77a9;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#62c5d8),
+		to(#4b5cb6) ); /*谷歌*/
+	background: -moz-linear-gradient(top, #62c5d8, #4b5cb6);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62c5d8',
+		endColorstr='#4b5cb6' );
+}
+
+.correct {
+	background-color: #cdc5c5 !important;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#cdc5c5),
+		to(#cdc5c5) ) !important; /*谷歌*/
+	background: -moz-linear-gradient(top, #cdc5c5, #cdc5c5) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cdc5c5',
+		endColorstr='#cdc5c5' ) !important;
+}
+
+.login_down:active {
+	background-color: #cdc5c5 !important;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1598b1),
+		to(#152265) ) !important; /*谷歌*/
+	background: -moz-linear-gradient(top, #1598b1, #152265) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1598b1',
+		endColorstr='#152265' ) !important;
+}
+
+.login-input-login-register {
+	color: white;
+	font-size: 12px;
+	width: 116px;
+	height: 16px;
+	margin: 15px auto;
+	text-align: center;
+	display: none;
+}
+
+.login-input-login-register:hover {
+	cursor: pointer;
+	color: #61b8d4;
+}
+
+.login-input {
+	transform-style: preserve-3d;
+	/*animation:myfirst 3s 1 forwards ease;*/
+	/*backface-visibility:hidden;*/
+}
+
+.login-collection-box {
+	width: 450px;
+	height: 310px;
+	left: 0px;
+	top: 0px;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	perspective: 800px;
+}
+
+/*密码找回*/
+.login-pasBack {
+	width: 450px;
+	height: 310px;
+	left: 0px;
+	top: 0px;
+	background: rgba(0, 0, 0, 0.8);
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	border-radius: 7px;
+	display: none;
+	*************************
+}
+
+.login-pasBack-change {
+	height: 50px;
+	border-radius: 7px;
+	background: #13223c;
+	box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
+	position: relative;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#222d3f),
+		to(#14243e) );
+	background: -moz-linear-gradient(top, #222d3f, #14243e);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#222d3f',
+		endColorstr='#14243e' );
+}
+
+.login-pasBack-validation {
+	font-size: 14px;
+	color: white;
+	width: 58px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	bottom: 0px;
+	margin: auto;
+	line-height: 50px;
+	height: 50px;
+}
+
+.login-pasBack-del {
+	position: absolute;
+	right: 8px;
+	top: 8px;
+	font-family: 'icon';
+	color: #637395;
+	font-weight: 900;
+	cursor: pointer;
+}
+
+.login-pasBack-cont {
+	height: 50px;
+}
+
+.login-pasBack-lo {
+	height: 260px;
+	width: 350px;
+	margin: 0 auto;
+}
+
+.login-pasBack-tipUser {
+	height: 50px;
+	font-size: 12px;
+	line-height: 69px;
+	color: #c54e2e;
+	margin-top: 15px;
+}
+
+.login-pasBack-userName {
+	width: 350px;
+	height: 35px;
+	border-radius: 7px;
+	background: #13223c;
+	margin-top: 10px;
+	overflow: hidden;
+}
+
+.login-pasBack-userName>input,.login_createW>input {
+	border: none;
+	outline: none;
+	background: transparent;
+	height: 35px;
+	width: 330px;
+	padding-left: 20px;
+	font-size: 12px;
+	color: white;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4) inset;
+	display: inline-block;
+}
+
+.login-pasBack-tipValidation {
+	width: 350px;
+	height: 35px;
+	margin-top: 10px;
+	overflow: hidden;
+}
+
+.login-pasBack-tipValidation>span:nth-of-type(1) {
+	font-size: 12px;
+	color: white;
+}
+
+.login-pasBack-tipValidation-err {
+	font-size: 12px;
+	color: #d7532d;
+	margin-left: 20px;
+	display: none;
+}
+
+.login-pasBack-tipValidation-err>span {
+	font-family: "icon";
+	margin-right: 5px;
+}
+
+.login-pasBack-import {
+	width: 350px;
+	height: 35px;
+	overflow: hidden;;
+	border-radius: 7px;
+	position: relative;
+}
+
+.login-pasBack-import-val {
+	width: 250px;
+	float: left;
+	background-color: #13223c;
+	border-radius: 7px;
+	overflow: hidden;
+	height: 35px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4) inset;
+	position: relative;
+}
+
+#login-pasBack-import-val,#login_administrator_note_val {
+	border: none;
+	outline: none;
+	background: transparent;
+	height: 35px;
+	width: 225px;
+	font-size: 12px;
+	color: white;
+	display: inline-block;
+	padding: 0px 0px 0px 20px;
+}
+
+#login-pasBack-import-T {
+	position: absolute;
+	right: 7px;
+	top: 10px;
+	font-family: 'icon';
+	color: #52b879;
+	font-size: 14px;
+}
+
+#login-pasBack-val,#login_administrator_pasBackval {
+	float: right;
+	width: 97px;
+	height: 33px;
+	border-radius: 7px;
+	line-height: 35px;
+	font-size: 12px;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+	box-shadow: 1px 1px 1px black inset;
+	background-color: #13233d;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.login-pasBack-next {
+	overflow: hidden;
+	padding-top: 25px;
+}
+
+.login-pasBack-next>div {
+	float: left;
+}
+
+.login-pasBack-nextOne {
+	width: 170px;
+	height: 36px;
+	background-color: #5b77a9;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#62c5d8),
+		to(#4b5cb6) ); /*谷歌*/
+	background: -moz-linear-gradient(top, #62c5d8, #4b5cb6);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62c5d8',
+		endColorstr='#4b5cb6' );
+	text-align: center;
+	line-height: 36px;
+	font-size: 12px;
+	border-radius: 6px;
+	color: white;
+	margin: 30px 0px 0px 36px;
+	cursor: pointer;
+}
+
+.login-pasBack-nextOr {
+	margin: 30px 0px 0px 0px;
+	color: #3f619d;
+	font-size: 12px;
+	box-shadow: 1px 1px 1px black inset;
+	height: 36px;
+	width: 100px;
+	text-align: center;
+	line-height: 36px;
+	border-radius: 8px;
+	background-color: #13233d;
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4) inset;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.login_create {
+	
+}
+
+.login_createN {
+	padding-top: 0px;
+	margin-top: 0px;
+	color: white;
+}
+
+.login_createW {
+	width: 100%;
+}
+
+#login_tip7 {
+	padding-left: 50px;
+}
+
+/* 成功界面 */
+.mobile-bind {
+	position: absolute;
+    width: 314px;
+    height: 237px;
+    background-color: #13233d;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    top: 0px;
+    margin: auto;
+}
+
+.cPBoxItm-title {
+	height: 43px;
+	background-color: #214172;
+	position: relative;
+}
+
+.cPBoxItm-title>div {
+	color: white;
+	font-size: 12px;
+	text-align: center;
+	height: 43px;
+	line-height: 43px;
+	border-radius: 4px;
+}
+
+.cPBoxItm-title>span {
+	position: absolute;
+	right: 5px;
+	top: 6px;
+	font-family: 'icon';
+	color: #6a80a7;
+	cursor: pointer;
+	z-index: 50;
+}
+
+.changeSuccessful {
+	width: 100%;
+	height: 100%;
+	background-color: #13233d;
+	position: absolute;
+	top: 0px;
+}
+
+.changeSuccessful>img {
+	display: block;
+	width: 85px;
+	height: 85px;
+	margin: 50px auto 29px;
+}
+
+.changeSuccessful>p {
+	margin: 5px auto 5px;
+	text-align: center;
+	font-size: 12px;
+	color: white;
+}
+
+.login_admin_tip {
+	color: white;
+}
+
+.login_tips {
+	margin-left: 5px;
+	color: #d8522d;
+}
+.login_forgot_show{
+	display:block;
+}
+.login-pasBack-tipUsern{
+	color:white;
+}
+#login_tip10>span:first-of-type{
+	font-family:"icon";
+}
+
+
+
+.login_forgot_title{
+	
+}
+.login_forgot_cont{
+	height:260px;
+    width: 350px;
+    padding: 0 50px;
+    position:relative;
+}
+.login_forgot_item{
+
+}
+.login_forgot_ptip{
+	color:white;
+	font-size:12px;
+}
+.login_forgot_input{
+    width: 350px;
+    height: 35px;
+    border-radius: 7px;
+    background: #13223c;
+    margin-top: 10px;
+}
+.login_forgot_input>input{
+	 border: none;
+    outline: none;
+    background: transparent;
+    height: 35px;
+    width: 340px;
+    padding-left: 20px;
+    font-size: 12px;
+    color: white;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4) inset;
+    display: inline-block;
+}
+.login_forgot_input2{
+	display:flex;
+	
+}
+.login_forgot_input2>input{
+	width: 226px;
+}
+.login_forgot_input2>div{
+	display:inline-block;
+	height: 33px;
+   	flex:1;
+   	border-radius:7px;
+   	overflow:hidden;
+}
+
+.login_forgot_itemx1{
+	position:absolute;
+	top:35px;
+}
+.login_forgot_itemx2{
+	position:absolute;
+	top:109px;
+}
+.login_forgot_itemx3{
+    position: absolute;
+    top: 41px;
+}
+#login_forgot_pwd2Tip{
+	color: white;
+    font-size: 12px;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 7px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px black inset;
+    background-color: #13233d;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+.login_forgot_itemn{
+	position:absolute;
+	top: 170px;
+	padding-top: 0px;
+}
+.login_forgot_none{
+	display:none;
+}
+
+.login_forgot_icon{
+	font-family:"icon";
+	margin-left:5px;
+}
+.login_forgot_iconc{
+	color:#c54e2e;
+}
+
+
+/* 动画 */
+@
+keyframes myfirst { 0%{
+	transform: rotateY(0deg);
+}
+100%{
+transform
+
+
+:
+
+ 
+
+rotateY
+
+
+(3600
+deg
+);
+
+
+    
+
+}
+}
