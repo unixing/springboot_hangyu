@@ -2,76 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c952a286-7f6c-4455-b70a-c95e49147418" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/mysql_war.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/mysql_war_exploded.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_4_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_4_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_4_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_0_9_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_3_7_5.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_15_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jolbox_bonecp_0_8_0_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jolbox_bonecp_spring_0_8_0_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_1_3_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_jsp_api_2_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_servlet_api_2_5.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jstl_jstl_1_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_16.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_32.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_3_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_4.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_generator_mybatis_generator_core_1_3_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_2_8.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_1_2_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_6_4.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_6_4.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_1_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_4_1_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_1_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_1_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_1_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_1_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_4_1_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_4_1_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_4_0_6_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_1_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_4_1_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/mysql.iml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/pom.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/java/com/springmvcandmysql/common/EasyUIResult.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/java/com/springmvcandmysql/common/ResponseEntity.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/java/com/springmvcandmysql/controller/IndexController.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/java/com/springmvcandmysql/controller/UserController.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/java/com/springmvcandmysql/mapper/UserMapper.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/java/com/springmvcandmysql/model/City.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/java/com/springmvcandmysql/model/User.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/java/com/springmvcandmysql/service/UserService.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/java/com/springmvcandmysql/test/TestSSM.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/resources/applicationContext-mybatis.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/resources/applicationContext-transaction.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/resources/applicationContext.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/resources/com.springmvcandmysql.mapper/UserMapper.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/resources/generatorConfig.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/resources/init.properties" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/resources/jdbc.properties" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/resources/log4j.properties" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/resources/mybatis-config.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/resources/spring-mvc.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/mysql/src/main/webapp/js/commons.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/springmvcandmysql.iml" />
-      <change beforePath="$PROJECT_DIR$/../springandmongo/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../springandmongo/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -445,12 +376,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1518424383131</updated>
-      <workItem from="1518424384571" duration="3186000" />
+      <workItem from="1518424384571" duration="3229000" />
     </task>
+    <task id="LOCAL-00001" summary="提交springmvc+mysql的项目">
+      <created>1518427612295</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1518427612295</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3186000" />
+    <option name="totallyTimeSpent" value="3229000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -495,6 +434,12 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="提交springmvc+mysql的项目" />
+    <option name="LAST_COMMIT_MESSAGE" value="提交springmvc+mysql的项目" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
