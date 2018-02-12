@@ -16,11 +16,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="springandredis" />
+        <module name="springandmongo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.7">
-      <module name="springandredis" target="1.7" />
+    <bytecodeTargetLevel>
+      <module name="springandmongo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

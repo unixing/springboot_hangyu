@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="springandmongo:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="skyLine.war">
+      <element id="artifact" artifact-name="springandmongo:war exploded" />
+    </root>
+  </artifact>
+</component>

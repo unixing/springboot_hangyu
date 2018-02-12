@@ -38,6 +38,8 @@ public class UserDaoImpl implements UserDao {
 					throws DataAccessException {
 				byte[] password = conn.get(redisTemplate.getStringSerializer().serialize(username));
 				try {
+					if(password==null)
+						return null;
 					return new String(password, "UTF-8");
 				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
