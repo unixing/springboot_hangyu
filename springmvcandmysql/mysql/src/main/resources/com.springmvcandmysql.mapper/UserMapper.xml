@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ldd.ssm.hangyu.mapper.PlatformUserMapper" >
+    <select id="queryAll" resultType="User">
+        select * from user
+    </select>
+
+    <select id="queryUserByPage" resultType="User">
+        select * from user
+        <where>
+            <if test="username !=null and username != ''">
+                AND username LIKE '%${username}%'
+            </if>
+            <if test="starttime !=null and starttime != ''">
+                AND starttime &gt; #{starttime}
+            </if>
+            <if test="endtime !=null and endtime != ''">
+                AND endtime &lt;#{endtime}
+            </if>
+        </where>
+    </select>
+</mapper>
+
