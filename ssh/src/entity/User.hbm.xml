@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- data connection mysql-->
+    <!--<class name="entity.User" table="user" schema="ssh">
+        <id name="id">
+            <column name="id" sql-type="int(10)"/>
+        </id>
+        <property name="username">
+            <column name="username" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="password">
+            <column name="password" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="phone">
+            <column name="phone" sql-type="varchar(11)" length="11" not-null="true"/>
+        </property>
+        <property name="mail">
+            <column name="mail" sql-type="varchar(20)" length="20" not-null="true"/>
+        </property>
+    </class>-->
+
+    <!-- data connection oracle-->
+    <class name="entity.User" table="T_USER" schema="TAIMEI">
+        <id name="id">
+            <column name="ID" sql-type="int(10)"/>
+        </id>
+        <property name="username">
+            <column name="USERNAME" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="password">
+            <column name="PASSWORD" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="phone">
+            <column name="PHONE" sql-type="varchar(11)" length="11" not-null="true"/>
+        </property>
+        <property name="mail">
+            <column name="MAIL" sql-type="varchar(20)" length="20" not-null="true"/>
+        </property>
+    </class>
+    <query name="queryUserById">
+        from User where id = ?
+    </query>
+</hibernate-mapping>
