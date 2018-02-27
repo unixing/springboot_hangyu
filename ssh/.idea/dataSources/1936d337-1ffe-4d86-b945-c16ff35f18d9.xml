@@ -4,9 +4,10 @@
     <root id="1"/>
     <schema id="2" parent="1" name="TAIMEI">
       <ObjectId>86</ObjectId>
-      <IntrospectionTimestamp>2018-02-23.21:46:05</IntrospectionTimestamp>
-      <CreatedTimestamp>2018-02-23.20:49:20</CreatedTimestamp>
-      <ModifiedTimestamp>2018-02-23.20:49:20</ModifiedTimestamp>
+      <IntrospectionTimestamp>2018-02-26.21:48:57</IntrospectionTimestamp>
+      <CreatedTimestamp>2018-02-26.19:16:15</CreatedTimestamp>
+      <ModifiedTimestamp>2018-02-26.19:36:43</ModifiedTimestamp>
+      <CommentsHash>30301308987751</CommentsHash>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -104,48 +105,64 @@
       <ObjectId>2147483638</ObjectId>
     </schema>
     <table id="34" parent="2" name="T_USER">
-      <ObjectId>73432</ObjectId>
-      <CreatedTimestamp>2018-02-23.20:49:20</CreatedTimestamp>
-      <ModifiedTimestamp>2018-02-23.20:49:20</ModifiedTimestamp>
+      <ObjectId>73435</ObjectId>
+      <CreatedTimestamp>2018-02-26.19:16:15</CreatedTimestamp>
+      <ModifiedTimestamp>2018-02-26.19:36:43</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <column id="35" parent="34" name="ID">
       <Position>1</Position>
+      <Comment>¿¿</Comment>
       <DataType>NUMBER(*)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="36" parent="34" name="PASSWORD">
+    <column id="36" parent="34" name="USERNAME">
       <Position>2</Position>
+      <Comment>¿¿¿</Comment>
       <DataType>VARCHAR2(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="37" parent="34" name="PHONE">
+    <column id="37" parent="34" name="PASSWORD">
       <Position>3</Position>
+      <Comment>¿¿</Comment>
       <DataType>VARCHAR2(20)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
     <column id="38" parent="34" name="MAIL">
       <Position>4</Position>
+      <Comment>¿¿¿¿</Comment>
       <DataType>VARCHAR2(20)|0</DataType>
     </column>
-    <column id="39" parent="34" name="USERNAME">
+    <column id="39" parent="34" name="PHONE">
       <Position>5</Position>
-      <DataType>VARCHAR2(20)|0</DataType>
-      <NotNull>1</NotNull>
+      <Comment>¿¿¿</Comment>
+      <DataType>VARCHAR2(11)|0</DataType>
     </column>
-    <index id="40" parent="34" name="T_USER_PK">
-      <ObjectId>73433</ObjectId>
-      <CreatedTimestamp>2018-02-23.20:49:20</CreatedTimestamp>
-      <ModifiedTimestamp>2018-02-23.20:49:20</ModifiedTimestamp>
-      <TablespaceName>SYSTEM</TablespaceName>
-      <ColNames>ID</ColNames>
+    <index id="40" parent="34" name="T_USER_UK1">
+      <ObjectId>73438</ObjectId>
+      <CreatedTimestamp>2018-02-26.19:36:43</CreatedTimestamp>
+      <ModifiedTimestamp>2018-02-26.19:36:43</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>USERNAME
+MAIL
+PHONE</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="41" parent="34" name="T_USER_PK">
-      <ModifiedTimestamp>2018-02-23.20:49:20</ModifiedTimestamp>
-      <ColNames>ID</ColNames>
+    <index id="41" parent="34" name="T_USER_INDEX1">
+      <ObjectId>73436</ObjectId>
+      <CreatedTimestamp>2018-02-26.19:16:15</CreatedTimestamp>
+      <ModifiedTimestamp>2018-02-26.19:16:15</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>USERNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="42" parent="34" name="T_USER_UK1">
+      <ModifiedTimestamp>2018-02-26.19:36:43</ModifiedTimestamp>
+      <ColNames>USERNAME
+MAIL
+PHONE</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
-      <UnderlyingIndexName>T_USER_PK</UnderlyingIndexName>
-      <Primary>1</Primary>
+      <UnderlyingIndexName>T_USER_UK1</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

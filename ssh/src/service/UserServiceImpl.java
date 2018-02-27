@@ -18,7 +18,10 @@ public class UserServiceImpl implements UserService {
         Transaction tx= s.beginTransaction();
         //当数据库为oracle时需要给自增字段赋值
         //获取数据库中id最大值
-        int maxIndex = (Integer) s.createQuery("select max(id) from User").uniqueResult();
+        Object maxId = s.createQuery("select max(id) from User").uniqueResult();
+        int maxIndex = 0;
+        if (maxId!=null)
+            maxIndex = (Integer)maxId;
         user.setId(maxIndex+1);
         s.save(user);
         tx.commit();
@@ -28,7 +31,7 @@ public class UserServiceImpl implements UserService {
     public User findUserById(int id) {
         Session s = sessionFactory.openSession();
         Transaction tx = s.beginTransaction();
-        User user = (User) s.getNamedQuery("queryUserById").setParameter(0,2).uniqueResult();
+        User user = (User) s.getNamedQuery("queryUserById").setParameter(0,id).uniqueResult();
         return user;
     }
 
