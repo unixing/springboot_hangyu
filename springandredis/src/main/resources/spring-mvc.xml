@@ -12,24 +12,26 @@
 
     <!-- 自动扫描  @Controller-->
     <context:component-scan base-package="com.springandredis.controller"/>
-
-    <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
+    <!-- 开启MVC注解支持 -->
+    <mvc:annotation-driven />
+    <!--&lt;!&ndash;避免IE执行AJAX时，返回JSON出现下载文件 &ndash;&gt;
     <bean id="mappingJacksonHttpMessageConverter"
           class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes">
             <list>
-                <value>text/html;charset=UTF-8</value>
+                <value>text/json;charset=UTF-8</value>
+                <value>application/json;charset=UTF-8</value>
             </list>
         </property>
     </bean>
-    <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
+    &lt;!&ndash; 启动SpringMVC的注解功能，完成请求和注解POJO的映射 &ndash;&gt;
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
             <list>
-                <ref bean="mappingJacksonHttpMessageConverter"/> <!-- JSON转换器 -->
+                <ref bean="mappingJacksonHttpMessageConverter"/> &lt;!&ndash; JSON转换器 &ndash;&gt;
             </list>
         </property>
-    </bean>
+    </bean>-->
 
 
     <!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
